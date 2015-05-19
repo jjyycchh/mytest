@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.DhcpInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.DhcpInfo" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="user_ip" property="userIp" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="pvlan_id" property="pvlanId" jdbcType="VARCHAR" />
+    <result column="cvlan_id" property="cvlanId" jdbcType="VARCHAR" />
+    <result column="attribute" property="attribute" jdbcType="VARCHAR" />
+    <result column="offline_datetime" property="offlineDatetime" jdbcType="TIMESTAMP" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_ip, mac, status, pvlan_id, cvlan_id, attribute, offline_datetime, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dhcp_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dhcp_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.DhcpInfo" >
+    insert into dhcp_info (id, user_ip, mac, 
+      status, pvlan_id, cvlan_id, 
+      attribute, offline_datetime, create_datetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{userIp,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{pvlanId,jdbcType=VARCHAR}, #{cvlanId,jdbcType=VARCHAR}, 
+      #{attribute,jdbcType=VARCHAR}, #{offlineDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.DhcpInfo" >
+	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into dhcp_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userIp != null" >
+        user_ip,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="pvlanId != null" >
+        pvlan_id,
+      </if>
+      <if test="cvlanId != null" >
+        cvlan_id,
+      </if>
+      <if test="attribute != null" >
+        attribute,
+      </if>
+      <if test="offlineDatetime != null" >
+        offline_datetime,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userIp != null" >
+        #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="pvlanId != null" >
+        #{pvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="cvlanId != null" >
+        #{cvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="attribute != null" >
+        #{attribute,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineDatetime != null" >
+        #{offlineDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.DhcpInfo" >
+    update dhcp_info
+    <set >
+      <if test="userIp != null" >
+        user_ip = #{userIp,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="pvlanId != null" >
+        pvlan_id = #{pvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="cvlanId != null" >
+        cvlan_id = #{cvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="attribute != null" >
+        attribute = #{attribute,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineDatetime != null" >
+        offline_datetime = #{offlineDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.DhcpInfo" >
+    update dhcp_info
+    set user_ip = #{userIp,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      pvlan_id = #{pvlanId,jdbcType=VARCHAR},
+      cvlan_id = #{cvlanId,jdbcType=VARCHAR},
+      attribute = #{attribute,jdbcType=VARCHAR},
+      offline_datetime = #{offlineDatetime,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getOnlineDhcpInfosByUserIp" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from dhcp_info
+    where user_ip = #{userIp,jdbcType=VARCHAR}
+      and status = #{status,jdbcType=VARCHAR}
+      order by id desc
+  </select>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.NetworkSecurityPolicyMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.NetworkSecurityPolicy" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.device.NetworkSecurityPolicy" extends="BaseResultMap" >
+    <result column="security_policy" property="securityPolicy" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, create_datetime, device_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    security_policy
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from network_security_policy
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from network_security_policy
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.NetworkSecurityPolicy" >
+    insert into network_security_policy (id, create_datetime, device_id, 
+      security_policy)
+    values (#{id,jdbcType=BIGINT}, #{createDatetime,jdbcType=TIMESTAMP}, #{deviceId,jdbcType=VARCHAR}, 
+      #{securityPolicy,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.NetworkSecurityPolicy" >
+    insert into network_security_policy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="securityPolicy != null" >
+        security_policy,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="securityPolicy != null" >
+        #{securityPolicy,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.NetworkSecurityPolicy" >
+    update network_security_policy
+    <set >
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="securityPolicy != null" >
+        security_policy = #{securityPolicy,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.device.NetworkSecurityPolicy" >
+    update network_security_policy
+    set create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      security_policy = #{securityPolicy,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.NetworkSecurityPolicy" >
+    update network_security_policy
+    set create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      device_id = #{deviceId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

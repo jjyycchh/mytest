@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalPageMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalPage" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="portal_template_id" property="portalTemplateId" jdbcType="BIGINT" />
+    <result column="push_statis" property="pushStatis" jdbcType="BIGINT" />
+    <result column="portal_site_id" property="portalSiteId" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="thumbnail_path" property="thumbnailPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.merchant.PortalPage" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, title, status, type, name, portal_template_id, push_statis, portal_site_id, create_datetime, 
+    thumbnail_path
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from portal_page
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from portal_page
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalPage" >
+    insert into portal_page (id, title, status, 
+      type, name, portal_template_id, 
+      push_statis, portal_site_id, create_datetime, 
+      thumbnail_path, content)
+    values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{portalTemplateId,jdbcType=BIGINT}, 
+      #{pushStatis,jdbcType=BIGINT}, #{portalSiteId,jdbcType=BIGINT}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{thumbnailPath,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalPage" >
+    insert into portal_page
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="portalTemplateId != null" >
+        portal_template_id,
+      </if>
+      <if test="pushStatis != null" >
+        push_statis,
+      </if>
+      <if test="portalSiteId != null" >
+        portal_site_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="portalTemplateId != null" >
+        #{portalTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="pushStatis != null" >
+        #{pushStatis,jdbcType=BIGINT},
+      </if>
+      <if test="portalSiteId != null" >
+        #{portalSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thumbnailPath != null" >
+        #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.PortalPage" >
+    update portal_page
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="portalTemplateId != null" >
+        portal_template_id = #{portalTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="pushStatis != null" >
+        push_statis = #{pushStatis,jdbcType=BIGINT},
+      </if>
+      <if test="portalSiteId != null" >
+        portal_site_id = #{portalSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.merchant.PortalPage" >
+    update portal_page
+    set title = #{title,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      portal_template_id = #{portalTemplateId,jdbcType=BIGINT},
+      push_statis = #{pushStatis,jdbcType=BIGINT},
+      portal_site_id = #{portalSiteId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.PortalPage" >
+    update portal_page
+    set title = #{title,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      portal_template_id = #{portalTemplateId,jdbcType=BIGINT},
+      push_statis = #{pushStatis,jdbcType=BIGINT},
+      portal_site_id = #{portalSiteId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getPortalPagesBySiteId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+   	select 
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+   	from portal_page as p
+   	where p.portal_site_id = #{value,jdbcType=BIGINT}
+  </select>
+  
+  <select id="getAuthPageBySiteId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+   	select 
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+   	from portal_page as p
+   	where p.type = 'AUTH' and p.portal_site_id = #{value,jdbcType=BIGINT}
+   	limit 1
+  </select>
+  
+  <select id="getLoginPageBySiteId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+   	select 
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+   	from portal_page as p
+   	where p.type = 'LOGIN' and p.portal_site_id = #{value,jdbcType=BIGINT}
+   	limit 1
+  </select>
+  
+  <update id="updateByAuthTypeAndSiteId" parameterType="com.access.model.merchant.PortalPage" >
+    update portal_page
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="pushStatis != null" >
+        push_statis = #{pushStatis,jdbcType=BIGINT},
+      </if>
+      <if test="portalTemplateId != null" >
+        portal_template_id = #{portalTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where type = #{type,jdbcType=VARCHAR}
+    and portal_site_id = #{portalSiteId,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateStatusById" parameterType="java.util.Map">
+  	update portal_page set status=#{status} where id=#{id}
+  </update>
+</mapper>

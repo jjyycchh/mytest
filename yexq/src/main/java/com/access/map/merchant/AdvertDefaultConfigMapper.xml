@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.AdvertDefaultConfigMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.AdvertDefaultConfig" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="codetype" property="codetype" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.merchant.AdvertDefaultConfig" extends="BaseResultMap" >
+    <result column="jscode" property="jscode" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, codetype
+  </sql>
+  <sql id="Blob_Column_List" >
+    jscode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from advert_default_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from advert_default_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.AdvertDefaultConfig" >
+    insert into advert_default_config (id, codetype, jscode
+      )
+    values (#{id,jdbcType=BIGINT}, #{codetype,jdbcType=VARCHAR}, #{jscode,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.AdvertDefaultConfig" >
+    insert into advert_default_config
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="codetype != null" >
+        codetype,
+      </if>
+      <if test="jscode != null" >
+        jscode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="codetype != null" >
+        #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="jscode != null" >
+        #{jscode,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.AdvertDefaultConfig" >
+    update advert_default_config
+    <set >
+      <if test="codetype != null" >
+        codetype = #{codetype,jdbcType=VARCHAR},
+      </if>
+      <if test="jscode != null" >
+        jscode = #{jscode,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.merchant.AdvertDefaultConfig" >
+    update advert_default_config
+    set codetype = #{codetype,jdbcType=VARCHAR},
+      jscode = #{jscode,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.AdvertDefaultConfig" >
+    update advert_default_config
+    set codetype = #{codetype,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

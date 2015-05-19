@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.ProducedDevicesMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.ProducedDevices" >
+  	<id column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="ems_dev_id" property="emsDevId" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="device_model_id" property="deviceModelId" jdbcType="BIGINT" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="frameware_version" property="framewareVersion" jdbcType="VARCHAR" />
+    <result column="component_version" property="componentVersion" jdbcType="VARCHAR" />
+    <result column="pin_code" property="pinCode" jdbcType="VARCHAR" />
+    <result column="config_items" property="configItems" jdbcType="LONGVARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="manufacturer_id" property="manufacturerId" jdbcType="BIGINT" />
+    <result column="ems_dev_id" property="emsDevId" jdbcType="BIGINT" />
+    <result column="ems_create_datetime" property="emsCreateDatetime" jdbcType="TIMESTAMP" />
+    <result column="xpos" property="xpos" jdbcType="DOUBLE" />
+    <result column="ypos" property="ypos" jdbcType="DOUBLE" />
+    <result column="fixaddr" property="fixAddr" jdbcType="VARCHAR" />
+  </resultMap>
+  
+<!--   <resultMap id="ResultMapWithModel" type="com.access.model.device.ProducedDevices" extends="BaseResultMap">
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="dm_brand" property="dmBrand" jdbcType="VARCHAR" />
+    <result column="dm_model" property="dmModel" jdbcType="VARCHAR" />
+  </resultMap> -->
+  
+  <sql id="Base_Column_List" >
+    mac, id, device_model_id, brand, model, frameware_version, component_version, pin_code, 
+    config_items, province, city, county, create_datetime, status, manufacturer_id,ems_dev_id,ems_create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from produced_devices
+    where mac = #{mac,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from produced_devices
+    where mac = #{mac,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.ProducedDevices" >
+    insert into produced_devices (mac, id, device_model_id, 
+      brand, model, frameware_version, 
+      component_version, pin_code, config_items, 
+      province, city, county, 
+      create_datetime, status, manufacturer_id,ems_dev_id,ems_create_datetime
+      )
+    values (#{mac,jdbcType=VARCHAR}, #{id,jdbcType=VARCHAR}, #{deviceModelId,jdbcType=BIGINT}, 
+      #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, #{framewareVersion,jdbcType=VARCHAR}, 
+      #{componentVersion,jdbcType=VARCHAR}, #{pinCode,jdbcType=VARCHAR}, #{configItems,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, #{manufacturerId,jdbcType=BIGINT},
+      #{emsDevId,jdbcType=BIGINT},#{emsCreateDatetime,jdbcType=TIMESTAMP} 
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.ProducedDevices" >
+    insert into produced_devices
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceModelId != null" >
+        device_model_id,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="framewareVersion != null" >
+        frameware_version,
+      </if>
+      <if test="componentVersion != null" >
+        component_version,
+      </if>
+      <if test="pinCode != null" >
+        pin_code,
+      </if>
+      <if test="configItems != null" >
+        config_items,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="manufacturerId != null" >
+        manufacturer_id,
+      </if>
+      <if test="emsDevId != null" >
+        ems_dev_id,
+      </if>
+      <if test="emsCreateDatetime != null" >
+        ems_create_datetime,
+      </if>
+      <if test="xpos != null" >
+        xpos,
+      </if>
+      <if test="ypos != null" >
+        ypos,
+      </if>
+      <if test="fixAddr != null" >
+        fixaddr,
+      </if>
+      
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceModelId != null" >
+        #{deviceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="framewareVersion != null" >
+        #{framewareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="componentVersion != null" >
+        #{componentVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="pinCode != null" >
+        #{pinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="configItems != null" >
+        #{configItems,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturerId != null" >
+        #{manufacturerId,jdbcType=BIGINT},
+      </if>
+      <if test="emsDevId != null" >
+        #{emsDevId,jdbcType=BIGINT},
+      </if>
+      <if test="emsCreateDatetime != null" >
+        #{emsCreateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xpos != null" >
+        #{xpos,jdbcType=VARCHAR},
+      </if>
+      <if test="ypos != null" >
+        #{ypos,jdbcType=VARCHAR},
+      </if>
+      <if test="fixAddr != null" >
+        #{fixAddr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.ProducedDevices" >
+    update produced_devices
+    <set >
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+       <if test="emsDevId != null" >
+        ems_dev_id = #{emsDevId,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceModelId != null" >
+        device_model_id = #{deviceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="framewareVersion != null" >
+        frameware_version = #{framewareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="componentVersion != null" >
+        component_version = #{componentVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="pinCode != null" >
+        pin_code = #{pinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="configItems != null" >
+        config_items = #{configItems,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="manufacturerId != null" >
+        manufacturer_id = #{manufacturerId,jdbcType=BIGINT},
+      </if>
+      <if test="xpos != null" >
+        xpos = #{xpos,jdbcType=VARCHAR},
+      </if>
+      <if test="ypos != null" >
+        ypos = #{ypos,jdbcType=VARCHAR},
+      </if>
+      <if test="fixAddr != null" >
+        fixaddr = #{fixAddr,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mac = #{mac,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.ProducedDevices" >
+    update produced_devices
+    set id = #{id,jdbcType=VARCHAR},
+      device_model_id = #{deviceModelId,jdbcType=BIGINT},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      frameware_version = #{framewareVersion,jdbcType=VARCHAR},
+      component_version = #{componentVersion,jdbcType=VARCHAR},
+      pin_code = #{pinCode,jdbcType=VARCHAR},
+      config_items = #{configItems,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      manufacturer_id = #{manufacturerId,jdbcType=BIGINT}
+    where mac = #{mac,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByMac" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    	<include refid="Base_Column_List" />
+    from 
+    	produced_devices
+    where 
+    	mac = #{mac,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByEmsDeviceId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select 
+    	<include refid="Base_Column_List" />
+    from 
+    	produced_devices
+    where 
+    	ems_dev_id = #{emsDevId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByMac" parameterType="java.lang.String" >
+    delete from produced_devices
+    where 
+		produced_devices.mac = #{mac, jdbcType=VARCHAR}
+  </delete>
+  
+  <delete id="deleteByMacMap" parameterType="java.util.Map" >
+    delete from produced_devices
+    where 
+		1 = 1
+    	<foreach item="item" index="index"  collection="mac" open="and (" separator="OR" close=")">  
+		  	produced_devices.mac = #{item}
+		 </foreach> 
+  </delete>
+  
+  <!-- <select id="producedDevices_getProducedDevicesPage" parameterType="java.util.Map" resultMap="ResultMapWithModel">
+  		select 
+  			pd.mac, pd.frameware_version, pd.component_version, pd.pin_code,
+  			pd.config_items, pd.province, pd.city, pd.county, pd.create_datetime, pd.status,
+  			a.fullname,
+  			dm.brand as dm_brand, dm.model as dm_model
+  		from 
+  			produced_devices as pd,
+  			device_model as dm,
+  			account as a
+		where 
+    		pd.manufacturer_id = a.id
+    		and pd.device_model_id = dm.id
+    		<if test="manufacturerId != null">
+				and pd.manufacturer_id = #{manufacturerId,jdbcType=BIGINT}
+			</if>
+			<if test="isDeviceAdmin != null">
+				and pd.manufacturer_id != 1
+			</if>
+    		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(pd.mac, ''), 
+		  				   IFNULL(dm.brand, ''),
+		  				   IFNULL(dm.model, ''),
+		  				   IFNULL(pd.frameware_version, ''),
+		  				   IFNULL(pd.component_version, ''))
+		  				   like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+    		<if test="startDate != null">
+				<![CDATA[ and pd.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and pd.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+			<if test="status != null">
+				and pd.status = #{status, jdbcType=VARCHAR}
+			</if>
+			<if test="province != null">
+				and pd.province = #{province, jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				and pd.city = #{city, jdbcType=VARCHAR}
+			</if>
+			<if test="county != null">
+				and pd.county = #{county, jdbcType=VARCHAR}
+			</if>
+		order by pd.create_datetime desc
+		limit #{page.begin},#{page.pageSize}
+	</select> -->
+  	
+  	<update id="auditByPrimaryKey" parameterType="java.util.Map">
+  		update produced_devices
+    		set status=#{status,jdbcType=VARCHAR}
+    	where
+    		1 = 1
+    		<foreach item="item" index="index"  collection="mac" open="and (" separator="OR" close=")">  
+		  		produced_devices.mac = #{item}
+		 	</foreach> 
+    </update>
+  
+  <update id="updateAllByPrimaryKeySelective" parameterType="com.access.model.device.ProducedDevices" >
+    update produced_devices
+    <set >
+   	  <if test="macNew != null">
+   	    mac = #{macNew, jdbcType=VARCHAR},
+   	  </if>
+      <if test="id != null" >
+        id = #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceModelId != null" >
+        device_model_id = #{deviceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="framewareVersion != null" >
+        frameware_version = #{framewareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="componentVersion != null" >
+        component_version = #{componentVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="pinCode != null" >
+        pin_code = #{pinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="configItems != null" >
+        config_items = #{configItems,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where mac = #{mac,jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateBrandModelById" parameterType="java.util.Map" >
+  update produced_devices
+  set
+  	brand = #{brand,jdbcType=VARCHAR},
+  	model = #{model,jdbcType=VARCHAR}
+  where
+  	device_model_id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

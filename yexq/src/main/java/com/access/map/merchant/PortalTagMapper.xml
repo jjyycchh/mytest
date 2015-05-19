@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalTagMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalTag" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from portal_tag
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from portal_tag
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalTag" >
+    insert into portal_tag (id, name, create_datetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalTag" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into portal_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.PortalTag" >
+    update portal_tag
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.PortalTag" >
+    update portal_tag
+    set name = #{name,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getPortalTagByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+     select 
+     	<include refid="Base_Column_List" />
+     from 
+     	portal_tag
+     where 
+     	name = #{value,jdbcType=VARCHAR}
+    
+   </select>
+   
+    <select id="getTagsByPortalSiteId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    	select 
+    		<include refid="Base_Column_List" />
+    	from portal_tag as t, portal_site_has_portal_tag as st
+    	where t.id=st.portal_tag_id AND st.portal_site_id = #{value,jdbcType=BIGINT}
+    </select>
+    
+    <select id="getTagsByPortalTemplateId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    	select 
+    		<include refid="Base_Column_List" />
+    	from portal_tag as t, portal_template_has_portal_tag as tt
+    	where t.id=tt.portal_tag_id AND tt.portal_template_id = #{value,jdbcType=BIGINT}
+    </select>
+    
+    <select id="selectByByTemplateId" parameterType="java.lang.Long" resultMap ="BaseResultMap">
+	    select
+	    	<include refid="Base_Column_List" />
+	    from 
+	    	portal_tag
+		WHERE 
+			id in (
+				select portal_tag_id from portal_template_has_portal_tag where portal_template_id = #{templateId, jdbcType=BIGINT}
+				)
+    </select>
+    
+</mapper>

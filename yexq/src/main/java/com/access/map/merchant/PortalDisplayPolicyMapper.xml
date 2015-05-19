@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalDisplayPolicyMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalDisplayPolicy" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="latest_update_datetime" property="latestUpdateDatetime" jdbcType="TIMESTAMP" />
+    <result column="latest_update_account_id" property="latestUpdateAccountId" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.merchant.PortalDisplayPolicyWithBLOBs" extends="BaseResultMap" >
+    <result column="device_ids" property="deviceIds" jdbcType="LONGVARCHAR" />
+    <result column="display_items" property="displayItems" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="findPortalPolicyPageMap" type="com.access.model.merchant.PortalDisplayPolicyWithBLOBs" extends="ResultMapWithBLOBs" >
+    <result column="editor" property="editor" jdbcType="VARCHAR" />
+    <result column="editorusername" property="editorusername" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="merchantname" property="merchantname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  
+  <sql id="Base_Column_List" >
+    id, name, account_id, status, latest_update_datetime, latest_update_account_id, create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    device_ids, display_items
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from portal_display_policy
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from portal_display_policy
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalDisplayPolicyWithBLOBs" >
+    insert into portal_display_policy (id, name, account_id, 
+      status, latest_update_datetime, latest_update_account_id, 
+      create_datetime, device_ids, display_items
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, 
+      #{status,jdbcType=VARCHAR}, #{latestUpdateDatetime,jdbcType=TIMESTAMP}, #{latestUpdateAccountId,jdbcType=BIGINT}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{deviceIds,jdbcType=LONGVARCHAR}, #{displayItems,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalDisplayPolicyWithBLOBs" >
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into portal_display_policy
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="latestUpdateDatetime != null" >
+        latest_update_datetime,
+      </if>
+      <if test="latestUpdateAccountId != null" >
+        latest_update_account_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="deviceIds != null" >
+        device_ids,
+      </if>
+      <if test="displayItems != null" >
+        display_items,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="latestUpdateDatetime != null" >
+        #{latestUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestUpdateAccountId != null" >
+        #{latestUpdateAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceIds != null" >
+        #{deviceIds,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="displayItems != null" >
+        #{displayItems,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.PortalDisplayPolicyWithBLOBs" >
+    update portal_display_policy
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="latestUpdateDatetime != null" >
+        latest_update_datetime = #{latestUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestUpdateAccountId != null" >
+        latest_update_account_id = #{latestUpdateAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceIds != null" >
+        device_ids = #{deviceIds,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="displayItems != null" >
+        display_items = #{displayItems,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.merchant.PortalDisplayPolicyWithBLOBs" >
+    update portal_display_policy
+    set name = #{name,jdbcType=VARCHAR},
+      account_id = #{accountId,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR},
+      latest_update_datetime = #{latestUpdateDatetime,jdbcType=TIMESTAMP},
+      latest_update_account_id = #{latestUpdateAccountId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      device_ids = #{deviceIds,jdbcType=LONGVARCHAR},
+      display_items = #{displayItems,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.PortalDisplayPolicy" >
+    update portal_display_policy
+    set name = #{name,jdbcType=VARCHAR},
+      account_id = #{accountId,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR},
+      latest_update_datetime = #{latestUpdateDatetime,jdbcType=TIMESTAMP},
+      latest_update_account_id = #{latestUpdateAccountId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updatePortalPolicyStatus" parameterType="com.access.model.merchant.PortalDisplayPolicy">
+  	update portal_display_policy set status=#{status} where id=#{id}
+  </update>
+
+  <select id="getPortalDisplayPoliciesByDeviceId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from portal_display_policy
+    where device_ids like concat('%', #{deviceId, jdbcType=VARCHAR}, '%')
+  </select>
+
+  <select id="portalPolicy_findPortalPolicyPage" parameterType="java.util.Map" resultMap="findPortalPolicyPageMap">
+	select 
+		pdp.*,
+		IFNULL(editor.fullname, '') as editor,
+		editor.username as editorusername,
+		account.username as username,
+		IFNULL(account.fullname, '') as fullname,
+		IFNULL(account.merchant_name, '') as merchantname
+	from portal_display_policy as pdp
+		LEFT JOIN account as editor ON pdp.latest_update_account_id=editor.id
+		LEFT JOIN account as account ON pdp.account_id=account.id
+		where pdp.account_id = account.id and pdp.status != 'DELETED'
+  		<if test="startDate != null">
+			<![CDATA[ and pdp.latest_update_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+		</if>
+  		<if test="endDate != null">
+			<![CDATA[ and pdp.latest_update_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+		</if>
+		<if test="totalParentId != null">
+		and (account.id = #{totalParentId} 
+			or account.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId,jdbcType=BIGINT}, '"%')
+		)
+		</if>
+	    <if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+			  IFNULL(pdp.name, '') like Concat('%', #{item}, '%')
+			 </foreach>
+	    </if>
+	    order by pdp.id desc
+  	limit #{page.begin},#{page.pageSize}
+  </select>
+
+  <select id="getPolicyCountBySiteId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+  	SELECT count(*) from portal_display_policy 
+	where display_items like CONCAT('%"siteid":"', #{value} ,'"%')
+  </select>
+  
+  <select id="getDeletedPolicyCountBySiteId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+  	SELECT count(*) from portal_display_policy 
+	where display_items like CONCAT('%"siteid":"', #{value} ,'"%')
+	and status != 'DELETED'
+  </select>
+	
+  <update id="updateSiteName" parameterType="java.util.Map">
+  	update portal_display_policy 
+  	set display_items = REPLACE(display_items, 
+							SUBSTR(display_items,
+								INSTR(display_items, CONCAT('"siteid":"',#{siteId},'","sitename":"')),
+								LENGTH(CONCAT('"siteid":"',#{siteId},'","sitename":"'))
+								+INSTR(SUBSTR(display_items, 
+											INSTR(display_items, CONCAT('"siteid":"',#{siteId},'","sitename":"'))
+											+LENGTH(CONCAT('"siteid":"',#{siteId},'","sitename":"'))
+											),
+									'",')
+							),
+								CONCAT('"siteid":"',#{siteId},'","sitename":"', #{siteName}, '"')
+							)
+  	where display_items like CONCAT('%"siteid":"', #{siteId} ,'"%')
+  </update>
+  
+  <select id="selectBySiteId" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+    from 
+    	portal_display_policy
+    where 
+    	display_items like #{siteId,jdbcType=VARCHAR}
+    and
+    	status = #{status, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByDeviceId" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+    from 
+    	portal_display_policy
+    where 
+    	device_ids like #{deviceIds,jdbcType=VARCHAR}
+    and
+    	status = #{status, jdbcType=VARCHAR}
+  </select>
+  
+</mapper>

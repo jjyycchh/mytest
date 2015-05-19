@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalPagePushLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalPagePushLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="portal_page_id" property="portalPageId" jdbcType="BIGINT" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, portal_page_id, device_id, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from portal_page_push_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from portal_page_push_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalPagePushLog" >
+    insert into portal_page_push_log (id, portal_page_id, device_id, create_datetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{portalPageId,jdbcType=BIGINT}, #{deviceId,jdbcType=VARCHAR} #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalPagePushLog" >
+    insert into portal_page_push_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="portalPageId != null" >
+        portal_page_id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="portalPageId != null" >
+        #{portalPageId,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.PortalPagePushLog" >
+    update portal_page_push_log
+    <set >
+      <if test="portalPageId != null" >
+        portal_page_id = #{portalPageId,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.PortalPagePushLog" >
+    update portal_page_push_log
+    set portal_page_id = #{portalPageId,jdbcType=BIGINT},
+    	device_id = #{deviceId,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getPortalPagePushStatis" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT hour(pppl.create_datetime) as hour, count(pppl.id) as count 
+  	from portal_page_push_log as pppl,
+		portal_page as pp,
+		portal_site as ps,
+		account as a
+	where pppl.portal_page_id=pp.id
+		and pp.portal_site_id=ps.id
+		and ps.account_id=a.id
+		and ps.id != #{defaultSiteId}
+		<if test="date != null">
+			and pppl.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d') 
+			and pppl.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d'), interval 1 day)
+		</if>
+   		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="totalParentId != null">
+			and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+		</if>
+		<if test="portalSiteId != null" >
+		  and ps.id = #{portalSiteId,jdbcType=BIGINT}
+		</if>
+	GROUP BY hour(pppl.create_datetime)
+  </select>
+  
+  <select id="getPortalPagePushDefault" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT hour(pppl.create_datetime) as hour, count(pppl.id) as count 
+	from portal_page_push_log as pppl,
+		portal_page as pp,
+		portal_site as ps,
+		device as d,
+		location as l,
+		account as a
+	where pppl.portal_page_id=pp.id
+		and pp.portal_site_id=ps.id
+		and pppl.device_id=d.device_id
+		and d.location_id=l.id
+		and l.account_id=a.id
+		and ps.id = #{defaultSiteId}
+		<if test="date != null">
+			and pppl.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d') 
+			and pppl.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d'), interval 1 day)
+		</if>
+   		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="totalParentId != null">
+			and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+		</if>
+		<if test="portalSiteId != null" >
+		  and ps.id = #{portalSiteId,jdbcType=BIGINT}
+		</if>
+	GROUP BY hour(pppl.create_datetime)
+  </select>
+  
+  <select id="getPortalPagePushPoint" parameterType="java.util.Map" resultType="java.lang.Integer">
+	SELECT count(pppl.id) as count 
+	  	from portal_page_push_log as pppl,
+			portal_page as p,
+			portal_site as s,
+			account as a
+		where pppl.portal_page_id=p.id
+			and p.portal_site_id=s.id
+			and s.account_id=a.id
+			and ps.id != #{defaultSiteId}
+		<if test="date != null">
+			and pppl.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d %H') 
+			and pppl.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d %H'), interval 1 hour)
+		</if>
+   		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="totalParentId != null">
+			and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+		</if>
+		<if test="portalSiteId != null" >
+		  and s.id = #{portalSiteId,jdbcType=BIGINT}
+		</if>
+		<if test="keywords != null">
+			<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	 			Concat(a.username,
+	 			IFNULL(a.merchant_name, ''),
+				IFNULL(d.name,'')) like CONCAT('%', #{item}, '%')
+			</foreach>
+		</if>
+  </select>
+  
+  <select id="getPortalPagePushDefaultPoint" parameterType="java.util.Map" resultType="java.lang.Integer">
+	SELECT count(pppl.id) as count 
+	  	from from portal_page_push_log as pppl,
+		portal_page as pp,
+		portal_site as ps,
+		device as d,
+		location as l,
+		account as a
+	where pppl.portal_page_id=pp.id
+		and pp.portal_site_id=ps.id
+		and pppl.device_id=d.device_id
+		and d.location_id=l.id
+		and l.account_id=a.id
+		and ps.id = #{defaultSiteId}
+		<if test="date != null">
+			and pppl.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d %H') 
+			and pppl.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d %H'), interval 1 hour)
+		</if>
+   		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="totalParentId != null">
+			and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+		</if>
+		<if test="portalSiteId != null" >
+		  and s.id = #{portalSiteId,jdbcType=BIGINT}
+		</if>
+		<if test="keywords != null">
+			<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	 			Concat(a.username,
+	 			IFNULL(a.merchant_name, ''),
+				IFNULL(d.name,'')) like CONCAT('%', #{item}, '%')
+			</foreach>
+		</if>
+  </select>
+  
+  <select id="getPortalPagePushAnalyse" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT hour(pl.create_datetime) as hour, count(pl.id) as count 
+  	from portal_page_push_log as pl,
+  		device as d,
+		portal_page as p,
+		portal_site as s,
+		account as a
+	where pl.device_id = d.device_id
+		and pl.portal_page_id=p.id
+		and p.portal_site_id=s.id
+		and s.account_id=a.id
+		and pl.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d') 
+		and pl.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d'), interval 1 day)
+		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="totalParentId != null">
+			and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+		</if>
+		<if test="deviceId != null">
+			and d.device_id = #{deviceId}
+		</if>
+		<if test="keywords != null">
+			<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	 			Concat(a.username,
+	 			IFNULL(a.merchant_name, ''),
+				IFNULL(d.name,'')) like '%' #{item} '%'
+			</foreach>
+		</if>
+		GROUP BY hour(pl.create_datetime)
+  </select>
+  
+  <select id="getSiteRanking" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT * from (
+		SELECT DISTINCT ps.id as site_id, ps.site_name, count(ps.id) as push_count 
+		from portal_page_push_log as pppl,
+			<if test="deviceId != null">
+				device as d,
+			</if>
+			portal_page as pp,
+			portal_site as ps,
+			account as a
+		WHERE pppl.portal_page_id=pp.id
+			and pp.portal_site_id=ps.id
+			and ps.account_id=a.id
+			<if test="deviceId != null">
+				and pppl.device_id=d.device_id
+				and d.device_id = #{deviceId}
+			</if>
+			<if test="date != null">
+				and pppl.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d') 
+				and pppl.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d'), interval 1 day)
+			</if>
+    		<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="totalParentId != null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		 			Concat(a.username,
+		 				IFNULL(a.fullname, ''),
+		 				IFNULL(a.merchant_name, ''),
+						IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+		GROUP BY ps.id
+	) as t
+	ORDER BY t.push_count desc
+	limit 0,#{limit}
+  </select>
+  
+  <select id="getSiteRankingPoint" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT * from (
+		SELECT ps.id as site_id, max(ps.site_name), count(ps.id) as push_count 
+		from portal_page_push_log as pppl,
+			<if test="deviceId != null">
+				device as d,
+			</if>
+			portal_page as pp,
+			portal_site as ps,
+			account as a
+		WHERE pppl.portal_page_id=pp.id
+			and pp.portal_site_id=ps.id
+			and ps.account_id=a.id
+			<if test="deviceId != null">
+				and pppl.device_id=d.device_id
+				and d.device_id = #{deviceId}
+			</if>
+			<if test="date != null">
+				and pppl.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d %H') 
+				and pppl.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d %H'), interval 1 hour)
+			</if>
+			<if test="type != 'SUPER_MAN'.toString()">
+	    		<if test="accountId != null">
+					and a.id = #{accountId}
+				</if>
+				<if test="totalParentId != null">
+					and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+				</if>
+	    	</if>
+			
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		 			Concat(a.username,
+		 				IFNULL(a.fullname, ''),
+		 				IFNULL(a.merchant_name, ''),
+						IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+		GROUP BY ps.id
+	) as t
+	ORDER BY t.push_count desc
+	limit 0,#{limit}
+  </select>
+  
+  <select id="getPushCountBySiteId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+  	SELECT count(pppl.portal_page_id) 
+  	from portal_page_push_log as pppl,
+		portal_page as pp,
+		device as d
+	where pppl.portal_page_id= pp.id
+	and pppl.device_id=d.device_id
+	and pp.portal_site_id=#{value}
+  </select>
+  
+  <select id="getLastPortalPushInfoBySiteId" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT pppl.id, 
+		pppl.portal_page_id, 
+		IFNULL(pppl.device_id, '') as device_id,
+		pppl.create_datetime,
+		count(pppl.portal_page_id) as count
+	from portal_page_push_log as pppl,
+		portal_page as pp,
+		portal_site as ps
+	where pppl.portal_page_id=pp.id
+	and pp.portal_site_id=ps.id
+	and ps.id=#{value}
+	ORDER BY pppl.id desc
+	limit 1
+  </select>
+</mapper>
