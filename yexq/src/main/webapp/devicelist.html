@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>爱WiFi-厂家终端列表</title>
+<link rel="stylesheet" type="text/css" href="/statics/css/devicelist.css" />
+<script type="text/javascript" src="/statics/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="/statics/js/jquery.ulmenu.js"></script>
+<script type="text/javascript">
+<!--
+var Devices = [
+	{"company":"瑞斯康达", "model":"MSG1200", "speed":"300", "speedtype":1, "cpu":"MT-7620N", "links":"/", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"20dbm"},
+	{"company":"瑞斯康达", "model":"MSG2100", "speed":"300", "speedtype":1, "cpu":"Marvell6550", "links":"/", "memory":"128", "frequency":"2.4G", "frequencytype":1, "power":"20dbm"},
+	{"company":"瑞斯康达", "model":"MSG2200", "speed":"300", "speedtype":1, "cpu":"Marvell6560", "links":"/", "memory":"256", "frequency":"2.4G", "frequencytype":1, "power":"20dbm"},
+	{"company":"东方通信", "model":"C50", "speed":"300", "speedtype":1, "cpu":"QCA9344", "links":"/", "memory":"128", "frequency":"2.4G", "frequencytype":1, "power":"18dbm"},
+	{"company":"东方通信", "model":"C100", "speed":"600", "speedtype":2, "cpu":"QCA9344+QCA9582", "links":"/", "memory":"128", "frequency":"2.4G+5G", "frequencytype":2, "power":"18dbm"},
+	{"company":"磊科", "model":"BY300", "speed":"300", "speedtype":1, "cpu":"MTK7620A", "links":"/", "memory":"128", "frequency":"单频", "frequencytype":1, "power":"100mw"},
+	{"company":"磊科", "model":"NAP851", "speed":"600", "speedtype":2, "cpu":"BCM5358U", "links":"/", "memory":"32", "frequency":"双频", "frequencytype":2, "power":"100mm"},
+	{"company":"博达", "model":"WAP2100-SK", "speed":"300", "speedtype":1, "cpu":"MTK7620A", "links":"/", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"博达", "model":"WAP2100-S", "speed":"300", "speedtype":1, "cpu":"MTK7620A", "links":"/", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"博达", "model":"WAP2100", "speed":"750", "speedtype":2, "cpu":"MTK7620A+7610E", "links":"/", "memory":"64", "frequency":"2.4G+5.8G", "frequencytype":2, "power":"100mm"},
+	{"company":"博达", "model":"WAP2200", "speed":"1200", "speedtype":2, "cpu":"MTK7620A+7612E", "links":"/", "memory":"128", "frequency":"2.4G+5.8G", "frequencytype":2, "power":"100mm"},
+	{"company":"博达", "model":"WAP2300-S", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"/", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"博达", "model":"WAP2300", "speed":"300", "speedtype":1, "cpu":"AR9344+AR9382", "links":"/", "memory":"128", "frequency":"2.4G+5.8G", "frequencytype":2, "power":"100mm"},
+	{"company":"日新邮电", "model":"RX-MAR30", "speed":"300", "speedtype":1, "cpu":"7620N", "links":"20", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"日新邮电", "model":"RX-MAR30+", "speed":"300", "speedtype":1, "cpu":"7620N", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"200mm"},
+	{"company":"日新邮电", "model":"RX-MAR50", "speed":"750", "speedtype":2, "cpu":"7620A", "links":"50", "memory":"128", "frequency":"2.4G+5G", "frequencytype":2, "power":"500mm"},
+	{"company":"中兴", "model":"WR100", "speed":"/", "speedtype":1, "cpu":"QCA9531", "links":"/", "memory":"/", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"中兴", "model":"WR450", "speed":"/", "speedtype":1, "cpu":"QCA9563", "links":"/", "memory":"/", "frequency":"2.4G", "frequencytype":1, "power":"200mm"},
+	{"company":"华为", "model":"无胖AP", "speed":"/", "speedtype":1, "cpu":"/", "links":"/", "memory":"/", "frequency":"/", "frequencytype":1, "power":"/"},
+	{"company":"网经", "model":"OFFICETEM1100", "speed":"300", "speedtype":1, "cpu":"MTK7620", "links":"/", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"网经", "model":"OFFICETEM1300", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"/", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"500mm"},
+	{"company":"网经", "model":"OFFICETEM1600", "speed":"300", "speedtype":1, "cpu":"AR9344", "links":"/", "memory":"128", "frequency":"2.4G", "frequencytype":1, "power":"500mm"},
+	{"company":"华思", "model":"T1", "speed":"300", "speedtype":1, "cpu":"MTK7620N", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"50mm"},
+	{"company":"华思", "model":"T2", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"华思", "model":"T2S", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"500mm"},
+	{"company":"华思", "model":"T3", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"华思", "model":"T3S", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"500mm"},
+	{"company":"华思", "model":"T3-POE", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"100mm"},
+	{"company":"华思", "model":"T3S-POE", "speed":"300", "speedtype":1, "cpu":"AR9341", "links":"30", "memory":"64", "frequency":"2.4G", "frequencytype":1, "power":"500mm"},
+	{"company":"H3C", "model":"WCA504", "speed":"/", "speedtype":1, "cpu":"AR9344", "links":"/", "memory":"/", "frequency":"2.4G", "frequencytype":1, "power":"23dbm"}
+];
+
+var selSpeed = 0,
+	selFrequency = 0;
+function getList(){
+	var device = [], items = null;
+	for(var i=0; i<Devices.length; i++){
+		items = null;
+		if(selSpeed == 1){
+			if(Devices[i].speedtype == 1) items = Devices[i];
+		}else if(selSpeed == 2){
+			if(Devices[i].speedtype == 2) items = Devices[i];
+		}else{
+			items = Devices[i];
+		}
+		if(selFrequency == 2 && Devices[i].frequencytype != 2){
+			items = null;
+		}
+		if(items != null)
+			device.push(items);
+	}
+	var code = '';
+	$('#devicelist table').html('');
+	for(var i=0; i<device.length; i++){
+		code = '<tr>';
+		if($('#devicelist th:last').text() == device[i].company){
+			var rowspan = $('#devicelist th:last').attr('rowspan');
+			if(rowspan)
+				$('#devicelist th:last').attr('rowspan', parseInt(rowspan)+1);
+			else
+				$('#devicelist th:last').attr('rowspan', 2);
+		}else{
+			code += '<th scope="row">'+device[i].company+'</th>';
+		}
+		code += '<td width="160"><span class="label1">'+device[i].model+'</span></td>';
+		code += '<td width="160"><span class="label2">'+device[i].speed+'</span></td>';
+		code += '<td width="200"><span class="label3">'+device[i].cpu+'</span></td>';
+		code += '<td width="120"><span class="label4">'+device[i].links+'</span></td>';
+		code += '<td width="140"><span class="label5">'+device[i].memory+'</span></td>';
+		code += '<td width="150"><span class="label6">'+device[i].frequency+'</span></td>';
+		code += '<td><span class="label7">'+device[i].power+'</span></td>';
+		code += '</tr>';
+		$('#devicelist table').append(code);
+	}
+}
+
+$(document).ready(function(){
+	$('#select-speed').ulMenu({
+		valAttr: 'val',
+		defVal: '0',
+		onSel: function(obj){
+			selSpeed = parseInt($(obj).data('value'));
+			getList();
+		}
+	});
+	$('#select-frequency').ulMenu({
+		valAttr: 'val',
+		defVal: '0',
+		onSel: function(obj){
+			selFrequency = parseInt($(obj).data('value'));
+			getList();
+		}
+	});
+	getList();
+});
+
+
+-->
+</script>
+</head>
+<body>
+<div id="header">
+<div id="logo"><a href="/">接入系统平台3.0</a></div>
+<div class="telephone"><span>24小时服务热线：4008-899-899</span></div>
+</div>
+<div id="banner"></div>
+<div id="advantage">
+<div class="title"></div>
+<div class="advantage"></div>
+<div class="examples"></div>
+</div>
+<div id="devicelist">
+<div class="title"><span>终端列表</span></div>
+<div class="list">
+<div class="header">
+<ul>
+<li class="item0"><span>厂家</span></li>
+<li class="item1"><span>型号规格<span></li>
+<li class="item2"><div><ul id="select-speed"><li val="0">最大速率M/bps</li><li val="1">300M/bps</li><li val="2">&gt;=600M/bps</li></ul></div></li>
+<li class="item3"><span>CPU芯片</span></li>
+<li class="item4"><span>并发用户数</span></li>
+<li class="item5"><span>内存大小</span></li>
+<li class="item6"><div><ul id="select-frequency"><li val="0">频率</li><li val="2">双频</li></ul></div></li>
+<li class="item7"><span>最大发射功率</span></li>
+</ul>
+</div>
+<table>
+<tr>
+<th rowspan="3" scope="row">瑞斯康达</th>
+<td width="160"><span class="label1">MSG1200</span></td>
+<td width="160"><span class="label2">300</span></td>
+<td width="200"><span class="label3">MT-7620N</span></td>
+<td width="120"><span class="label4">/</span></td>
+<td width="140"><span class="label5">64</span></td>
+<td width="150"><span class="label6">2.4G</span></td>
+<td><span class="label7">20dbm</span></td>
+</tr>
+<tr>
+<td><span class="label1">MSG1200</span></td>
+<td><span class="label2">300</span></td>
+<td><span class="label3">MT-7620N</span></td>
+<td><span class="label4">/</span></td>
+<td><span class="label5">64</span></td>
+<td><span class="label6">2.4G</span></td>
+<td><span class="label7">20dbm</span></td>
+</tr>
+<tr>
+<td><span class="label1">MSG1200</span></td>
+<td><span class="label2">300</span></td>
+<td><span class="label3">MT-7620N</span></td>
+<td><span class="label4">/</span></td>
+<td><span class="label5">64</span></td>
+<td><span class="label6">2.4G</span></td>
+<td><span class="label7">20dbm</span></td>
+</tr>
+</table>
+</div>
+</div>
+<div id="copyright"><span>版权所有 &copy; 中国电信爱WiFi运营中心</span></div>
+</body>
+</html>
