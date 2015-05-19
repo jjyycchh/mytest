@@ -1,0 +1,44 @@
+<link href="${CONTEXT_PATH}/js/lib/jquery/jquery-ui-1.9.2/css/start/jquery-ui-1.10.4.custom.css" rel="stylesheet"	type="text/css" />
+<link href="${CONTEXT_PATH}/css/zzsoft/zzsoft.css" rel="stylesheet" type="text/css" />
+<link href="${CONTEXT_PATH}/css/zzsoft/table.css" rel="stylesheet" type="text/css" />
+<link href="${CONTEXT_PATH}/css/zzsoft/form.css" rel="stylesheet" type="text/css" />
+<link href="${CONTEXT_PATH}/css/zzsoft/font.css" rel="stylesheet" type="text/css" />
+<link href="${CONTEXT_PATH}/css/zzsoft/botton.css" rel="stylesheet" type="text/css" />
+<link href="${CONTEXT_PATH}/css/zzsoft/dtree.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+	window.CONTEXT_PATH = "${CONTEXT_PATH}";
+	window.BASE_PATH = "${BASE_PATH}";
+</script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/jquery/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/jquery/jquery-migrate-1.1.0.min.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/jquery/jquery-ui-1.9.2/js/jquery-ui-1.9.2.min.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/jquery/plugins/jquery.formatDate.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/jquery/plugins/jquery.formatCurrency-1.4.0.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/jquery/plugins/jquery-json-2.4.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/jquery/plugins/ajaxfileupload.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/dot/doT.min.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/ss_util.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/util.js"></script>
+<script type="text/javascript" src="${CONTEXT_PATH}/js/lib/My97DatePicker/WdatePicker.js"></script>
+ <div id="loading" class="ui-widget-overlay" style="display:none;">
+	  <p style="margin:180px auto; width:196px; height:100px;">
+	  	<img alt="" height="" src="${BASE_PATH}/images/loading.gif">
+	  </p>
+ </div> 
+ <script type="text/javascript">
+	$(document).ajaxStart(function(){
+		$("#loading").show();
+	}).ajaxComplete(function(){ 
+		$("#loading").hide();
+		if(window.parent.resizeFrame){
+			window.parent.resizeFrame();
+		}
+	});
+	window.onload =function(){
+		
+	 	if(window.parent.resizeFrame){
+			window.parent.resizeFrame();
+		}
+	}
+</script>

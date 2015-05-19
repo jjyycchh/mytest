@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	
+<display-name>Archetype Created Web Application</display-name>
+<!-- log4j配置 -->
+<context-param>  
+    <param-name>log4jConfigLocation</param-name>  
+   <!-- <param-value>classpath:META-INF/properties/log4j.properties</param-value>   -->
+    <param-value>classpath:log4j.properties</param-value>  
+  </context-param>  
+  <listener>  
+    <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>  
+  </listener>
+ 
+ <!-- ==================== spring3 configuration ============================= -->
+<!-- 加载Spring配置文件 -->
+   <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	
+	<listener>  
+        <listener-class>com.access.core.listener.FileUploadListener</listener-class>  
+    </listener>
+	
+	<listener>  
+        <listener-class>com.access.core.listener.TwifiListener</listener-class>  
+    </listener>
+	
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<listener>  
+        <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>  
+    </listener>  
+    
+    <!-- 改变数据库黑白名单字段数据 -->
+    <listener>
+    	<listener-class>com.access.core.listener.ChangeDataListener</listener-class>
+    </listener>
+    
+    <!-- 启动dataMQ本地接收端 -->
+    <listener>
+    	<listener-class>com.access.core.listener.DataMQReceiverListener</listener-class>
+    </listener>
+
+    
+  	<!--   <listener>  
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>  
+    </listener>  
+    <listener>  
+        <listener-class>org.apache.struts2.dispatcher.ng.listener.StrutsListener</listener-class>  
+    </listener>  
+	 -->
+	
+    <!-- 定义Spring字符编码过滤器   	  -->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+	    <filter-name>CharacterEncodingFilter</filter-name>
+	    <url-pattern>/*</url-pattern>
+  	</filter-mapping>
+<!--  	    
+  	<filter>  
+        <filter-name>openSessionInViewFilter</filter-name>  
+        <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>  
+        <init-param>  
+            <param-name>singleSession</param-name>  
+            <param-value>true</param-value>  
+        </init-param>  
+        <init-param>  
+            <param-name>sessionFactoryBeanName</param-name>  
+            <param-value>sessionFactory</param-value>  
+        </init-param>  
+	</filter>  
+	<filter-mapping>  
+        <filter-name>openSessionInViewFilter</filter-name>  
+        <url-pattern>/*</url-pattern>  
+	</filter-mapping>    
+ -->
+
+<!--  
+   	<filter>  
+        <filter-name>ACLFilter</filter-name>  
+        <filter-class>com.access.filter.ACLFilter</filter-class>
+        <init-param>
+	      <param-name>exceptUrls</param-name>
+	      <param-value>
+          	/device/addDevice,/device/radiusRegister,/device/fatApPage,/device/testPage,/device/test,/account/usernamevalidation,/account/saveaccount,/account/login,/account/loginmerchant,/account/loginadmin,/account/logout,/account/login_validate,/account/register_account,/account/findpwdback,/account/resetpassword,/account/recommendNumbervalidation,/account/getWechatAccessUrl,/account/getnewmerchantaccount,/user/userlogin,/user/logininfo,/user/userauth,/register,/device/register,/user/validateusermac,/thirdpart/userauth,/thirdpart/userlogin,/api*/*,/platform10/*,/statis/*/*,/device/find,/user/findusertoadvert,/account/findtoadvert,/radapi*/*,/app*/*,/device/getwlanacname,/device/getdevidbyacname,/system/newsuggest,/authentication/interfacetest,/authentication/logininterfacetest,/authentication/wechatauthorregister,/authentication/wechatauthpage,/authentication/wechatgetauthcode,/authentication/wechatauth,/authentication/merchanthasthirdapplicationpage,/authentication/merchantdelthirdapplication,/authentication/destest,/thirdapps/getmerchantinfo,/thirdapps/getuserinfo,/merchant/getadvertjs,/merchant/hotmap/list
+	      </param-value>
+	    </init-param>
+	</filter>
+	<filter-mapping>  
+        <filter-name>ACLFilter</filter-name>  
+        <url-pattern>*.htm</url-pattern>  
+	</filter-mapping> 
+-->
+  <!-- ===============================  struts2 configuration  ==============================   -->
+
+    <filter>
+        <filter-name>struts2</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+        <init-param>
+		   <param-name>actionPackages</param-name>
+		   <param-value>action</param-value>
+  		</init-param>
+		    <init-param>
+            <param-name>struts.ui.theme</param-name>
+            <param-value>simple</param-value>
+        </init-param>
+        <init-param>
+            <param-name>struts.objectFactory</param-name>
+            <param-value>spring</param-value>
+        </init-param>
+        <init-param>
+            <param-name>struts.convention.action.packages</param-name>
+            <param-value>com.access.action</param-value>
+        </init-param>
+        <init-param>
+            <param-name>struts.action.extension</param-name>
+            <param-value>htm</param-value>
+        </init-param>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+    </filter>
+    
+    <filter-mapping>
+        <filter-name>struts2</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+<!-- ===============================  resteasy configuration start ==============================   -->
+	<context-param>  
+        <param-name>resteasy.resources</param-name>  
+        <param-value>com.access.server.Imp.DeviceServerImp</param-value>
+    </context-param>  
+    <listener>  
+      <listener-class>  
+         org.jboss.resteasy.plugins.server.servlet.ResteasyBootstrap  
+      </listener-class>  
+   </listener>  
+	<!--  <listener>  
+	  <listener-class>org.jboss.resteasy.plugins.spring.SpringContextLoaderListener</listener-class>  
+	</listener> -->
+   <servlet>  
+      <servlet-name>Resteasy</servlet-name>  
+      <servlet-class>  
+         org.jboss.resteasy.plugins.server.servlet.HttpServletDispatcher  
+      </servlet-class>  
+   </servlet>  
+  
+   <servlet-mapping>  
+      <servlet-name>Resteasy</servlet-name>  
+      <url-pattern>/wsapi/*</url-pattern>  
+   </servlet-mapping> 
+<!-- ===============================  resteasy configuration end ==============================   -->	
+
+<welcome-file-list>
+	<welcome-file>index.jsp</welcome-file>
+</welcome-file-list>
+ 
+ 
+<!-- <security-constraint>
+    <web-resource-collection>
+        <web-resource-name>login</web-resource-name>
+        <url-pattern>/account/login.htm</url-pattern>
+        <http-method>DELETE</http-method>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
+    </web-resource-collection>
+    <web-resource-collection>
+        <web-resource-name>register</web-resource-name>
+        <url-pattern>/account/register_account.htm</url-pattern>
+        <http-method>DELETE</http-method>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
+    </web-resource-collection>
+    <web-resource-collection>
+        <web-resource-name>findpwdback</web-resource-name>
+        <url-pattern>/account/findpwdback.htm</url-pattern>
+        <http-method>DELETE</http-method>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
+    </web-resource-collection>
+    <web-resource-collection>
+        <web-resource-name>device_register</web-resource-name>
+        <url-pattern>/device/register.htm</url-pattern>
+        <http-method>DELETE</http-method>
+        <http-method>GET</http-method>
+        <http-method>POST</http-method>
+        <http-method>PUT</http-method>
+    </web-resource-collection>
+    <user-data-constraint> 
+        <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+    </user-data-constraint>
+</security-constraint> -->
+
+<error-page>  
+    <error-code>404</error-code>  
+    <location>/WEB-INF/jsp/error_404.jsp</location>  
+</error-page>  
+<error-page>  
+    <error-code>500</error-code>  
+    <location>/WEB-INF/jsp/error_500.jsp</location>  
+</error-page>  
+
+<session-config>
+     <session-timeout>30</session-timeout>
+</session-config>
+
+</web-app>
