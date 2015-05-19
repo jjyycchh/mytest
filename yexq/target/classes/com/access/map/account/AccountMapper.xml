@@ -1,0 +1,981 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.account.AccountMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.account.Account" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="avatar_path" property="avatarPath" jdbcType="VARCHAR" />
+    <result column="cell_number" property="cellNumber" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="is_superuser" property="isSuperuser" jdbcType="BIT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="geo_level" property="geoLevel" jdbcType="VARCHAR" />
+    <result column="error_password_retry" property="errorPasswordRetry" jdbcType="INTEGER" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="last_login_datetime" property="lastLoginDatetime" jdbcType="TIMESTAMP" />
+    <result column="change_pwd_token" property="changePwdToken" jdbcType="VARCHAR" />
+    <result column="phone_binded" property="phoneBinded" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.account.AccountWithBLOBs" extends="BaseResultMap" >
+    <result column="parent_ids" property="parentIds" jdbcType="LONGVARCHAR" />
+    <result column="merchant_description" property="merchantDescription" jdbcType="LONGVARCHAR" />
+    <result column="attributes" property="attributes" jdbcType="LONGVARCHAR" />
+    <result column="geo_location" property="geoLocation" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="account_userMerchantListMap" type="com.access.model.account.AccountWithBLOBs" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="avatar_path" property="avatarPath" jdbcType="VARCHAR" />
+    <result column="geo_location" property="geoLocation" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="account_parentIdsMap" type="com.access.model.account.AccountWithBLOBs" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="parent_ids" property="parentIds" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="account_getMerchantPageMap" type="com.access.model.account.AccountWithBLOBs" >
+    <result column="id" property="id" jdbcType="BIGINT" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="avatar_path" property="avatarPath" jdbcType="VARCHAR" />
+    <result column="geo_location" property="geoLocation" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, username, password, email, fullname, avatar_path, cell_number, merchant_name, 
+    is_superuser, status, type, geo_level, error_password_retry, create_datetime, last_login_datetime, 
+    change_pwd_token, phone_binded
+  </sql>
+  <sql id="Blob_Column_List" >
+    parent_ids, merchant_description, attributes, geo_location
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.account.AccountWithBLOBs" >
+    insert into account (id, username, password, 
+      email, fullname, avatar_path, 
+      cell_number, merchant_name, is_superuser, 
+      status, type, geo_level, 
+      error_password_retry, create_datetime, last_login_datetime, 
+      change_pwd_token, phone_binded, parent_ids, 
+      merchant_description, attributes, 
+      geo_location)
+    values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{fullname,jdbcType=VARCHAR}, #{avatarPath,jdbcType=VARCHAR}, 
+      #{cellNumber,jdbcType=VARCHAR}, #{merchantName,jdbcType=VARCHAR}, #{isSuperuser,jdbcType=BIT}, 
+      #{status,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{geoLevel,jdbcType=VARCHAR}, 
+      #{errorPasswordRetry,jdbcType=INTEGER}, #{createDatetime,jdbcType=TIMESTAMP}, #{lastLoginDatetime,jdbcType=TIMESTAMP}, 
+      #{changePwdToken,jdbcType=VARCHAR}, #{phoneBinded,jdbcType=BIT}, #{parentIds,jdbcType=LONGVARCHAR}, 
+      #{merchantDescription,jdbcType=LONGVARCHAR}, #{attributes,jdbcType=LONGVARCHAR}, 
+      #{geoLocation,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.account.AccountWithBLOBs" >
+	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="username != null" >
+        username,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="fullname != null" >
+        fullname,
+      </if>
+      <if test="avatarPath != null" >
+        avatar_path,
+      </if>
+      <if test="cellNumber != null" >
+        cell_number,
+      </if>
+      <if test="merchantName != null" >
+        merchant_name,
+      </if>
+      <if test="isSuperuser != null" >
+        is_superuser,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="geoLevel != null" >
+        geo_level,
+      </if>
+      <if test="errorPasswordRetry != null" >
+        error_password_retry,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="lastLoginDatetime != null" >
+        last_login_datetime,
+      </if>
+      <if test="changePwdToken != null" >
+        change_pwd_token,
+      </if>
+      <if test="phoneBinded != null" >
+        phone_binded,
+      </if>
+      <if test="parentIds != null" >
+        parent_ids,
+      </if>
+      <if test="merchantDescription != null" >
+        merchant_description,
+      </if>
+      <if test="attributes != null" >
+        attributes,
+      </if>
+      <if test="geoLocation != null" >
+        geo_location,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="username != null" >
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarPath != null" >
+        #{avatarPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cellNumber != null" >
+        #{cellNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuperuser != null" >
+        #{isSuperuser,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="geoLevel != null" >
+        #{geoLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="errorPasswordRetry != null" >
+        #{errorPasswordRetry,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginDatetime != null" >
+        #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changePwdToken != null" >
+        #{changePwdToken,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneBinded != null" >
+        #{phoneBinded,jdbcType=BIT},
+      </if>
+      <if test="parentIds != null" >
+        #{parentIds,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merchantDescription != null" >
+        #{merchantDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attributes != null" >
+        #{attributes,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="geoLocation != null" >
+        #{geoLocation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.account.AccountWithBLOBs" >
+    update account
+    <set >
+      <if test="username != null" >
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="fullname != null" >
+        fullname = #{fullname,jdbcType=VARCHAR},
+      </if>
+      <if test="avatarPath != null" >
+        avatar_path = #{avatarPath,jdbcType=VARCHAR},
+      </if>
+      <if test="cellNumber != null" >
+        cell_number = #{cellNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="merchantName != null" >
+        merchant_name = #{merchantName,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuperuser != null" >
+        is_superuser = #{isSuperuser,jdbcType=BIT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="geoLevel != null" >
+        geo_level = #{geoLevel,jdbcType=VARCHAR},
+      </if>
+      <if test="errorPasswordRetry != null" >
+        error_password_retry = #{errorPasswordRetry,jdbcType=INTEGER},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginDatetime != null" >
+        last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="changePwdToken != null" >
+        change_pwd_token = #{changePwdToken,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneBinded != null" >
+        phone_binded = #{phoneBinded,jdbcType=BIT},
+      </if>
+      <if test="parentIds != null" >
+        parent_ids = #{parentIds,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="merchantDescription != null" >
+        merchant_description = #{merchantDescription,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attributes != null" >
+        attributes = #{attributes,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="geoLocation != null" >
+        geo_location = #{geoLocation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.account.AccountWithBLOBs" >
+    update account
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      fullname = #{fullname,jdbcType=VARCHAR},
+      avatar_path = #{avatarPath,jdbcType=VARCHAR},
+      cell_number = #{cellNumber,jdbcType=VARCHAR},
+      merchant_name = #{merchantName,jdbcType=VARCHAR},
+      is_superuser = #{isSuperuser,jdbcType=BIT},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      geo_level = #{geoLevel,jdbcType=VARCHAR},
+      error_password_retry = #{errorPasswordRetry,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      change_pwd_token = #{changePwdToken,jdbcType=VARCHAR},
+      phone_binded = #{phoneBinded,jdbcType=BIT},
+      parent_ids = #{parentIds,jdbcType=LONGVARCHAR},
+      merchant_description = #{merchantDescription,jdbcType=LONGVARCHAR},
+      attributes = #{attributes,jdbcType=LONGVARCHAR},
+      geo_location = #{geoLocation,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.account.Account" >
+    update account
+    set username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      fullname = #{fullname,jdbcType=VARCHAR},
+      avatar_path = #{avatarPath,jdbcType=VARCHAR},
+      cell_number = #{cellNumber,jdbcType=VARCHAR},
+      merchant_name = #{merchantName,jdbcType=VARCHAR},
+      is_superuser = #{isSuperuser,jdbcType=BIT},
+      status = #{status,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      geo_level = #{geoLevel,jdbcType=VARCHAR},
+      error_password_retry = #{errorPasswordRetry,jdbcType=INTEGER},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      last_login_datetime = #{lastLoginDatetime,jdbcType=TIMESTAMP},
+      change_pwd_token = #{changePwdToken,jdbcType=VARCHAR},
+      phone_binded = #{phoneBinded,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectLoginAccount" resultMap="ResultMapWithBLOBs" parameterType="com.access.model.account.AccountWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" />
+    from account
+    where username = #{username,jdbcType=VARCHAR} 
+    and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <select id="account_findAccountPage" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" />
+    from account
+    where is_superuser=0 
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(username, email,
+					IFNULL(fullname, ''),
+					IFNULL(cell_number,''),
+					IFNULL(attributes,''),
+					IFNULL(merchant_name,''),
+					IFNULL(merchant_description,'')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    <if test="directParentId != null" >
+    	and parent_ids like Concat('%directParentIds%"', #{directParentId, jdbcType=VARCHAR}, '"%totalParentIds%')
+    </if>
+    <if test="totalParentId != null" >
+    	and parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId, jdbcType=VARCHAR}, '"%')
+    </if>
+    limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="account_findAccountPageCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select count(id)
+    from account
+    where is_superuser=0 
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(username, email,
+					IFNULL(fullname, ''),
+					IFNULL(cell_number,''),
+					IFNULL(attributes,''),
+					IFNULL(merchant_name,''),
+					IFNULL(merchant_description,'')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    <if test="directParentId != null" >
+    	and parent_ids like Concat('%directParentIds%"', #{directParentId, jdbcType=VARCHAR}, '"%totalParentIds%')
+    </if>
+    <if test="totalParentId != null" >
+    	and parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId, jdbcType=VARCHAR}, '"%')
+    </if>
+  </select>
+  
+  <select id="account_findAccountByPage" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" />
+    from account
+    where is_superuser=0 
+    <if test="type != 'SUPER_MAN'.toString()">
+   		and type != 'MANUFACTURER'
+   		and type != 'DEVICE_ADMIN'
+   		<if test="type == 'ADMINISTRATOR'.toString()">
+	   		<choose>
+	   			<when test="geoLevel == '1'.toString()">
+	   				<![CDATA[ and geo_level > #{geoLevel} ]]>
+	   			</when>
+	   			<when test="geoLevel == '4'.toString()">
+	   				and type != 'ADMINISTRATOR'
+		   			and (parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</when>		
+	   			<otherwise>
+	   				<![CDATA[ and geo_level > #{geoLevel} ]]>
+		   				and (parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</otherwise>
+	   		</choose>
+   		</if>
+	    <if test="type == 'REPRESENTATIVE'.toString()">
+	   		and type = 'MERCHANT'
+	   		and (parent_ids like CONCAT('%"',#{totalParentId},'"%')
+	   		<if test="geoLocation != null">
+	   			or geo_location like Concat('%', #{geoLocation}, '%')
+	   		</if>
+	   		)
+	   	</if>
+    </if>
+    
+    <if test="searchAccountType != null">
+        and type = #{searchAccountType, jdbcType=VARCHAR}
+        and geo_level = #{searchAccountLevel, jdbcType=VARCHAR}
+    </if>
+    
+    <if test="searchSubAccount != null">
+        and parent_ids like CONCAT('%"',#{totalParentId},'"%')
+    </if>
+    
+    <if test="accountStatus != null ">
+    	<![CDATA[ and status = #{accountStatus} ]]>
+    </if>
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(username, email,
+					IFNULL(fullname, ''),
+					IFNULL(cell_number,''),
+					IFNULL(attributes,''),
+					IFNULL(merchant_name,''),
+					IFNULL(merchant_description,'')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    order by id desc
+    limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="account_findAccountByPageCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select count(id)
+    from account
+    where is_superuser=0 
+    <if test="type != 'SUPER_MAN'.toString()">
+   		and type != 'MANUFACTURER'
+   		and type != 'DEVICE_ADMIN'
+   		<if test="type == 'ADMINISTRATOR'.toString()">
+	   		<choose>
+	   			<when test="geoLevel == '1'.toString()">
+	   				<![CDATA[ and geo_level > #{geoLevel} ]]>
+	   			</when>
+	   			<when test="geoLevel == '4'.toString()">
+	   				and type != 'ADMINISTRATOR'
+		   			and (parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</when>		
+	   			<otherwise>
+	   				<![CDATA[ and geo_level > #{geoLevel} ]]>
+		   				and (parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</otherwise>
+	   		</choose>
+   		</if>
+	    <if test="type == 'REPRESENTATIVE'.toString()">
+	   		and type = 'MERCHANT'
+	   		and (parent_ids like CONCAT('%"',#{totalParentId},'"%')
+	   		<if test="geoLocation != null">
+	   			or geo_location like Concat('%', #{geoLocation}, '%')
+	   		</if>
+	   		)
+	   	</if>
+    </if>
+    <if test="accountStatus != null ">
+    	<![CDATA[ and status = #{accountStatus} ]]>
+    </if>
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(username, email,
+					IFNULL(fullname, ''),
+					IFNULL(cell_number,''),
+					IFNULL(attributes,''),
+					IFNULL(merchant_name,''),
+					IFNULL(merchant_description,'')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+  </select>
+  
+  <select id="account_findDirectSubAccountPage" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+    a.id, a.username, 
+    IFNULL(a.fullname, '') as fullname,
+    a.email, a.avatar_path, 
+    a.is_superuser, a.status, a.type, a.geo_level, a.parent_ids, 
+    a.merchant_name, a.geo_location, a.create_datetime
+    from account a
+    where a.is_superuser=0
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(a.username,
+				IFNULL(fullname, ''),
+				IFNULL(merchant_name,''),
+				IFNULL(a.geo_location,'')
+				) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    and a.parent_ids like Concat('%directParentIds%"', #{directParentId, jdbcType=VARCHAR}, '"%totalParentIds%')
+    order by a.username
+    limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="account_findDirectSubAccountPageCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select count(a.id)
+    from account a
+    where a.is_superuser=0
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(a.username,
+				IFNULL(fullname, ''),
+				IFNULL(merchant_name,''),
+				IFNULL(a.geo_location,'')
+				) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    and a.parent_ids like Concat('%directParentIds%"', #{directParentId, jdbcType=VARCHAR}, '"%totalParentIds%') 
+  </select>
+  
+  <select id="account_findInDirectSubAccountPage" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+    a.id, a.username, 
+    IFNULL(a.fullname, '') as fullname,
+    a.email, a.avatar_path, 
+    a.is_superuser, a.status, a.type, a.geo_level, a.parent_ids, 
+    a.merchant_name, a.geo_location, a.create_datetime
+    from account a
+    where a.is_superuser=0
+   	and a.parent_ids not like Concat('%directParentIds%"', #{totalParentId, jdbcType=VARCHAR}, '"%totalParentIds%') 
+    <if test="geoLevel != '4'.toString()">
+    	<![CDATA[ and a.geo_level > #{geoLevel} ]]>
+    </if>
+    <if test="geoLevel == '4'.toString()">
+    	<if test="type == 'ADMINISTRATOR'.toString()">
+    		and a.type != 'ADMINISTRATOR'
+    	</if>
+    	<if test="type == 'REPRESENTATIVE'.toString()">
+    		and a.type = 'MERCHANT'
+    	</if>
+    </if>
+
+    <if test="geoLocation != null">
+    	and a.geo_location like Concat('%', #{geoLocation}, '%')
+    </if>
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(a.username,
+				IFNULL(fullname, ''),
+				IFNULL(merchant_name,''),
+				IFNULL(a.geo_location,'')
+				) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="account_findInDirectSubAccountPageCount" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select count(a.id)
+    from account a
+    where a.is_superuser=0
+    and a.parent_ids not like Concat('%directParentIds%"', #{totalParentId, jdbcType=VARCHAR}, '"%totalParentIds%') 
+    <if test="geoLevel != '4'.toString()">
+    	<![CDATA[ and a.geo_level > #{geoLevel} ]]>
+    </if>
+    <if test="geoLevel == '4'.toString()">
+    	<if test="type == 'ADMINISTRATOR'.toString()">
+    		and a.type != 'ADMINISTRATOR'
+    	</if>
+    	<if test="type == 'REPRESENTATIVE'.toString()">
+    		and a.type = 'MERCHANT'
+    	</if>
+    </if>
+
+    <if test="geoLocation != null">
+    	and a.geo_location like Concat('%', #{geoLocation}, '%')
+    </if>
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(a.username,
+				IFNULL(fullname, ''),
+				IFNULL(merchant_name,''),
+				IFNULL(a.geo_location,'')
+				) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+  </select>
+  
+  <select id="getCountByUsername" resultType="java.lang.Integer" parameterType="java.util.Map" >
+    select count(*) from account
+    where is_superuser=0 
+    <if test="id != null" >
+    	and id != #{id, jdbcType=BIGINT}
+    </if>
+	and username = #{username, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getAccountByUsername" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" /> 
+    from account
+    where is_superuser=0 
+	and username = #{value, jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateAccountStatus" parameterType="com.access.model.account.AccountWithBLOBs">
+  	update account set status=#{status} where id=#{id}
+  </update>
+  
+  <update id="changePassword" parameterType="com.access.model.account.AccountWithBLOBs">
+  	update account set password=#{password} where id=#{id}
+  </update>
+  
+  <select id="getAccountListByType" parameterType="java.util.Map" resultType="com.access.model.account.AccountWithBLOBs">
+  	select 
+  	<include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" />
+     from account 
+  	where is_superuser=0 and type=#{type}
+	<foreach item="item" index="index"  collection="idArray" open="and id in (" separator=", " close=")">  
+		 #{item}
+	</foreach>
+  </select>
+    
+  <!-- 根据设备ID取得商户对象 -->
+  <select id="getAccountByDeviceId" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+  		a.* 
+  	from 
+  		location as l, 
+  		device as d, 
+  		account as a
+  	where 
+  		l.id = d.location_id 
+  	and 
+  		l.account_id = a.id
+  	and 
+  		d.device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateLoginTime" parameterType="java.lang.Long">
+  	update account set last_login_datetime = now() where id = #{value}
+  </update>
+  
+  <update id="updateParentId" parameterType="com.access.model.account.AccountWithBLOBs">
+  	UPDATE account SET parent_ids = #{parent_ids} WHERE is_superuser=0 and id = #{id}
+  </update>
+  
+  <update id="updateDirectParentId" parameterType="java.util.Map">
+	UPDATE account SET parent_ids =
+		CASE (parent_ids is null || parent_ids='')
+			WHEN true THEN REPLACE('{"directParentIds":[],"totalParentIds":[]}', '],', CONCAT('"', #{directParentId, jdbcType=VARCHAR}, '"],')) 
+			WHEN false THEN 
+				CASE parent_ids LIKE CONCAT('%directParentIds%"', #{directParentId, jdbcType=VARCHAR}, '"%totalParentIds%')
+					WHEN TRUE THEN parent_ids
+					WHEN FALSE THEN 
+						CASE INSTR(parent_ids, '[],') > 0 
+							WHEN true THEN REPLACE(parent_ids, '],', CONCAT('"', #{directParentId, jdbcType=VARCHAR}, '"],')) 
+							WHEN false THEN REPLACE(parent_ids, '],', CONCAT(',', '"', #{directParentId, jdbcType=VARCHAR}, '"],')) 
+						END
+				END
+		END
+	 WHERE is_superuser=0
+	<foreach item="item" index="index"  collection="subAcctIds" open="and id in (" separator=", " close=")">  
+		 #{item}
+	</foreach>
+  </update>
+  
+  <update id="removeDirectParentId" parameterType="java.util.Map">
+	UPDATE account SET parent_ids =
+		CASE (parent_ids='' || parent_ids is null)
+			WHEN true THEN '{"directParentIds":[], "totalParentIds":[]}'
+			WHEN false THEN 
+				CASE parent_ids LIKE CONCAT('%directParentIds%"', #{exdirectParentId, jdbcType=VARCHAR}, '"%totalParentIds%')
+					WHEN FALSE THEN parent_ids
+					WHEN TRUE THEN   
+						CASE parent_ids LIKE CONCAT('%directParentIds%["', #{exdirectParentId, jdbcType=VARCHAR}, '"],%totalParentIds%')
+							WHEN TRUE THEN INSERT(parent_ids, INSTR(parent_ids, 'directParentIds'), INSTR(parent_ids, 'totalParentIds') - INSTR(parent_ids, 'directParentIds'), REPLACE( SUBSTRING(parent_ids, INSTR(parent_ids, 'directParentIds'), INSTR(parent_ids, 'totalParentIds') - INSTR(parent_ids, 'directParentIds')), CONCAT('"', #{exdirectParentId, jdbcType=VARCHAR}, '"'), "")) 
+							WHEN FALSE THEN 
+								CASE parent_ids LIKE CONCAT('%directParentIds%"', #{exdirectParentId, jdbcType=VARCHAR}, '",%totalParentIds%')
+									WHEN true THEN INSERT(parent_ids, INSTR(parent_ids, 'directParentIds'), INSTR(parent_ids, 'totalParentIds') - INSTR(parent_ids, 'directParentIds'), REPLACE( SUBSTRING(parent_ids, INSTR(parent_ids, 'directParentIds'), INSTR(parent_ids, 'totalParentIds') - INSTR(parent_ids, 'directParentIds')), CONCAT('"', #{exdirectParentId, jdbcType=VARCHAR}, '",'), "")) 
+									WHEN false THEN INSERT(parent_ids, INSTR(parent_ids, 'directParentIds'), INSTR(parent_ids, 'totalParentIds') - INSTR(parent_ids, 'directParentIds'), REPLACE( SUBSTRING(parent_ids, INSTR(parent_ids, 'directParentIds'), INSTR(parent_ids, 'totalParentIds') - INSTR(parent_ids, 'directParentIds')), CONCAT(',"', #{exdirectParentId, jdbcType=VARCHAR}, '"'), "")) 
+								END
+						END
+				END
+		END
+	 WHERE is_superuser=0
+	<foreach item="item" index="index"  collection="removedSubacctIds" open="and id in (" separator=", " close=")">  
+		 #{item}
+	</foreach>
+  </update>
+  
+  <update id="updateIndirectParentId" parameterType="java.util.Map">
+	UPDATE account SET parent_ids =
+		CASE (parent_ids='' || parent_ids is null)
+			WHEN true THEN CONCAT('{"directParentIds":[], "totalParentIds":["', #{indirectParentId, jdbcType=VARCHAR}, '"]}')
+			WHEN false THEN 
+				CASE parent_ids LIKE CONCAT('%directParentIds%totalParentIds%"', #{indirectParentId, jdbcType=VARCHAR}, '"%')
+					WHEN TRUE THEN parent_ids
+					WHEN FALSE THEN 
+						CASE INSTR( substring(parent_ids, INSTR(parent_ids, 'totalParentIds')), '[]') > 0 
+							WHEN true THEN  REVERSE(INSERT( REVERSE(parent_ids), INSTR(REVERSE(parent_ids), "]") +1, 0, CONCAT('"', REVERSE(#{indirectParentId, jdbcType=VARCHAR}), '"') )) 
+							WHEN false THEN REVERSE(INSERT( REVERSE(parent_ids), INSTR(REVERSE(parent_ids), "]") +1, 0, CONCAT('"', REVERSE(#{indirectParentId, jdbcType=VARCHAR}), '",') )) 
+						END   
+				END
+		END
+	 WHERE is_superuser=0
+	<foreach item="item" index="index"  collection="subAcctIds" open="and id in (" separator=", " close=")">  
+		 #{item}
+	</foreach>
+  </update>
+  
+  <update id="removeIndirectParentId" parameterType="java.util.Map">
+	UPDATE account SET parent_ids =
+		CASE (parent_ids='' || parent_ids is null)
+			WHEN true THEN '{"directParentIds":[], "totalParentIds":[]}'
+			WHEN false THEN 
+				CASE parent_ids LIKE CONCAT('%totalParentIds%"', #{exindirectParentId, jdbcType=VARCHAR}, '"%')
+					WHEN false THEN parent_ids
+					WHEN true THEN 
+						CASE parent_ids LIKE CONCAT('%totalParentIds%["', #{exindirectParentId, jdbcType=VARCHAR}, ']",%')
+								WHEN TRUE THEN INSERT(parent_ids,  INSTR(parent_ids, 'totalParentIds'), LENGTH(parent_ids) - INSTR(parent_ids, 'totalParentIds')+1, REPLACE(SUBSTRING(parent_ids, INSTR(parent_ids, 'totalParentIds')), CONCAT('"', #{exindirectParentId, jdbcType=VARCHAR}, '"'), "")) 
+								WHEN FALSE THEN
+									CASE parent_ids LIKE CONCAT('%totalParentIds%"', #{exindirectParentId, jdbcType=VARCHAR}, '",%')
+										WHEN true THEN INSERT(parent_ids,  INSTR(parent_ids, 'totalParentIds'), LENGTH(parent_ids) - INSTR(parent_ids, 'totalParentIds')+1, REPLACE(SUBSTRING(parent_ids, INSTR(parent_ids, 'totalParentIds')), CONCAT('"', #{exindirectParentId, jdbcType=VARCHAR}, '",'), ""))  
+										WHEN false THEN INSERT(parent_ids,  INSTR(parent_ids, 'totalParentIds'), LENGTH(parent_ids) - INSTR(parent_ids, 'totalParentIds')+1, REPLACE(SUBSTRING(parent_ids, INSTR(parent_ids, 'totalParentIds')), CONCAT(',"', #{exindirectParentId, jdbcType=VARCHAR}, '"'), ""))  
+									END  
+						END 
+				END
+		END
+	 WHERE is_superuser=0 
+	<foreach item="item" index="index"  collection="removedSubacctIds" open="and id in (" separator=", " close=")">  
+		 #{item}
+	</foreach>
+  </update>
+  
+  <select id="account_userMerchantList" parameterType="java.util.Map" resultMap="account_userMerchantListMap">
+    select id, username, merchant_name
+    from account
+    where is_superuser=0 
+    and type = #{type,jdbcType=VARCHAR}
+    and parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId, jdbcType=VARCHAR}, '"%')
+    <if test="merchantName != null">
+    	and merchant_name like CONCAT('%', #{merchantName,jdbcType=VARCHAR}, '%')
+    </if>
+    limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  
+  <select id="account_getMerchantList" parameterType="java.util.Map" resultMap="account_userMerchantListMap">
+    select id, username, merchant_name
+    from account
+    where is_superuser=0 
+    and type = #{type,jdbcType=VARCHAR}
+    and parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId, jdbcType=VARCHAR}, '"%')
+    <if test="merchantName != null">
+    	and Concat(username,
+				IFNULL(fullname, ''),
+				IFNULL(merchant_name,'')
+			) like CONCAT('%', #{merchantName,jdbcType=VARCHAR}, '%')
+    </if>
+    limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="getTotalSubAccountByAccountId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+  	select 
+  	<include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" />
+     from account 
+  	where is_superuser=0 and 
+    	parent_ids like CONCAT('%directParentIds%totalParentIds%"', #{value, jdbcType=VARCHAR}, '"%')
+  </select>
+  
+  <update id="updateToken" parameterType="com.access.model.account.AccountWithBLOBs">
+  	update account set change_pwd_token = #{changePwdToken, jdbcType=VARCHAR}
+  	where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getAccountByToken" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+  	select 
+  	<include refid="Base_Column_List" />
+    ,<include refid="Blob_Column_List" />
+     from account 
+  	where is_superuser=0
+	and change_pwd_token = #{value, jdbcType=VARCHAR}
+  </select>
+  
+	<select id="getLatestDaysIncsAcct" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+	  	select 
+		  	<include refid="Base_Column_List" />
+		    ,<include refid="Blob_Column_List" />
+	     from account 
+	  	where is_superuser=0
+	 		and create_datetime > date_add(now(), interval #{value} day)
+		order by create_datetime desc
+  	</select>
+  
+  	<select id="getOtherDirectAccount" resultMap="account_parentIdsMap" parameterType="java.util.Map" >
+  		SELECT dp.id, dp.parent_ids from account as a, account as dp
+		where  a.parent_ids like CONCAT('%directParentIds%"', dp.id ,'"%totalParentIds%')
+		and dp.id != #{destAccountId}
+		and a.id in
+	  	<foreach item="item" index="index" collection="subAccountIds" open=" (" separator=", " close=")">  
+		 	#{item}
+		</foreach>
+  	</select>
+  	
+  	<select id="getAccountListByCellNumber" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String">
+  		select 
+		  	<include refid="Base_Column_List" />
+		    ,<include refid="Blob_Column_List" />
+	    from account 
+	  	where is_superuser=0
+	  	and cell_number = #{value}
+  	</select>
+  	
+  	<select id="getChildCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		SELECT count(a.id) from account as a
+		where a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{accountId,jdbcType=BIGINT}, '"%')
+		<if test="status != null">
+			and a.status = #{status, jdbcType=VARCHAR}
+		</if>
+  	</select>
+  	
+  	<select id="account_getMerchantPage" parameterType="java.util.Map" resultMap="account_getMerchantPageMap">
+	    select id, username, 
+		    IFNULL(fullname,'') as full_name, 
+		    IFNULL(merchant_name,'') as merchant_name,
+		    IFNULL(avatar_path,'') as avatar_path,
+		    IFNULL(geo_location,'') as geo_location
+	    from account
+	    where is_superuser=0 
+	    and UPPER(type) = #{type,jdbcType=BIGINT}
+	    and parent_ids like Concat('%directParentIds%totalParentIds%"', #{accountId, jdbcType=BIGINT}, '"%')
+	    <if test="keywords != null">
+		    <foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		    	Concat(username,
+						IFNULL(fullname, ''),
+						IFNULL(merchant_name,'')
+				) like CONCAT('%', #{keywords,jdbcType=VARCHAR}, '%')
+			</foreach>
+	    </if>
+	    limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id='account_getFullnameByType' parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT 
+  		account.fullname
+  	FROM
+  		account
+  	WHERE
+  		account.type = 'MANUFACTURER'
+  	GROUP BY
+  		account.fullname
+  	ORDER BY
+  		account.fullname
+  </select>
+  
+  <select id='getIdbyFullname' parameterType="java.lang.String" resultType="java.lang.Long">
+  	SELECT
+  		account.id
+  	FROM
+  		account
+  	WHERE
+  		account.fullname = #{fullname, jdbcType=VARCHAR} AND
+  		account.type = 'MANUFACTURER'
+  	LIMIT 1
+  </select>
+  
+  <select id="ad_getAccountById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    SELECT
+        account.username,
+        account.type
+    FROM
+        account
+    WHERE
+        account.id = #{id, jdbcType=BIGINT}
+  </select>
+  
+  <select id="account_getAccountByMerchantType" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+    select
+    	account.id, account.username, account.merchant_name,
+    	account.fullname
+    from
+    	account
+    where
+    	account.type = 'MERCHANT'
+    	<if test="keywords != null">
+		    <foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		    	Concat(account.username,
+						IFNULL(account.fullname, ''),
+						IFNULL(account.merchant_name,'')
+				) like CONCAT('%', #{item}, '%')
+			</foreach>
+	    </if>
+	    <if test="type == 'ADMINISTRATOR'.toString()">
+	   		<choose>
+	   			<when test="geoLevel == '1'.toString()">
+	   				<![CDATA[ and account.geo_level > #{geoLevel} ]]>
+	   			</when>
+	   			<when test="geoLevel == '4'.toString()">
+	   				and account.type != 'ADMINISTRATOR'
+		   			and (account.parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or account.geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</when>		
+	   			<otherwise>
+	   				<![CDATA[ and account.geo_level > #{geoLevel} ]]>
+		   				and (account.parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or account.geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</otherwise>
+	   		</choose>
+   		</if>
+	order by
+		account.username asc
+	limit
+		#{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="getHotmapList" parameterType="java.util.Map" resultType="java.util.Map">
+  	select * from(
+		select a.merchant_name as name ,d.config_items,l.address ,a.id ,a.cell_number as telephone,l.latitude as lat,l.longitude as lng , sqrt(  
+		    (  
+		     ((#{longitude}-l.longitude)*PI()*12656*cos(((#{latitude}+l.latitude)/2)*PI()/180)/180)  
+		     *  
+		     ((#{longitude}-l.longitude)*PI()*12656*cos (((#{latitude}+l.latitude)/2)*PI()/180)/180)  
+		    )  
+		    +  
+		    (  
+		     ((#{latitude}-l.latitude)*PI()*12656/180)  
+		     *  
+		     ((#{latitude}-l.latitude)*PI()*12656/180)  
+		    )  
+		    )  as distance
+		from account as a ,location as l ,device d
+		where d.location_id=l.id
+		and   l.account_id=a.id) t
+	where 1=1
+	<![CDATA[ and t.distance < #{raidus} ]]>
+	order by t.distance;
+  </select>
+</mapper>

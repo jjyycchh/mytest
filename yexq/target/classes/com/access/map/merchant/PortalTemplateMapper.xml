@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalTemplateMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalTemplate" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="auth_type" property="authType" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="thumbnail_path" property="thumbnailPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.merchant.PortalTemplateWithBLOBs" extends="BaseResultMap" >
+    <result column="default_data" property="defaultData" jdbcType="LONGVARCHAR" />
+    <result column="template_frame" property="templateFrame" jdbcType="LONGVARCHAR" />
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, type, auth_type, create_datetime, thumbnail_path
+  </sql>
+  <sql id="Blob_Column_List" >
+    default_data, template_frame, description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from portal_template
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from portal_template
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalTemplateWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into portal_template (id, name, type, 
+      auth_type, create_datetime, thumbnail_path, 
+      default_data, template_frame, description
+      )
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, 
+      #{authType,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{thumbnailPath,jdbcType=VARCHAR}, 
+      #{defaultData,jdbcType=LONGVARCHAR}, #{templateFrame,jdbcType=LONGVARCHAR}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalTemplateWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into portal_template
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="authType != null" >
+        auth_type,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path,
+      </if>
+      <if test="defaultData != null" >
+        default_data,
+      </if>
+      <if test="templateFrame != null" >
+        template_frame,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thumbnailPath != null" >
+        #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultData != null" >
+        #{defaultData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="templateFrame != null" >
+        #{templateFrame,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.PortalTemplateWithBLOBs" >
+    update portal_template
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        auth_type = #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultData != null" >
+        default_data = #{defaultData,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="templateFrame != null" >
+        template_frame = #{templateFrame,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.merchant.PortalTemplateWithBLOBs" >
+    update portal_template
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      auth_type = #{authType,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      default_data = #{defaultData,jdbcType=LONGVARCHAR},
+      template_frame = #{templateFrame,jdbcType=LONGVARCHAR},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.PortalTemplate" >
+    update portal_template
+    set name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      auth_type = #{authType,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getAll" resultMap="ResultMapWithBLOBs">
+  	select 
+  	    <include refid="Base_Column_List" />
+	  	,
+	  	<include refid="Blob_Column_List" />
+    from portal_template order by create_datetime desc
+  </select>
+  
+  <select id="template_getTemplatePage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from portal_template
+    where 1=1
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(name, '')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    <if test="startDate != null">
+		<![CDATA[ and create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+ 		<if test="endDate != null">
+		<![CDATA[ and create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+	order by create_datetime desc 
+	limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="getTemplateList" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	select 
+  	<include refid="Base_Column_List" />
+  	,
+  	<include refid="Blob_Column_List" />
+	from portal_template
+	where 1=1
+	<if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(name, '')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    <if test="startDate != null">
+			<![CDATA[ and create_datetime >= #{startDate,jdbcType=TIMESTAMP} ]]>
+	</if>
+ 		<if test="endDate != null">
+		<![CDATA[ and create_datetime < #{endDate,jdbcType=TIMESTAMP} ]]>
+	</if>
+	order by create_datetime desc
+  </select>
+  
+  <select id="getTemplateByMap" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	select 
+  	<include refid="Base_Column_List" />
+  	,
+  	<include refid="Blob_Column_List" />
+	from portal_template
+	where name = #{name, jdbcType=VARCHAR}
+		and type = #{type, jdbcType=VARCHAR}
+	<if test="authType != null" >
+        and auth_type = #{authType, jdbcType=VARCHAR}
+      </if>
+  </select>
+  
+  <select id="portalTemplate_findTemplatePage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	select 
+  	    <include refid="Base_Column_List" />
+	  	,
+	  	<include refid="Blob_Column_List" />
+    from portal_template
+    where 1=1
+    <if test="type != null">
+    	and type = #{type}
+    </if>
+    <if test = "templateIdList != null">
+    	and id in
+	    <foreach collection="templateIdList" item="templateId" separator = "," open = "(" close = ")" >  
+	    	#{templateId, jdbcType=BIGINT}
+	    </foreach>
+    </if>
+    order by 
+    	type, auth_type
+    limit 
+    	#{page.begin},#{page.pageSize}
+  </select>
+    <select id="portalTemplate_findTemplatePageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  	select count(*)
+    from portal_template
+    where 1=1
+    <if test="type != null">
+    	and type = #{type}
+    </if>
+    order by type, auth_type
+    limit {page.begin},{page.pageSize}
+  </select>
+</mapper>

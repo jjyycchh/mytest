@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+		location="C:\Users\richard\.m2\repository\mysql\mysql-connector-java\5.1.29\mysql-connector-java-5.1.29.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<!-- <plugin type="org.mybatis.generator.plugins.MapperConfigPlugin"> <property 
+			name="fileName" value="GeneratedMapperConfig.xml" /> <property name="targetPackage" 
+			value="com.easyway.app.core.mgr" /> <property name="targetProject" value="../java" 
+			/> </plugin> -->
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://192.168.3.197:3306/twifi_dev" userId="twifi" password="twifi123$">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.access.model"
+			targetProject="twifi-access">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.access.map"
+			targetProject="twifi-access">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.access.dao" 
+			targetProject="twifi-access">
+			<property name="enableSubPackages" value="false" />
+		</javaClientGenerator>
+
+		<table schema="twifi_dev" tableName="account" domainObjectName="Account"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="account_has_terminal_user" domainObjectName="AccountHasTerminalUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="account_operation_log" domainObjectName="AccountOptLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="account_tag" domainObjectName="AccountTag"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="account_tag_has_account" domainObjectName="AccountTagHasAccount"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="background_task" domainObjectName="BackgroundTask"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="background_task_log" domainObjectName="BackgroundTaskLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="city" domainObjectName="City"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="component" domainObjectName="Component"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="county_district" domainObjectName="CountyDistrict"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="device" domainObjectName="Device"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="device_has_device_tag" domainObjectName="DeviceHasDeviceTag"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="device_status_log" domainObjectName="DeviceStatusLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="device_tag" domainObjectName="DeviceTag"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="device_task_log" domainObjectName="DeviceTaskLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="email_notice" domainObjectName="EmailNotice"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="email_sending_log" domainObjectName="EmailSendingLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="exception_log" domainObjectName="ExceptionLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="location" domainObjectName="Location"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="network_security_policy" domainObjectName="NetworkSecurityPolicy"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="permission" domainObjectName="Permission"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="permission_has_account" domainObjectName="PermissionHasAccount"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_display_policy" domainObjectName="PortalDisplayPolicy"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_display_policy_has_portal_page" domainObjectName="PortalDisplayPageHasPortalPage"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_page" domainObjectName="PortalPage"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_page_has_portal_tag" domainObjectName="PortalPageHasPortalTag"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_site" domainObjectName="PortalSite"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_tag" domainObjectName="PortalTag"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_template" domainObjectName="PortalTemplate"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_template_has_portal_tag" domainObjectName="PortalTemplateHasPortalTag"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_traffic_log" domainObjectName="PortalTrafficLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="portal_display_item" domainObjectName="PortalDisplayItem"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="province" domainObjectName="Province"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="resource" domainObjectName="Resource"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="resource_has_portal_page" domainObjectName="ResourceHasPortalPage"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="sms" domainObjectName="Sms"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="system_config" domainObjectName="SystemConfig"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="terminal_user" domainObjectName="TerminalUser"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+		
+		<table schema="twifi_dev" tableName="terminal_user_authentication_log" domainObjectName="TerminalUserAuthLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="terminal_user_has_device" domainObjectName="TerminalUserHasDevice"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+		<table schema="twifi_dev" tableName="terminal_user_request_log" domainObjectName="TerminalUserRequestLog"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false">
+		</table>
+
+	</context>
+</generatorConfiguration>

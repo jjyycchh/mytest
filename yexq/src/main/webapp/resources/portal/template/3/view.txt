@@ -1,0 +1,144 @@
+template:
+{
+    "name": "默认模板 - 内容页面",
+    "layout": {
+        "header": "<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><meta name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no'><title>{%=title%}</title>{#css#}{#script#}<script type='text/javascript'>$(document).ready(function(){MyTemplate.init();$(window).resize(function(){MyTemplate.init();})})</script></head><body>",
+        "body": "<div class='portalTemplateBody' id='portalTemplateBodyID'>{{siteHeaderModuleBox}}</div>",
+        "footer": "</body></html>",
+        "script": [
+            "/resources/portal/template/3/js/template.js",
+            "/resources/portal/auth_module/js/authorize.js",
+            "/resources/portal/auth_module/js/jquery-1.11.0.min.js"
+        ],
+        "css": [
+            "/resources/portal/template/3/css/template.css"
+        ]
+    },
+    "modules": [
+        {
+            "moduleid": "siteHeaderModuleBox",
+            "layout": "<div class='siteModules' id='siteHeaderModuleBox' role='general' title='导航栏'>{{Header001}}{{Header002}}<a href='javascript:;' class='siteMenu'>&nbsp;</a><div class='userActiveMenu'><a href='javascript:;' class='MenuIcon'>&nbsp;</a><div class='userActive'><a href=''>个人信息</a><a href=''>修改密码</a><a href=''>退出</a></div></div>",
+            "permission": {
+                "accountId": [],
+                "accountType": [
+                    "SUPER_MAN",
+                    "ADMINISTRATOR",
+                    "REPRESENTATIVE",
+                    "MERCHANT"
+                ]
+            },
+            "type": "general",
+            "components": [
+                {
+                    "componentid": "Header001",
+                    "permission": {
+                        "accountId": [],
+                        "accountType": [
+                            "SUPER_MAN",
+                            "ADMINISTRATOR",
+                            "REPRESENTATIVE",
+                            "MERCHANT"
+                        ]
+                    },
+                    "content": "<a href='javascript:;' class='siteNavi components url'><span class='textFirst title'>{%=title%}</span></a>"
+                },
+                {
+                    "componentid": "Header002",
+                    "permission": {
+                        "accountId": [],
+                        "accountType": [
+                            "SUPER_MAN",
+                            "ADMINISTRATOR",
+                            "REPRESENTATIVE",
+                            "MERCHANT"
+                        ]
+                    },
+                    "content": "<a href='javascript:;' class='siteNavi components url'><span class='iconNext'>&nbsp;</span><span class='textNext title'>{%=title%}</span></a><span class='naviEnd'>&nbsp;</span>"
+                }
+            ]
+        },
+        {
+            "moduleid": "siteArticleViewModuleBox",
+            "layout": "<div class='siteModules' id='siteArticleViewModuleBox' role='general' title='文本内容'>{{ArticleView001}}</div>",
+            "permission": {
+                "accountId": [],
+                "accountType": [
+                    "SUPER_MAN",
+                    "ADMINISTRATOR",
+                    "REPRESENTATIVE",
+                    "MERCHANT"
+                ]
+            },
+            "type": "general",
+            "components": [
+                {
+                    "componentid": "ArticleView001",
+                    "permission": {
+                        "accountId": [],
+                        "accountType": [
+                            "SUPER_MAN",
+                            "ADMINISTRATOR",
+                            "REPRESENTATIVE",
+                            "MERCHANT"
+                        ]
+                    },
+                    "content": "<div class='articleTitle components title'>{%=title%}</div><div class='articleTime components title'>{%=time%}</div><div class='articleLine'></div><div class='articleText description'>{%=description%}</div>"
+                }
+            ]
+        }
+    ]
+}
+ 
+ 
+ defaultdata:
+ 
+ 
+ {
+    "layout": {
+        "header": {
+            "title": "内容页面"
+        },
+        "body": "",
+        "footer": "",
+        "script": "",
+        "css": "",
+        "modal": ""
+    },
+    "modules": [
+        {
+            "moduleid": "siteHeaderModuleBox",
+            "layout": "",
+            "components": [
+                {
+                    "componentid": "Header001",
+                    "content": {
+                        "title": "一鸣奶吧",
+                        "url": "javascript:;"
+                    }
+                },
+                {
+                    "componentid": "Header002",
+                    "content": {
+                        "title": "详细内容",
+                        "url": "javascript:;"
+                    }
+                }
+            ]
+        },
+        {
+            "moduleid": "siteArticleViewModuleBox",
+            "layout": "",
+            "components": [
+                {
+                    "componentid": "ArticleView001",
+                    "content": {
+                        "title": "一鸣奶吧",
+                        "time": "2014-05-06 23:22:09",
+                        "description": "详细内容详细内容详细内容详细内容详细内容"
+                    }
+                }
+            ]
+        }
+    ]
+}
+ 

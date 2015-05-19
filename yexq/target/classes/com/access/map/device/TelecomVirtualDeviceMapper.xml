@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.TelecomVirtualDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.TelecomVirtualDevice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="pvlan_id" property="pvlanId" jdbcType="VARCHAR" />
+    <result column="cvlan_id" property="cvlanId" jdbcType="VARCHAR" />
+    <result column="domain" property="domain" jdbcType="VARCHAR" />
+    <result column="eth_port" property="ethPort" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="telecom_account" property="telecomAccount" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="tcvApSearchResult" extends="BaseResultMap" type="com.access.model.device.TelecomVirtualDevice" >
+    <result column="location_id" property="locationId" jdbcType="BIGINT" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county_district" property="countyDistrict" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+    <result column="account_type" property="accountType" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, pvlan_id, cvlan_id, domain, eth_port, name, description, device_id, account_id, 
+    telecom_account, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from telecom_virtual_device
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from telecom_virtual_device
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.TelecomVirtualDevice" >
+    insert into telecom_virtual_device (id, pvlan_id, cvlan_id, 
+      domain, eth_port, name, 
+      description, device_id, account_id, 
+      telecom_account, create_datetime)
+    values (#{id,jdbcType=BIGINT}, #{pvlanId,jdbcType=VARCHAR}, #{cvlanId,jdbcType=VARCHAR}, 
+      #{domain,jdbcType=VARCHAR}, #{ethPort,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{accountId,jdbcType=BIGINT}, 
+      #{telecomAccount,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.TelecomVirtualDevice" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into telecom_virtual_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pvlanId != null" >
+        pvlan_id,
+      </if>
+      <if test="cvlanId != null" >
+        cvlan_id,
+      </if>
+      <if test="domain != null" >
+        domain,
+      </if>
+      <if test="ethPort != null" >
+        eth_port,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="telecomAccount != null" >
+        telecom_account,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="pvlanId != null" >
+        #{pvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="cvlanId != null" >
+        #{cvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="ethPort != null" >
+        #{ethPort,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="telecomAccount != null" >
+        #{telecomAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.TelecomVirtualDevice" >
+    update telecom_virtual_device
+    <set >
+      <if test="pvlanId != null" >
+        pvlan_id = #{pvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="cvlanId != null" >
+        cvlan_id = #{cvlanId,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="ethPort != null" >
+        eth_port = #{ethPort,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="telecomAccount != null" >
+        telecom_account = #{telecomAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.TelecomVirtualDevice" >
+    update telecom_virtual_device
+    set pvlan_id = #{pvlanId,jdbcType=VARCHAR},
+      cvlan_id = #{cvlanId,jdbcType=VARCHAR},
+      domain = #{domain,jdbcType=VARCHAR},
+      eth_port = #{ethPort,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      account_id = #{accountId,jdbcType=BIGINT},
+      telecom_account = #{telecomAccount,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="findByTvDevice" parameterType="com.access.model.device.TelecomVirtualDevice" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from telecom_virtual_device
+    where 1=1
+      <if test="pvlanId != null" >
+        and pvlan_id = #{pvlanId,jdbcType=VARCHAR}
+      </if>
+      <if test="cvlanId != null" >
+        and cvlan_id = #{cvlanId,jdbcType=VARCHAR}
+      </if>
+      <if test="domain != null" >
+        and domain = #{domain,jdbcType=VARCHAR}
+      </if>
+      <if test="ethPort != null" >
+        and eth_port = #{ethPort,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="deviceId != null" >
+        and device_id = #{deviceId,jdbcType=VARCHAR}
+      </if>
+      <if test="accountId != null" >
+        and account_id = #{accountId,jdbcType=BIGINT}
+      </if>
+      <if test="telecomAccount != null" >
+        and telecom_account = #{telecomAccount,jdbcType=VARCHAR}
+      </if>
+      limit 1
+  </select>
+  
+  <select id="findByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select 
+    <include refid="Base_Column_List" />
+    from telecom_virtual_device
+    where 1=1
+      <if test="pvlanId != null" >
+        and pvlan_id = #{pvlanId,jdbcType=VARCHAR}
+      </if>
+      <if test="cvlanId != null" >
+        and cvlan_id = #{cvlanId,jdbcType=VARCHAR}
+      </if>
+      <if test="domain != null" >
+        and domain = #{domain,jdbcType=VARCHAR}
+      </if>
+      <if test="ethPort != null" >
+        and eth_port = #{ethPort,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="deviceId != null" >
+        and device_id = #{deviceId,jdbcType=VARCHAR}
+      </if>
+      <if test="accountId != null" >
+        and account_id = #{accountId,jdbcType=BIGINT}
+      </if>
+      <if test="telecomAccount != null" >
+        and telecom_account = #{telecomAccount,jdbcType=VARCHAR}
+      </if>
+      limit 1
+  </select>
+  
+  <select id="telecomvirtualdevice_getTelecomVirtualDevicePage" resultMap="tcvApSearchResult" parameterType="java.util.Map">
+		SELECT
+			tvd.device_id, 
+			tvd.pvlan_id,
+			tvd.cvlan_id,
+			tvd.domain,
+			tvd.eth_port,
+			tvd.telecom_account,
+			IFNULL(tvd.name, '') as name,
+			tvd.create_datetime,
+			IFNULL(d.name, '') as device_name,
+			d.location_id,
+			l.province, 
+			l.city, 
+			IFNULL(l.county_district, '') AS county_district,
+			IFNULL(l.address, '') AS address,
+			l.account_id, 
+			a.username, 
+			a.type as account_type,
+			IFNULL(a.merchant_name, '') AS merchant_name, 
+			IFNULL(a.fullname, '') AS fullname
+		FROM telecom_virtual_device as tvd,
+			device as d,
+			location as l,
+			account as a
+		WHERE tvd.device_id = d.device_id 
+		AND d.location_id = l.id AND
+		l.account_id = a.id
+      <if test="keywords != null">
+        <foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")"> 
+          Concat(tvd.device_id,
+		       tvd.pvlan_id,
+		       tvd.cvlan_id,
+		       tvd.domain,
+		       tvd.eth_port,
+		       IFNULL(tvd.name, ''),
+		       IFNULL(d.name, ''),
+		       IFNULL(a.username, ''),
+		       IFNULL(a.merchant_name, ''),
+		       IFNULL(a.fullname, '')) LIKE Concat('%', #{item}, '%')
+        </foreach>
+      </if>
+      <if test="startDate != null">
+        <![CDATA[ AND tvd.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="endDate != null">
+        <![CDATA[ AND tvd.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+    ORDER BY
+      tvd.create_datetime DESC
+    LIMIT
+      #{page.begin},#{page.pageSize}
+  </select>
+  
+  <update id="updateByDeviceId" parameterType="com.access.model.device.TelecomVirtualDevice">
+    update
+      telecom_virtual_device
+    set
+      <if test="pvlanId != null" >
+        pvlan_id = #{pvlanId},
+      </if>
+      <if test="cvlanId != null" >
+        cvlan_id = #{cvlanId},
+      </if>
+      <if test="domain != null" >
+        domain = #{domain},
+      </if>
+      <if test="ethPort != null" >
+        eth_port = #{ethPort},
+      </if>
+      <if test="name != null" >
+        name = #{name},
+      </if>
+      <if test="telecomAccount != null" >
+        telecom_account = #{telecomAccount}
+      </if>
+    where
+      device_id = #{deviceId}
+  </update>
+  
+</mapper>

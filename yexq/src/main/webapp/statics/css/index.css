@@ -1,0 +1,42 @@
+@charset "UTF-8";
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+**/
+
+.ChinaNet-Free-Body {}
+.ChinaNet-Free-Body .Index-Top-Statis {height: 120px;overflow: hidden;margin-top: 10px;}
+.ChinaNet-Free-Body .Index-Top-Statis ul {margin:0px;padding:0px;overflow:hidden;height:120px;list-style-type:none;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li {width:50%;float:left;height:120px;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item {height: 120px;overflow: hidden;background: url(../img/index-top-statis-background.png);position:relative;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Chart-Item-Figure {margin:0px;height: 120px;width: 120px;overflow: hidden;float: left;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item-Guest {margin-right:5px;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item-Device {margin-left:5px;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District {padding:20px 0;overflow:hidden;position:absolute;left:100px;top:0px;z-index:20;display:block;width:80%;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District ul.Statis-Data-Row {height:60px;margin:0 -3px 20px 0;padding:8px 0px 0px 50px;list-style-type:none;overflow:hidden;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District ul.Statis-Data-Row li {width:33.33334%;float:left;height:60px;overflow:hidden;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District ul.Statis-Data-Row li .Data-Row-Item {height:60px;border-right:1px solid #efefef;padding-left:10px;text-align:left;overflow:hidden;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District ul.Statis-Data-Row li .Index-Data-Name {color:#999;font:12px/18px "Microsoft YaHei","ARIAL","宋体";display:block;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District ul.Statis-Data-Row li .Index-Data-Number {color:#666;font:bold 31px/31px "Microsoft YaHei","ARIAL","宋体";display:block;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District .Statis-Data-Topen {padding-left:10px;margin-left:190px;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District .Statis-Data-Topen a {font:12px/20px "Microsoft YaHei","ARIAL","宋体";color:#ccc;}
+.ChinaNet-Free-Body .Index-Top-Statis ul li .Index-Statis-Chart-Item .Statis-Data-District .Statis-Data-Topen a:hover {color:#666;}
+
+
+.ChinaNet-Free-Body .Index-Flow-Statis {height:540px;overflow:hidden;width:100%;margin-top:10px;zoom:1;}
+.ChinaNet-Free-Body .Index-Flow-Statis .Flow-Statis-Chart {height:540px;width:100%;overflow:hidden;}
+
+
+.ChinaNet-Free-Body .Index-Statis-Sheet {height:360px;margin-top:10px;overflow:hidden;}
+.ChinaNet-Free-Body .Index-Statis-Sheet ul {margin:0px;padding:0px;list-style-type:none;height:360px;overflow:hidden;}
+.ChinaNet-Free-Body .Index-Statis-Sheet ul li {float:left;height:360px;width:33.33334%;overflow:hidden;}
+.ChinaNet-Free-Body .Index-Statis-Sheet ul li .Statis-Sheet-Item {height:360px;margin-right:10px;overflow:hidden;}
+.ChinaNet-Free-Body .Index-Statis-Sheet ul li .Statis-Sheet-Item table {width:100%;border:0px;}
+
+.loading-message {margin: 0px auto; background: url('/statics/img/loading-spinner-grey.gif') no-repeat 5px 8px; padding: 10px; text-align: center; color: rgb(0, 0, 0) !important; font-size: 13px; font-weight: 400; vertical-align: middle; display: inline-block; min-width: 125px;}
+.loading-message span {line-height: 20px; vertical-align: middle;}
+.loading-message-boxed.loading-message {border: 1px solid rgb(221, 221, 221); box-shadow: 0px 1px 8px rgba(0,0,0,0.1); background-color: rgb(238, 238, 238); -webkit-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1); -moz-box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);}

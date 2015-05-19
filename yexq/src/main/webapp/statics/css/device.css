@@ -1,0 +1,78 @@
+@charset "UTF-8";
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+**/
+
+
+
+.ChinaNet-Free-Body .Device-Detail-Abstract {padding:10px 0;border-bottom: 1px solid #f0f0f0;overflow: hidden;width: 100%;}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Name {float:left;}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Name span {padding-left:20px;}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Data {float: right;width: 280px;height: 54px;overflow: hidden;}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Data ul {height: 54px;overflow: hidden;list-style-type: none;}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Data ul li {float: left;width:280px;height: 54px;}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Data ul li .SSID-Icon {width: 54px;float:left;height: 54px;}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Data ul li .SSID-Icon-1 {background:url(../img/wifi-ssid-1.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/wifi-ssid-1.png");}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Data ul li .SSID-Icon-2 {background:url(../img/wifi-ssid-2.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/wifi-ssid-2.png");}
+.ChinaNet-Free-Body .Device-Detail-Abstract .Abstract-Device-Data ul li .SSID-Data {width:200px;overflow: hidden;margin-left: 10px;float: left;}
+
+.ChinaNet-Free-Body .Device-Detail-Content-Body {overflow:hidden;margin-top:20px;height:500px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul {list-style-type:none;height:500px;width:100%;overflow:hidden;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li {float:left;overflow:hidden;height:500px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Data {width:75%;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard {width:25%;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li .Device-Detail-Body {overflow:hidden;height:500px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Data .Device-Detail-Body {margin-right:5px;background:#fafafa;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Data .Device-Detail-Body ul {width:100%;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Data .Device-Detail-Body ul li {width:50%;height:500px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Data .Device-Detail-Body .ChinaNet-Table-Body {border:0px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Data .Device-Detail-Body .Device-Detail-Tag {height: 42px;background: #e2e2e2;border: 0px;}
+
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body {margin-left:5px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Connect-Wifi-Online {height: 80px;background: #f5f5f5;overflow:hidden;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Connect-Wifi-Online ul {list-style-type: none;height:80px;width:100%;zoom:1;margin-left:-1px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Connect-Wifi-Online ul li {height: 80px;width:49.9999%;white-space:nowrap;display:inline;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Connect-Wifi-Online ul li .Connect-Statis-Number {border-left: 1px solid #dfdfdf;padding-left:10px;margin:10px 0;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Connect-Wifi-Online ul li .Connect-Statis-Number span {font: 12px/20px "Microsoft YaHei","ARIAL","宋体";color: #aaa;display: block;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Connect-Wifi-Online ul li .Connect-Statis-Number span.Statis-Number {font:bold 32px/32px "Microsoft YaHei","ARIAL","宋体";color: #666;display: block;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body {height:200px;background:#f5f5f5;overflow:hidden;margin-top:10px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Chart {padding:10px 0px 10px 10px;overflow:hidden;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Chart .Device-Hard-Load-Chart {height:120px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Text {overflow:hidden;padding:0 10px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Text table {border: 0px;border-collapse: collapse;width:100%;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Text table td {width:50%;height:20px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Text span {color:#aaa;font:12px/20px "Microsoft YaHei","ARIAL","宋体";display:inline-block;margin:2px;}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Text span.Load-Value {color:#999;font:bold 14px/20px "Microsoft YaHei","ARIAL","宋体";}
+.ChinaNet-Free-Body .Device-Detail-Content-Body ul li.Detail-Content-Hard .Device-Detail-Body .Device-Hard-Load-Body .Hard-Load-Text span.Load-Alert {color:#cb2100;font:bold 14px/20px "Microsoft YaHei","ARIAL","宋体";}
+
+
+.ChinaNet-Free-Body .Device-Upgrade-Button {width:80px;height:24px;font:12px/24px "Microsoft YaHei","ARIAL","宋体";color:#fff;text-align:center;display:inline-block;margin-left:10px;background:url(../img/upgrade-line-button.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/upgrade-line-button.png");}
+.ChinaNet-Free-Body .Device-Upgrade-Button:hover {background:url(../img/upgrade-line-button-over.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/upgrade-line-button-over.png");}
+
+.ChinaNet-Free-Body a.Device-Settings-Button {width:160px;height:34px;background:url(../img/settings-button.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/settings-button.png");display:inline-block;text-align:center;color:#fff;font:bold 12px/34px "Microsoft YaHei","ARIAL","宋体";corsur:pointer;_corsur:hand;margin-right: 10px;}
+.ChinaNet-Free-Body a.Device-Settings-Button:hover {background:url(../img/settings-button-over.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/settings-button-over.png");}
+.ChinaNet-Free-Body a.Device-Settings-Sync {}
+
+.ChinaNet-Free-Body a.Device-Settings-Restart {width:100px;height:34px;background:url(../img/settings-restart.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/settings-button.png");display:inline-block;text-align:center;color:#fff;font:bold 12px/34px "Microsoft YaHei","ARIAL","宋体";corsur:pointer;_corsur:hand;margin-right: 10px;}
+.ChinaNet-Free-Body a.Device-Settings-Restart:hover {background:url(../img/settings-restart-over.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/settings-button-over.png");}
+
+
+.ChinaNet-Free-Body .Device-Detail-Logs {margin-top: 20px;width: 100%;}
+.ChinaNet-Free-Body .Data-Content-Tab {margin-top:20px;}
+
+.Device-Settings-MenuForXiMenu {border: 0px;position: absolute;z-index:999;width:120px;overflow: hidden;}
+.Device-Settings-MenuForXiMenu .xiMenu-Content-Body {background: #313131;border-radius: 2px;overflow: hidden;}
+.Device-Settings-MenuForXiMenu .xiMenu-Content-Body a {display:block;color:#999;padding-left: 10px;font:12px/30px "Microsoft YaHei","ARIAL","宋体";}
+.Device-Settings-MenuForXiMenu .xiMenu-Content-Body a:hover {background: #555;color:#ccc;}
+
+.Form-Default {margin-left: 10px;}
+.Form-Primary {margin-left: 10px;}
+.ChinaNet-Form-Sheet {overflow:hidden;}
+.ChinaNet-Free-Body .ChinaNet-Table-Body .device-set {overflow:hidden;text-align:center;}
+.ChinaNet-Free-Body .ChinaNet-Table-Body .device-set  a {display:inline-block;width:50px;text-align:center;font:12px/24px "Microsoft YaHei","ARIAL","宋体";color:#fff;margin:0 3px;background:url(../img/setting-button-primary.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="statics/img/setting-button-primary.png");}
+.ChinaNet-Free-Body .ChinaNet-Table-Body .device-set  a:hover {background:url(../img/setting-button-primary-over.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="statics/img/setting-button-primary-over.png");}

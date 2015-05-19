@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no'>
+<title class='siteValue' id='title'>欢迎来到安吉江南天池</title>
+<link type="text/css" rel="stylesheet" href="css/template.css" media="screen">
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/template.js"></script>
+<script type="text/javascript" src="../../auth_module/js/authorize.js"></script>
+<script type="text/javascript" src="js/smallslider.js"></script>
+<script type="text/javascript">$(document).ready(function(){MyTemplate.init();})</script>
+<style type='text/css'>body {margin:0px;padding:0px;}</style>
+</head>
+<body>
+	<div class="portalTemplateBody">		
+		<div class="siteModules" id="siteLogoViewModuleBox" title="Logo信息">
+			<div id="Logo001" class="bs-docs-nav contentImage siteComponent">
+				<a href="javascript:;" id="url" class="siteSource"><img src="img/logo.jpg" id="thumb" class="siteResource"></a>
+			</div>
+		</div>				
+		<div id="siteLoginModuleBox" class="siteModules  auth_html_code" platSvrAddr="" title="用户验证">
+			<div id="ggSpan001" class="loginAPI-Form">
+				<div id="mytabs">
+					<div id="hidediv" class="inimg2"></div>
+					<div class="content">					
+						<div class="ct" >
+							<table align="center">							
+								<tr>
+									<td class="td_mobilenumber"><input type="text" placeholder="请输入手机号码" id="MobileNumber" name="MobileNumber"></td>									
+									<td class="td_authmobilesms"><button type="button" class="AuthMobileSMS">获取验证码</button></td>
+								</tr>
+								
+								<tr>
+									<td class="td_smscodenumber"><input type="text" placeholder="请输入验证码" id="SMSCodeNumber" name="SMSCodeNumber"></td>
+									<td><button type="button" class="AuthSubmitID ValidatorMobile">输入验证码登录</button></td>									
+								</tr>								
+							</table>
+						</div>
+						<div class="ct" style="display: none">
+						  <div class="bigbtndiv"><button class="bigbtn" type="button"></button></div>
+						</div>
+					</div>
+					<div class="controls" style="display: none">
+						<ul class="tab_title">
+							<li class="one"><div class="inimg3"></div><small>免认证</small></li>
+							<li><div class="inimg4"></div><small>短信认证</small></li>
+						</ul>
+					</div>
+				</div>
+				<div class="bottombutton" style="display: none">
+					<div class="inimg1"></div>
+					<button type="button" class="AuthTypeID">点击上网</button>
+				</div>
+			</div>
+		</div>			
+		
+	</div>
+</body>
+</html>

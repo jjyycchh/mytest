@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.DeviceDisplayPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.DeviceDisplayPlan" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="device_device_id" property="deviceDeviceId" jdbcType="VARCHAR" />
+    <result column="portal_site_id" property="portalSiteId" jdbcType="BIGINT" />
+    <result column="clock" property="clock" jdbcType="REAL" />
+    <result column="effon" property="effon" jdbcType="TIMESTAMP" />
+    <result column="effend" property="effend" jdbcType="TIMESTAMP" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="latest_update_account_id" property="latestUpdateAccountId" jdbcType="BIGINT" />
+    <result column="latest_update_datetime" property="latestUpdateDatetime" jdbcType="TIMESTAMP" />
+    <result column="latest_update_policy_id" property="latestUpdatePolicyId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, device_device_id, portal_site_id, clock, effon, effend, create_datetime, latest_update_account_id, 
+    latest_update_datetime, latest_update_policy_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_display_plan
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from device_display_plan
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.DeviceDisplayPlan" >
+    insert into device_display_plan (id, device_device_id, portal_site_id, 
+      clock, effon, effend, 
+      create_datetime, latest_update_account_id, 
+      latest_update_datetime, latest_update_policy_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{deviceDeviceId,jdbcType=VARCHAR}, #{portalSiteId,jdbcType=BIGINT}, 
+      #{clock,jdbcType=REAL}, #{effon,jdbcType=TIMESTAMP}, #{effend,jdbcType=TIMESTAMP}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{latestUpdateAccountId,jdbcType=BIGINT}, 
+      #{latestUpdateDatetime,jdbcType=TIMESTAMP}, #{latestUpdatePolicyId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.DeviceDisplayPlan" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into device_display_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="deviceDeviceId != null" >
+        device_device_id,
+      </if>
+      <if test="portalSiteId != null" >
+        portal_site_id,
+      </if>
+      <if test="clock != null" >
+        clock,
+      </if>
+      <if test="effon != null" >
+        effon,
+      </if>
+      <if test="effend != null" >
+        effend,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="latestUpdateAccountId != null" >
+        latest_update_account_id,
+      </if>
+      <if test="latestUpdateDatetime != null" >
+        latest_update_datetime,
+      </if>
+      <if test="latestUpdatePolicyId != null" >
+        latest_update_policy_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="deviceDeviceId != null" >
+        #{deviceDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="portalSiteId != null" >
+        #{portalSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="clock != null" >
+        #{clock,jdbcType=REAL},
+      </if>
+      <if test="effon != null" >
+        #{effon,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effend != null" >
+        #{effend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestUpdateAccountId != null" >
+        #{latestUpdateAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="latestUpdateDatetime != null" >
+        #{latestUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestUpdatePolicyId != null" >
+        #{latestUpdatePolicyId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.DeviceDisplayPlan" >
+    update device_display_plan
+    <set >
+      <if test="deviceDeviceId != null" >
+        device_device_id = #{deviceDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="portalSiteId != null" >
+        portal_site_id = #{portalSiteId,jdbcType=BIGINT},
+      </if>
+      <if test="clock != null" >
+        clock = #{clock,jdbcType=REAL},
+      </if>
+      <if test="effon != null" >
+        effon = #{effon,jdbcType=TIMESTAMP},
+      </if>
+      <if test="effend != null" >
+        effend = #{effend,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestUpdateAccountId != null" >
+        latest_update_account_id = #{latestUpdateAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="latestUpdateDatetime != null" >
+        latest_update_datetime = #{latestUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="latestUpdatePolicyId != null" >
+        latest_update_policy_id = #{latestUpdatePolicyId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.DeviceDisplayPlan" >
+    update device_display_plan
+    set device_device_id = #{deviceDeviceId,jdbcType=VARCHAR},
+      portal_site_id = #{portalSiteId,jdbcType=BIGINT},
+      clock = #{clock,jdbcType=REAL},
+      effon = #{effon,jdbcType=TIMESTAMP},
+      effend = #{effend,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      latest_update_account_id = #{latestUpdateAccountId,jdbcType=BIGINT},
+      latest_update_datetime = #{latestUpdateDatetime,jdbcType=TIMESTAMP},
+      latest_update_policy_id = #{latestUpdatePolicyId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getDisplayPlanByDeviceId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    	<include refid="Base_Column_List" />
+    from device_display_plan
+    where device_device_id = #{deviceId, jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByDeviceId" parameterType="java.lang.String" >
+    delete from device_display_plan where device_device_id = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  
+  <select id="selectBySiteId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+  	select 
+  		count(DISTINCT latest_update_policy_id)  
+	from 
+		device_display_plan 
+	where 
+		portal_site_id = #{siteId, jdbcType=BIGINT}
+  </select>
+</mapper>

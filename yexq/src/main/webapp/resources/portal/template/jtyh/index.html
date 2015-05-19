@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no'>
+<title class='siteValue' id='title'>iWiFi联盟-酒店</title>
+<link type="text/css" rel="stylesheet" href="css/template.css" media="screen">
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="js/template.js"></script>
+<script type="text/javascript" src="../../auth_module/js/authorize.js"></script>
+<script type="text/javascript" src="js/smallslider.js"></script>
+<script type="text/javascript">$(document).ready(function(){MyTemplate.init();})</script>
+<style type='text/css'>body {margin:0px;padding:0px;}</style>
+</head>
+<body>
+    <div class="portalTemplateBody">     	      
+        <div class="siteModules" id="siteLogoViewModuleBox"  title="Logo信息">
+			<div id="Logo001" class="ggtop bs-docs-nav contentImage siteComponent" >
+				<a href="javascript:;" id="url" class="siteSource"><img
+					src="/resources/portal/template/jtyh/img/log.png" id="thumb"
+					class="siteResource"></a>
+				
+			</div>
+		</div>		
+        <div class="siteModules" id="siteSliderModuleBox" title="广告轮播">
+            <a href="javascript:;" class="sliderBrowse" id="sliderToPrev">&nbsp;</a>
+            <a href="javascript:;" class="sliderBrowse" id="sliderToNext">&nbsp;</a>
+            <div class="sliderNavigator"></div>
+            <div class="sliderNavigator" id="sliderNaviList"></div>
+            <div id="Slider001" class="sliderItem siteComponent"><a href="javascript:;" id="url" class="siteSource"><img id="thumb"  src="/resources/portal/template/jtyh/img/pic1.png" class="siteResource"></a></div>
+            <div id="Slider002" class="sliderItem siteComponent"><a href="javascript:;" id="url" class="siteSource"><img id="thumb"  src="/resources/portal/template/jtyh/img/pic1.png" class="siteResource"></a></div>
+            <div id="Slider003" class="sliderItem siteComponent"><a href="javascript:;" id="url" class="siteSource"><img id="thumb"  src="/resources/portal/template/jtyh/img/pic1.png" class="siteResource"></a></div>
+        </div>
+        
+        <div id="siteArticleViewModuleBox" class="siteModules" title="文本内容">
+        	<div id="textSpan003" class="articleText siteComponent">
+        	<span id="description" class="siteValue"><h3>免责条款</h3>尊敬的客户：您在使用中国电信为交通银行客户提供的免费无线上网服务时，请保护好您的个人信息与资料，以免被他人非法获得或使用。请遵守国家相关法律法规规定，不访问非法、不良网站及发表、传输任何违法信息。您在网络上泄露个人信息资料，或者访问非法不良网站及发表、传输任何违法信息而导致的相关损失与责任，均由您自行承担、交通银行对此不承担任何责任。
+        	</span>
+        	</div>
+        </div>
+
+        	 
+		<div id="siteLoginModuleBox" class="siteModules  auth_html_code"
+			platSvrAddr="" title="用户验证">
+			<div id="ggSpan001" class="loginAPI-Form ggbottom ">
+				<div id="mytabs">
+					<div id="hidediv" class="inimg2"></div>
+					<div class="content">
+						<div class="ct">
+							<table align="center">
+								<tr>
+									<td><input type="text" placeholder="输入手机号码..."
+										id="MobileNumber" name="MobileNumber"></td>
+									<td width="20">&nbsp;</td>
+									<td><button type="button" class="AuthMobileSMS">获取验证码</button></td>
+								</tr>
+								<tr>
+									<td><input type="text" placeholder="验证码..."
+										id="SMSCodeNumber" name="SMSCodeNumber"></td>
+									<td width="20">&nbsp;</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td colspan="3"><button type="button"
+											class="AuthSubmitID ValidatorMobile">马上登录</button></td>
+								</tr>
+							</table>
+						</div>
+						<div class="ct" style="display: none">微信认证 暂未开通</div>
+					</div>
+					<div class="controls">
+						<ul class="tab_title">
+							<li class="one"><div class="inimg4"></div><small>短信认证</small></li>
+							<!-- <li><div class="inimg5"></div><small>微信认证</small></li> -->
+						</ul>
+					</div>
+				</div>
+				<div class="bottombutton">
+					<div class="inimg1"></div>
+					<button type="button" class="AuthTypeID">点击上网</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.EmailNoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.EmailNotice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="from" property="from" jdbcType="VARCHAR" />
+    <result column="retry_times" property="retryTimes" jdbcType="INTEGER" />
+    <result column="is_sent" property="isSent" jdbcType="BIT" />
+    <result column="sent_datetime" property="sentDatetime" jdbcType="TIMESTAMP" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.system.EmailNoticeWithBLOBs" extends="BaseResultMap" >
+    <result column="to" property="to" jdbcType="LONGVARCHAR" />
+    <result column="cc" property="cc" jdbcType="LONGVARCHAR" />
+    <result column="bcc" property="bcc" jdbcType="LONGVARCHAR" />
+    <result column="subject" property="subject" jdbcType="LONGVARCHAR" />
+    <result column="body" property="body" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `from`, retry_times, is_sent, sent_datetime, create_datetime, account_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    `to`, cc, bcc, `subject`, body
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from email_notice
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from email_notice
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.EmailNoticeWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into email_notice (id, `from`, retry_times, 
+      is_sent, sent_datetime, create_datetime, 
+      account_id, `to`, cc, 
+      bcc, `subject`, body
+      )
+    values (#{id,jdbcType=BIGINT}, #{from,jdbcType=VARCHAR}, #{retryTimes,jdbcType=INTEGER}, 
+      #{isSent,jdbcType=BIT}, #{sentDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{accountId,jdbcType=BIGINT}, #{to,jdbcType=LONGVARCHAR}, #{cc,jdbcType=LONGVARCHAR}, 
+      #{bcc,jdbcType=LONGVARCHAR}, #{subject,jdbcType=LONGVARCHAR}, #{body,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.EmailNoticeWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into email_notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="from != null" >
+        `from`,
+      </if>
+      <if test="retryTimes != null" >
+        retry_times,
+      </if>
+      <if test="isSent != null" >
+        is_sent,
+      </if>
+      <if test="sentDatetime != null" >
+        sent_datetime,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="to != null" >
+        `to`,
+      </if>
+      <if test="cc != null" >
+        cc,
+      </if>
+      <if test="bcc != null" >
+        bcc,
+      </if>
+      <if test="subject != null" >
+        `subject`,
+      </if>
+      <if test="body != null" >
+        body,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="from != null" >
+        #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="retryTimes != null" >
+        #{retryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isSent != null" >
+        #{isSent,jdbcType=BIT},
+      </if>
+      <if test="sentDatetime != null" >
+        #{sentDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="to != null" >
+        #{to,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cc != null" >
+        #{cc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bcc != null" >
+        #{bcc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subject != null" >
+        #{subject,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        #{body,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.EmailNoticeWithBLOBs" >
+    update email_notice
+    <set >
+      <if test="from != null" >
+        `from` = #{from,jdbcType=VARCHAR},
+      </if>
+      <if test="retryTimes != null" >
+        retry_times = #{retryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isSent != null" >
+        is_sent = #{isSent,jdbcType=BIT},
+      </if>
+      <if test="sentDatetime != null" >
+        sent_datetime = #{sentDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="to != null" >
+        `to` = #{to,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cc != null" >
+        cc = #{cc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bcc != null" >
+        bcc = #{bcc,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="subject != null" >
+        `subject` = #{subject,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="body != null" >
+        body = #{body,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.system.EmailNoticeWithBLOBs" >
+    update email_notice
+    set `from` = #{from,jdbcType=VARCHAR},
+      retry_times = #{retryTimes,jdbcType=INTEGER},
+      is_sent = #{isSent,jdbcType=BIT},
+      sent_datetime = #{sentDatetime,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      account_id = #{accountId,jdbcType=BIGINT},
+      `to` = #{to,jdbcType=LONGVARCHAR},
+      cc = #{cc,jdbcType=LONGVARCHAR},
+      bcc = #{bcc,jdbcType=LONGVARCHAR},
+      `subject` = #{subject,jdbcType=LONGVARCHAR},
+      body = #{body,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.EmailNotice" >
+    update email_notice
+    set `from` = #{from,jdbcType=VARCHAR},
+      retry_times = #{retryTimes,jdbcType=INTEGER},
+      is_sent = #{isSent,jdbcType=BIT},
+      sent_datetime = #{sentDatetime,jdbcType=TIMESTAMP},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      account_id = #{accountId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

@@ -1,0 +1,52 @@
+@charset "UTF-8";
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+**/
+
+body {_background-image:url(about:blank);_background-attachment:fixed;/*防止页面抖动*/}
+
+.siteModules {}
+.siteModules .Page-Module-Edit-Body {z-index:7777;position:absolute;left:0px;top:0px;background:none;overflow:hidden;display:none;}
+.siteModules .Page-Module-Edit-Body .Page-Module-Edit-Body-Frame {width:100%;height:100%;position:relative;background:none;border:1px dotted #f00;}
+.siteModules .Page-Module-Edit-Body .Page-Module-Edit-Body-Frame a {height:28px;width:100px;z-index:7779;position:absolute;left:50%;top:50%;margin-top:-14px;margin-left:-50px;text-align:center;font:bold 12px/28px "ARIAL","宋体";background:url(../img/edit-module.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/edit-module.png");display:none;text-decoration:none;color:#fff;}
+.siteModules .Page-Module-Edit-Body .Page-Module-Edit-Body-Frame a:hover {background:url(../img/edit-module-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/edit-module-over.png");}
+.siteModules .Page-Module-Edit-Body .Page-Module-Edit-Body-Frame .Edit-Module-Overly {background:#000;z-index:7778;position:absolute;left:0px;top:0px;-moz-opacity:0.6;filter:alpha(opacit=60);opacity:0.6;width:100%;height:100%;display:none;}
+
+.Page-Edit-Mode {overflow:hidden;position:relative;}
+.Page-Edit-Mode .Page-Module-Edit-Body {display:block;}
+.Page-Edit-Template {}
+.Page-Edit-Template .View {display:none;}
+.Page-Edit-Template .Edit {display:none;}
+.Page-Edit-Template .Edit-Page-Bar .Cancel {display:block;}
+
+.Edit-Page-Bar {position:fixed;_position: absolute; /*ie6 and above*/top:0;_top:expression(documentElement.scrollTop);right: 0;padding:0px;overflow:hidden;display:block;width:58px;text-align:right;}
+.Edit-Page-Bar a {height:48px;width:48px;display:block;margin-top:10px;}
+.Edit-Page-Bar a span {width:48px;height:48px;display:block;}
+.Edit-Page-Bar a span.Edit-Button {background:url(../img/page-edit-48x.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-edit-48x.png");}
+.Edit-Page-Bar a:hover span.Edit-Button {background:url(../img/page-edit-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-edit-48x-over.png");}
+.Edit-Page-Bar a span.View-Button {background:url(../img/page-view-48x.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-view-48x.png");}
+.Edit-Page-Bar a:hover span.View-Button {background:url(../img/page-view-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-view-48x-over.png");}
+.Edit-Page-Bar a span.Template-Button {background:url(../img/page-template-48x.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-template-48x.png");}
+.Edit-Page-Bar a:hover span.Template-Button {background:url(../img/page-template-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-template-48x-over.png");}
+.Edit-Page-Bar a.Cancel {display:none;}
+.Edit-Page-Bar a.Cancel span.Cancel-Button {background:url(../img/page-cancel-48x.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-cancel-48x.png");}
+.Edit-Page-Bar a.Cancel:hover span.Cancel-Button {background:url(../img/page-cancel-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-cancel-48x-over.png");}
+.Edit-Page-Bar a.Active span.Edit-Button {background:url(../img/page-edit-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-edit-48x-over.png");}
+.Edit-Page-Bar a.Active span.View-Button {background:url(../img/page-view-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-view-48x-over.png");}
+.Edit-Page-Bar a.Active span.Template-Button {background:url(../img/page-template-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-template-48x-over.png");}
+.Edit-Page-Bar a.Active span.Cancel-Button {background:url(../img/page-cancel-48x-over.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/page-cancel-48x-over.png");}
+
+.ChinaNet-Portal-Templates {overflow:hidden;padding-right:15px;}
+.ChinaNet-Portal-Templates ul {list-style-type:none;overflow:hidden;}
+.ChinaNet-Portal-Templates ul li {float:left;width:20%;height:240px;overflow:hidden;}
+.ChinaNet-Portal-Templates ul li .Page-Template-Body {margin:20px 0 0 22px;backbround:#fafafa;overflow:hidden;height:225px;}
+.ChinaNet-Portal-Templates ul li .Page-Template-Body img {width:100%;border:0px;}
+.ChinaNet-Portal-Templates ul li .Page-Template-Body .Template-Select-Line {height:48px;background:#666;position:absolute;left:0px;bottom:0px;z-index:50px;width:100%;overflow:hidden;padding:0;}
+.ChinaNet-Portal-Templates ul li .Page-Template-Body .Template-Select-Line span {width:133px;padding:3px 10px;font:12px/18px "Microsoft YaHei","ARIAL","宋体";color:#eee;display:block;}
+.ChinaNet-Portal-Templates ul li .Page-Template-Body a {height:48px;width:42px;text-align:center;font:12px/43px "Microsoft YaHei","ARIAL","宋体";color:#fff;background:#17bd9b;display:block;position:absolute;right:0px;bottom:0px;z-index:51;}
+.ChinaNet-Portal-Templates ul li .Page-Template-Body a:hover {background:#098e73;}

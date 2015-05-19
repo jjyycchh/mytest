@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalTrafficLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalTrafficLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="portal_page_id" property="portalPageId" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.merchant.PortalTrafficLog" extends="BaseResultMap" >
+    <result column="URL" property="url" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, portal_page_id, create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    URL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from portal_traffic_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from portal_traffic_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalTrafficLog" >
+    insert into portal_traffic_log (id, portal_page_id, create_datetime, 
+      URL)
+    values (#{id,jdbcType=BIGINT}, #{portalPageId,jdbcType=BIGINT}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{url,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalTrafficLog" >
+    insert into portal_traffic_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="portalPageId != null" >
+        portal_page_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="portalPageId != null" >
+        #{portalPageId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.PortalTrafficLog" >
+    update portal_traffic_log
+    <set >
+      <if test="portalPageId != null" >
+        portal_page_id = #{portalPageId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.merchant.PortalTrafficLog" >
+    update portal_traffic_log
+    set portal_page_id = #{portalPageId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      URL = #{url,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.PortalTrafficLog" >
+    update portal_traffic_log
+    set portal_page_id = #{portalPageId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getPortalTrafficStatis" parameterType="java.util.Map" resultType="java.util.Map">
+  	SELECT hour(tl.create_datetime) as hour, count(tl.id) as count 
+  	from portal_traffic_log as tl,
+		portal_page as p,
+		portal_site as s,
+		account as a
+	where tl.portal_page_id=p.id
+		and p.portal_site_id=s.id
+		and s.account_id=a.id
+		<if test="date != null">
+			and date_format(tl.create_datetime, '%Y-%m-%d') = #{date}
+		</if>
+		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="portalSiteId != null" >
+		  and s.id = #{portalSiteId,jdbcType=BIGINT}
+		</if>
+		and (a.id = #{totalParentId} 
+					or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+				)
+		GROUP BY hour(tl.create_datetime)
+		order by hour(tl.create_datetime)
+  </select>
+
+</mapper>

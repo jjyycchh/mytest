@@ -1,0 +1,193 @@
+@CHARSET "UTF-8";
+*, *:before, *:after {box-sizing: border-box;}
+.thumbnail {overflow:hidden;}
+
+/* Body && Modules */
+.portalTemplateBody {max-width:800px;overflow:hidden;margin:0 auto;position:relative;}
+
+/* module public*/
+.siteModules {overflow:hidden;position:relative;}
+.siteModules .ModuleEditBar {position:absolute;left:0px;top:0px;height:32px;background:#000;z-index:120;-moz-opacity:0.6;filter:alpha(opacity=60);opacity:0.6;width:100%;}
+.siteModules .ModuleEditBarText {background:none;-moz-opacity:1;filter:alpha(opacity=100);opacity:1;height:36px;}
+.siteModules .ModuleEditBarText a {float:right;margin-right:3px;text-decoration:none;color:#fff !important;font:12px/36px "";padding:0 8px;background:#f00}
+.siteModules .ModuleEditBarText a:hover {color:#999;background:#d66}
+.siteModules .ModuleEditBarText span {font:12px/36px "";color:#fff;padding-left:10px;float:left;}
+
+/* Loading Module*/
+#siteLoadingModuleBox {position:absolute;z-index:110;background:#fff;overflow:hidden;}
+#siteLoadingModuleBox img {width:100%;height:100%;border:0px;}
+#siteLoadingModuleBox .loadingTimeTip {background:#fff;-moz-opacity:0.6;filter:alpha(opacity=60);opacity:0.6;z-index:101;border-radius:16px;font:12px/30px "";text-align:center;width:200px;position:absolute;height:30px;}
+#siteLoadingModuleBox #loadingTimeText {background:none;-moz-opacity:1;filter:alpha(opacity=100);opacity:1;color:#333;}
+
+/* Slider */
+#siteSliderModuleBox {position:relative;width:800px;height:533.333px}
+#siteSliderModuleBox .sliderBrowse {width:58px;height:120px;position:absolute;z-index:103;display:block;-moz-opacity:0.6;filter:alpha(opacity=60);opacity:0.6;overflow:hidden;text-decoration:none;}
+#siteSliderModuleBox .sliderBrowse:hover {-moz-opacity:0.90;filter:alpha(opacity=90);opacity:0.90;}
+#siteSliderModuleBox #sliderToPrev {left:0px;background:url(../img/buttonPrev.png) no-repeat;}
+#siteSliderModuleBox #sliderToNext {right:0px;background:url(../img/buttonNext.png)no-repeat;}
+#siteSliderModuleBox .sliderNavigator {border-radius:16px;position:absolute;z-index:104;background:#fff;-moz-opacity:0.6;filter:alpha(opacity=60);opacity:0.6;height:32px;bottom:10px;}
+#siteSliderModuleBox #sliderNaviList {-moz-opacity:1;filter:alpha(opacity=100);opacity:1;background:none;text-align:center;}
+#siteSliderModuleBox #sliderNaviList a {height:16px;width:16px;border-radius:8px;display:inline-block;margin:7px 3px 0;background:#666;text-decoration:none;}
+#siteSliderModuleBox #sliderNaviList a:hover {background:#dfdfdf;}
+#siteSliderModuleBox #sliderNaviList a.active {background:#fbe424;}
+
+#siteSliderModuleBox .sliderItem {overflow:hidden;position:absolute;left:0px;top:0px;width:100%;height:100%;}
+#siteSliderModuleBox .sliderItem img {width:100%;height:100%;border:0px;}
+
+/* Login */
+#siteLoginModuleBox .loginAPI-Line {background:url(../img/AuthAPILine.png) 0 100% repeat-x #fafafa;padding:36px 0;position:relative;overflow:hidden;text-align:center;font:24px/30px "微软雅黑";color:#666;}
+#siteLoginModuleBox .loginAPI-Line a {width:100px;height:100px;margin-left:10px;display:inline-block;text-decoration:none;}
+#siteLoginModuleBox .loginAPI-Line a img {width:100%;height:100%;border:0px;}
+#siteLoginModuleBox .loginAPI-Form {text-align:center;padding:10px 0;overflow:hidden;position:relative;}
+#siteLoginModuleBox .loginAPI-Form table {width:90%;}
+#siteLoginModuleBox .loginAPI-Form table td {padding:10px 0;}
+#siteLoginModuleBox .loginAPI-Form table td input {border-radius:6px;font:17px/30px ARIAL;height:40px;color:#333;border:1px solid #ddd;text-indent:10px;width:100%;}
+#siteLoginModuleBox .loginAPI-Form table td button {width:100%;height:40px;border-radius:5px;}
+
+#siteLoginModuleBox .loginAPI-Form .AuthMobileSMS {background: #4D82E3;border: 1px solid #4D82E3;color:#FFFFFF;cursor:pointer;_cursor:hand;}
+#siteLoginModuleBox .loginAPI-Form .AuthSubmitID {background: #F1751A;border: 1px solid #F1751A;color:#FFFFFF;cursor:pointer;_cursor:hand;height:48px;}
+#siteLoginModuleBox .loginAPI-Form .AuthSubmitID:hover {background:#f1931a;border:1px solid #f1931a;}
+
+/* Login Image Text block */
+#siteImageTextModuleBox {border-top:1px solid #e5e5e5;background:#f5f5f5;overflow:hidden;}
+#siteImageTextModuleBox ul {margin:0 -1px;list-style-type:none;padding:0px;overflow:hidden;}
+#siteImageTextModuleBox ul li {width:50%;float:left;overflow:hidden;border-bottom:1px solid #e5e5e5;}
+#siteImageTextModuleBox ul li div {border-right-color:#e5e5e5;border-bottom:0px;padding:10px;height:75px;position:relative;}
+#siteImageTextModuleBox ul li div img {float:left;border:0px;}
+#siteImageTextModuleBox ul li div em {float:left;margin-left:10px;text-align:left;}
+#siteImageTextModuleBox ul li div em a {text-decoration:none;color:#333;font:bold 14px/20px "ARIAL","微软雅黑";}
+#siteImageTextModuleBox ul li div em a:hover {color:#999;}
+#siteImageTextModuleBox ul li div dd {float:left;margin-left:10px;text-align:left;}
+#siteImageTextModuleBox ul li div dd a {text-decoration:none;color:#333;font:bold 14px/20px "ARIAL","微软雅黑";}
+#siteImageTextModuleBox ul li div dd a:hover {color:#999;}
+/*#siteImageTextModuleBox ul li div dd {color:#333;font-weight:bold;float:left;text-align:left;margin:0 0 0 10px;}
+#siteImageTextModuleBox ul li div dd:hover {color:#999;}*/
+#siteImageTextModuleBox ul li div:hover {background:#f9f9f9;}
+#siteImageTextModuleBox ul li div span {color:#666;font:12px/18px "ARIAL","微软雅黑";float:left;margin-left:10px;text-indent:25px;}
+
+/* Product Image Text block */
+#siteProductListModuleBox {border-top:1px solid #e5e5e5;background:#f5f5f5;overflow:hidden;}
+#siteProductListModuleBox ul {margin:0 -1px;list-style-type:none;padding:0px;overflow:hidden;}
+#siteProductListModuleBox ul li {width:50%;float:left;overflow:hidden;border-bottom:1px solid #e5e5e5;}
+#siteProductListModuleBox ul li div {border:1px solid #fbfbfb;border-right-color:#e5e5e5;border-bottom:0px;padding:10px;height:100px;position:relative;}
+#siteProductListModuleBox ul li div img {width:100px;height:100px;float:left;border:0px;}
+#siteProductListModuleBox ul li div em {float:left;margin-left:10px;}
+#siteProductListModuleBox ul li div em a {text-decoration:none;color:#333;font:bold 14px/20px "ARIAL","微软雅黑";}
+#siteProductListModuleBox ul li div em a:hover {color:#999;}
+#siteProductListModuleBox ul li div dd {float:left;margin-left:10px;}
+#siteProductListModuleBox ul li div dd a {text-decoration:none;color:#333;font:bold 14px/20px "ARIAL","微软雅黑";}
+#siteProductListModuleBox ul li div dd a:hover {color:#999;}
+/*#siteProductListModuleBox ul li div dd a {color:#333;font-weight:bold;float:left;text-align:left;margin:0 0 0 10px;}
+#siteProductListModuleBox ul li div dd a:hover {color:#999;}*/
+#siteProductListModuleBox ul li div:hover {background:#f9f9f9;}
+#siteProductListModuleBox ul li div span {color:#666;font:12px/18px "ARIAL","微软雅黑";float:left;margin-left:10px;text-indent:25px;}
+
+/* Login Text block */
+#siteTextBlockModuleBox {border-top:1px solid #e5e5e5;background:#f5f5f5;overflow:hidden;}
+#siteTextBlockModuleBox ul {margin:0 -1px;list-style-type:none;padding:0px;overflow:hidden;}
+#siteTextBlockModuleBox ul li {width:50%;float:left;overflow:hidden;border-bottom:1px solid #e5e5e5;}
+#siteTextBlockModuleBox ul li div {border:1px solid #fbfbfb;border-right-color:#e5e5e5;border-bottom:0px;padding:10px;height:100px;position:relative;overflow:hidden;}
+#siteTextBlockModuleBox ul li div em {float:left;margin-left:10px;display:block;width:100%;text-align:left;}
+#siteTextBlockModuleBox ul li div em a {text-decoration:none;color:#333;font:bold 14px/20px "ARIAL","微软雅黑";}
+#siteTextBlockModuleBox ul li div em a:hover {color:#999;}
+#siteTextBlockModuleBox ul li div dd {float:left;margin-left:10px;display:block;width:100%;text-align:left;}
+#siteTextBlockModuleBox ul li div dd a {text-decoration:none;color:#333;font:bold 14px/20px "ARIAL","微软雅黑";}
+#siteTextBlockModuleBox ul li div dd a:hover {color:#999;}
+#siteTextBlockModuleBox ul li div:hover {background:#f9f9f9;}
+#siteTextBlockModuleBox ul li div span {color:#666;font:12px/18px "ARIAL","微软雅黑";float:left;text-indent:25px;width:100%;}
+
+/* Login link block */
+#siteLinkBlockModuleBox {border-top:1px solid #e5e5e5;background:#f5f5f5;overflow:hidden;}
+#siteLinkBlockModuleBox ul {margin:0 -1px;list-style-type:none;padding:0px;overflow:hidden;}
+#siteLinkBlockModuleBox ul li {width:50%;float:left;overflow:hidden;border-bottom:1px solid #e5e5e5;}
+#siteLinkBlockModuleBox ul li div {border:1px solid #fbfbfb;border-right-color:#e5e5e5;border-bottom:0px;padding:10px;height:20px;position:relative;white-space:nowrap;content:'...';}
+#siteLinkBlockModuleBox ul li div a {font:14px/20px "微软雅黑","ARIAL";text-decoration:none;color:#333;white-space:nowrap;content:"...";}
+#siteLinkBlockModuleBox ul li div a:hover {color:#999;}
+
+
+
+/* Page Header */
+#siteHeaderModuleBox {overflow:hidden;height:48px;background:#535353;padding:0 6px;}
+#siteHeaderModuleBox a.siteNavi {display:inline-block;float:left;overflow:hidden;background:url(../img/headerNavi.png);margin-top:6px;}
+#siteHeaderModuleBox a span {display:inline-block;height:38px;font:12px/35px "微软雅黑";color:#fff;float:left;}
+#siteHeaderModuleBox a span.textFirst {padding:0 15px;}
+#siteHeaderModuleBox a span.textNext {padding:0 10px;background:url(../img/headerNavi.png) -10px 0;}
+#siteHeaderModuleBox a:hover span.textFirst {color:#999;}
+#siteHeaderModuleBox a:hover span.textNext {color:#999;}
+#siteHeaderModuleBox a span.iconNext {width:20px;background:url(../img/headerNavi.png) 100% 0;}
+#siteHeaderModuleBox span.naviEnd {height:38px;width:20px;float:left;display:inline-block;background:url(../img/headerNavi.png) 100% 0;}
+#siteHeaderModuleBox a.siteMenu {width:38px;height:38px;border-radius:5px;background:url(../img/menuIcon.png) no-repeat;text-decoration:none;float:right;display:inline-block;}
+#siteHeaderModuleBox a.siteMenu:hover {background:url(../img/menuIcon.png) #666;}
+#siteHeaderModuleBox div.userActiveMenu {width:80px;position:absolute;right:6px;top:6px;z-index:102;overflow:hidden;display:none;}
+#siteHeaderModuleBox div.userActiveMenu a.MenuIcon {width:38px;height:38px;display:block;background:url(../img/menuIcon.png) #666;float:right;text-decoration:none;}
+#siteHeaderModuleBox div.userActiveMenu div.userActive {background:#666;width:80px;overflow:hidden;}
+#siteHeaderModuleBox div.userActiveMenu div.userActive a {padding-left:10px;font:12px/30px "";color:#fff;text-decoration:none;display:block;}
+#siteHeaderModuleBox div.userActiveMenu div.userActive a:hover {background:#555;}
+/* Page Footer */
+#siteFooterModuleBox .footerfont { background:none repeat scroll 0 0 #D68705;font:14px/20px "微软雅黑";text-align:center;padding:10px 0;overflow:hidden;color: #FFFFFF;}
+/* Image Span */
+#siteImageSpanModule {overflow:hidden;}
+#siteImageSpanModule ul {margin:0px;padding:0px;list-style-type:none;overflow:hidden;margin-left:-5px;}
+#siteImageSpanModule ul li {float:left;width:33%;overflow:hidden;position:relative;padding-top:5px;}
+#siteImageSpanModule ul li div.imageSpanBox {margin-left:5px;overflow:hidden;}
+#siteImageSpanModule ul li div.imageSpanBox img {width:100%;height:100%;border:0px;}
+#siteImageSpanModule ul li div.imageSpanTitle {left:5px;bottom:0px;height:32px;display:block;background:#000;-moz-opacity:0.6;filter:alpah(opacity=60);opacity:0.6;z-index:1;position:absolute;}
+#siteImageSpanModule ul li div.imageSpanTitleText {color:#fff;background:none;-moz-opacity:1;filter:alpha(opacity=100);opacity:1;}
+#siteImageSpanModule ul li div.imageSpanTitleText a {color:#fff;text-decoration:none;font:12px/32px "微软雅黑";padding:0 6px;white-space:nowrap;content:"...";}
+#siteImageSpanModule ul li div.imageSpanTitleText a:hover {color:#888;}
+
+
+
+/* Content */
+#siteContentViewModuleBox {overflow:hidden;}
+#siteContentViewModuleBox .contentImage {overflow:hidden;}
+#siteContentViewModuleBox .contentImage img {border:0px;}
+#siteContentViewModuleBox .contentTitle {font:bold 14px/42px "微软雅黑";color:#333;height:36px;overflow:hidden;}
+#siteContentViewModuleBox .contentTime {font:12px/24px "ARIAL";color:#999;overflow:hidden;}
+#siteContentViewModuleBox .contentText {font:12px/20px "";color:#333;padding:10px 5px 30px 5px;overflow:hidden;}
+
+
+/* Article */
+#siteArticleViewModuleBox {overflow:hidden;}
+#siteArticleViewModuleBox .articleImage {overflow:hidden;}
+#siteArticleViewModuleBox .articleImage img {border:0px;}
+#siteArticleViewModuleBox .articleTitle {font:bold 14px/42px "微软雅黑";color:#333;height:36px;overflow:hidden;}
+#siteArticleViewModuleBox .articleTime {font:12px/24px "ARIAL";color:#999;overflow:hidden;}
+#siteArticleViewModuleBox .articleText {font:12px/20px "";color:#333;padding:10px 5px 30px 5px;overflow:hidden;}
+#siteArticleViewModuleBox .articleLine {margin:10px 0;height:1px;background:#efefef;}
+
+
+.disabled {background:#ccc !important;color:#fff;border:1px solid #ccc !important;}
+
+/*** EDITOR MODAL ***/
+.editModule {border:1px solid #ddd;border-radius:4px;height:320px;overflow:hidden;padding:20px;}
+#editLoadModuleBox {}
+#editLoadModuleBox .overlyImage {height:280px;overflow:hidden;width:100%;}
+#editLoadModuleBox .overlyImage img {width:100%;border:0px;}
+#editLoadModuleBox .overlyEdit {width:200px;float:left;margin:20px;height:42px;}
+
+
+#editImageTextModuleBox {overflow:scroll;overflow-x:hidden;padding:0px;}
+#editImageTextModuleBox ul {overflow:hidden;list-style-type:none;margin:0px;padding:0px;width:100%;}
+#editImageTextModuleBox ul li {overflow:hidden;height:120px;padding:10px;position:relative;bordre-bottom:1px dotted #ddd;}
+#editImageTextModuleBox ul li img {float:left;width:120px;height:100px;}
+#editImageTextModuleBox ul li div {float:left;height:100px;width:488px;margin-left:10px;position:relative;}
+#editImageTextModuleBox ul li div span {font:12px/20px "";color:#666;display:block;width:100%;}
+#editImageTextModuleBox ul li div span.cm-title {font:bold 12px/24px "";color:#333;}
+#editImageTextModuleBox ul li div a {position:absolute;right:0px;top:0px;font:12px/30px "";width:60px;text-align:center;text-decoration:none;background:#f00;color:#fff;display:block;}
+#editImageTextModuleBox ul li div a:hover {background:#e66;}
+#editImageTextModuleBox ul li div a.disabled {border:0px;}
+
+.editModuleImageTextTable {overflow:hidden;height:320px;}
+.editModuleImageTextTable .editModuleImageLeft {float:left;width:200px;border:1px solid #ddd;border-radius:4px;height:200px;}
+.editModuleImageTextTable .editModuleImageLeft .imageviewsheet {width:100%;height:100%;}
+.editModuleImageTextTable .editModuleImageInput {float:right;width:430px;}
+
+
+.reloadImageSite {position:relative;}
+.reloadImageSite a {position:absolute;background:#000;width:100%;height:100%;-moz-opacity:0.6;filter:alpha(opacity=60);opacity:0.6;text-decoraiton:none;display:block;}
+.reloadImageSite a.loadImageIcon {background:url(../img/reloadimage.png) center center no-repeat;-moz-opacity:0.8;filter:alpha(opacity=80);opacity:0.8;}
+.reloadImageSite a.loadImageIcon:hover {background:url(../img/reloadimage.png) center center no-repeat;-moz-opacity:1;filter:alpha(opacity=100);opacity:1;}
+.reloadImageSite img {width:100%;height:100%;}
+
+

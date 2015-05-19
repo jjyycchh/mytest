@@ -1,0 +1,61 @@
+@charset "utf-8";
+
+* {padding:0;margin:0;}
+body {font-family:'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';font-size:14px;overflow:auto;}
+form,ul,li {padding:0;margin:0;}
+ul,li {list-style-type:none;}
+img,iframe,textarea {vertical-align:middle;border:0;}
+a:link,a:visited {text-decoration:none;color:#3cb099;}
+a:hover,a:active {text-decoration:underline;color:#3cb099;}
+input,textarea {outline:0!important;}
+
+.ChinaNet-Login-Header {background-color:#fff;width:100%;height:91px;border-top:5px solid #3cb099;border-bottom:2px solid #e9e8e8;}
+.ChinaNet-Login-Header .ChinaNet-Login-Header-Body {width:980px;height:91px;margin:0 auto;overflow:hidden;position:relative;}
+.ChinaNet-Login-Header .ChinaNet-Login-Logo {width:231px;height:45px;margin-top:29px;;overflow:hidden;float:left;}
+.ChinaNet-Login-Header .ChinaNet-Login-Logo img {width:231px;height:45px;border:0;}
+.ChinaNet-Login-Header .ChinaNet-Login-Telephone {width:296px;height:22px;margin-top:52px;overflow:hidden;float:right;}
+.ChinaNet-Login-Header .ChinaNet-Login-Telephone img {width:296px;height:22px;border:0;}
+.ChinaNet-Login-Header .ChinaNet-Login-Partners {width:173px;height:28px;overflow:hidden;position:absolute;top:0;right:0;}
+.ChinaNet-Login-Header .ChinaNet-Login-Partners a {display:block;background:url(../img/login21/partners_bg.png) no-repeat 0 0;text-align:center;color:#fff;text-decoration:none;font-size:18px;line-height:25px;width:173px;height:28px;}
+.ChinaNet-Login-Header .ChinaNet-Login-Partners a:hover {background-position:0 -28px;}
+
+.ChinaNet-Login-Form {background:#fafdfe url(../img/login21/main_bg.jpg) no-repeat center center;width:100%;height:517px;}
+.ChinaNet-Login-Form form {width:980px;height:517px;margin:0 auto;}
+.ChinaNet-Login-Form .ChinaNet-Login-Form-Box {background-color:#fff;width:324px;height:336px;margin-top:76px;border:1px solid #3cb099;float:right;}
+.ChinaNet-Login-Form .ChinaNet-Login-Form-Box .ChinaNet-Login-Form-Box-Header {background:#3cb099 url(../img/login21/form_icon.png) no-repeat 35px 50%;width:100%;height:81px;}
+.ChinaNet-Login-Form .ChinaNet-Login-Form-Box .ChinaNet-Login-Form-Box-Header span {font-size:16px;color:#fff;line-height:81px;margin-left:100px;}
+.ChinaNet-Login-Form .Login-Form-Body {width:100%;height:132px;overflow:hidden;}
+.ChinaNet-Login-Form .Login-Form-Body ul {display:block;width:254px;margin:42px auto 0 auto;}
+.ChinaNet-Login-Form .Login-Form-Body ul li {display:block;width:100%;height:45px;}
+.ChinaNet-Login-Form .Login-Form-Body ul li .Login-User {background:url(../img/login21/input_icon_01.png) no-repeat 10px 50%;width:auto;height:34px;padding-left:40px;margin:0;border:1px solid #ccc;}
+.ChinaNet-Login-Form .Login-Form-Body ul li .Login-Pass {background:url(../img/login21/input_icon_02.png) no-repeat 10px 50%;width:auto;height:34px;padding-left:40px;margin:0;border:1px solid #ccc;}
+.ChinaNet-Login-Form .Login-Form-Body ul li input {background-color:#fff;line-height:20px;width:200px;height:20px;padding:0;margin:7px 0 0 0;border:0;}
+.ChinaNet-Login-Form .Login-Register {width:254px;height:40px;margin:0 auto;}
+.ChinaNet-Login-Form .Login-Register .Forgot {width:127px;height:24px;float:left;}
+.ChinaNet-Login-Form .Login-Register .Register {width:127px;height:24px;float:right;text-align:right;}
+.ChinaNet-Login-Form .Login-Register a {line-height:24px;}
+.ChinaNet-Login-Form .Login-Button {width:254px;height:36px;margin:0 auto;}
+.ChinaNet-Login-Form .Login-Button button {width:254px;height:36px;padding:0;margin:0;border:0;background-color:#3cb099;font-size:16px;color:#fff;letter-spacing:10px;}
+
+.ChinaNet-Login-Bottom {background-color:#fff;width:100%;height:135px;}
+.ChinaNet-Login-Bottom .ChinaNet-Login-Bottom-Body {width:980px;height:135px;margin:0 auto;overflow:hidden;}
+.ChinaNet-Login-Bottom ul {display:block;width:100%;height:44px;margin-top:44px;overflow:hidden;}
+.ChinaNet-Login-Bottom ul li {display:block;height:44px;overflow:hidden;float:left;}
+.ChinaNet-Login-Bottom ul li.Icon1 {background:url(../img/login21/icon01.png) no-repeat 0 0;width:372px;}
+.ChinaNet-Login-Bottom ul li.Icon2 {background:url(../img/login21/icon02.png) no-repeat 0 0;width:372px;}
+.ChinaNet-Login-Bottom ul li.Icon3 {background:url(../img/login21/icon03.png) no-repeat 0 0;width:236px;}
+.ChinaNet-Login-Bottom ul li span {color:#6a6a6a;font-size:16px;font-weight:bold;line-height:44px;margin-left:65px;}
+.ChinaNet-Login-Copyright {background-color:#f8f8f8;color:#6d7477;text-align:center;line-height:40px;width:100%;height:40px;}
+
+.ChinaNet-Error-Tip {background: #cb2100;border:0px;height: 48px;font: bold 12px/48px "Microsoft YaHei","ARIAL","宋体";color:#fff;padding-right:10px;}
+.ChinaNet-Error-Tip .ui-dialog-body {padding:0px;margin:0px;}
+.ChinaNet-Error-Tip .Tip-Icon {float:left;width: 48px;height:48px;background: url(../img/dialog-error-tip.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/dialog-error-tip.png");}
+.ChinaNet-Error {width: 420px;height: 145px;border: 0px;background: url(../img/dialog-error.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/dialog-error.png");}
+.ChinaNet-Alert {width: 420px;height: 145px;border: 0px;background: url(../img/dialog-alert.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/dialog-alert.png");}
+.ChinaNet-Error .ui-dialog-header, .ChinaNet-Alert .ui-dialog-header {height: 45px;width: 420px;border:0px;}
+.ChinaNet-Error .ui-dialog-header button, .ChinaNet-Alert .ui-dialog-header button {background:none;}
+.ChinaNet-Error .ui-dialog-content, .ChinaNet-Alert .ui-dialog-content {padding-left:100px;font:bold 12px/20px "Microsoft YaHei","ARIAL","宋体";color:#fff;}
+
+.ui-dialog {border-radius: 2px;border: 0px;}
+.ui-popup-top-left .ui-dialog-arrow-b, .ui-popup-top .ui-dialog-arrow-b, .ui-popup-top-right .ui-dialog-arrow-b {border-top: 8px solid #cb2100;}
+.ChinaNet-Error .ui-dialog-body, .ChinaNet-Alert .ui-dialog-body {padding: 0px;margin: 0px;text-align: left;}

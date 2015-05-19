@@ -1,0 +1,66 @@
+@charset "UTF-8";
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+**/
+
+
+body {background-color:#fff;margin:0px;padding:0px;font-size:12px;font-family:"Microsoft YaHei","ARIAL","宋体";color:#333;overflow:hidden;width:100%;height:100%;_overflow-y:hidden;}
+ul,li,div,span,label,input,textarea {margin:0px;padding:0px;}
+input,textarea,button {outline:none;}
+
+.ChinaNet-Free-Login {background:#fff;min-width:1200px;width: auto !important;width: 100%;}
+.ChinaNet-Free-Login .Login-Background {width:100%;height:100%;overflow:hidden;}
+.ChinaNet-Free-Login .Login-Background ul {overflow:hidden;list-style-type:none;height:100%;padding-top:120px;}
+.ChinaNet-Free-Login .Login-Background ul li {float:left;text-align:center;height:340px;}
+.ChinaNet-Free-Login .Login-Background ul li img {width:1440px;height:340px;border:0px;}
+
+.ChinaNet-Free-Login-Header {height: 120px;width: 100%;position: absolute;left:0px;top:0px;z-index:200;background: #fff;}
+.ChinaNet-Free-Login-Header .ChinaNet-Free-Login-Header-Center {width:1160px;height:100%;margin:0 auto;overflow:hidden;position:relative;}
+.ChinaNet-Free-Login-Header .ChinaNet-Free-Login-Logo {background:url(../img/login/logo.png) no-repeat 0 0;width:285px;height:77px;position:absolute;top:30px;left:0;}
+.ChinaNet-Free-Login-Bottom {width: 100%;padding:20px 0;position: absolute;left:0px;top:520px;z-index:200;background:#fff;}
+.ChinaNet-Free-Login-Bottom .ChinaNet-Free-Login-Bottom-Center {width:900px;height:60px;margin:0 auto;}
+.ChinaNet-Free-Login-Bottom ul {list-style-type:none;width:100%;height:100%;overflow:hidden;}
+.ChinaNet-Free-Login-Bottom ul li {display:block;font-size:16px;line-height:60px;width:300px;height:100%;overflow:hidden;float:left;}
+.ChinaNet-Free-Login-Bottom ul li.Icon1 {background:url(../img/login/icon1.png) no-repeat 0 0;}
+.ChinaNet-Free-Login-Bottom ul li.Icon2 {background:url(../img/login/icon2.png) no-repeat 0 0;}
+.ChinaNet-Free-Login-Bottom ul li.Icon3 {background:url(../img/login/icon3.png) no-repeat 0 0;}
+.ChinaNet-Free-Login-Bottom ul li span {padding-left:80px;}
+.ChinaNet-Free-Login-Bottom .ChinaNet-Free-Login-Bottom-Copyright {text-align:center;font-size:14px;margin-top:20px;}
+
+
+.ChinaNet-Login-Body {position:absolute;width:420px;height:480px;left:50%;top:40px;margin-left:160px;z-index:210;background:url(../img/login-background.png) no-repeat 0 0;_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/login-background.png");}
+
+.ChinaNet-Login-Form-Body {position:absolute;width:420px;height:480px;left:50%;top:40px;margin-left:160px;z-index:211;background:none;}
+.ChinaNet-Login-Form-Body .Login-Body-Header {height:90px;width:420px;}
+.ChinaNet-Login-Form-Body .Login-Body-Form {}
+.ChinaNet-Login-Form-Body .Login-Body-Form ul {list-style-type:none;}
+.ChinaNet-Login-Form-Body .Login-Body-Form ul li {padding:30px 0 0 115px;}
+.ChinaNet-Login-Form-Body .Login-Text {width:255px;height:36px;background:none;border:0px;padding-top:/*\**/8px\9;height:/*\**/24px\9;padding-top:/*\**/9px\9\0;height:/*\**/34px\9\0;font:bold 14px/18px "Microsoft YaHei","ARIAL","宋体";color: #999;}
+.ChinaNet-Login-Form-Body .Login-Button {padding:20px 0 10px 0;text-align:center;}
+.ChinaNet-Login-Form-Body .Login-Button button {border:0px;cursor:pointer;_cursor:hand;background:url(../img/login-button.png);color:#fff;font:bold 14px/60px "Microsoft YaHei","ARIAL","宋体";width:330px;height:60px;zoom:1;-moz-opacity:0.9;filter:alpha(opacity=90);opacity:0.9;overflow:hidden;}
+.ChinaNet-Login-Form-Body .Login-Button button:hover {-moz-opacity:1;filter:alpha(opacity=100);opacity:1;}
+.ChinaNet-Login-Form-Body .Login-Register {padding:0px 45px;overflow:hidden;}
+.ChinaNet-Login-Form-Body .Login-Register a {display:inline-block;font:bold 12px/25px "Microsoft YaHei","ARIAL","宋体";color:#117661;text-decoration:none;}
+.ChinaNet-Login-Form-Body .Login-Register a:hover {color:#169a7f;text-decoration:none;}
+.ChinaNet-Login-Form-Body .Login-Register a.Register {float:right;}
+.ChinaNet-Login-Form-Body .Login-Register a.Forgot {float:left;}
+.ChinaNet-Login-Form-Body .Login-Hotline {background:url(../img/login/hotline.png) no-repeat center center;width:100%;height:80px;}
+
+.ChinaNet-Error-Tip {background: #cb2100;border:0px;height: 48px;font: bold 12px/48px "Microsoft YaHei","ARIAL","宋体";color:#fff;padding-right:10px;}
+.ChinaNet-Error-Tip .ui-dialog-body {padding:0px;margin:0px;}
+.ChinaNet-Error-Tip .Tip-Icon {float:left;width: 48px;height:48px;background: url(../img/dialog-error-tip.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/dialog-error-tip.png");}
+.ChinaNet-Error {width: 420px;height: 145px;border: 0px;background: url(../img/dialog-error.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/dialog-error.png");}
+.ChinaNet-Alert {width: 420px;height: 145px;border: 0px;background: url(../img/dialog-alert.png);_background:url(about:blank);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/dialog-alert.png");}
+.ChinaNet-Error .ui-dialog-header, .ChinaNet-Alert .ui-dialog-header {height: 45px;width: 420px;border:0px;}
+.ChinaNet-Error .ui-dialog-header button, .ChinaNet-Alert .ui-dialog-header button {background:none;}
+.ChinaNet-Error .ui-dialog-content, .ChinaNet-Alert .ui-dialog-content {padding-left:100px;font:bold 12px/20px "Microsoft YaHei","ARIAL","宋体";color:#fff;}
+
+
+.ui-dialog {border-radius: 2px;border: 0px;}
+.ui-popup-top-left .ui-dialog-arrow-b, .ui-popup-top .ui-dialog-arrow-b, .ui-popup-top-right .ui-dialog-arrow-b {border-top: 8px solid #cb2100;}
+.ChinaNet-Error .ui-dialog-body, .ChinaNet-Alert .ui-dialog-body {padding: 0px;margin: 0px;text-align: left;}

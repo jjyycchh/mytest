@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+**/
+.ChinaNet-Form-Sheet {overflow: hidden;}
+.ChinaNet-Free-Body .System-Body {width: 100%; margin-top: 3px;}
+.ChinaNet-Free-Body .System-Body .System-Body-Guest {width: 100%; padding-top: 10px}
+
+/*.ChinaNet-Free-Body .System-Plugin {}
+.ChinaNet-Free-Body .System-Plugin td {line-height: }*/
+
+.Form-Primary {margin-left: 10px;}
+
+.ChinaNet-Free-Table table .Device-State-Table-Body {border-bottom:1px dotted #efefef;}
+.ChinaNet-Free-Table table .Device-State-Table-Body td {padding:15px 0 15px 10px;color:#333;text-align:left;}
+.ChinaNet-Free-Table table .Device-State-Table-Body td .Table-Data-Name {color:#666;font:bold 12px/18px "Microsoft YaHei","ARIAL","宋体";display:block;}
+
+/* Policy */
+.ChinaNet-Free-Body .Portal-Policy-Devices-List {overflow:hidden;padding-bottom:10px;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Header {height:6px;overflow:hidden;background:url(../img/textarea-normal-header.png);padding-left:6px;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Header div {height:6px;overflow:hidden;background:url(../img/textarea-normal-header.png) 100% 0;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body {min-height:100px;background:url(../img/textarea-normal-body.png);padding-left:6px;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body .Devices-List-Item-Body {background:url(../img/textarea-normal-body.png) 100% 0;overflow:auto;min-height:100px;max-height:200px;padding:2px 13px 4px 7px;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body .Devices-List-Item-Body a {display:block;font:12px/36px "Microsoft YaHei","ARIAL","宋体";padding-left:10px;text-align:left;color:#999;border-bottom:1px dotted #ddd;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body .Devices-List-Item-Body a:hover {color:#333;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body .Devices-List-Item-Body a span {float:right;height:36px;width:36px;cursor:pointer;_cursor:hand;overlow:hidden;display:inline;background:url(../img/delete-icon.png);_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/delete-icon.png");}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body .Devices-List-Item-Body a.Add-Account {float:left;border:0px;color:#666;font-weight:bold;padding-left:0px;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body .Devices-List-Item-Body a.Add-Account:hover {color:#333;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Body .Devices-List-Item-Body a.Add-Account span {float:left;background:url(../img/add-icon.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/add-icon.png");}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Bottom {height:6px;overflow:hidden;background:url(../img/textarea-normal-bottom.png);padding-left:6px;}
+.ChinaNet-Free-Body .Portal-Policy-Devices-List .Devices-List-Bottom div {height:6px;overflow:hidden;background:url(../img/textarea-normal-bottom.png) 100% 0;}
+.ChinaNet-Free-Body .ChinaNet-Form-Sheet .Submit-Button {margin-left:3px;}

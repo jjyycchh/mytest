@@ -1,0 +1,60 @@
+/** PORTAL SITE AUTHORIZE CSS **/
+
+/** PUBLIC **/
+.siteModules {min-height:42px;}
+.AuthInputLine {padding:5px 10px;overflow:hidden;text-align:left;}
+.AuthInputText {border:1px solid #ddd;background:#fff;height:36px;font:16px/36px "ARIAL";color:#333;width:55%;border-radius:4px;text-indent:8px;padding:0px;height:35px;}
+.AuthMobileSMS {background: #4D82E3;border: 1px solid #4D82E3;border-radius: 4px;color: #FFFFFF;height: 35px;margin-left: 10px;width: 100px;cursor:pointer;_cursor:hand;}
+.AuthSubmitID {background: #F1751A;border: 1px solid #F1751A;border-radius: 4px;color: #FFFFFF;height: 36px;width: 55%;cursor:pointer;_cursor:hand;}
+.AuthSubmitID:hover {background:#f1931a;border:1px solid #f1931a;}
+
+
+.AuthModuleMobile {}
+
+.disabled {background:#ccc;color:#fff;border:1px solid #ccc;}
+
+
+
+.auth-type-components {overflow:hidden;}
+.auth-type-components .auth-type-list-item {overflow:hidden;width:100%;margin:0px;padding:0px;display:none;}
+.auth-type-components .auth-type-list-item ul {overflow:hidden;width:100%;margin:0px;padding:0px;list-style-type:none;}
+.auth-type-components .auth-type-list-item ul li {overflow:hidden;width:50%;padding:20px 0 10px 0;text-align:center;float:left;}
+.auth-type-components .auth-type-list-item ul li a {width:140px;height:100px;text-decoration:none;display:inline-block;}
+.auth-type-components .auth-type-list-item ul li a.mobile {background:url(../img/auth-mobile.png);}
+.auth-type-components .auth-type-list-item ul li a.wechat {background:url(../img/auth-wechat.png);}
+.auth-type-components .auth-component-button {overflow:hidden;padding:30px 0;display:none;text-align:center;}
+.auth-type-components .auth-component-button button {border-radius:2px;width:80%;height:42px;background:#fa5e11;color:#fff;cursor:pointer;_cursor:hand;border:0px;}
+.auth-type-components .auth-component-button button:hover {background:#fd722e;}
+.auth-type-components .auth-type-components-view {overflow:hidden;display:none;position:relative;width:100%;padding:30px 0;padding:20px 0 10px 0;}
+.auth-type-components .auth-type-components-view a.close {width:40px;height:30px;display:block;z-index:100;position:absolute;top:0px;right:0px;text-decoration:none;background:url(../img/auth-close.png);display:none;}
+.auth-type-components .auth-type-components-view .auth-type-body {width:100%;overflow:hidden;display:none;}
+
+
+
+
+.Portal-Auth-Body {overflow: hidden;width: 100%;}
+.Portal-Auth-Body .Auth-Type-Body {overflow: hidden;width: 98%;padding:20px 0;margin: 0 auto;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Type-Icon {width:100%;overflow: hidden;padding:20px 0 ;text-align: center;height: 48px;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Type-Icon a {width: 48px;height:48px;margin:0 5px;display:inline-block;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Type-Item {display: none;overflow: hidden;}
+.Portal-Auth-Body .Auth-Single {}
+.Portal-Auth-Body .Auth-Single .Auth-Type-Icon {display:none;}
+.Portal-Auth-Body .Auth-Single .Auth-Type-Item {display:block;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Type-MOBILE {}
+.Portal-Auth-Body .Auth-Type-Body input {text-indent:6px;width:100%;border:1px solid #ddd; border-radius: 2px;height: 36px;font:bold 14px/36px "Microsoft YaHei","ARIAL","宋体";color: #666;}
+.Portal-Auth-Body .Auth-Type-Body button {border:0px;border-radius: 2px;height:48px;font:bold 18px/48px "Microsoft YaHei","ARIAL","宋体";color: #fff;background: #098e73;text-align: center;cursor: pointer; _cursor: hand;width: 100%;}
+.Portal-Auth-Body .Auth-Type-Body button:hover {background: #10a688}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Input-Row {padding:8px 0;width: 100%;overflow: hidden;height:50px;float:left;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Input-Captcha {padding:8px 0;width: 48%;overflow: hidden;height:50px;float: left;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Input-Button {padding:8px 0;width: 50%;overflow: hidden;height:50px;float: right;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Input-Button button {height:36px;font:12px/36px "Microsoft YaHei","ARIAL","宋体";color: #fff;background: #45caaf;text-align: center;cursor: pointer; _cursor: hand;width: 100%;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Input-Button button:hover {background: #50d5ba;}
+.Portal-Auth-Body .Auth-Type-Body .Auth-Button-Row {padding:8px 0;width: 100%;overflow: hidden;height:64px;float:left;}
+
+.Portal-Auth-Body .Auth-Type-Free {padding: 15px 0;width: 98%;overflow: hidden;margin:0 auto;}
+.Portal-Auth-Body .Auth-Type-Free button {border-radius: 2px;font: bold 18px/48px "Microsoft YaHei","ARIAL","宋体";color:#fff;background: #098e73;text-align: center;border:0px;height: 48px;cursor: pointer; _cursor: hand;width: 100%;}
+.Portal-Auth-Body .Auth-Type-Free button:hover {background: #10a688}
+
+
+.suggest-body {overflow: hidden;width: 100%;text-align: center;}
+.suggest-body a {font: 12px/32px "Microsoft YaHei","ARIAL","宋体";color: #00f;display:inline-block;}

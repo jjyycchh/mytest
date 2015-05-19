@@ -1,0 +1,1374 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.user.TerminalUserAuthLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.user.TerminalUserAuthLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="terminal_user_id" property="terminalUserId" jdbcType="BIGINT" />
+    <result column="auth_type" property="authType" jdbcType="VARCHAR" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="terminal_mac" property="terminalMac" jdbcType="VARCHAR" />
+    <result column="offline_datetime" property="offlineDatetime" jdbcType="TIMESTAMP" />
+    <result column="terminal_type" property="terminalType" jdbcType="VARCHAR" />
+    <result column="browser_type" property="browserType" jdbcType="VARCHAR" />
+    <result column="total_up_traffic" property="totalUpTraffic" jdbcType="BIGINT" />
+    <result column="total_dw_traffic" property="totalDwTraffic" jdbcType="BIGINT" />
+    <result column="modified_datetime" property="modifiedDatetime" jdbcType="TIMESTAMP" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+  </resultMap>
+
+  <resultMap id="ResultMapWithMac" type="com.access.model.user.TerminalUserAuthLog" extends="BaseResultMap">
+   	<result column="mac" property="mac" jdbcType="VARCHAR" />
+   	<result column="content" property="content" jdbcType="VARCHAR" />
+   	<result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.user.TerminalUserAuthLog" extends="BaseResultMap" >
+    <result column="log_content" property="logContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, terminal_user_id, auth_type, token, device_id, status, terminal_mac, offline_datetime, 
+    terminal_type, browser_type, total_up_traffic, total_dw_traffic, modified_datetime, 
+    create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    log_content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from terminal_user_authentication_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from terminal_user_authentication_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.user.TerminalUserAuthLog" >
+    insert into terminal_user_authentication_log (id, terminal_user_id, auth_type, 
+      token, device_id, status, 
+      terminal_mac, offline_datetime, terminal_type, 
+      browser_type, total_up_traffic, total_dw_traffic, 
+      modified_datetime, create_datetime, log_content,account_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{terminalUserId,jdbcType=BIGINT}, #{authType,jdbcType=VARCHAR}, 
+      #{token,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{terminalMac,jdbcType=VARCHAR}, #{offlineDatetime,jdbcType=TIMESTAMP}, #{terminalType,jdbcType=VARCHAR}, 
+      #{browserType,jdbcType=VARCHAR}, #{totalUpTraffic,jdbcType=BIGINT}, #{totalDwTraffic,jdbcType=BIGINT}, 
+      #{modifiedDatetime,jdbcType=TIMESTAMP}, #{createDatetime,jdbcType=TIMESTAMP}, #{logContent,jdbcType=LONGVARCHAR},
+      #{accountId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.user.TerminalUserAuthLog" >
+    <selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into terminal_user_authentication_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="terminalUserId != null" >
+        terminal_user_id,
+      </if>
+      <if test="authType != null" >
+        auth_type,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="terminalMac != null" >
+        terminal_mac,
+      </if>
+      <if test="offlineDatetime != null" >
+        offline_datetime,
+      </if>
+      <if test="terminalType != null" >
+        terminal_type,
+      </if>
+      <if test="browserType != null" >
+        browser_type,
+      </if>
+      <if test="totalUpTraffic != null" >
+        total_up_traffic,
+      </if>
+      <if test="totalDwTraffic != null" >
+        total_dw_traffic,
+      </if>
+      <!-- <if test="modifiedDatetime != null" >
+        modified_datetime,
+      </if> -->
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="logContent != null" >
+        log_content,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      modified_datetime
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="terminalUserId != null" >
+        #{terminalUserId,jdbcType=BIGINT},
+      </if>
+      <if test="authType != null" >
+        #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalMac != null" >
+        #{terminalMac,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineDatetime != null" >
+        #{offlineDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalType != null" >
+        #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="browserType != null" >
+        #{browserType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalUpTraffic != null" >
+        #{totalUpTraffic,jdbcType=BIGINT},
+      </if>
+      <if test="totalDwTraffic != null" >
+        #{totalDwTraffic,jdbcType=BIGINT},
+      </if>
+      <!-- <if test="modifiedDatetime != null" >
+        #{modifiedDatetime,jdbcType=TIMESTAMP},
+      </if> -->
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logContent != null" >
+        #{logContent,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      now()
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.user.TerminalUserAuthLog" >
+    update terminal_user_authentication_log
+    <set >
+      <if test="terminalUserId != null" >
+        terminal_user_id = #{terminalUserId,jdbcType=BIGINT},
+      </if>
+      <if test="authType != null" >
+        auth_type = #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="terminalMac != null" >
+        terminal_mac = #{terminalMac,jdbcType=VARCHAR},
+      </if>
+      <if test="offlineDatetime != null" >
+        offline_datetime = #{offlineDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalType != null" >
+        terminal_type = #{terminalType,jdbcType=VARCHAR},
+      </if>
+      <if test="browserType != null" >
+        browser_type = #{browserType,jdbcType=VARCHAR},
+      </if>
+      <if test="totalUpTraffic != null" >
+        total_up_traffic = #{totalUpTraffic,jdbcType=BIGINT},
+      </if>
+      <if test="totalDwTraffic != null" >
+        total_dw_traffic = #{totalDwTraffic,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <!-- <if test="modifiedDatetime != null" >
+        modified_datetime = #{modifiedDatetime,jdbcType=TIMESTAMP},
+      </if> -->
+      modified_datetime = now(),
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logContent != null" >
+        log_content = #{logContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.user.TerminalUserAuthLog" >
+    update terminal_user_authentication_log
+    set terminal_user_id = #{terminalUserId,jdbcType=BIGINT},
+      auth_type = #{authType,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      terminal_mac = #{terminalMac,jdbcType=VARCHAR},
+      offline_datetime = #{offlineDatetime,jdbcType=TIMESTAMP},
+      terminal_type = #{terminalType,jdbcType=VARCHAR},
+      browser_type = #{browserType,jdbcType=VARCHAR},
+      total_up_traffic = #{totalUpTraffic,jdbcType=BIGINT},
+      total_dw_traffic = #{totalDwTraffic,jdbcType=BIGINT},
+      modified_datetime = now(),
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      log_content = #{logContent,jdbcType=LONGVARCHAR},
+      account_id = #{accountId, jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.user.TerminalUserAuthLog" >
+    update terminal_user_authentication_log
+    set terminal_user_id = #{terminalUserId,jdbcType=BIGINT},
+      auth_type = #{authType,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      terminal_mac = #{terminalMac,jdbcType=VARCHAR},
+      offline_datetime = #{offlineDatetime,jdbcType=TIMESTAMP},
+      terminal_type = #{terminalType,jdbcType=VARCHAR},
+      browser_type = #{browserType,jdbcType=VARCHAR},
+      total_up_traffic = #{totalUpTraffic,jdbcType=BIGINT},
+      total_dw_traffic = #{totalDwTraffic,jdbcType=BIGINT},
+      modified_datetime = now(),
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      account_id = #{accountId, jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getLatestDayUsersstatis" parameterType="java.util.Map" resultType="java.util.HashMap">
+	SELECT hour(ual.create_datetime) as hour, count(ual.terminal_user_id) as user_count
+	from terminal_user_authentication_log as ual,
+		terminal_user as u, terminal_user_has_device as ud, device as d, location as l, account as a
+	where ual.terminal_user_id=u.id
+		and u.id=ud.terminal_user_id
+		and ud.device_id=d.device_id
+		and d.location_id=l.id
+		and l.account_id=a.id
+		and ual.create_datetime > ADDDATE(now(), interval -1 day)
+		and a.type = #{type,jdbcType=VARCHAR}
+		and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+		)
+		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="deviceId != null">
+			and d.device_id = #{deviceId}
+		</if>
+		<if test="keywords != null">
+			<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	 			Concat(IFNULL(a.merchant_name, ''),
+				IFNULL(d.name,'')) like '%' #{item} '%'
+			</foreach>
+		</if>
+		group by hour(ual.create_datetime)
+		order by hour(ual.create_datetime)
+  </select>
+   
+  <select id="getUsersstatis" parameterType="java.util.Map" resultType="java.util.HashMap">
+  SELECT hour, count(*) AS user_count from(
+	SELECT hour(ual.create_datetime) as hour, count(ual.terminal_user_id) as user_count
+	from terminal_user_authentication_log as ual,
+		terminal_user as u, terminal_user_has_device as ud, device as d, location as l, account as a
+	where ual.terminal_user_id=u.id
+		and u.id=ud.terminal_user_id
+		and ud.device_id=d.device_id
+		and d.location_id=l.id
+		and l.account_id=a.id
+		and date_format(ual.create_datetime, '%Y-%m-%d') = #{date}
+		<!-- and a.type = #{type,jdbcType=VARCHAR} -->
+		and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+		)
+		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="deviceId != null">
+			and d.device_id = #{deviceId}
+		</if>
+		<if test="keywords != null">
+			<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	 			Concat(IFNULL(a.merchant_name, ''),
+				IFNULL(d.name,'')) like '%' #{item} '%'
+			</foreach>
+		</if>
+		group by hour(ual.create_datetime), ual.terminal_user_id
+	) as t 
+	GROUP BY t.hour
+	order by t.hour
+  </select>
+  
+  <select id="getTrafficstatis" parameterType="java.util.Map" resultType="java.util.Map">
+	SELECT 
+		hour(ual.create_datetime) as hour, 
+	    (case sum(ual.total_dw_traffic + ual.total_up_traffic) is null
+			when true then 0
+			else sum(ual.total_dw_traffic + ual.total_up_traffic)
+	    end) as traffic
+	from terminal_user_authentication_log as ual,
+		device as d, location as l, account as a
+	where ual.device_id=d.device_id
+		and d.location_id=l.id
+		and l.account_id=a.id
+		and date_format(ual.create_datetime, '%Y-%m-%d') = #{date}
+		and a.type = #{accountType}
+		and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+		)
+		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="deviceId != null">
+			and ual.device_id = #{deviceId}
+		</if>
+	GROUP BY hour(ual.create_datetime)
+	order by hour(ual.create_datetime)
+  </select>
+  
+	
+  <select id="getLatestUserAuthLogsByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+	    select 
+		    <include refid="Base_Column_List" /> ,
+		    <include refid="Blob_Column_List" />
+	    from 
+	    	terminal_user_authentication_log
+	    where 
+	    	terminal_user_id = #{userId,jdbcType=BIGINT}
+		    <if test="expireDays != null">
+		    	and create_datetime > date_add(now(), interval #{expireDays,jdbcType=BIGINT} day)
+		    </if>
+	    order by 
+	    	create_datetime desc
+	    LIMIT 
+	    	1
+  </select>
+  
+  <select id="getCurrentTrafficForDevice" resultType="java.util.Map" parameterType="java.util.Map" >
+	select 
+	    SUM(IFNULL(total_up_traffic,0)) as upTraffic, sum(IFNULL(total_dw_traffic,0)) as downTraffic
+	from
+	    terminal_user_authentication_log as auth_log
+	where
+		
+	    device_id = #{deviceId} 
+	    <if test="deviceOnlineDate != null">
+	    	and create_datetime > #{deviceOnlineDate} 
+	    </if>
+	group by 
+		device_id;
+  </select>
+  
+  
+	<select id="getLatestDaysIncreasedConnection" parameterType="java.lang.Long" resultType="java.lang.Long">
+		select 
+		    count(*)
+		from
+		    terminal_user_authentication_log
+		where
+		    create_datetime > ADDDATE(now(), interval #{value} day)
+		order by id desc
+	</select>
+	
+	    
+    <select id="getLoginCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	SELECT count(*) from (
+			SELECT MAX(tual.create_datetime) as create_datetime, tu.mac 
+			from terminal_user_authentication_log as tual, 
+				terminal_user as tu,
+				terminal_user_has_device as ud
+			where tual.terminal_user_id = tu.id
+				and tu.id = ud.terminal_user_id
+				and tual.status = 'ONLINE'
+				and ud.device_id = #{value}
+			GROUP BY tu.mac
+		) as t
+    </select>
+  
+  	<select id="getLoginTimes" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		SELECT count(tu.mac) 
+		from terminal_user_authentication_log as tual, 
+			terminal_user as tu,
+			terminal_user_has_device as ud
+		where tual.terminal_user_id = tu.id
+			and tu.id = ud.terminal_user_id
+			and ud.device_id = #{deviceId}
+			and tu.mac = #{mac}
+  	</select>
+  	
+  	<select id="getAuthListByMap" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  		select ual.*
+    	terminal_user_authentication_log as ual
+		LEFT JOIN terminal_user as tu on ual.terminal_user_id=tu.id
+    	where ual.auth_type=#{authType}
+    	and tu.mac=#{mac}
+    	<if test="expireDays != null">
+    		and create_datetime > date_add(now(), interval #{expireDays,jdbcType=BIGINT} day)
+    	</if>
+    	order by create_datetime desc
+  	</select>
+  	
+  	<select id="getLastAuthLogByMap" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  		select 
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+	    from terminal_user_authentication_log
+	    where id =(
+	  		select MAX(ual.id)
+	    	from terminal_user_authentication_log as ual
+			LEFT JOIN terminal_user as tu on ual.terminal_user_id=tu.id
+	    	where ual.auth_type=#{authType}
+		    	and ual.terminal_mac=#{mac}
+		    	and ual.token is not null
+		    	<if test="authId != null">
+		    		and tu.auth_id=#{authId}
+		    	</if>
+		    	<if test="expireDays != null">
+		    		and ual.create_datetime > date_add(now(), interval #{expireDays,jdbcType=BIGINT} day)
+		    	</if>
+		)
+  	</select>
+  	
+  	<select id="getUserDetails" parameterType="java.lang.Long" resultType="java.util.Map">
+  		SELECT status, count(mac) as countnum from (
+			SELECT MAX(tual.create_datetime) as create_datetime, tual.status, tu.mac 
+			from terminal_user_authentication_log as tual, 
+				terminal_user as tu,
+				device as d,
+				location as l,
+				account as a
+			where tual.terminal_user_id = tu.id
+				and tual.device_id=d.device_id
+				and d.location_id = l.id
+				and l.account_id = a.id
+				and (a.id = #{value}
+					or a.parent_ids like CONCAT('%"', #{value}, '"%')
+				)
+				GROUP BY tu.mac
+		) as t
+		GROUP BY t.status
+  	</select>
+  	
+  	<select id="getTrafficDetails" parameterType="java.lang.Long" resultType="java.util.Map">
+  		SELECT 
+			hour(
+				IFNULL(tual.modified_datetime, tual.create_datetime)
+			) as hour, 
+		    (case sum(tual.total_dw_traffic) is null
+				when true then 0
+				else sum(tual.total_dw_traffic)
+		    	end) as total_dw_traffic,
+		    (case sum(tual.total_up_traffic) is null
+				when true then 0
+				else sum(tual.total_up_traffic)
+		    	end) as total_up_traffic
+		from terminal_user_authentication_log as tual,
+			device as d, location as l, account as a
+		where tual.device_id=d.device_id
+			and d.location_id=l.id
+			and l.account_id=a.id
+			and tual.create_datetime > ADDDATE(now(), interval -1 day)
+			and (a.id = #{value}
+				or a.parent_ids like Concat('%"', #{value}, '"%')
+			)
+		GROUP BY hour(
+				IFNULL(tual.modified_datetime, tual.create_datetime)
+			)
+	</select>
+	
+	<select id="getAuthTypeStatis" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT tual.auth_type as authType, IFNULL(count(tual.id), 0) as authCount 
+		from terminal_user_authentication_log as tual,
+			device as d, 
+			location as l, 
+			account as a
+		where tual.device_id=d.device_id
+			and d.location_id=l.id
+			and l.account_id=a.id
+			and tual.create_datetime > ADDDATE(now(), interval -1 day)
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="accountId == null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="deviceId != null">
+				and d.device_id = #{deviceId}
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		 			Concat(IFNULL(a.merchant_name, ''),
+					IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+		GROUP BY tual.auth_type
+	</select>
+	
+	<select id="getAuthTypePoint" parameterType="java.util.Map" resultType="java.util.Map">
+		select * from (
+			SELECT tual.auth_type as auth_type, IFNULL(count(tual.id), 0) as auth_count 
+			from terminal_user_authentication_log as tual,
+				device as d, 
+				location as l, 
+				account as a
+			where tual.device_id=d.device_id
+				and d.location_id=l.id
+				and l.account_id=a.id
+				<if test="date != null">
+					and DATE_FORMAT(tual.create_datetime, '%Y-%m-%d %H') = #{date}
+				</if>
+				<if test="accountId != null">
+					and a.id = #{accountId}
+				</if>
+				<if test="accountId == null">
+					and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+				</if>
+				<if test="deviceId != null">
+					and d.device_id = #{deviceId}
+				</if>
+				<if test="keywords != null">
+					<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+			 			Concat(a.username,
+			 				IFNULL(a.fullname, ''),
+			 				IFNULL(a.merchant_name, ''),
+							IFNULL(d.name,'')) like '%' #{item} '%'
+					</foreach>
+				</if>
+			GROUP BY tual.auth_type
+		) as t 
+		order by t.auth_count desc
+		limit 0,#{limit}
+	</select>
+	
+	<select id="getTerminalTypeStatis" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT IFNULL(tual.terminal_type, '--')  as terminalType, 
+			IFNULL(count(tual.id), 0) as terminalCount 
+		from terminal_user_authentication_log as tual,
+			device as d, 
+			location as l, 
+			account as a
+		where tual.device_id=d.device_id
+			and d.location_id=l.id
+			and l.account_id=a.id
+			and tual.create_datetime > ADDDATE(now(), interval -1 day)
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="accountId == null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="deviceId != null">
+				and d.device_id = #{deviceId}
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		 			Concat(IFNULL(a.merchant_name, ''),
+					IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+		GROUP BY tual.terminal_type
+	</select>
+	
+	<select id="getBrowserTypeStatis" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT IFNULL(tual.browser_type, '--') as browserType, 
+			IFNULL(count(tual.id), 0) as browserCount 
+		from terminal_user_authentication_log as tual,
+			device as d, 
+			location as l, 
+			account as a
+		where tual.device_id=d.device_id
+			and d.location_id=l.id
+			and l.account_id=a.id
+			and tual.create_datetime > ADDDATE(now(), interval -1 day)
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="accountId == null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		 			Concat(IFNULL(a.merchant_name, ''),
+					IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+		GROUP BY tual.browser_type
+	</select>
+	
+	<select id="getUserAnalyse" parameterType="java.util.Map" resultType="java.util.Map">
+	<![CDATA[ 
+		select count(*) as usercount, 
+		   	sum(onlinetime) as onlinetime from
+			(SELECT distinct tu.id, 
+				SUM(
+					CASE UPPER(tual.status) = 'OFFLINE' 
+					WHEN true THEN 
+								CASE tual.offline_datetime is null
+								WHEN true THEN #{timeOut}
+								ELSE CASE tual.create_datetime <= tual.offline_datetime 
+									WHEN TRUE THEN TIMESTAMPDIFF(SECOND, tual.create_datetime, tual.offline_datetime)
+									ELSE 0
+									END
+								END
+					ELSE CASE TIMESTAMPDIFF(SECOND, tual.create_datetime, now()) >= #{timeOut}
+							WHEN true then #{timeOut}
+							ELSE TIMESTAMPDIFF(SECOND, tual.create_datetime, now())
+							END
+					END
+				) as onlinetime
+			from terminal_user_authentication_log as tual,
+				terminal_user as tu,
+				device as d, 
+				location as l, 
+				account as a
+			where tual.device_id=d.device_id
+				and d.location_id=l.id
+				and l.account_id=a.id
+				and tual.terminal_user_id=tu.id
+				and tual.create_datetime >= str_to_date(#{date}, '%Y-%m-%d') 
+				and tual.create_datetime <= date_add(str_to_date(#{date}, '%Y-%m-%d'), interval 1 day)
+			 ]]>
+				<if test="userType == 'newUser'.toString()">
+					<![CDATA[ 
+					and tu.create_datetime >= str_to_date(#{date}, '%Y-%m-%d') 
+					and tu.create_datetime <= date_add(str_to_date(#{date}, '%Y-%m-%d'), interval 1 day)
+					]]>
+				</if>
+				<if test="userType == 'oldUser'.toString()">
+					<![CDATA[ 
+						and tu.create_datetime < str_to_date(#{date}, '%Y-%m-%d')
+					]]>
+				</if>
+				<if test="accountId != null">
+					and a.id = #{accountId}
+				</if>
+				<if test="accountId == null">
+					and (a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+						and a.type = #{type}
+					)
+				</if>
+				<if test="deviceId != null">
+					and d.device_id = #{deviceId}
+				</if>
+				<if test="keywords != null">
+					<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+			 			Concat(a.username,
+			 			IFNULL(a.merchant_name, ''),
+						IFNULL(d.name,'')) like '%' #{item} '%'
+					</foreach>
+				</if>
+			GROUP BY tu.id ) as t
+	</select>
+	
+	<select id="getUserCountPoint" parameterType="java.util.Map" resultType="java.lang.Long">
+	   	SELECT count(aa.id) FROM (
+		SELECT tu.id
+			from terminal_user_authentication_log as tual,
+				terminal_user as tu,
+				device as d, 
+				location as l, 
+				account as a
+			where tual.device_id=d.device_id
+				and d.location_id=l.id
+				and l.account_id=a.id
+				and tual.terminal_user_id=tu.id
+				and tual.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d %H')
+				and tual.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d %H'), interval 1 hour)
+				<if test="userType == 'newUser'.toString()">
+					and tu.create_datetime &gt;= str_to_date(#{date}, '%Y-%m-%d %H')
+					and tu.create_datetime &lt;= date_add(str_to_date(#{date}, '%Y-%m-%d %H'), interval 1 hour)
+				</if>
+				<if test="status != null">
+					and tual.status = #{status}
+				</if>
+				<if test="accountId != null">
+					and a.id = #{accountId}
+				</if>
+				<if test="accountId == null">
+					and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+				</if>
+				<if test="deviceId != null">
+					and d.device_id = #{deviceId}
+				</if>
+				<if test="keywords != null">
+					<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+			 			Concat(a.username,
+			 			IFNULL(a.merchant_name, ''),
+						IFNULL(d.name,'')) like '%' #{item} '%'
+					</foreach>
+				</if>
+			GROUP BY tu.id
+			)aa
+	</select>
+	
+	<select id="getTrafficAnalyse" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT 
+			hour(ual.create_datetime) as hour, 
+		    sum(IFNULL(ual.total_dw_traffic,0) + IFNULL(ual.total_up_traffic,0)) as traffic
+		from terminal_user_authentication_log as ual,
+			device as d, 
+			location as l, 
+			account as a
+		where ual.device_id=d.device_id
+			and d.location_id=l.id
+			and l.account_id=a.id
+			and date_format(ual.create_datetime, '%Y-%m-%d') = #{date}
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="accountId == null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="deviceId != null">
+				and d.device_id = #{deviceId}
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		 			Concat(a.username,
+		 			IFNULL(a.merchant_name, ''),
+					IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+		GROUP BY hour(ual.create_datetime)
+	</select>
+	
+	<select id="getTrafficPoint" parameterType="java.util.Map" resultType="java.util.Map">
+		SELECT t.device_id, t.traffic, t.username, t.fullname, t.merchant_name
+		from (
+			SELECT 
+				a.username, 
+				a.fullname, 
+				a.merchant_name,
+				d.device_id,
+			    sum(IFNULL(tual.total_dw_traffic,0) + IFNULL(tual.total_up_traffic,0)) as traffic
+			from terminal_user_authentication_log as tual,
+				device as d, 
+				location as l, 
+				account as a
+			where tual.device_id=d.device_id
+				and d.location_id=l.id
+				and l.account_id=a.id
+				and date_format(tual.create_datetime, '%Y-%m-%d %H') = #{date}
+				<if test="accountId != null">
+					and a.id = #{accountId}
+				</if>
+				<if test="accountId == null">
+					and (a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+						and a.type = #{type}
+					)
+				</if>
+				<if test="deviceId != null">
+					and d.device_id = #{deviceId}
+				</if>
+				<if test="keywords != null">
+					<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+			 			Concat(a.username,
+			 			IFNULL(a.merchant_name, ''),
+						IFNULL(d.name,'')) like '%' #{item} '%'
+					</foreach>
+				</if>
+			GROUP BY d.device_id
+		) as t ORDER BY t.traffic DESC
+		limit 0, #{limit}
+	</select>
+	
+	
+	<select id="getUserCountOfDevice" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select count(*) from 
+			(SELECT distinct tu.id
+			from terminal_user_authentication_log as tual,
+				terminal_user as tu,
+				device as d, 
+				location as l, 
+				account as a
+			where tual.device_id=d.device_id
+				and d.location_id=l.id
+				and l.account_id=a.id
+				and tual.terminal_user_id=tu.id
+				and d.device_id = #{deviceId}
+				<if test="status != null">
+					and tual.status = #{status}
+				</if>
+				<if test="dataType == 'curent'.toString()">
+					and tual.create_datetime > ADDDATE(now(), interval -1 day)
+				</if>
+				group by tu.id ) as t
+	</select>  
+	
+	<select id="getAuthStatis" parameterType="java.util.Map" resultType="java.util.Map">
+	  	SELECT hour(tual.create_datetime) as hour, count(tual.id) as count 
+		from terminal_user_authentication_log as tual,
+			device as d,
+			location as l,
+			account as a 
+		where tual.device_id=d.device_id
+			and d.location_id=l.id
+			and l.account_id=a.id
+			<if test="date != null">
+				and date_format(tual.create_datetime, '%Y-%m-%d') = #{date}
+			</if>
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="accountId == null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="deviceId != null">
+				d.divice_id = #{deviceId}
+			</if>
+			<if test="keywords != null">
+					<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+			 			Concat(a.username,
+			 			IFNULL(a.merchant_name, ''),
+						IFNULL(d.name,'')) like '%' #{item} '%'
+					</foreach>
+				</if>
+		GROUP BY hour(tual.create_datetime)
+  	</select>
+  	
+  	<select id="getAuthPoint" parameterType="java.util.Map" resultType="java.lang.Long">
+	  	SELECT count(tual.id) as count from 
+			terminal_user_authentication_log as tual,
+			device as d,
+			portal_display_policy as pdp,
+			portal_site as ps,
+			location as l,
+			account as a
+		where 
+			tual.device_id=d.device_id
+			and pdp.device_ids like CONCAT('%"', tual.device_id, '"%')
+			and pdp.device_ids like CONCAT('%"', d.device_id, '"%')
+			and pdp.display_items like CONCAT('%"siteid":"', ps.id, '"%')
+			and d.location_id=l.id
+			and l.account_id=a.id
+			<if test="date != null">
+				and date_format(pl.create_datetime, '%Y-%m-%d %H') = #{date}
+			</if>
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="totalParentId != null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="deviceId != null">
+				d.divice_id = #{deviceId}
+			</if>
+			<if test="portalSiteId != null" >
+			  and s.id = #{portalSiteId,jdbcType=BIGINT}
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">
+		 			Concat(a.username,
+		 			IFNULL(a.merchant_name, ''),
+					IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+  	</select>
+  	
+  	<select id="getClickCountBySiteId" parameterType="java.util.Map" resultType="java.lang.Long">
+	  	SELECT count(tual.id) as count from 
+			terminal_user_authentication_log as tual,
+			device as d,
+			portal_display_policy as pdp,
+			portal_site as ps,
+			location as l,
+			account as a
+		where 
+			tual.device_id=d.device_id
+			and pdp.device_ids like CONCAT('%"', tual.device_id, '"%')
+			and pdp.device_ids like CONCAT('%"', d.device_id, '"%')
+			and pdp.display_items like CONCAT('%"siteid":"', ps.id, '"%')
+			and d.location_id=l.id
+			and l.account_id=a.id
+			<if test="date != null">
+				and date_format(tual.create_datetime, '%Y-%m-%d') = #{date}
+			</if>
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="totalParentId != null">
+				and a.parent_ids like Concat('%"', #{totalParentId}, '"%')
+			</if>
+			<if test="deviceId != null">
+				d.divice_id = #{deviceId}
+			</if>
+			<if test="portalSiteId != null" >
+			  and ps.id = #{portalSiteId,jdbcType=BIGINT}
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		 			Concat(a.username,
+		 			IFNULL(a.merchant_name, ''),
+					IFNULL(d.name,'')) like '%' #{item} '%'
+				</foreach>
+			</if>
+  	</select>
+  	
+	<select id="terminalUserAuthLog_getUserAuthLog" parameterType="java.util.Map" resultMap="ResultMapWithMac">
+  		SELECT 
+  			tual.*,
+  			tu.mac,
+  			s.content,
+  			s.cellphone
+  		FROM 
+  			terminal_user_authentication_log as tual,
+  			terminal_user as tu,
+  			sms as s
+		WHERE 
+			tu.id = tual.terminal_user_id 
+			and tual.id = s.terminal_user_authentication_log_id
+    		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(tu.MAC, '')) like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+    		<if test="startDate != null">
+				<![CDATA[ and tual.offline_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and tual.offline_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+		ORDER BY 
+			tual.offline_datetime DESC
+		LIMIT 
+			#{page.begin},#{page.pageSize}
+	</select>
+  
+    <select id="getLastAuthLogByUserIdDevId" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+	    select
+	    <include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" />
+	    from terminal_user_authentication_log
+	    where 1=1
+        <if test="userId != null">
+          and terminal_user_id = #{userId,jdbcType=BIGINT}
+        </if>
+	    <if test="deviceId != null">
+	    	and device_id = #{deviceId,jdbcType=BIGINT}
+	    </if>
+	    order by id desc
+	    LIMIT 1
+    </select>
+    
+    <select id="getAuthLogByToken" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+    	select  
+    	<include refid="Base_Column_List" />
+	    ,
+	    <include refid="Blob_Column_List" /> from terminal_user_authentication_log
+    	where device_id=#{deviceId}
+    	and token=#{token}
+    </select>
+    
+    <update id="updateAuthLogStatus" parameterType="java.util.Map">
+    	update terminal_user_authentication_log 
+    	set status=#{status}, offline_datetime=now()
+    	where id=#{authLogId,jdbcType=VARCHAR}
+    </update>
+    
+    <select id="getUserInfo" parameterType="java.util.Map" resultType="java.util.Map">
+        select tual.terminal_mac as mac, tu.auth_id as cell_number
+        from terminal_user_authentication_log as tual
+            left join terminal_user as tu on tu.id = tual.terminal_user_id
+            left join radius_virtual_device as rad on rad.device_id = tual.device_id
+          where 1 = 1
+			and rad.wlanacname = #{wlanacname,jdbcType=VARCHAR}
+			and LENGTH(tu.auth_id)=11
+            and tual.terminal_mac is not null
+	    	<if test="authType != null">
+	    		and tu.auth_type in
+				<foreach item="item" index="index" collection="authType" open=" (" separator="," close=")">
+		 			#{item}
+				</foreach>
+			</if>
+			<if test="startDate != null">
+				<![CDATA[ and tual.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and tual.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+        group by tual.terminal_mac, tu.auth_id
+        order by tual.id desc;
+    </select>
+
+    <select id="findUserInfo" parameterType="java.util.Map"  resultType="java.util.Map">
+        select tu.auth_id as cell_number, tual.terminal_mac as mac
+          from terminal_user_authentication_log as tual
+        left join terminal_user as tu on tu.id=tual.terminal_user_id
+    	where LENGTH(auth_id)=11
+        and tual.terminal_mac is not null
+    	<if test="authType != null">
+    		and tu.auth_type
+			<foreach item="item" index="index" collection="authType" open="in (" separator="," close=")">
+	 			#{item}
+			</foreach>
+		</if>
+    	and tual.terminal_mac in
+		<foreach item="item" index="index" collection="mac" open="(" separator="," close=")">
+ 			#{item}
+		</foreach>
+        group by tual.terminal_mac, tu.auth_id
+        order by tual.id desc;
+    </select>
+    
+    <select id="getOneDayUsers" parameterType="java.util.Map" resultType="java.util.HashMap">
+	    select hour,count(*) as user_count from(
+	    	select HOUR(tual.create_datetime) as hour,count(tual.terminal_user_id) as user_count
+       			from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user as tu, terminal_user_has_device as tuhd
+       			where  tual.terminal_user_id=tuhd.terminal_user_id
+			 	and tuhd.device_id=tual.device_id
+       			and	tual.device_id=d.device_id
+       			and d.location_id=l.id
+       			and l.account_id=a.id
+       			<![CDATA[ and tual.create_datetime >= #{date} ]]>
+       			<![CDATA[ and tual.create_datetime < #{oneDayEnd} ]]>
+       			<if test="accountId != null">
+				and a.id = #{accountId}
+				</if>
+				<if test="status != null">
+				and tuhd.status=#{status}
+			   </if>
+       			group by hour,tual.terminal_user_id) as t
+       	group by t.hour;
+    </select>
+    
+    <select id="getOneDayNewUsers" parameterType="java.util.Map" resultType="java.util.Map">
+    	select hour,count(*) as user_count 
+		from(select HOUR(tual.create_datetime) as hour,count(HOUR(tual.create_datetime))as user_count
+		       from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user as tu, terminal_user_has_device as tuhd
+		       where  tual.terminal_user_id=tuhd.terminal_user_id
+			   and tuhd.device_id=tual.device_id
+		       and tual.device_id=d.device_id
+		       and d.location_id=l.id
+		       and l.account_id=a.id
+		       and tual.terminal_user_id=tu.id
+		       <![CDATA[ and tual.create_datetime >= #{date} ]]>
+       		   <![CDATA[ and tual.create_datetime < #{oneDayEnd} ]]> 
+       		   <![CDATA[ and tu.create_datetime >= #{date} ]]>
+       		   <![CDATA[ and tu.create_datetime < #{oneDayEnd} ]]> 
+		       <if test="accountId != null">
+				and a.id = #{accountId}
+				</if>
+				<if test="status != null">
+				and tuhd.status=#{status}
+			   </if>
+		       group by hour,tual.terminal_user_id) as t
+		group by t.hour;
+    </select>
+    
+    <select id="getOneDayOldUsers" parameterType="java.util.Map" resultType="java.util.Map">
+    	select hour,count(*) as user_count 
+		from(select HOUR(tual.create_datetime) as hour,count(HOUR(tual.create_datetime))as user_count
+		       from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user as tu, terminal_user_has_device as tuhd
+		       where  tual.terminal_user_id=tuhd.terminal_user_id
+			   and tuhd.device_id=tual.device_id
+		       and tual.device_id=d.device_id
+		       and d.location_id=l.id
+		       and l.account_id=a.id
+		       and tual.terminal_user_id=tu.id
+		       <![CDATA[ and tual.create_datetime >= #{date} ]]>
+       		   <![CDATA[ and tual.create_datetime < #{oneDayEnd} ]]> 
+       		   <![CDATA[ and tu.create_datetime < #{date} ]]>
+		       <if test="accountId != null">
+				and a.id = #{accountId}
+				</if>
+				<if test="status != null">
+				and tuhd.status=#{status}
+			   </if>
+		       group by hour,tual.terminal_user_id) as t
+		group by t.hour;
+    </select>
+    
+    <select id="getHistoryUsers" parameterType="java.util.Map" resultType="java.util.Map">
+    	select riqi,count(*) as user_count
+		 from(
+		      select date_format(tual.create_datetime, '%Y-%m-%d') as riqi,count(date_format(tual.create_datetime, '%Y-%m-%d')) as user_count
+		       from terminal_user_authentication_log as tual, device as d, location as l, account as a, terminal_user_has_device as tuhd
+		       where tual.terminal_user_id=tuhd.terminal_user_id
+			   and   tuhd.device_id=tual.device_id
+		       and	 tual.device_id=d.device_id
+		       and   d.location_id=l.id
+		       and   l.account_id=a.id      
+		       <if test="startDate != null">
+				<![CDATA[ and tual.create_datetime >= #{startDate} ]]>
+			   </if>
+ 			   <if test="endDate != null">
+				<![CDATA[ and tual.create_datetime < #{endDate} ]]>
+			   </if>
+		       <if test="accountId != null">
+				and a.id = #{accountId}
+				</if>
+				<if test="status != null">
+				and tuhd.status=#{status}
+			   </if>
+		       group by riqi,tual.terminal_user_id) as t
+		 group by t.riqi;
+    </select>
+    
+    <select id="getHistoryNewUsers" parameterType="java.util.Map" resultType="java.util.Map">
+	    select riqi,count(*) as user_count from(
+	      	select date_format(tual.create_datetime, '%Y-%m-%d') as riqi,count(tual.terminal_user_id)as num
+	      	from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user as tu,terminal_user_has_device as tuhd
+	      	where tual.terminal_user_id=tuhd.terminal_user_id
+			and   tuhd.device_id=tual.device_id
+	      	and	  tual.device_id=d.device_id
+	      	and   d.location_id=l.id
+	      	and   l.account_id=a.id
+	      	and   tual.terminal_user_id=tu.id
+	      	<if test="startDate != null">
+				<![CDATA[ and tual.create_datetime >= #{startDate} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and tual.create_datetime <= #{endDate}]]>
+			</if> 
+	      	and date_format(tual.create_datetime, '%Y-%m-%d') = date_format(tu.create_datetime, '%Y-%m-%d')
+	      	<if test="accountId != null">
+			and a.id = #{accountId}
+			</if>
+			<if test="status != null">
+			and tuhd.status=#{status}
+			</if>
+	      	group by riqi,tual.terminal_user_id ) as temp
+		group by temp.riqi;
+    </select>
+    
+    <select id="getHistoryOldUsers" parameterType="java.util.Map" resultType="java.util.Map">
+	    select riqi,count(*) as user_count from(
+	      	select date_format(tual.create_datetime, '%Y-%m-%d') as riqi,count(tual.terminal_user_id)as num
+	      	from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user as tu,terminal_user_has_device as tuhd
+	      	where tual.terminal_user_id=tuhd.terminal_user_id
+			and   tuhd.device_id=tual.device_id
+	      	and	  tual.device_id=d.device_id
+	      	and   d.location_id=l.id
+	      	and   l.account_id=a.id
+	      	and   tual.terminal_user_id=tu.id
+	      	<if test="startDate != null">
+				<![CDATA[ and tual.create_datetime >= #{startDate} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and tual.create_datetime <= #{endDate} ]]>
+			</if> 
+	      	and date_format(tual.create_datetime, '%Y-%m-%d') != date_format(tu.create_datetime, '%Y-%m-%d')
+	      	<if test="accountId != null">
+			and a.id = #{accountId}
+			</if>
+			<if test="status != null">
+			and tuhd.status=#{status}
+			</if>
+	      	group by riqi,tual.terminal_user_id ) as temp
+		group by temp.riqi;
+    </select>
+    
+    <select id="getAllApUsers" parameterType="java.util.Map" resultType="java.util.Map">
+    	SELECT tuhd.device_id as id,d.name as name, count(*) as count
+		from terminal_user_has_device as tuhd, device as d, location as l
+		where tuhd.device_id=d.device_id
+		and d.location_id=l.id
+		<if test="accountId != null">
+		and l.account_id = #{accountId}
+		</if>
+		<if test="status != null">
+		and tuhd.status=#{status}
+		</if>
+		GROUP BY tuhd.device_id;
+    </select>
+    
+    <select id="getApUsers" parameterType="java.util.Map" resultType="java.util.Map">
+    	select count(*) as count,device_id as id ,name
+		from( 
+		      select tual.device_id as device_id,d.name as name,tual.terminal_user_id,date_format(tual.create_datetime, '%Y-%m-%d') as riqi
+		       from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user tu,terminal_user_has_device tuhd
+		       where tual.terminal_user_id=tu.id
+		       and   tu.id=tuhd.terminal_user_id
+		       and   tuhd.device_id=d.device_id
+		       and   d.location_id=l.id
+		       and   l.account_id=a.id
+		       <if test="startDate != null">
+				<![CDATA[ and tual.create_datetime >= #{startDate} ]]>
+				</if>
+	 			<if test="endDate != null">
+				<![CDATA[ and tual.create_datetime < #{endDate} ]]>
+				</if> 
+		      	<if test="accountId != null">
+				and a.id = #{accountId}
+				</if>
+				<if test="status != null">
+				and tuhd.status=#{status}
+			   </if>
+		       group by tual.device_id,tual.terminal_user_id,riqi)as tem 
+		group by tem.device_id;
+    </select>
+    
+    <select id="getApNewUsers" parameterType="java.util.Map" resultType="java.util.Map">
+    	select count(*) as count,device_id as id ,name
+		from( 
+		      select tual.device_id as device_id,d.name as name,tual.terminal_user_id,date_format(tual.create_datetime, '%Y-%m-%d') as riqi
+		       from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user tu,terminal_user_has_device tuhd
+		       where tual.terminal_user_id=tu.id
+		       and   tu.id=tuhd.terminal_user_id
+		       and   tuhd.device_id=d.device_id
+		       and   d.location_id=l.id
+		       and   l.account_id=a.id
+		        <if test="startDate != null">
+				<![CDATA[ and tual.create_datetime >= #{startDate}]]>
+				</if>
+	 			<if test="endDate != null">
+				<![CDATA[ and tual.create_datetime < #{endDate}]]>
+				</if> 
+				and date_format(tual.create_datetime, '%Y-%m-%d')=date_format(tu.create_datetime, '%Y-%m-%d')
+		      	<if test="accountId != null">
+				and a.id = #{accountId}
+				</if>
+				<if test="status != null">
+				and tuhd.status=#{status}
+			   </if>
+		       group by tual.device_id,riqi,tual.device_id,tual.terminal_user_id)as tem 
+		group by tem.device_id;
+    </select>
+    
+    <select id="getApOldUsers" parameterType="java.util.Map" resultType="java.util.Map">
+    	select count(*) as count,device_id as id,name 
+		from( 
+		      select tual.device_id as device_id,d.name as name,tual.terminal_user_id,date_format(tual.create_datetime, '%Y-%m-%d') as riqi
+		       from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user tu,terminal_user_has_device tuhd
+		       where tual.terminal_user_id=tu.id
+		       and   tu.id=tuhd.terminal_user_id
+		       and   tuhd.device_id=d.device_id
+		       and   d.location_id=l.id
+		       and   l.account_id=a.id
+		        <if test="startDate != null">
+				<![CDATA[ and tual.create_datetime >= #{startDate}]]>
+				</if>
+	 			<if test="endDate != null">
+				<![CDATA[ and tual.create_datetime < #{endDate}]]>
+				</if> 
+				and date_format(tual.create_datetime, '%Y-%m-%d')!=date_format(tu.create_datetime, '%Y-%m-%d')
+		      	<if test="accountId != null">
+				and a.id = #{accountId}
+				</if>
+				<if test="status != null">
+				and tuhd.status=#{status}
+			   </if>
+		       group by tual.device_id,riqi,tual.terminal_user_id)as tem 
+		group by tem.device_id;
+    </select>
+    
+    <select id="getUserStatusStatistics" parameterType="java.lang.Long" resultType="java.util.Map">
+    	SELECT status, count(1) as countnum from (
+			SELECT MAX(tual.create_datetime) as create_datetime, tual.status, tu.mac 
+			from terminal_user_authentication_log as tual, 
+				terminal_user as tu,
+				device as d,
+				location as l,
+				account as a
+			where tual.terminal_user_id = tu.id
+				and tual.device_id=d.device_id
+				and d.location_id = l.id
+				and l.account_id = a.id
+				and a.id = #{accountId}
+				GROUP BY tual.terminal_user_id
+		) as t
+		GROUP BY t.status;
+    </select>
+    
+    <select id="getNewUserNumStatistics" parameterType="java.util.Map" resultType="java.lang.Long">
+    	select count(1)  from( 
+		  select tual.terminal_user_id
+		  from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user as tu,terminal_user_has_device as tuhd
+		  where tual.terminal_user_id=tuhd.terminal_user_id
+		  and   tuhd.device_id=tual.device_id
+		  and   tual.device_id=d.device_id
+		  and   d.location_id=l.id
+		  and   l.account_id=a.id
+		  and   tual.terminal_user_id=tu.id
+		  <![CDATA[ and tual.create_datetime >= #{date} ]]>
+       	  <![CDATA[ and tual.create_datetime < #{oneDayEnd} ]]> 
+       	  <![CDATA[ and tu.create_datetime >= #{date} ]]>
+       	  <![CDATA[ and tu.create_datetime < #{oneDayEnd} ]]> 
+		  and   a.id=#{accountId}
+		  and tuhd.status=#{status}
+		  group by tual.terminal_user_id) t
+    </select>
+    
+    <select id="getTodayUserCount" parameterType="java.util.Map" resultType="java.lang.Long">
+    	select count(1) from( 
+		  select tual.terminal_user_id
+		  from terminal_user_authentication_log as tual, device as d, location as l, account as a,terminal_user as tu,terminal_user_has_device as tuhd
+		  where tual.terminal_user_id=tuhd.terminal_user_id
+		  and   tuhd.device_id=tual.device_id
+		  and   tual.device_id=d.device_id
+		  and   d.location_id=l.id
+		  and   l.account_id=a.id
+		  and   tual.terminal_user_id=tu.id
+		  <![CDATA[ and tual.create_datetime >= #{date} ]]>
+       	  <![CDATA[ and tual.create_datetime < #{oneDayEnd} ]]> 
+		  and   a.id=#{accountId}
+		  and tuhd.status=#{status}
+		  group by tual.terminal_user_id) t
+    </select>
+   
+   <select id="getUserInfoByMac" parameterType="java.util.Map" resultType="java.util.Map">
+     SELECT
+       IFNULL(tual.terminal_mac, '') AS terminal_mac,
+	   IFNULL(tu.auth_id, '') AS auth_id,
+       IFNULL(tual.auth_type, '') AS auth_type,
+       IFNULL(tual.status, '') AS status,
+       count(tu.auth_id) as authCount
+     FROM
+       terminal_user_authentication_log AS tual,
+       terminal_user AS tu
+     WHERE
+       tual.terminal_user_id = tu.id AND
+       tual.terminal_mac = #{terminalMac}
+     GROUP BY
+	   tu.auth_id,
+       tual.auth_type;
+   </select>
+   
+   <select id="getUserMacByUserId" parameterType="java.lang.Long" resultType="java.lang.String">
+   		select 
+       		DISTINCT terminal_mac
+		from
+		    terminal_user_authentication_log
+		where
+   			terminal_user_id = #{terminalUserId}
+   		and
+   			terminal_mac != ''
+   </select>
+   
+   <select id="selectByTerminalUserId" parameterType="java.lang.Long" resultType = "java.util.Map">
+		select
+		    max(create_datetime) as last_login_time,
+		    min(create_datetime) as first_login_time
+		from
+	    	terminal_user_authentication_log
+		where
+		     terminal_user_id = #{terminalUserId}
+	</select>
+</mapper>

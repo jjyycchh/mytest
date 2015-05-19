@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.OrgProducedDevicesMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.OrgProducedDevices" >
+    <result column="id" property="id" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="frameware_version" property="framewareVersion" jdbcType="VARCHAR" />
+    <result column="component_version" property="componentVersion" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="pin_code" property="pinCode" jdbcType="VARCHAR" />
+    <result column="config_items" property="configItems" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <insert id="insert" parameterType="com.access.model.device.OrgProducedDevices" >
+    insert into org_produced_devices (id, brand, model, 
+      frameware_version, component_version, mac, 
+      pin_code, config_items, province, 
+      city, county, create_datetime
+      )
+    values (#{id,jdbcType=VARCHAR}, #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{framewareVersion,jdbcType=VARCHAR}, #{componentVersion,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{pinCode,jdbcType=VARCHAR}, #{configItems,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.OrgProducedDevices" >
+    insert into org_produced_devices
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="framewareVersion != null" >
+        frameware_version,
+      </if>
+      <if test="componentVersion != null" >
+        component_version,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="pinCode != null" >
+        pin_code,
+      </if>
+      <if test="configItems != null" >
+        config_items,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="framewareVersion != null" >
+        #{framewareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="componentVersion != null" >
+        #{componentVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="pinCode != null" >
+        #{pinCode,jdbcType=VARCHAR},
+      </if>
+      <if test="configItems != null" >
+        #{configItems,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+</mapper>

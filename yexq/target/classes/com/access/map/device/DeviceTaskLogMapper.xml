@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.DeviceTaskLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.DeviceTaskLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="is_success" property="isSuccess" jdbcType="BIT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.device.DeviceTaskLogWithBLOBs" extends="BaseResultMap" >
+    <result column="command" property="command" jdbcType="LONGVARCHAR" />
+    <result column="result_description" property="resultDescription" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, is_success, create_datetime, device_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    command, result_description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from device_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from device_task_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.DeviceTaskLogWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into device_task_log (id, is_success, create_datetime, 
+      device_id, command, result_description
+      )
+    values (#{id,jdbcType=BIGINT}, #{isSuccess,jdbcType=BIT}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{deviceId,jdbcType=VARCHAR}, #{command,jdbcType=LONGVARCHAR}, #{resultDescription,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.DeviceTaskLogWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into device_task_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="isSuccess != null" >
+        is_success,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="command != null" >
+        command,
+      </if>
+      <if test="resultDescription != null" >
+        result_description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="isSuccess != null" >
+        #{isSuccess,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null" >
+        #{command,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resultDescription != null" >
+        #{resultDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.DeviceTaskLogWithBLOBs" >
+    update device_task_log
+    <set >
+      <if test="isSuccess != null" >
+        is_success = #{isSuccess,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="command != null" >
+        command = #{command,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="resultDescription != null" >
+        result_description = #{resultDescription,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.device.DeviceTaskLogWithBLOBs" >
+    update device_task_log
+    set is_success = #{isSuccess,jdbcType=BIT},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      command = #{command,jdbcType=LONGVARCHAR},
+      result_description = #{resultDescription,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.DeviceTaskLog" >
+    update device_task_log
+    set is_success = #{isSuccess,jdbcType=BIT},
+      device_id = #{deviceId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="deviceTaskLog_getDeviceTaskLogPage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	SELECT
+      device_task_log.id,
+      device_task_log.command,
+      IFNULL(device_task_log.result_description, '') AS resultDescription,
+      IFNULL(device_task_log.is_success, '') AS isSuccess,
+      device_task_log.create_datetime,
+      device_task_log.device_id
+    FROM
+      device_task_log
+    WHERE
+      1 = 1
+      <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(command, ''),
+		      IFNULL(device_task_log.result_description, ''),
+              IFNULL(device_task_log.device_id, '')) LIKE Concat('%', #{item}, '%')
+		</foreach>
+      </if>
+      <if test="startDate != null">
+		<![CDATA[ AND device_task_log.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+ 	  <if test="endDate != null">
+		<![CDATA[ AND device_task_log.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+	  <if test="isSuccess != null">
+		AND device_task_log.is_success = #{isSuccess, jdbcType=BIT}
+	  </if>
+	ORDER BY
+	  device_task_log.create_datetime DESC
+	LIMIT
+	  #{page.begin},#{page.pageSize}
+  </select>
+</mapper>

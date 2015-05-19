@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.FitApVirtualDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.FitApVirtualDevice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ssid" property="ssid" jdbcType="VARCHAR" />
+    <result column="ac_device_id" property="acDeviceId" jdbcType="VARCHAR" />
+    <result column="ap_mac" property="apMac" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithRadius" type="com.access.model.device.FitApVirtualDevice" extends="BaseResultMap">
+    <result column="wlanacname" property="wlanacname" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, ssid, ac_device_id, ap_mac, device_id, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from fit_ap_virtual_device
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from fit_ap_virtual_device
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.FitApVirtualDevice" >
+    insert into fit_ap_virtual_device (id, ssid, ac_device_id, 
+      ap_mac, device_id, create_datetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{ssid,jdbcType=VARCHAR}, #{acDeviceId,jdbcType=VARCHAR}, 
+      #{apMac,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, #{createDatetime,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.FitApVirtualDevice" >
+    insert into fit_ap_virtual_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="ssid != null" >
+        ssid,
+      </if>
+      <if test="acDeviceId != null" >
+        ac_device_id,
+      </if>
+      <if test="apMac != null" >
+        ap_mac,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ssid != null" >
+        #{ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="acDeviceId != null" >
+        #{acDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="apMac != null" >
+        #{apMac,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.FitApVirtualDevice" >
+    update fit_ap_virtual_device
+    <set >
+      <if test="ssid != null" >
+        ssid = #{ssid,jdbcType=VARCHAR},
+      </if>
+      <if test="acDeviceId != null" >
+        ac_device_id = #{acDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="apMac != null" >
+        ap_mac = #{apMac,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.FitApVirtualDevice" >
+    update fit_ap_virtual_device
+    set ssid = #{ssid,jdbcType=VARCHAR},
+      ac_device_id = #{acDeviceId,jdbcType=VARCHAR},
+      ap_mac = #{apMac,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getFitApBySsid" parameterType="com.access.model.device.FitApVirtualDevice" resultType= "com.access.model.device.FitApVirtualDevice">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      fit_ap_virtual_device
+    WHERE
+      ssid = #{ssid, jdbcType=VARCHAR} AND
+      ac_device_id = #{acDeviceId, jdbcType=VARCHAR} AND
+      ap_mac = #{apMac, jdbcType=VARCHAR}
+    LIMIT
+      1
+  </select>
+  
+  <select id="fitApVirtualDevice_getFitApDevicePage" parameterType="java.util.Map" resultMap="ResultMapWithRadius">
+    SELECT
+      fit_ap_virtual_device.id,
+      fit_ap_virtual_device.ssid,
+      fit_ap_virtual_device.ac_device_id,
+      fit_ap_virtual_device.ap_mac,
+      fit_ap_virtual_device.device_id,
+      fit_ap_virtual_device.create_datetime,
+      radius_virtual_device.wlanacname
+    FROM
+      fit_ap_virtual_device,
+      radius_virtual_device
+    WHERE
+      fit_ap_virtual_device.ac_device_id = radius_virtual_device.device_id
+      <if test="keywords != null">
+        <foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+          Concat(IFNULL(fit_ap_virtual_device.ssid, ''), 
+              IFNULL(fit_ap_virtual_device.ac_device_id, ''),
+              IFNULL(fit_ap_virtual_device.ap_mac, ''),
+              IFNULL(fit_ap_virtual_device.device_id, ''))
+              LIKE Concat('%', #{item}, '%')
+        </foreach>
+      </if>
+      <if test="startDate != null">
+        <![CDATA[ and fit_ap_virtual_device.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="endDate != null">
+        <![CDATA[ and fit_ap_virtual_device.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+    ORDER BY
+      fit_ap_virtual_device.id DESC
+    LIMIT
+      #{page.begin},#{page.pageSize}
+  </select>
+  
+  <update id="updateByDeviceId" parameterType="com.access.model.device.FitApVirtualDevice">
+    UPDATE
+      fit_ap_virtual_device
+    SET
+      ssid = #{ssid, jdbcType=VARCHAR},
+      ac_device_id = #{acDeviceId, jdbcType=VARCHAR},
+      ap_mac = #{apMac, jdbcType=VARCHAR}
+    WHERE
+      device_id = #{deviceId, jdbcType=VARCHAR}
+  </update>
+</mapper>

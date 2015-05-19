@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/**
+ *
+ *
+ *
+**/
+.ChinaNet-Free-Body .App_list {overflow:hidden;padding:3px;margin-top:10px}
+.ChinaNet-Free-Body .App_list .App-list-Body {border:1px solid #efefef;overflow:hidden;margin-bottom:10px;width:100%;position:relative;}
+.ChinaNet-Free-Body .App_list .App-list-Body .App-Thumb {height:100px;width:100px;float:left;margin-right:15px;}
+.ChinaNet-Free-Body .App_list .App-list-Body .App-Thumb img {width:80px;margin:10px}
+.ChinaNet-Free-Body .App_list .App-list-Body .App-list-Data {float:left;overflow:hidden;}
+.ChinaNet-Free-Body .App_list .App-list-Body .App-Button{position: absolute;left:10%;width:88%;padding-top:10px;}
+.ChinaNet-Free-Body .App_list .App-list-Body .App-content {position: absolute;top: 0;left: 8%;display: block;float: left;padding: 4.5% 2%;overflow-y: auto;font:bold 12px/24px "Microsoft YaHei","ARIAL","宋体";color:#666;width:75%}
+.ChinaNet-Free-Body .App_list .App-list-Body  span {font:12px/16px "Microsoft YaHei","ARIAL","宋体";color:#999;display:block;}
+.ChinaNet-Free-Body .App_list .App-list-Body  span.Data-Name {font:bold 14px/24px "Microsoft YaHei","ARIAL","宋体";color:#333;}
+.ChinaNet-Free-Body .App_list .App-list-Body  span.Data-phone {font:bold 12px/24px "Microsoft YaHei","ARIAL","宋体";color:#666;}
+.ChinaNet-Free-Body .App_list a {color: #006f59;font: bold 12px/18px "Microsoft YaHei","ARIAL","宋体";}
+.ChinaNet-Free-Body .App_list a.Action-Primary {
+    background: url("../img/input-textarea.png") repeat scroll -10px -160px rgba(0, 0, 0, 0);
+    color: #fff;
+    display: inline-block;
+    font: 12px/40px "Microsoft YaHei","ARIAL","宋体";
+    overflow: hidden;
+    padding: 0 15px;
+    margin-left: 5px;
+}
+.ChinaNet-Free-Body .App_list a.Action-Primary:hover {
+    background: url("../img/input-textarea.png") repeat scroll -10px -200px rgba(0, 0, 0, 0);
+}
+.ChinaNet-Free-Body .App_list a.Action-disable {
+    background: url("../img/input-textarea.png") repeat scroll -10px -320px rgba(0, 0, 0, 0);
+    color: #fff;
+    display: inline-block;
+    font: 12px/40px "Microsoft YaHei","ARIAL","宋体";
+    overflow: hidden;
+    padding: 0 15px;
+    margin-left: 5px;
+}
+.ChinaNet-Free-Body .App_list a.Action-disable:hover {
+    background: url("../img/input-textarea.png") repeat scroll -10px -360px rgba(0, 0, 0, 0);
+}
+.ChinaNet-Free-Body .App_list a.Action-wrang {
+    background: url("../img/input-textarea.png") repeat scroll -10px -240px rgba(0, 0, 0, 0);
+    color: #fff;
+    display: inline-block;
+    font: 12px/40px "Microsoft YaHei","ARIAL","宋体";
+    overflow: hidden;
+    padding: 0 15px;
+    margin-left: 5px;
+}
+.ChinaNet-Free-Body .App_list a.Action-wrang:hover {
+    background: url("../img/input-textarea.png") repeat scroll -10px -280px rgba(0, 0, 0, 0);
+}

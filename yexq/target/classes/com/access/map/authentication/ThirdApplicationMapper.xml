@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.authentication.ThirdApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.authentication.ThirdApplication" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="app_id" property="appId" jdbcType="VARCHAR" />
+    <result column="app_key" property="appKey" jdbcType="VARCHAR" />
+    <result column="thumb_path" property="thumbPath" jdbcType="VARCHAR" />
+    <result column="interface_url" property="interfaceUrl" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="type_id" property="typeId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithMerchant" type="com.access.model.authentication.ThirdApplication" extends="BaseResultMap">
+    <result column="merchant_status" property="merchantStatus" jdbcType="VARCHAR" />
+    <result column="merchant_create_datetime" property="merchantCreateDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, description, app_id, app_key, thumb_path, interface_url, url, create_datetime, 
+    version, phone, status, type_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from third_application
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from third_application
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.authentication.ThirdApplication" >
+    insert into third_application (id, name, description, 
+      app_id, app_key, thumb_path, 
+      interface_url, url, create_datetime, 
+      version, phone, status, 
+      type_id)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{appId,jdbcType=VARCHAR}, #{appKey,jdbcType=VARCHAR}, #{thumbPath,jdbcType=VARCHAR}, 
+      #{interfaceUrl,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{version,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{typeId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.authentication.ThirdApplication" >
+    insert into third_application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="appId != null" >
+        app_id,
+      </if>
+      <if test="appKey != null" >
+        app_key,
+      </if>
+      <if test="thumbPath != null" >
+        thumb_path,
+      </if>
+      <if test="interfaceUrl != null" >
+        interface_url,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="typeId != null" >
+        type_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null" >
+        #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbPath != null" >
+        #{thumbPath,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null" >
+        #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        #{typeId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.authentication.ThirdApplication" >
+    update third_application
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="appId != null" >
+        app_id = #{appId,jdbcType=VARCHAR},
+      </if>
+      <if test="appKey != null" >
+        app_key = #{appKey,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbPath != null" >
+        thumb_path = #{thumbPath,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null" >
+        interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="typeId != null" >
+        type_id = #{typeId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.authentication.ThirdApplication" >
+    update third_application
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      app_id = #{appId,jdbcType=VARCHAR},
+      app_key = #{appKey,jdbcType=VARCHAR},
+      thumb_path = #{thumbPath,jdbcType=VARCHAR},
+      interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      type_id = #{typeId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getThirdApplicationByName" parameterType="java.util.Map" resultType="com.access.model.authentication.ThirdApplication">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      third_application
+    WHERE
+      third_application.name = #{name,jdbcType=VARCHAR} AND
+      third_application.version = #{version,jdbcType=VARCHAR}
+    LIMIT
+      1
+  </select>
+  
+  <select id="thirdApplication_getThirdApplication" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+      third_application.id,
+      third_application.name,
+      third_application.version,
+      third_application.url,
+      third_application.interface_url,
+      third_application.app_id,
+      third_application.app_key,
+      third_application.create_datetime,
+      third_application.phone,
+      third_application.status,
+      IFNULL(third_application.type_id, '') AS typeId,
+      IFNULL(third_application.thumb_path, '') AS thumbPath,
+      IFNULL(third_application.description, '') AS description
+    FROM
+      third_application
+    WHERE
+      1 = 1
+      <if test="keywords != null">
+		<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	  	  Concat(IFNULL(third_application.name, ''),
+		      IFNULL(third_application.version,'')) LIKE Concat('%', #{item}, '%')
+ 		</foreach>
+  	  </if>
+  	  <if test="startDate != null">
+	    <![CDATA[ and third_application.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+ 	  <if test="endDate != null">
+		<![CDATA[ and third_application.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+    ORDER BY
+      third_application.id DESC
+    LIMIT
+      #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="getThirdApplicationByAppId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      third_application
+    WHERE
+      third_application.app_id = #{appId, jdbcType=VARCHAR}
+    LIMIT
+      1
+  </select>
+  
+  <select id="thirdApplication_getMerchantThirdApplication" parameterType="java.util.Map" resultMap="ResultMapWithMerchant">
+    SELECT
+      *
+    FROM (
+      SELECT
+        third_application.id,
+        third_application.name,
+        third_application.version,
+        third_application.url,
+        third_application.interface_url,
+        third_application.create_datetime,
+        IFNULL(third_application.thumb_path, '') AS thumbPath,
+        IFNULL(third_application.description, '') AS description,
+        third_application.phone,
+        third_application.status,
+        IFNULL(merchant_has_third_application.status, '') AS merchant_status,
+        IFNULL(merchant_has_third_application.create_datetime, '') AS merchant_create_datetime
+      FROM
+        third_application,
+        merchant_has_third_application
+      WHERE
+        third_application.id = merchant_has_third_application.third_app_id AND
+        merchant_has_third_application.account_id = #{accountId, jdbcType=BIGINT}
+      UNION
+      SELECT
+        third_application.id,
+        third_application.name,
+        third_application.version,
+        third_application.url,
+        third_application.interface_url,
+        third_application.create_datetime,
+        IFNULL(third_application.thumb_path, '') AS thumbPath,
+        IFNULL(third_application.description, '') AS description,
+        third_application.phone,
+        third_application.status,
+        null AS merchant_status,
+        null AS merchant_create_datetime
+      FROM
+        third_application
+      WHERE
+        third_application.id NOT IN (
+          SELECT 
+            merchant_has_third_application.third_app_id 
+          FROM 
+            merchant_has_third_application 
+          WHERE merchant_has_third_application.account_id = #{accountId, jdbcType=BIGINT}
+        )
+      ) AS tmp
+    WHERE
+      tmp.status = #{status, jdbcType=VARCHAR}
+      <if test="keywords != null">
+        <foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+            Concat(IFNULL(tmp.name, ''),
+            IFNULL(tmp.version, ''),
+            IFNULL(tmp.description, ''))
+            like Concat('%', #{item}, '%')
+        </foreach>
+      </if>
+      <if test="startDate != null">
+        <![CDATA[ AND tmp.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="endDate != null">
+        <![CDATA[ AND tmp.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+    ORDER BY
+      tmp.merchant_create_datetime DESC,
+      tmp.create_datetime DESC
+    LIMIT
+      #{page.begin},#{page.pageSize} 
+  </select>
+  
+  <select id="thirdApplication_getMerchantHasThirdApplication" parameterType="java.util.Map" resultMap="ResultMapWithMerchant">
+    SELECT
+      third_application.id,
+      third_application.name,
+      third_application.version,
+      third_application.url,
+      third_application.interface_url,
+      third_application.create_datetime,
+      IFNULL(third_application.thumb_path, '') AS thumbPath,
+      IFNULL(third_application.description, '') AS description,
+      third_application.status,
+      third_application.phone,
+      IFNULL(merchant_has_third_application.status, '') AS merchant_status,
+      IFNULL(merchant_has_third_application.create_datetime, '') AS merchant_create_datetime
+    FROM
+      third_application,
+      merchant_has_third_application
+    WHERE
+      third_application.id = merchant_has_third_application.third_app_id AND
+      merchant_has_third_application.account_id = #{accountId, jdbcType=BIGINT} AND
+      merchant_has_third_application.status = #{status, jdbcType=TINYINT}
+    ORDER BY
+      third_application.id DESC
+    LIMIT
+      #{page.begin},#{page.pageSize} 
+  </select>
+</mapper>

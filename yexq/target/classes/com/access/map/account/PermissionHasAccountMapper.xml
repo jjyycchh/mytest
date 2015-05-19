@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.account.PermissionHasAccountMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.account.PermissionHasAccount" >
+    <result column="permission_id" property="permissionId" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <insert id="insert" parameterType="com.access.model.account.PermissionHasAccount" >
+    insert into permission_has_account (permission_id, account_id)
+    values (#{permissionId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT})
+  </insert>
+  
+  <update id="updateForeignKeyChecks" parameterType="java.lang.Integer" >
+    set foreign_key_checks = #{value}
+  </update>
+  
+  <insert id="insertSelective" parameterType="com.access.model.account.PermissionHasAccount" >
+    insert into permission_has_account
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
+        permission_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="permissionId != null" >
+        #{permissionId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <delete id="deleteByAccountId" parameterType="java.lang.Long">
+  	delete from permission_has_account where account_id=#{value}
+  </delete>
+</mapper>

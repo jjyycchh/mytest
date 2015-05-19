@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.resource.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.resource.Resource" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="resource_path" property="resourcePath" jdbcType="VARCHAR" />
+    <result column="reference_times" property="referenceTimes" jdbcType="INTEGER" />
+    <result column="thumbnail_path" property="thumbnailPath" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, resource_path, reference_times, thumbnail_path, create_datetime, account_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from resource
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from resource
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.resource.Resource" >
+    insert into resource (id, name, resource_path, 
+      reference_times, thumbnail_path, create_datetime, 
+      account_id)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{resourcePath,jdbcType=VARCHAR}, 
+      #{referenceTimes,jdbcType=INTEGER}, #{thumbnailPath,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{accountId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.resource.Resource" >
+    insert into resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="resourcePath != null" >
+        resource_path,
+      </if>
+      <if test="referenceTimes != null" >
+        reference_times,
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcePath != null" >
+        #{resourcePath,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceTimes != null" >
+        #{referenceTimes,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnailPath != null" >
+        #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.resource.Resource" >
+    update resource
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcePath != null" >
+        resource_path = #{resourcePath,jdbcType=VARCHAR},
+      </if>
+      <if test="referenceTimes != null" >
+        reference_times = #{referenceTimes,jdbcType=INTEGER},
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.resource.Resource" >
+    update resource
+    set name = #{name,jdbcType=VARCHAR},
+      resource_path = #{resourcePath,jdbcType=VARCHAR},
+      reference_times = #{referenceTimes,jdbcType=INTEGER},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      account_id = #{accountId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="resource_findResourcePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	SELECT r.*
+  	from resource as r, account as a
+	where r.account_id=a.id
+	and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+		)
+	order by r.create_datetime desc 
+  	limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="resource_findResourcePageCount" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	SELECT count(*)
+  	from resource as r, account as a
+	where r.account_id=a.id
+	and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+		)
+	order by r.create_datetime desc 
+  	limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <update id="updateReferenceTimesAdd" parameterType="java.lang.Long">
+  	update resource set reference_times=reference_times+1 where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateReferenceTimesCut" parameterType="java.lang.Long">
+  	update resource set reference_times=reference_times-1 where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

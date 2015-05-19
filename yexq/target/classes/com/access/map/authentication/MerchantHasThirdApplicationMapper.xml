@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.authentication.MerchantHasThirdApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.authentication.MerchantHasThirdApplication" >
+    <id column="third_app_id" property="thirdAppId" jdbcType="BIGINT" />
+    <id column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    third_app_id, account_id, status, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.access.model.authentication.MerchantHasThirdApplicationKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from merchant_has_third_application
+    where third_app_id = #{thirdAppId,jdbcType=BIGINT}
+      and account_id = #{accountId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.access.model.authentication.MerchantHasThirdApplicationKey" >
+    delete from merchant_has_third_application
+    where third_app_id = #{thirdAppId,jdbcType=BIGINT}
+      and account_id = #{accountId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.authentication.MerchantHasThirdApplication" >
+    insert into merchant_has_third_application (third_app_id, account_id, status, 
+      create_datetime)
+    values (#{thirdAppId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{status,jdbcType=TINYINT}, 
+      #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.authentication.MerchantHasThirdApplication" >
+    insert into merchant_has_third_application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="thirdAppId != null" >
+        third_app_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="thirdAppId != null" >
+        #{thirdAppId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.authentication.MerchantHasThirdApplication" >
+    update merchant_has_third_application
+    <set >
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where third_app_id = #{thirdAppId,jdbcType=BIGINT}
+      and account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.authentication.MerchantHasThirdApplication" >
+    update merchant_has_third_application
+    set status = #{status,jdbcType=TINYINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where third_app_id = #{thirdAppId,jdbcType=BIGINT}
+      and account_id = #{accountId,jdbcType=BIGINT}
+  </update>
+  <update id="delMerchantThirdApplication" parameterType="java.util.Map" >
+    update merchant_has_third_application
+    <set >
+      status = #{status,jdbcType=TINYINT},
+    </set>
+       where account_id = #{accountId,jdbcType=BIGINT}
+             and third_app_id = #{thirdAppId,jdbcType=BIGINT}
+  </update>
+  <select id="getMerchantHasThirdApplicationByIds" parameterType="com.access.model.authentication.MerchantHasThirdApplication" resultType="com.access.model.authentication.MerchantHasThirdApplication">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      merchant_has_third_application
+    WHERE
+      third_app_id = #{thirdAppId, jdbcType=BIGINT} AND
+      account_id = #{accountId, jdbcType=BIGINT}
+  </select>
+  <update id="updateStatusByIds" parameterType="com.access.model.authentication.MerchantHasThirdApplication">
+    UPDATE
+      merchant_has_third_application
+    SET
+      status = #{status, jdbcType=TINYINT}
+    WHERE
+      third_app_id = #{thirdAppId, jdbcType=BIGINT} AND
+      account_id = #{accountId, jdbcType=BIGINT}
+    LIMIT
+      1
+  </update>
+</mapper>

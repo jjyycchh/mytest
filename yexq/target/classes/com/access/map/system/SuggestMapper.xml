@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.SuggestMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.Suggest" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, description, mac, cellphone, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from suggest
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from suggest
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.Suggest" >
+    insert into suggest (id, description, mac, 
+      cellphone, create_datetime)
+    values (#{id,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, 
+      #{cellphone,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.Suggest" >
+    insert into suggest
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.Suggest" >
+    update suggest
+    <set >
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.Suggest" >
+    update suggest
+    set description = #{description,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      cellphone = #{cellphone,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="suggest_getSuggestPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    SELECT
+      suggest.id,
+      suggest.description,
+      suggest.mac,
+      IFNULL(suggest.cellphone, '') AS cellphone,
+      suggest.create_datetime
+    FROM
+      suggest
+    WHERE
+      1 = 1
+      <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(suggest.description, ''),
+		      IFNULL(suggest.mac, ''),
+		      IFNULL(suggest.cellphone, '')) LIKE Concat('%', #{item}, '%')
+		</foreach>
+	  </if>
+	  <if test="startDate != null">
+		<![CDATA[ AND suggest.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+ 	  <if test="endDate != null">
+		<![CDATA[ AND suggest.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+	ORDER BY
+	  suggest.id DESC
+	LIMIT
+	  #{page.begin},#{page.pageSize}
+  </select>
+</mapper>

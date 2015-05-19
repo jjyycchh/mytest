@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMapConfig
+    PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+<!-- 
+    <properties resource="jdbc.properties" />
+    <settings cacheModelsEnabled="true" enhancementEnabled="true"
+        maxSessions="64" maxTransactions="20" maxRequests="128"
+        useStatementNamespaces="true" />
+    <transactionManager type="JDBC">
+        <dataSource type="SIMPLE">
+            <property value="$" name="JDBC.Driver" />
+            <property value="$" name="JDBC.ConnectionURL" />
+            <property value="$" name="JDBC.Username" />
+            <property value="$" name="JDBC.Password" />
+            <property value="15" name="Pool.MaximumActiveConnections" />
+            <property value="15" name="Pool.MaximumIdleConnections" />
+          <property value="1000" name="Pool.MaximumWait" />
+        </dataSource>
+    </transactionManager>
+     -->
+    <!-- <sqlMap resource="com/ssi/entity/pojo/Edu.xml" /> -->
+</sqlMapConfig>

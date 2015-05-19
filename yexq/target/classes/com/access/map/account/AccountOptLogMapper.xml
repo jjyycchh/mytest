@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.account.AccountOptLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.account.AccountOptLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="source_ip" property="sourceIp" jdbcType="VARCHAR" />
+    <result column="source_port" property="sourcePort" jdbcType="VARCHAR" />
+    <result column="action_func" property="actionFunc" jdbcType="VARCHAR" />
+    <result column="module_name" property="moduleName" jdbcType="VARCHAR" />
+    <result column="service_name" property="serviceName" jdbcType="VARCHAR" />
+    <result column="result" property="result" jdbcType="BIT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.account.AccountOptLogWithBLOBs" extends="BaseResultMap" >
+    <result column="parameter" property="parameter" jdbcType="LONGVARCHAR" />
+    <result column="return_message" property="returnMessage" jdbcType="LONGVARCHAR" />
+    <result column="memo" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithAccount" type="com.access.model.account.AccountOptLogWithBLOBs" extends="ResultMapWithBLOBs" >
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account_id, description, source_ip, source_port, action_func, module_name, service_name, 
+    result, create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    parameter, return_message, memo
+  </sql>
+  <sql id="Account_Column_List" >
+  	username, type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from account_operation_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from account_operation_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.account.AccountOptLogWithBLOBs" >
+    insert into account_operation_log (id, account_id, description, 
+      source_ip, source_port, action_func, 
+      module_name, service_name, result,
+      parameter, return_message, memo)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{sourceIp,jdbcType=VARCHAR}, #{sourcePort,jdbcType=VARCHAR}, #{actionFunc,jdbcType=VARCHAR}, 
+      #{moduleName,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, #{result,jdbcType=BIT}, 
+      #{parameter,jdbcType=LONGVARCHAR}, #{returnMessage,jdbcType=LONGVARCHAR}, 
+      #{memo,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.account.AccountOptLogWithBLOBs" >
+    insert into account_operation_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="sourceIp != null" >
+        source_ip,
+      </if>
+      <if test="sourcePort != null" >
+        source_port,
+      </if>
+      <if test="actionFunc != null" >
+        action_func,
+      </if>
+      <if test="moduleName != null" >
+        module_name,
+      </if>
+      <if test="serviceName != null" >
+        service_name,
+      </if>
+      <if test="result != null" >
+        result,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="parameter != null" >
+        parameter,
+      </if>
+      <if test="returnMessage != null" >
+        return_message,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceIp != null" >
+        #{sourceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcePort != null" >
+        #{sourcePort,jdbcType=VARCHAR},
+      </if>
+      <if test="actionFunc != null" >
+        #{actionFunc,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null" >
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        #{result,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parameter != null" >
+        #{parameter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="returnMessage != null" >
+        #{returnMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.account.AccountOptLogWithBLOBs" >
+    update account_operation_log
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceIp != null" >
+        source_ip = #{sourceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcePort != null" >
+        source_port = #{sourcePort,jdbcType=VARCHAR},
+      </if>
+      <if test="actionFunc != null" >
+        action_func = #{actionFunc,jdbcType=VARCHAR},
+      </if>
+      <if test="moduleName != null" >
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="result != null" >
+        result = #{result,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parameter != null" >
+        parameter = #{parameter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="returnMessage != null" >
+        return_message = #{returnMessage,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.account.AccountOptLogWithBLOBs" >
+    update account_operation_log
+    set account_id = #{accountId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      source_ip = #{sourceIp,jdbcType=VARCHAR},
+      source_port = #{sourcePort,jdbcType=VARCHAR},
+      action_func = #{actionFunc,jdbcType=VARCHAR},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      result = #{result,jdbcType=BIT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      parameter = #{parameter,jdbcType=LONGVARCHAR},
+      return_message = #{returnMessage,jdbcType=LONGVARCHAR},
+      memo = #{memo,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.account.AccountOptLog" >
+    update account_operation_log
+    set account_id = #{accountId,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      source_ip = #{sourceIp,jdbcType=VARCHAR},
+      source_port = #{sourcePort,jdbcType=VARCHAR},
+      action_func = #{actionFunc,jdbcType=VARCHAR},
+      module_name = #{moduleName,jdbcType=VARCHAR},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      result = #{result,jdbcType=BIT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  
+  
+	<select id="accountOptLog_findAccountOptLogPage" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map">  
+	   select  
+	   <include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from account_operation_log where account_id=#{accountId}
+		order by create_datetime desc
+		limit #{page.begin},#{page.pageSize}
+	</select>
+  
+	<select id="accountOptLog_findAccountOptLogPageCount" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map">  
+	   select count(id)
+		from account_operation_log where account_id=#{value}
+	</select>
+  
+  	<select id="findLatestShortcutsAccess" resultType="java.util.Map" parameterType="java.util.Map">  
+	   select  
+			max(create_datetime) as create_datetime,
+		    action_func as ref
+		from account_operation_log 
+			where account_id=#{accountId}
+			<foreach item="item" index="index"  collection="refs" open="and (" separator="OR" close=")">  
+			  action_func like Concat('%', #{item}, '%')
+			</foreach>
+			group by action_func
+		order by max(create_datetime) desc
+		limit #{number}
+	</select>
+  
+    <select id="accountoptlog_getAccountOptLogPage" resultMap="ResultMapWithAccount" parameterType="java.util.Map">
+        select *
+        from (
+            select
+                account_operation_log.id,
+                account_operation_log.account_id,
+                account_operation_log.source_ip,
+                account_operation_log.source_port,
+                account_operation_log.action_func,
+                account_operation_log.module_name,
+                account_operation_log.service_name,
+                account_operation_log.parameter,
+                account_operation_log.result,
+                account_operation_log.return_message,
+                account_operation_log.memo,
+                account_operation_log.create_datetime,
+                account_operation_log.description,
+                account.username, account.type
+            from
+                account_operation_log,
+                account
+            where
+                account_operation_log.account_id = account.id
+            union
+            select
+                account_operation_log.id,
+                account_operation_log.account_id,
+                account_operation_log.source_ip,
+                account_operation_log.source_port,
+                account_operation_log.action_func,
+                account_operation_log.module_name,
+                account_operation_log.service_name,
+                account_operation_log.parameter,
+                account_operation_log.result,
+                account_operation_log.return_message,
+                account_operation_log.memo,
+                account_operation_log.create_datetime,
+                account_operation_log.description,
+                null as username, null as type
+            from
+                account_operation_log
+            where
+                account_operation_log.account_id is null
+            ) as tmp
+        where
+            1 = 1
+            <if test="type != null">
+                and tmp.type = #{type, jdbcType=VARCHAR}
+            </if>
+            <if test="moduleName != null">
+                and tmp.module_name = #{moduleName, jdbcType=VARCHAR}
+            </if>
+            <if test="serviceName != null">
+                and tmp.service_name = #{serviceName, jdbcType=VARCHAR}
+            </if>
+            <if test="keywords != null">
+                <foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+                    Concat(IFNULL(tmp.description, ''),
+                            IFNULL(tmp.source_ip, ''),
+                            IFNULL(tmp.action_func, ''))
+                        like Concat('%', #{item}, '%')
+                </foreach>
+            </if>
+            <if test="startDate != null">
+                <![CDATA[ and tmp.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+            </if>
+            <if test="endDate != null">
+                <![CDATA[ and tmp.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+            </if>
+        order by
+            tmp.id desc
+        limit
+            #{page.begin},#{page.pageSize} 
+    </select>
+</mapper>

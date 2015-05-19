@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.user.UserWhitelistMapper" >
+
+  <resultMap id="BaseResultMap" type="com.access.model.user.UserWhitelist" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="macs" property="macs" jdbcType="LONGVARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, macs, device_id, create_datetime
+  </sql>
+  
+  <!-- 添加一条记录 -->
+  <insert id="insertSelective" parameterType="com.access.model.user.UserWhitelist" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into user_whitelist
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="macs != null" >
+        macs,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="macs != null" >
+        #{macs,jdbcType=LONGVARCHAR},
+      </if>
+       <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  
+  <!-- 根据deviceId更新记录 -->
+  <update id="updateByDeviceId" parameterType="com.access.model.user.UserWhitelist" >
+    update 
+    	user_whitelist
+    set
+    	macs = #{macs,jdbcType=LONGVARCHAR}
+    where 
+    	device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  
+   <!-- 根据deviceId获取一条记录 -->
+  <select id="selectByDeviceId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    	<include refid="Base_Column_List" />
+    from 
+    	user_whitelist
+    where 
+    	device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 根据deviceId和macs获取一条记录 -->
+  <select id="selectByDeviceIdAndMac" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    	<include refid="Base_Column_List" />
+    from 
+    	user_blacklist
+    where 
+    	device_id = #{deviceId,jdbcType=VARCHAR}
+    and
+    	macs like '%' #{macs} '%'
+  </select>
+  
+  <!-- 获取所有记录 -->
+  <select id="selectAll" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from 
+    	user_whitelist
+  </select>
+  
+</mapper>

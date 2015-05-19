@@ -1,0 +1,496 @@
+template:
+{
+  "name": "默认模板 - 登录页面",
+  "layout": {
+    "header": "<!DOCTYPE html><html><head><meta http-equiv='Content-Type' content='text/html; charset=UTF-8'><meta name='viewport' content='initial-scale=1, maximum-scale=1, user-scalable=no'><title>{%=title%}</title>{#css#}{#script#}<script type='text/javascript'>$(document).ready(function(){MyTemplate.init();$(window).resize(function(){MyTemplate.init();})})</script></head><body>",
+    "body": "<div class='portalTemplateBody' id='portalTemplateBodyID'>{{siteLoadingModuleBox}}{{siteSliderModuleBox}}{{siteLoginModuleBox}}{{siteImageTextModuleBox}}</div>",
+    "footer": "</body></html>",
+    "script": [
+      "/resources/portal/template/2/js/template.js",
+      "/resources/portal/auth_module/js/authorize.js",
+      "/resources/portal/auth_module/js/jquery-1.11.0.min.js"
+    ],
+    "css": [
+      "/resources/portal/template/2/css/template.css"
+    ],
+    "modal": "<div class='modal fade' role='dialog' id='siteLoadingModuleBoxModal'></div><div class='modal fade' role='dialog' id='siteSliderModuleBoxModal'></div><div class='modal fade' role='dialog' id='siteImageTextModuleBoxModal'></div>"
+  },
+  "modules": [
+    {
+      "moduleid": "siteLoadingModuleBox",
+      "layout": "<div class='siteModules' id='siteLoadingModuleBox' role='general' title='引导图层'>{{Loading001}}</div>",
+      "permission": {
+        "accountId": [
+          
+        ],
+        "accountType": [
+          "SUPER_MAN",
+          "ADMINISTRATOR",
+          "REPRESENTATIVE",
+          "MERCHANT"
+        ]
+      },
+      "type": "general",
+      "components": [
+        {
+          "componentid": "Loading001",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<div class='loadingTimeTip'></div><div class='loadingTimeTip' id='loadingTimeText'></div><img src='{%=thumb%}'>"
+        }
+      ]
+    },
+    {
+      "moduleid": "siteSliderModuleBox",
+      "layout": "<div class='siteModules' id='siteSliderModuleBox' role='general' title='广告轮播'><a href='javascript:;' class='sliderBrowse' id='sliderToPrev'>&nbsp;</a><a href='javascript:;' class='sliderBrowse' id='sliderToNext'>&nbsp;</a><div class='sliderNavigator'></div><div class='sliderNavigator' id='sliderNaviList'></div>{{Slider001}}{{Slider002}}{{Slider003}}{{Slider004}}{{Slider005}}{{Slider006}}</div>",
+      "permission": {
+        "accountId": [
+          
+        ],
+        "accountType": [
+          "SUPER_MAN",
+          "ADMINISTRATOR",
+          "REPRESENTATIVE",
+          "MERCHANT"
+        ]
+      },
+      "type": "general",
+      "components": [
+        {
+          "componentid": "Slider001",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<div id='Slider001' class='components sliderItem'><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a></div>"
+        },
+        {
+          "componentid": "Slider002",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<div id='Slider002' class='components sliderItem'><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a></div>"
+        },
+        {
+          "componentid": "Slider003",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<div id='Slider003' class='components sliderItem'><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a></div>"
+        },
+        {
+          "componentid": "Slider004",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<div id='Slider004' class='components sliderItem'><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a></div>"
+        },
+        {
+          "componentid": "Slider005",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<div id='Slider005' class='components sliderItem'><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a></div>"
+        },
+        {
+          "componentid": "Slider006",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<div id='Slider006' class='components sliderItem'><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a></div>"
+        }
+      ]
+    },
+    {
+      "moduleid": "siteLoginModuleBox",
+      "layout": "<div class='siteModules' id='siteLoginModuleBox' role='auth' platSvrAddr='{@=platSvrAddr@}' title='用户登录'>{%=auth_html_code%}</div>",
+      "permission": {
+        "accountId": [
+          
+        ],
+        "accountType": [
+          "SUPER_MAN",
+          "ADMINISTRATOR",
+          "REPRESENTATIVE",
+          "MERCHANT"
+        ]
+      },
+      "type": "auth",
+      "components": [
+        
+      ]
+    },
+    {
+      "moduleid": "siteImageTextModuleBox",
+      "layout": "<div class='siteModules' id='siteImageTextModuleBox' role='general' title='图文信息'><ul>{{ImageText001}}{{ImageText002}}{{ImageText003}}{{ImageText004}}{{ImageText005}}{{ImageText006}}{{ImageText007}}{{ImageText008}}</ul></div>",
+      "permission": {
+        "accountId": [
+          
+        ],
+        "accountType": [
+          "SUPER_MAN",
+          "ADMINISTRATOR",
+          "REPRESENTATIVE",
+          "MERCHANT"
+        ]
+      },
+      "type": "general",
+      "components": [
+        {
+          "componentid": "ImageText001",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText001'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        },
+        {
+          "componentid": "ImageText002",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText002'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        },
+        {
+          "componentid": "ImageText003",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText003'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        },
+        {
+          "componentid": "ImageText004",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText004'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        },
+        {
+          "componentid": "ImageText005",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText005'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        },
+        {
+          "componentid": "ImageText006",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText006'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        },
+        {
+          "componentid": "ImageText007",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText007'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        },
+        {
+          "componentid": "ImageText008",
+          "permission": {
+            "accountId": [
+              
+            ],
+            "accountType": [
+              "SUPER_MAN",
+              "ADMINISTRATOR",
+              "REPRESENTATIVE",
+              "MERCHANT"
+            ]
+          },
+          "content": "<li class='components' id='ImageText008'><div><a href='{%=url%}' class='url'><img src='{%=thumb%}' class='thumb'></a><a href='{%=url%}' class='url'><dd class='title'>{%=title%}</dd></a><span class='description'>{%=description%}</span></div></li>"
+        }
+      ]
+    }
+  ]
+}
+
+
+defaultdata:
+
+{
+  "layout": {
+    "header": {
+      "title": "登录页面"
+    },
+    "body": "",
+    "footer": "",
+    "script": "",
+    "css": "",
+    "modal": ""
+  },
+  "modules": [
+    {
+      "moduleid": "siteLoadingModuleBox",
+      "layout": "",
+      "components": [
+        {
+          "componentid": "Loading001",
+          "content": {
+            "thumb": "/resources/portal/template/2/img/demo/019.jpg"
+          }
+        }
+      ]
+    },
+    {
+      "moduleid": "siteSliderModuleBox",
+      "layout": "",
+      "components": [
+        {
+          "componentid": "Slider001",
+          "content": {
+            "title": "默认轮播图片#1",
+            "thumb": "/resources/portal/template/2/img/demo/002.jpg",
+            "url": "javascript:;",
+            "description": ""
+          }
+        },
+        {
+          "componentid": "Slider002",
+          "content": {
+            "title": "默认轮播图片#2",
+            "thumb": "/resources/portal/template/2/img/demo/009.jpg",
+            "url": "javascript:;",
+            "description": ""
+          }
+        },
+        {
+          "componentid": "Slider003",
+          "content": {
+            "title": "默认轮播图片#3",
+            "thumb": "/resources/portal/template/2/img/demo/013.jpg",
+            "url": "javascript:;",
+            "description": ""
+          }
+        },
+        {
+          "componentid": "Slider004",
+          "content": {
+            "title": "默认轮播图片#4",
+            "thumb": "/resources/portal/template/2/img/demo/018.jpg",
+            "url": "javascript:;",
+            "description": ""
+          }
+        },
+        {
+          "componentid": "Slider005",
+          "content": {
+            "title": "默认轮播图片#5",
+            "thumb": "/resources/portal/template/2/img/demo/022.jpg",
+            "url": "javascript:;",
+            "description": ""
+          }
+        },
+        {
+          "componentid": "Slider006",
+          "content": {
+            "title": "默认轮播图片#6",
+            "thumb": "/resources/portal/template/2/img/demo/012.jpg",
+            "url": "javascript:;",
+            "description": ""
+          }
+        }
+      ]
+    },
+    {
+      "moduleid": "siteLoginModuleBox",
+      "layout": {
+        "auth_html_code": "<div class='loginAPI-Line'>欢迎使用接入系统平台</div><div class='loginAPI-Form'><table align='center'><tr><td><input type='text' placeholder='输入手机号码...' id='MobileNumber' name='MobileNumber'></td><td width='20'>&nbsp;</td><td><button type='button' class='AuthMobileSMS'>获取验证码</button></td></tr><tr><td><input type='text' placeholder='验证码...' id='SMSCodeNumber' name='SMSCodeNumber'></td><td width='20'>&nbsp;</td><td>&nbsp;</td></tr><tr><td colspan='3'><button type='button' class='AuthSubmitID'>马上登录</button></td></tr></table></div>",
+        "platSvrAddr": ""
+      },
+      "components": [
+        
+      ]
+    },
+    {
+      "moduleid": "siteImageTextModuleBox",
+      "layout": "",
+      "components": [
+        {
+          "componentid": "ImageText001",
+          "content": {
+            "title": "默认标题#1",
+            "thumb": "/resources/portal/template/2/img/demo/009.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#1"
+          }
+        },
+        {
+          "componentid": "ImageText002",
+          "content": {
+            "title": "默认标题#2",
+            "thumb": "/resources/portal/template/2/img/demo/010.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#2"
+          }
+        },
+        {
+          "componentid": "ImageText003",
+          "content": {
+            "title": "默认标题#3",
+            "thumb": "/resources/portal/template/2/img/demo/011.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#3"
+          }
+        },
+        {
+          "componentid": "ImageText004",
+          "content": {
+            "title": "默认标题#4",
+            "thumb": "/resources/portal/template/2/img/demo/012.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#4"
+          }
+        },
+        {
+          "componentid": "ImageText005",
+          "content": {
+            "title": "默认标题#5",
+            "thumb": "/resources/portal/template/2/img/demo/013.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#5"
+          }
+        },
+        {
+          "componentid": "ImageText006",
+          "content": {
+            "title": "默认标题#6",
+            "thumb": "/resources/portal/template/2/img/demo/014.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#6"
+          }
+        },
+        {
+          "componentid": "ImageText007",
+          "content": {
+            "title": "默认标题#7",
+            "thumb": "/resources/portal/template/2/img/demo/015.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#7"
+          }
+        },
+        {
+          "componentid": "ImageText008",
+          "content": {
+            "title": "默认标题#8",
+            "thumb": "/resources/portal/template/2/img/demo/016.jpg",
+            "url": "javascript:;",
+            "description": "默认描述内容#8"
+          }
+        }
+      ]
+    }
+  ]
+}

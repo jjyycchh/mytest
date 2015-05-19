@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.user.TerminalUserMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.user.TerminalUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="authentication_type" property="authenticationType" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="auth_type" property="authType" jdbcType="VARCHAR" />
+    <result column="auth_id" property="authId" jdbcType="VARCHAR" />
+    <result column="auth_code" property="authCode" jdbcType="VARCHAR" />
+    <result column="parameter" property="parameter" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="membership_id" property="membershipId" jdbcType="BIGINT" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="findUserPageMap" type="com.access.model.user.TerminalUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="auth_id" property="authId" jdbcType="VARCHAR" />
+    <result column="auth_type" property="authType" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="online_status" property="onlineStatus" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="device_name" property="deviceName" jdbcType="VARCHAR" />
+    <result column="login_datetime" property="loginDatetime" jdbcType="TIMESTAMP" />
+    <result column="total_up_traffic" property="totalUpTraffic" jdbcType="BIGINT" />
+    <result column="total_dw_traffic" property="totalDwTraffic" jdbcType="BIGINT" />
+    <result column="terminal_type" property="terminalType" jdbcType="VARCHAR" />
+    <result column="browser_type" property="browserType" jdbcType="VARCHAR" />
+    <result column="modified_datetime" property="modifiedDatetime" jdbcType="TIMESTAMP" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="log_content" property="logContent" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="membership_id" property="membershipId" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, authentication_type, create_datetime, status, memo, auth_type, auth_id, auth_code, 
+    parameter, mac, membership_id, phone_number
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from terminal_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from terminal_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.user.TerminalUser" >
+    insert into terminal_user (id, authentication_type, create_datetime, 
+      status, memo, auth_type, 
+      auth_id, auth_code, parameter, 
+      mac, membership_id, phone_number
+      )
+    values (#{id,jdbcType=BIGINT}, #{authenticationType,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{authType,jdbcType=VARCHAR}, 
+      #{authId,jdbcType=VARCHAR}, #{authCode,jdbcType=VARCHAR}, #{parameter,jdbcType=VARCHAR}, 
+      #{mac,jdbcType=VARCHAR}, #{membershipId,jdbcType=BIGINT}, #{phoneNumber,jdbcType=VARCHAR}
+      )
+  </insert>
+  
+  <!-- 插入一条记录,并设置插入后的ID为terminalUser对象的id字段值 -->
+  <insert id="insertSelective" parameterType="com.access.model.user.TerminalUser" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into 
+    	terminal_user
+    <trim prefix = "(" suffix = ")" suffixOverrides = "," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authenticationType != null" >
+        authentication_type,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="authType != null" >
+        auth_type,
+      </if>
+      <if test="authId != null" >
+        auth_id,
+      </if>
+      <if test="authCode != null" >
+        auth_code,
+      </if>
+      <if test="parameter != null" >
+        parameter,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="membershipId != null" >
+        membership_id,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="authenticationType != null" >
+        #{authenticationType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="authId != null" >
+        #{authId,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null" >
+        #{authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipId != null" >
+        #{membershipId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.user.TerminalUser" >
+    update terminal_user
+    <set >
+      <if test="authenticationType != null" >
+        authentication_type = #{authenticationType,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        auth_type = #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="authId != null" >
+        auth_id = #{authId,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null" >
+        auth_code = #{authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="parameter != null" >
+        parameter = #{parameter,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="membershipId != null" >
+        membership_id = #{membershipId,jdbcType=BIGINT},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <!-- 根据主键更新记录 -->
+  <update id="updateByPrimaryKey" parameterType="com.access.model.user.TerminalUser" >
+    update 
+    	terminal_user
+    set 
+    	authentication_type = #{authenticationType,jdbcType=VARCHAR},
+		create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+		status = #{status,jdbcType=VARCHAR},
+		memo = #{memo,jdbcType=VARCHAR},
+		auth_type = #{authType,jdbcType=VARCHAR},
+		auth_id = #{authId,jdbcType=VARCHAR},
+		auth_code = #{authCode,jdbcType=VARCHAR},
+		parameter = #{parameter,jdbcType=VARCHAR},
+		mac = #{mac,jdbcType=VARCHAR},
+		membership_id = #{membershipId,jdbcType=BIGINT},
+		phone_number = #{phoneNumber,jdbcType=VARCHAR}
+    where 
+    	id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="terminalUser_findUserPage" parameterType="java.util.Map" resultMap="findUserPageMap">
+  select 
+	tu.id as id,
+	aa.create_datetime as login_datetime,
+	aa.auth_type as auth_type,
+	tu.memo as memo,
+	tu.auth_code as auth_code,
+	tu.auth_id as auth_id,
+    tu.phone_number as phone_number,
+	aa.device_id as device_id,
+	aa.log_content as log_content,
+	aa.browser_type as browser_type,
+	aa.terminal_type as terminal_type,
+	tu.mac as mac,
+    tu.membership_id as membership_id,
+	(select case count(*) != 0 and tud.status='LOCKED'
+			when true then 'LOCKED'
+			when false then aa.status
+			end 
+		from terminal_user_has_device as tud 
+		where tud.terminal_user_id = aa.terminal_user_id and tud.device_id = aa.device_id
+	) as status
+	from terminal_user tu
+    left join (
+	select ual.terminal_user_id, ual.create_datetime, ual.token, 
+		ual.auth_type, ual.status, ual.device_id, ual.log_content,
+		ual.browser_type as browser_type, ual.terminal_type as terminal_type
+	  from terminal_user_authentication_log ual , 
+		(select terminal_user_id, max(id) as id from terminal_user_authentication_log group by terminal_user_id)n
+	where ual.id = n.id
+      <if test="isOnline != null">
+        and ual.status = #{isOnline, jdbcType=VARCHAR}
+      </if>
+      )aa on tu.id=aa.terminal_user_id,
+	(select ahtu.terminal_user_id
+      from account_has_terminal_user as ahtu, account as a, location as l, device d
+	where d.location_id = l.id
+		and l.account_id = a.id
+		and ahtu.account_id=a.id
+		<if test="accountId != null">
+			and a.id = #{accountId, jdbcType=BIGINT}
+		</if>
+		<if test="accountId == null">
+			and a.parent_ids like Concat('%"', #{totalParentId, jdbcType=VARCHAR}, '"%')
+		</if>
+		<if test="deviceId != null">
+	    	and d.device_id = #{deviceId, jdbcType=VARCHAR}
+	    </if>
+	group by ahtu.terminal_user_id )bb
+	where tu.id=bb.terminal_user_id
+	    <if test="status != null" >
+	    	and aa.status = #{status, jdbcType=VARCHAR}
+	    </if>
+		<if test="keywords != null">
+			<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	  			Concat(IFNULL(tu.mac, ''),
+	  			IFNULL(aa.log_content, '')) like '%' #{item} '%'
+ 			</foreach>
+  		</if>
+	order by aa.create_datetime desc
+   	limit #{page.begin},#{page.pageSize}
+   </select>
+	
+   <select id="terminalUser_findUserPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+		select 
+			count(tu.id)
+		from
+			terminal_user as tu,
+			terminal_user_authentication_log as ual,
+			device as d, 
+			location as l, 
+			account as a
+		where ual.terminal_user_id = tu.id
+			and tu.id = ual.terminal_user_id
+			and d.device_id = ual.device_id
+			and d.location_id = l.id
+			and l.account_id = a.id
+			<if test="accountId != null">
+				and a.id = #{accountId, jdbcType=BIGINT}
+			</if>
+			<if test="accountId == null">
+				and parent_ids like Concat('%"', #{totalParentId, jdbcType=VARCHAR}, '"%')
+			</if>
+		    <if test="status != null" >
+		    	and ual.status = #{status, jdbcType=VARCHAR}
+		    </if>
+		    <if test="deviceId != null">
+		    	and d.device_id = #{deviceId, jdbcType=VARCHAR}
+		    </if>
+			<if test="keywords != null">
+				<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(a.merchant_name, ''),
+					IFNULL(d.name,''), 
+					IFNULL(tu.mac,''), 
+					IFNULL(a.username,''), 
+					IFNULL(tu.auth_id, '')) like '%' #{item} '%'
+	 			</foreach>
+	  		</if>
+   </select>
+   
+   <select id="terminalUser_findUserAuthLogPage" parameterType="java.util.Map" resultMap="findUserPageMap">
+	select 
+		ual.terminal_user_id as id,
+		ual.log_content as log_content,
+		ual.auth_type as auth_type,
+		ual.token as token,
+		ual.status as status,
+		ual.offline_datetime as offline_datetime,
+		ual.total_up_traffic as total_up_traffic,
+		ual.total_dw_traffic as total_dw_traffic,
+		ual.terminal_type as terminal_type,
+		ual.browser_type as browser_type,
+		ual.create_datetime as login_datetime,
+		ual.modified_datetime as modified_datetime,
+		d.name as device_name,
+		d.device_id as device_id,
+		a.merchant_name as merchant_name,
+		ahtu.memo AS memo
+	from
+		terminal_user_authentication_log as ual,
+		device as d, 
+		location as l, 
+		account as a,
+		account_has_terminal_user as ahtu
+	where d.device_id = ual.device_id
+		and d.location_id = l.id
+		and l.account_id = a.id
+		and ual.terminal_user_id=ahtu.terminal_user_id
+		and ahtu.account_id=a.id
+		<if test="accountId != null">
+			and a.id = #{accountId, jdbcType=BIGINT}
+		</if>
+		<if test="accountId == null">
+			and a.parent_ids like Concat('%"', #{totalParentId, jdbcType=VARCHAR}, '"%')
+		</if>
+	    <if test="deviceId != null">
+	    	and d.device_id = #{deviceId, jdbcType=VARCHAR}
+	    </if>
+		<if test="keywords != null">
+			<foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">  
+	  			Concat(IFNULL(a.merchant_name, ''),
+				IFNULL(d.name,''), 
+				IFNULL(ual.log_content,''), 
+				IFNULL(a.username,'')) like '%' #{item} '%'
+ 			</foreach>
+  		</if>
+   		order by ual.create_datetime desc
+   		limit #{page.begin},#{page.pageSize}
+   </select>
+   
+	<select id="getLatestDaysIncreasedUser" parameterType="java.lang.Long"  resultType="java.lang.Long">
+		select 
+		    count(*)
+		from
+		    terminal_user
+		where
+		    create_datetime > date_add(now(), interval #{value} day)
+		order by create_datetime desc
+	</select>
+	
+	<!-- 根据authId获取一条记录 -->
+	<select id="getTerminalUserByAuthId" parameterType="java.lang.String"  resultMap="BaseResultMap">
+		select 
+		     <include refid="Base_Column_List" />
+		from
+		    terminal_user
+		where
+		    auth_id = #{value}
+        order by 
+        	id desc
+        limit 1
+	</select>
+
+	<update id="updateUserStatus" parameterType="com.access.model.user.TerminalUser">
+		update terminal_user set status = #{status} where id=#{id}
+	</update>
+	
+	<select id="getTerminalUserByMac" parameterType="java.lang.String"  resultMap="BaseResultMap">
+		select 
+		     <include refid="Base_Column_List" />
+		from
+		    terminal_user
+		where
+		    mac = #{value}
+	</select>
+	
+	<select id="getTerminalUser" parameterType="java.util.Map"  resultMap="BaseResultMap">
+		SELECT 
+			tu.* 
+		from 
+			terminal_user as tu,
+			terminal_user_has_device as tuhd,
+			device as d,
+			location as l,
+			account as a
+		where 
+			tu.id = tuhd.terminal_user_id
+		and 
+			tuhd.device_id = d.device_id
+		and 
+			d.location_id = l.id
+		and 
+			l.account_id = a.id
+		and 
+			tu.auth_type = #{authType}
+        <if test="accountId != null">
+		  	and a.id = #{accountId}
+        </if>
+		<if test="authId != null">
+			and tu.auth_id = #{authId}
+        </if>
+		<if test="mac != null">
+			and tu.mac = #{mac}
+        </if>
+        order by 
+        	id desc
+        limit 
+        	1
+	</select>
+	
+	<!-- 根据authType和mac地址获取用户记录 -->
+	<select id="getTerminalUserByMap" parameterType="java.util.Map" resultMap="BaseResultMap">
+  		select 
+  			tu.*
+    	from 
+    		terminal_user_authentication_log as ual,
+			terminal_user as tu 
+		where 
+			ual.terminal_user_id=tu.id
+    	and 
+    		ual.auth_type=#{authType}
+    	and 
+    		ual.terminal_mac=#{mac}
+    	order by 
+    		create_datetime desc
+    	limit 
+    		1
+  	</select>
+  	
+  	<!-- 广告平台查找用户SQL -->
+    <select id="findUserOfAdvert" parameterType="java.util.Map" resultType="java.util.Map">
+      SELECT 
+        a.username,
+        a.type,
+        a.cell_number
+      FROM
+        account AS a
+      WHERE 
+        a.username = #{account}
+        AND a.password = #{password}
+        AND (a.type='REPRESENTATIVE' OR a.type='MERCHANT') 
+        limit 1
+    </select>
+    
+    <select id="selectByMemberId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    	select 
+    		<include refid="Base_Column_List" />
+    	from 
+    		terminal_user
+    	where 
+    		membership_id = #{memberShipId,jdbcType=BIGINT}
+    </select>
+	
+</mapper>

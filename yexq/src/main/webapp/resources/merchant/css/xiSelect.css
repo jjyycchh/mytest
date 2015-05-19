@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/**
+ *
+ *
+ *
+ *
+ *
+ *
+**/
+
+
+.xiSelect-Element-Body {height:40px;background:url(../img/input-textarea.png) 0 0;float:left;padding-left:12px;position: relative;overflow: visible;zoom: 1;width:100%;}
+.xiSelect-Element-Body .xiSelect-Input-Text {float:right;background:url(../img/input-textarea.png) 100% 0;border:0px;height: 40px;padding-top:1px\0;padding-top:/*\**/12px\9;height:/*\**/28px\9;height:/*\**/40px\0;display: block;width: 100%;}
+.xiSelect-Element-Body .xiSelect-Element-Arrow {width:19px;text-align: center;padding:10px 0;height: 32px;position: absolute;z-index: 31;zoom: 1;right:4px;top:4px;right:6px\0;right:/*\**/6px\9;}
+.xiSelect-Element-Body .xiSelect-Element-Arrow span {width: 11px;height: 11px;background: url(../img/select-allow-normal.png);cursor: pointer;_cursor:hand;display: block;overflow: hidden;_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/select-allow-normal.png");}
+.xiSelect-Element-Body .xiSelect-Element-Arrow:hover span {background: url(../img/select-allow-over.png);_background:none;_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src="/statics/img/select-allow-over.png");}
+.xiSelect-Disabled {background:url(../img/input-textarea.png) 0 -120px;}
+.xiSelect-Disabled .xiSelect-Input-Text {background:url(../img/input-textarea.png) 100% -120px;}
+
+.xiSelectPanelElementName {position:absolute;z-index:8000;background:none;overflow:hidden;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody {background:none;position:relative;zoom:1;overflow:hidden;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body {overflow:hidden;position:absolute;left:0px;top:0px;z-index:801;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-SelectList {overflow:auto;overflow-x:hidden;padding:5px;border:1px solid #dfdfdf;border-radius:2px;background:#fff;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-SelectList a {display:block;font:12px/30px "Microsoft YaHei","ARIAL","宋体";color:#333;padding-left:10px;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-SelectList a:hover {background:#007e65;color:#fff;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-SelectList a.Active {background:#007e65;color:#fff;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-SelectList a.Active:hover {background:#007e65;color:#fff;}
+.xiSelectPanelElementName iframe {background:none;-moz-opacity:0;opacity:0;filter:alpha(opacity=0);}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-AdornTop {height:5px;idth:100%;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-AdornBottom {height:5px;width:100%;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-AdornTop .xiSelectPanelElementName-SelectList {padding-bottom:0px;width:100%;}
+.xiSelectPanelElementName .xiSelectPanelElementName-MainBody .xiSelectPanelElementName-Body .xiSelectPanelElementName-AdornBottom .xiSelectPanelElementName-SelectList {padding-top:0px;width:100%;}
+
+
+.xSelect-Valign-Top .xiSelectPanelElementName-AdornTop {display:none;}
+.xSelect-Valign-Bottom .xiSelectPanelElementName-AdornBottom {display:none;}
+
+
+.fileInputContainer{
+    height:34px;
+    width: 80px;
+    background:url(/statics/img/button-primary-over.png);
+    position:relative;
+}
+.fileInput{
+    width:150px;
+    height:34px;
+    overflow: hidden;
+    font-size: 10px;
+    position:absolute;
+    right:0;
+    top:0;
+    opacity: 0;
+    filter:alpha(opacity=0);
+    cursor:pointer;
+}

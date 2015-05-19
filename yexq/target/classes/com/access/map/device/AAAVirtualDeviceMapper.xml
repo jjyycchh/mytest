@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.AAAVirtualDeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.AAAVirtualDevice" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="wlanacname" property="wlanacname" jdbcType="VARCHAR" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="ip_addr" property="ipAddr" jdbcType="VARCHAR" />
+    <result column="port" property="port" jdbcType="INTEGER" />
+    <result column="regist_secret" property="registSecret" jdbcType="VARCHAR" /> <!-- 2015.1.23 add -->
+    <result column="auth_secret" property="authSecret" jdbcType="VARCHAR" />
+    <result column="accounting_secret" property="accountingSecret" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithDevice" type="com.access.model.device.AAAVirtualDevice" extends="BaseResultMap">
+    <result column="location_id" property="locationId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithLocation" type="com.access.model.device.AAAVirtualDevice" extends="ResultMapWithDevice">
+    <result column="province" property="deviceProvince" jdbcType="VARCHAR" />
+    <result column="city" property="deviceCity" jdbcType="VARCHAR" />
+    <result column="county_district" property="deviceCountyDistrict" jdbcType="VARCHAR" />
+    <result column="address" property="deviceAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithAccount" type="com.access.model.device.AAAVirtualDevice" extends="ResultMapWithLocation">
+    <result column="id" property="accountId" jdbcType="BIGINT" />
+    <result column="username" property="accountUsername" jdbcType="VARCHAR" />
+    <result column="type" property="accountType" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="accountMerchantName" jdbcType="VARCHAR" />
+    <result column="fullname" property="accountFullname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, wlanacname, device_id deviceId, ip_addr ipAddr, port, regist_secret registSecret, auth_secret authSecret, accounting_secret accountingSecret, name, description, 
+    create_datetime createDatetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from aaa_virtual_device
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="getRaduisByRaduis" resultMap="BaseResultMap" parameterType="com.access.model.device.AAAVirtualDevice" >
+    select 
+    <include refid="Base_Column_List" />
+    from aaa_virtual_device
+    where 1=1
+     <if test="deviceId != null" >
+       AND device_Id = #{deviceId,jdbcType=VARCHAR}
+     </if>
+     <if test="wlanacname != null" >
+       AND wlanacname = #{wlanacname,jdbcType=VARCHAR}
+     </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from aaa_virtual_device
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.AAAVirtualDevice" >
+    insert into aaa_virtual_device (id, wlanacname, device_id, 
+      ip_addr, port, regist_secret, auth_secret, 
+      accounting_secret, name, description, 
+      create_datetime)
+    values (#{id,jdbcType=BIGINT}, #{wlanacname,jdbcType=VARCHAR}, #{deviceId,jdbcType=VARCHAR}, 
+      #{ipAddr,jdbcType=VARCHAR}, #{port,jdbcType=INTEGER}, #{registSecret,jdbcType=VARCHAR}, #{authSecret,jdbcType=VARCHAR}, 
+      #{accountingSecret,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.AAAVirtualDevice" >
+    insert into aaa_virtual_device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="wlanacname != null" >
+        wlanacname,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="ipAddr != null" >
+        ip_addr,
+      </if>
+      <if test="port != null" >
+        port,
+      </if>
+      <if test="registSecret != null" >
+        regist_secret,
+      </if>
+      <if test="authSecret != null" >
+        auth_secret,
+      </if>
+      <if test="accountingSecret != null" >
+        accounting_secret,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wlanacname != null" >
+        #{wlanacname,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddr != null" >
+        #{ipAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        #{port,jdbcType=INTEGER},
+      </if>
+      <if test="registSecret != null" >
+        #{registSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="authSecret != null" >
+        #{authSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="accountingSecret != null" >
+        #{accountingSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.AAAVirtualDevice" >
+    update aaa_virtual_device
+    <set >
+      <if test="wlanacname != null" >
+        wlanacname = #{wlanacname,jdbcType=VARCHAR},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddr != null" >
+        ip_addr = #{ipAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        port = #{port,jdbcType=INTEGER},
+      </if>
+      <if test="registSecret != null" >
+        regist_secret = #{registSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="authSecret != null" >
+        auth_secret = #{authSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="accountingSecret != null" >
+        accounting_secret = #{accountingSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.AAAVirtualDevice" >
+    update aaa_virtual_device
+    set wlanacname = #{wlanacname,jdbcType=VARCHAR},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      ip_addr = #{ipAddr,jdbcType=VARCHAR},
+      port = #{port,jdbcType=INTEGER},
+      regist_secret = #{registSecret,jdbcType=VARCHAR},
+      auth_secret = #{authSecret,jdbcType=VARCHAR},
+      accounting_secret = #{accountingSecret,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getRaduisByAcname" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    	<include refid="Base_Column_List" />
+    from 
+    	aaa_virtual_device
+    where 
+    	wlanacname = #{wlanacname,jdbcType=VARCHAR}
+  </select>
+
+  <select id="getRaduisByDeviceId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from aaa_virtual_device
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getRaduisByDeviceIp" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from aaa_virtual_device
+    where ip_addr = #{ip_addr,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="aaavirtualdevice_getAAAVirtualDevicePage" resultMap="ResultMapWithAccount" parameterType="java.util.Map">
+    SELECT
+      aaa_virtual_device.device_id, 
+      aaa_virtual_device.wlanacname, 
+      IFNULL(aaa_virtual_device.ip_addr, '') AS ipAddr,
+      IFNULL(aaa_virtual_device.port, '') AS port,
+      IFNULL(aaa_virtual_device.regist_secret, '') AS registSecret,
+      IFNULL(aaa_virtual_device.auth_secret, '') AS authSecret,
+      IFNULL(aaa_virtual_device.accounting_secret, '') AS accountingSecret,
+      IFNULL(aaa_virtual_device.name, '') AS name,
+      IFNULL(aaa_virtual_device.description, '') AS description,
+      aaa_virtual_device.create_datetime,
+      device.location_id,
+      location.province, 
+      location.city, 
+      IFNULL(location.county_district, '') AS deviceCountyDistrict,
+      IFNULL(location.address, '') AS deviceAddress,
+      account.id, 
+      account.username, 
+      account.type,
+      IFNULL(account.merchant_name, '') AS accountMerchantName, 
+      IFNULL(account.fullname, '') AS accountFullname
+    FROM
+      aaa_virtual_device,
+      device,
+      location,
+      account
+    WHERE
+      aaa_virtual_device.device_id = device.device_id AND
+      device.location_id = location.id AND
+      location.account_id = account.id
+      <if test="keywords != null">
+        <foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")"> 
+          Concat(IFNULL(aaa_virtual_device.device_id, ''),
+              IFNULL(aaa_virtual_device.ip_addr, ''),
+              IFNULL(aaa_virtual_device.wlanacname, ''),
+              IFNULL(aaa_virtual_device.name, ''),
+              IFNULL(aaa_virtual_device.description, ''),
+              IFNULL(account.username, ''),
+              IFNULL(account.merchant_name, ''),
+              IFNULL(account.fullname, '')) LIKE Concat('%', #{item}, '%')
+        </foreach>
+      </if>
+      <if test="startDate != null">
+        <![CDATA[ AND aaa_virtual_device.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+      <if test="endDate != null">
+        <![CDATA[ AND aaa_virtual_device.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+      </if>
+    ORDER BY
+      aaa_virtual_device.create_datetime DESC
+    LIMIT
+      #{page.begin},#{page.pageSize}
+  </select>
+  
+  <update id="updateByDeviceId" parameterType="com.access.model.device.AAAVirtualDevice">
+    update
+      aaa_virtual_device
+    set
+      <if test="ipAddr != null" >
+        ip_addr = #{ipAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="port != null" >
+        port = #{port,jdbcType=INTEGER},
+      </if>
+      <if test="authSecret != null" >
+        auth_secret = #{authSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="accountingSecret != null" >
+        accounting_secret = #{accountingSecret,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="registSecret != null" >
+        regist_secret = #{registSecret,jdbcType=VARCHAR},
+      </if>
+      wlanacname = #{wlanacname,jdbcType=VARCHAR}
+    where
+      device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

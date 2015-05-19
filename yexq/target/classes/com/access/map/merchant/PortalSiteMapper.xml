@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalSiteMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalSite" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="site_name" property="siteName" jdbcType="VARCHAR" />
+    <result column="thumbnail_path" property="thumbnailPath" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="created_account_id" property="createdAccountId" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="last_edit_account_id" property="lastEditAccountId" jdbcType="BIGINT" />
+    <result column="last_update_datetime" property="lastUpdateDatetime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+  	<result column="description" property="description" jdbcType="VARCHAR"/>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, site_name, thumbnail_path, create_datetime, created_account_id, account_id, last_edit_account_id, 
+    last_update_datetime, status, description
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from portal_site
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from portal_site
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalSite" >
+    insert into portal_site (id, site_name, thumbnail_path, 
+      create_datetime, created_account_id, account_id, 
+      last_edit_account_id, last_update_datetime, 
+      status, description)
+    values (#{id,jdbcType=BIGINT}, #{siteName,jdbcType=VARCHAR}, #{thumbnailPath,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{createdAccountId,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, 
+      #{lastEditAccountId,jdbcType=BIGINT}, #{lastUpdateDatetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalSite" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into portal_site
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="siteName != null" >
+        site_name,
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="createdAccountId != null" >
+        created_account_id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="lastEditAccountId != null" >
+        last_edit_account_id,
+      </if>
+        last_update_datetime,
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="siteName != null" >
+        #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailPath != null" >
+        #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAccountId != null" >
+        #{createdAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="lastEditAccountId != null" >
+        #{lastEditAccountId,jdbcType=BIGINT},
+      </if>
+        #{lastUpdateDatetime,jdbcType=TIMESTAMP},
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.merchant.PortalSite" >
+    update portal_site
+    <set >
+      <if test="siteName != null" >
+        site_name = #{siteName,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createdAccountId != null" >
+        created_account_id = #{createdAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="lastEditAccountId != null" >
+        last_edit_account_id = #{lastEditAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="lastUpdateDatetime != null" >
+        last_update_datetime = #{lastUpdateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.merchant.PortalSite" >
+    update portal_site
+    set site_name = #{siteName,jdbcType=VARCHAR},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      created_account_id = #{createdAccountId,jdbcType=BIGINT},
+      account_id = #{accountId,jdbcType=BIGINT},
+      last_edit_account_id = #{lastEditAccountId,jdbcType=BIGINT},
+      last_update_datetime = #{lastUpdateDatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <update id="updateSiteStatus" parameterType="com.access.model.merchant.PortalSite">
+  	update portal_site set status=#{status} where id=#{id}
+  </update>
+  
+  <select id="portalSite_findPortalSitePage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select ps.*
+  	from portal_site as ps, account as a
+  	where (a.type = #{type,jdbcType=VARCHAR} or a.type = 'SUPER_MAN')
+  		and ps.account_id = a.id
+  		<if test="startDate != null">
+			<![CDATA[ and ps.last_update_datetime >= #{startDate,jdbcType=TIMESTAMP} ]]>
+		</if>
+  		<if test="endDate != null">
+			<![CDATA[ and ps.last_update_datetime < #{endDate,jdbcType=TIMESTAMP} ]]>
+		</if>
+  		<if test="accountId != null">
+			and a.id = #{accountId,jdbcType=BIGINT}
+		</if>
+		<if test="statuses != null">
+			<foreach item="item" index="index"  collection="statuses" open="and (" separator="OR" close=")">  
+			  IFNULL(ps.status, '') = #{item}
+			</foreach>
+		</if>
+		and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId,jdbcType=BIGINT}, '"%')
+		)
+		<if test="siteName != null" >
+	    	and ps.site_name like Concat('%', #{siteName,jdbcType=VARCHAR}, '%')
+	    </if>
+	    <if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+			  IFNULL(ps.site_name, '') like Concat('%', #{item}, '%')
+			 </foreach>
+	    </if>
+	    order by create_datetime desc
+  	limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="portalSite_findPortalSitePageCount" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select count(ps.*)
+  	from portal_site as ps, account as a
+  	where (a.type = #{type,jdbcType=VARCHAR} or a.type = 'SUPER_MAN')
+  		and ps.account_id = a.id
+  		<if test="startDate != null">
+			<![CDATA[ and ps.last_update_datetime >= #{startDate,jdbcType=TIMESTAMP} ]]>
+		</if>
+  		<if test="endDate != null">
+			<![CDATA[ and ps.last_update_datetime < #{endDate,jdbcType=TIMESTAMP} ]]>
+		</if>
+  		<if test="accountId != null">
+			and a.id = #{accountId,jdbcType=BIGINT}
+		</if>
+		<if test="statuses != null">
+			<foreach item="item" index="index"  collection="statuses" open="and (" separator="OR" close=")">  
+			  IFNULL(ps.status, '') = #{item}
+			</foreach>
+		</if>
+		and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId,jdbcType=BIGINT}, '"%')
+		)
+		<if test="siteName != null" >
+	    	and ps.site_name like Concat('%', #{siteName,jdbcType=VARCHAR}, '%')
+	    </if>
+	    <if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+			  IFNULL(ps.site_name, '') like Concat('%', #{item}, '%')
+			 </foreach>
+	    </if>
+  </select>  
+  
+  <select id="portalSite_portsitelistPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select ps.*
+  	from portal_site as ps, account as a
+  	where 
+  		ps.account_id = a.id
+  	    and a.type = #{type}
+  		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="statuses != null">
+			<foreach item="item" index="index"  collection="statuses" open="and (" separator="OR" close=")">  
+			  IFNULL(ps.status, '') = #{item}
+			</foreach>
+		</if>
+		and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+		)
+		<if test="siteName != null" >
+	    	and ps.site_name like Concat('%', #{siteName,jdbcType=VARCHAR}, '%')
+	    </if>
+  	limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="portalSite_portsitelistPageCount" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select count(ps.*)
+  	from portal_site as ps, account as a
+  	where a.type = #{type}
+  		<if test="accountId != null">
+			and a.id = #{accountId}
+		</if>
+		<if test="statuses != null">
+			<foreach item="item" index="index"  collection="statuses" open="and (" separator="OR" close=")">  
+			  IFNULL(ps.status, '') = #{item}
+			</foreach>
+		</if>
+		and (a.id = #{totalParentId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+		)
+		<if test="siteName != null" >
+	    	and ps.site_name like Concat('%', #{siteName,jdbcType=VARCHAR}, '%')
+	    </if>
+  </select>
+  
+  <select id="getPortalSitesBySiteIds" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from portal_site
+    where 
+        (status = 'NORMAL' or status = 'LOCKED')
+	<foreach item="item" index="index"  collection="siteIds" open="and id in (" separator=", " close=")">  
+		 #{item}
+	</foreach>
+  </select>
+  
+  <select id="getPortalSiteByOwnerId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+    select 
+    <include refid="Base_Column_List" />
+    from portal_site
+    where 
+    	(status = 'NORMAL')
+    	and account_id = #{value}
+  </select>
+  
+  <select id="getDefaultSite" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select 
+    <include refid="Base_Column_List" />
+    from portal_site
+    where 
+    	account_id = #{ownerId, jdbcType=BIGINT}
+    	and site_name = #{siteName, jdbcType=VARCHAR}
+    	and create_datetime = #{createDatetime, jdbcType=TIMESTAMP}
+  </select>
+  
+</mapper>

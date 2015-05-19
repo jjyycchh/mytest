@@ -1,0 +1,54 @@
+
+.Form-Primary {
+    margin-left: 10px;
+}
+.ChinaNet-Free-Table .ChinaNet-Table-Body .User-Member-Tag-Vip {
+    margin-right: 10px;
+    margin-bottom: 0;
+    width: 25px;
+    height: 25px;
+    background: url(../img/vip.png) no-repeat;
+}
+.ChinaNet-Free-Table .ChinaNet-Table-Body .User-Member-Tag-White {
+    margin-right: 10px;
+    margin-bottom: 0;
+    width: 25px;
+    height: 25px;
+    background: url(../img/whiteuser.png) no-repeat;
+}
+.ChinaNet-Free-Table .ChinaNet-Table-Body .User-Member-Tag-Black {
+    margin-right: 10px;
+    margin-bottom: 0;
+    width: 25px;
+    height: 25px;
+    background: url(../img/blackuser.png) no-repeat;
+}
+.ChinaNet-Free-Body-Right .User-Type-List {
+    display: none;
+    position: absolute;
+    padding: 9px 3px 3px 3px;
+    width: 92px;
+    height: 100px;
+    background: url(../img/tipbg4setting.png) no-repeat;
+}
+.ChinaNet-Free-Body-Right .User-Type-List ul {
+    list-style: none;
+    padding: 0 8px;
+}
+.ChinaNet-Free-Body-Right .User-Type-List ul li{
+    height: 24px;
+    line-height: 24px;
+    padding-left: 24px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    background-image: url(../img/unselected.png);
+    background-repeat: no-repeat;
+    background-position: 6px center;
+    cursor: pointer;
+}
+.ChinaNet-Free-Body-Right .User-Type-List ul li.Black-List-Li{
+    border-top: 1px dashed #dfdfdf;
+}
+.ChinaNet-Free-Body-Right .User-Type-List ul li.Select{
+    background-image: url(../img/selected.png);
+}

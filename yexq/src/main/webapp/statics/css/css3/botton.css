@@ -1,0 +1,41 @@
+.ThebBut
+{
+background-image:url(../../images/zzsoft/TheButt.gif);
+width:54px;
+height:22px;
+text-align:center;
+color:#FFFFFF;
+padding-top:3.5px;
+cursor:pointer;
+}
+
+.ThebBut2
+{
+background-image:url(../../images/zzsoft/TheButt2.gif);
+width:80px;
+height:22px;
+text-align:center;
+color:#FFFFFF;
+padding-top:3.5px;
+cursor:pointer;
+}
+
+.ThebBut3
+{
+background-image:url(../../images/zzsoft/TheButt3.gif);
+width:80px;
+height:22px;
+text-align:center;
+color:#FFFFFF;
+padding-top:3.5px;
+cursor:pointer;
+}
+
+.ThebNewBut{
+text-decoration: none;font-weight: normal;border: 1px solid #6593CF;
+	height: 24px; color:#ffffff;BACKGROUND-IMAGE: url(../../images/zzsoft/ButBg12.gif);
+	cursor:hand;text-align:center;margin-left:10px; font-size: 12px;padding-left:3px; padding-right:3px;padding-top:2px;
+	background-color:#ffffff;
+}
+
+

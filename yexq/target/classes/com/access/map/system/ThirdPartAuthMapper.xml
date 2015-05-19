@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.ThirdPartAuthMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.ThirdPartAuth" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="business_name" property="businessName" jdbcType="VARCHAR" />
+    <result column="virtual_device_id" property="virtualDeviceId" jdbcType="VARCHAR" />
+    <result column="site_id" property="siteId" jdbcType="BIGINT" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, business_name, virtual_device_id, site_id, status, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from third_part_auth
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from third_part_auth
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.ThirdPartAuth" >
+    insert into third_part_auth (id, business_name, virtual_device_id, 
+      site_id, status, create_datetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{businessName,jdbcType=VARCHAR}, #{virtualDeviceId,jdbcType=VARCHAR}, 
+      #{siteId,jdbcType=BIGINT}, #{status,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.ThirdPartAuth" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into third_part_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="businessName != null" >
+        business_name,
+      </if>
+      <if test="virtualDeviceId != null" >
+        virtual_device_id,
+      </if>
+      <if test="siteId != null" >
+        site_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="businessName != null" >
+        #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualDeviceId != null" >
+        #{virtualDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteId != null" >
+        #{siteId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.ThirdPartAuth" >
+    update third_part_auth
+    <set >
+      <if test="businessName != null" >
+        business_name = #{businessName,jdbcType=VARCHAR},
+      </if>
+      <if test="virtualDeviceId != null" >
+        virtual_device_id = #{virtualDeviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="siteId != null" >
+        site_id = #{siteId,jdbcType=BIGINT},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.ThirdPartAuth" >
+    update third_part_auth
+    set business_name = #{businessName,jdbcType=VARCHAR},
+      virtual_device_id = #{virtualDeviceId,jdbcType=VARCHAR},
+      site_id = #{siteId,jdbcType=BIGINT},
+      status = #{status,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="getAll" resultMap="BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from third_part_auth
+    	order by id desc
+  </select>
+    <select id="selectByDeviceId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    	<include refid="Base_Column_List" />
+    from third_part_auth
+    where virtual_device_id = #{deviceId,jdbcType=VARCHAR}
+    	order by id desc
+    limit 1
+  </select>
+  
+</mapper>

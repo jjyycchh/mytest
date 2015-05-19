@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+body{padding:0;margin:0;}
+*, *:before, *:after {box-sizing: border-box;}
+.thumbnail {overflow:hidden;}
+img { max-width: 100%;}
+table{border-collapse:collapse;}
+
+
+.siteModules {position:relative ! important;}
+.Page-Edit-Mode .siteModules {position:relative !important;}
+.portalTemplateBody {background-color:#fff;max-width:480px;overflow:hidden;margin:0 auto;width:438px;}
+
+
+#siteLogoViewModuleBox img{width:100%;}
+
+#siteImageSpanModule{width:100%;overflow:hidden;}
+#siteImageSpanModule .imglinks{float:left;}
+#siteImageSpanModule .imglinks a{cursor:pointer;}
+#siteImageSpanModule .imglinks a img {height:145px;}
+#siteImageSpanModule #imageLink02{float:right;width:166px;}
+#siteImageSpanModule #imageLink04{float:right; width:272px;}
+#siteImageSpanModule #imageLink05{float:left;width:218px;}
+#siteImageSpanModule #imageLink06{float:right;}
+

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.merchant.PortalTemplateHasPortalTagMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.merchant.PortalTemplateHasPortalTag" >
+    <result column="portal_template_id" property="portalTemplateId" jdbcType="BIGINT" />
+    <result column="portal_tag_id" property="portalTagId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List">
+  	portal_template_id, portal_tag_id
+  </sql>
+  <insert id="insert" parameterType="com.access.model.merchant.PortalTemplateHasPortalTag" >
+    insert into portal_template_has_portal_tag (portal_template_id, portal_tag_id)
+    values (#{portalTemplateId,jdbcType=BIGINT}, #{portalTagId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.merchant.PortalTemplateHasPortalTag" >
+    insert into portal_template_has_portal_tag
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="portalTemplateId != null" >
+        portal_template_id,
+      </if>
+      <if test="portalTagId != null" >
+        portal_tag_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="portalTemplateId != null" >
+        #{portalTemplateId,jdbcType=BIGINT},
+      </if>
+      <if test="portalTagId != null" >
+        #{portalTagId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  
+  <select id="selectByTagId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select
+  	    <include refid="Base_Column_List"/>
+  	from
+  		portal_template_has_portal_tag
+  	where
+  		portal_tag_id = #{portalTagId, jdbcType=BIGINT}
+  </select>
+  
+  <select id="selectByTemplateId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	select
+  	    <include refid="Base_Column_List"/>
+  	from
+  		portal_template_has_portal_tag
+  	where
+  		portal_template_id = #{portalTemplateId, jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByTemplateId" parameterType="java.lang.Long">
+  	delete from 
+  		portal_template_has_portal_tag
+  	where
+  		portal_template_id = #{portalTemplateId, jdbcType=BIGINT}
+  </delete>
+</mapper>

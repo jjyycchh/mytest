@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.user.StaticUserMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.user.StaticUser" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="auth_name" property="authName" jdbcType="VARCHAR" />
+    <result column="auth_password" property="authPassword" jdbcType="VARCHAR" />
+    <result column="auth_type" property="authType" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="devId" property="devid" jdbcType="VARCHAR" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="is_del" property="isDel" jdbcType="BIT" />
+    <result column="radius_password" property="radiusPassword" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="update_datetime" property="updateDatetime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, auth_name, auth_password, auth_type, mac, devId, account_id, is_del, radius_password, 
+    create_datetime, update_datetime, status, phone_number, note
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from static_user
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from static_user
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.user.StaticUser" >
+    insert into static_user (id, auth_name, auth_password, 
+      auth_type, mac, devId, 
+      account_id, is_del, radius_password, 
+      create_datetime, update_datetime, status, 
+      phone_number, note)
+    values (#{id,jdbcType=BIGINT}, #{authName,jdbcType=VARCHAR}, #{authPassword,jdbcType=VARCHAR}, 
+      #{authType,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{devid,jdbcType=VARCHAR}, 
+      #{accountId,jdbcType=BIGINT}, #{isDel,jdbcType=BIT}, #{radiusPassword,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{updateDatetime,jdbcType=TIMESTAMP}, #{status,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.user.StaticUser" >
+    insert into static_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="authName != null" >
+        auth_name,
+      </if>
+      <if test="authPassword != null" >
+        auth_password,
+      </if>
+      <if test="authType != null" >
+        auth_type,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="devid != null" >
+        devId,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="isDel != null" >
+        is_del,
+      </if>
+      <if test="radiusPassword != null" >
+        radius_password,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="updateDatetime != null" >
+        update_datetime,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="authName != null" >
+        #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authPassword != null" >
+        #{authPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="devid != null" >
+        #{devid,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="radiusPassword != null" >
+        #{radiusPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.user.StaticUser" >
+    update static_user
+    <set >
+      <if test="authName != null" >
+        auth_name = #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authPassword != null" >
+        auth_password = #{authPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        auth_type = #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="devid != null" >
+        devId = #{devid,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="radiusPassword != null" >
+        radius_password = #{radiusPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.user.StaticUser" >
+    update static_user
+    set auth_name = #{authName,jdbcType=VARCHAR},
+      auth_password = #{authPassword,jdbcType=VARCHAR},
+      auth_type = #{authType,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      devId = #{devid,jdbcType=VARCHAR},
+      account_id = #{accountId,jdbcType=BIGINT},
+      is_del = #{isDel,jdbcType=BIT},
+      radius_password = #{radiusPassword,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      note = #{note,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <!-- +++++++++++++++++++++++++++++++++ -->
+   <select id="getStaticUseryByMap" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from static_user su
+   	where su.account_id=#{accountId}
+   	and su.auth_name=#{username}
+   	and su.is_del = '0'
+  </select>
+  
+   <update id="updateByAidAndName" parameterType="com.access.model.user.StaticUser" >
+    update static_user
+    <set >
+      <if test="authName != null" >
+        auth_name = #{authName,jdbcType=VARCHAR},
+      </if>
+      <if test="authPassword != null" >
+        auth_password = #{authPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="authType != null" >
+        auth_type = #{authType,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="devid != null" >
+        devId = #{devid,jdbcType=VARCHAR},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="isDel != null" >
+        is_del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="radiusPassword != null" >
+        radius_password = #{radiusPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDatetime != null" >
+        update_datetime = #{updateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where account_id = #{accountId,jdbcType=BIGINT}
+    and auth_name = #{authName,jdbcType=VARCHAR}
+    and is_del = '0'
+  </update>
+</mapper>

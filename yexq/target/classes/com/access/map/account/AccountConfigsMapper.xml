@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.account.AccountConfigsMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.account.AccountConfigs" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="cfg_key" property="cfgKey" jdbcType="VARCHAR" />
+    <result column="cfg_value" property="cfgValue" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account_id, cfg_key, cfg_value, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from account_configs
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from account_configs
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.account.AccountConfigs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into account_configs (id, account_id, cfg_key, 
+      cfg_value, create_datetime)
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{cfgKey,jdbcType=VARCHAR}, 
+      #{cfgValue,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.account.AccountConfigs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into account_configs
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="cfgKey != null" >
+        cfg_key,
+      </if>
+      <if test="cfgValue != null" >
+        cfg_value,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="cfgKey != null" >
+        #{cfgKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgValue != null" >
+        #{cfgValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.account.AccountConfigs" >
+    update account_configs
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="cfgKey != null" >
+        cfg_key = #{cfgKey,jdbcType=VARCHAR},
+      </if>
+      <if test="cfgValue != null" >
+        cfg_value = #{cfgValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.account.AccountConfigs" >
+    update account_configs
+    set account_id = #{accountId,jdbcType=BIGINT},
+      cfg_key = #{cfgKey,jdbcType=VARCHAR},
+      cfg_value = #{cfgValue,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getAccountConfigsByKey" parameterType="java.util.Map" resultMap="BaseResultMap">
+	select 
+	<include refid="Base_Column_List" />
+	from account_configs 
+	where account_id = #{accountId,jdbcType=BIGINT}
+	and cfg_key =  #{cfgKey,jdbcType=VARCHAR}
+  </select>
+  
+  <update id="updateValueById" parameterType="com.access.model.account.AccountConfigs" >
+    update account_configs
+    set cfg_value = #{cfgValue,jdbcType=VARCHAR},
+    create_datetime = CURRENT_TIMESTAMP
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+    
+  <update id="updateValueByKey" parameterType="com.access.model.account.AccountConfigs" >
+    update account_configs
+    set cfg_value = #{cfgValue,jdbcType=VARCHAR},
+    create_datetime = CURRENT_TIMESTAMP
+    where account_id = #{accountId,jdbcType=BIGINT}
+    and cfg_key = #{cfgKey}
+  </update>
+  
+  <select id="getAccountConfigsMap" parameterType="java.lang.Long" resultMap="BaseResultMap">
+  	select 
+	<include refid="Base_Column_List" />
+	from account_configs 
+	where account_id = #{accountId,jdbcType=BIGINT}
+  </select>
+
+  <insert id="saveOnDuplicate" parameterType="com.access.model.account.AccountConfigs" >
+	INSERT INTO account_configs (account_id, cfg_key, cfg_value) 
+	VALUES (#{accountId,jdbcType=BIGINT}, 
+			#{cfgKey,jdbcType=VARCHAR}, 
+    		#{cfgValue,jdbcType=VARCHAR}) 
+	ON DUPLICATE KEY UPDATE cfg_value=VALUES(cfg_value)
+  </insert>
+
+  <select id="getAccountConfigsByKeyValue" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select
+	<include refid="Base_Column_List" />
+	from account_configs
+	where cfg_key = #{cfgKey,jdbcType=VARCHAR}
+      and cfg_value = #{cfgValue,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="getAccountConfigsByAccountId" parameterType="com.access.model.account.AccountConfigs" resultType="com.access.model.account.AccountConfigs">
+    select
+      <include refid="Base_Column_List" />
+    from
+      account_configs
+    where
+      account_id = #{accountId, jdbcType=BIGINT} AND
+      cfg_key = #{cfgKey, jdbcType=VARCHAR}
+    limit
+      1
+  </select>
+</mapper>

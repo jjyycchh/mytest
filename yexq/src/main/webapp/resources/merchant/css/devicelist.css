@@ -1,0 +1,69 @@
+@charset "utf-8";
+
+* {padding:0;margin:0;}
+body {font-family:'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';font-size:14px;color:#3fae9b;background-color:#fff;overflow:auto;}
+form,ul,li {padding:0;margin:0;}
+ul,li {list-style-type:none;}
+
+#header {width:1280px;height:126px;margin:0 auto;}
+#logo {width:317px;height:64px;padding:26px 0 0 48px;float:left;}
+#logo a {display:block;background:url(../img/devicelist/logo.jpg) no-repeat 0 0;text-indent:-999px;width:317px;height:64px;overflow:hidden;}
+#header .telephone {background:url(../img/devicelist/telephone.jpg) no-repeat 0 0;width:326px;height:22px;margin:25px 0 0 0;overflow:hidden;float:right;}
+#header .telephone span {font-size:16px;margin-left:38px;}
+
+#banner {background:url(../img/devicelist/pic.jpg) no-repeat 0 0;width:1280px;height:600px;margin:0 auto;}
+#advantage {width:1280px;margin:88px auto 0 auto;}
+#advantage .title {background:url(../img/devicelist/bar.jpg) no-repeat 0 0;width:100%;height:47px;}
+#advantage .advantage {background:url(../img/devicelist/advantage.jpg) no-repeat center center;width:1280px;height:128px;margin-top:24px;}
+#advantage .examples {background:url(../img/devicelist/pic2.jpg) no-repeat center center;width:100%;height:1135px;}
+
+#devicelist {width:1238px;margin:0 auto;border:1px solid #e7e7e7;}
+#devicelist .title {background-color:#f9f9f9;width:100%;height:57px;border-bottom:1px solid #e7e7e7;position:relative;}
+#devicelist .title span {display:block;background-color:#fff;font-size:18px;font-weight:bold;color:#16bc98;line-height:40px;text-align:center;width:99px;height:40px;border:1px solid #e7e7e7;border-bottom:none;position:absolute;top:17px;left:30px;}
+#devicelist .list {padding:14px 30px 30px 30px;}
+#devicelist .list .header {background-color:#18bd9b;width:100%;height:56px;}
+#devicelist .list .header ul {display:block;width:100%;height:56px;overflow:hidden;}
+#devicelist .list .header ul li {display:block;color:#fff;font-size:16px;line-height:56px;height:56px;float:left;}
+#devicelist .list .header ul li div {background-color:#fff;color:#666;line-height:37px;height:37px;margin-top:9px;}
+#devicelist .list .header ul li.item0 {text-align:center;width:106px;}
+#devicelist .list .header ul li.item1 {width:160px;}
+#devicelist .list .header ul li.item2 {width:160px;}
+#devicelist .list .header ul li.item3 {width:200px;}
+#devicelist .list .header ul li.item4 {width:120px;}
+#devicelist .list .header ul li.item5 {width:140px;}
+#devicelist .list .header ul li.item6 {width:150px;}
+#devicelist .list .header ul li.item7 {}
+#devicelist .list .header ul li.item0 span {text-align:center;}
+#devicelist .list .header ul li.item1 span {margin-left:50px;}
+#devicelist .list .header ul li.item2 div {width:100%;}
+#devicelist .list .header ul li.item3 span {margin-left:35px;}
+#devicelist .list .header ul li.item5 span {margin-left:20px;}
+#devicelist .list .header ul li.item6 div {width:75px;}
+
+
+#devicelist .list table {width:100%;border-collapse:collapse;border-spacing:0;border:1px solid #e7e7e7;table-layout:fixed;}
+#devicelist .list table tr {background-color:#f9f9f9;}
+#devicelist .list table tr:hover {background-color:#fff;}
+#devicelist .list table th {background-color:#fff;width:106px;border-bottom:1px solid #e7e7e7;}
+#devicelist .list table td {height:56px;border-bottom:1px solid #e7e7e7;}
+#devicelist .list table td span {display:block;}
+#devicelist .list table td .label1 {margin-left:50px;}
+#devicelist .list table td .label2 {margin-left:60px;}
+#devicelist .list table td .label3 {margin-left:35px;}
+#devicelist .list table td .label4 {margin-left:35px;}
+#devicelist .list table td .label5 {margin-left:42px;}
+#devicelist .list table td .label6 {margin-left:10px;}
+#devicelist .list table td .label7 {margin-left:20px;}
+
+#copyright {background-color:#f8f8f8;text-align:center;width:1280px;height:40px;margin:73px auto 0 auto;}
+#copyright span {font-size:15px;color:#6c7477;line-height:40px;}
+
+/* ulMenu */
+div.ulMenu {text-align:center;width:auto;height:100%;overflow:hidden;}
+div.ulMenu .ulMenuCaption {background:url(../img/devicelist/select.gif) no-repeat right 15px;line-height:37px;width:auto;height:37px;padding-right:4px;margin:0!important;overflow:hidden;}
+div.ulMenu .ulMenuCaption span {display:block;text-align:left;line-height:37px;width:auto;height:37px;padding:0 20px 0 9px;overflow:hidden;cursor:pointer;}
+#ulMenuList {background-color:#fff;border:1px solid #ddd;position:absolute;z-index:9999; max-height:200px;overflow-y:auto;}
+#ulMenuList ul {padding:3px;}
+#ulMenuList ul li {display:block;line-height:30px;width:auto;height:30px;padding:0 6px;overflow:hidden;cursor:pointer;}
+#ulMenuList ul li:hover {background-color:#18bd9b;color:#fff;}
+#ulMenuList ul li.ulMenuSelected {background-color:#18bd9b;color:#fff;}

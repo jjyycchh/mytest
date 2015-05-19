@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.JubaoMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.Jubao" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="jb_type" property="jbType" jdbcType="TINYINT" />
+    <result column="visious_account" property="visiousAccount" jdbcType="VARCHAR" />
+    <result column="visious_url" property="visiousUrl" jdbcType="VARCHAR" />
+    <result column="jb_description" property="jbDescription" jdbcType="VARCHAR" />
+    <result column="jb_account_id" property="jbAccountId" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithReport" type="com.access.model.system.Jubao" extends="BaseResultMap">
+    <result column="username" property="reportAccountUsername" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="reportAccountMerchantName" jdbcType="VARCHAR" />
+    <result column="fullname" property="reportAccountFullname" jdbcType="VARCHAR" />
+    <result column="type" property="reportAccountType" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithVisious" type="com.access.model.system.Jubao" extends="ResultMapWithReport">
+    <result column="username" property="visiousAccountUsername" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="visiousAccountMerchantName" jdbcType="VARCHAR" />
+    <result column="fullname" property="visiousAccountFullname" jdbcType="VARCHAR" />
+    <result column="type" property="visiousAccountType" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    id, jb_type, visious_account, visious_url, jb_description, jb_account_id, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from jubao
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from jubao
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.Jubao" >
+    insert into jubao (id, jb_type, visious_account, 
+      visious_url, jb_description, jb_account_id, 
+      create_datetime)
+    values (#{id,jdbcType=BIGINT}, #{jbType,jdbcType=TINYINT}, #{visiousAccount,jdbcType=VARCHAR}, 
+      #{visiousUrl,jdbcType=VARCHAR}, #{jbDescription,jdbcType=VARCHAR}, #{jbAccountId,jdbcType=BIGINT}, 
+      #{createDatetime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.Jubao" >
+    insert into jubao
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="jbType != null" >
+        jb_type,
+      </if>
+      <if test="visiousAccount != null" >
+        visious_account,
+      </if>
+      <if test="visiousUrl != null" >
+        visious_url,
+      </if>
+      <if test="jbDescription != null" >
+        jb_description,
+      </if>
+      <if test="jbAccountId != null" >
+        jb_account_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="jbType != null" >
+        #{jbType,jdbcType=TINYINT},
+      </if>
+      <if test="visiousAccount != null" >
+        #{visiousAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="visiousUrl != null" >
+        #{visiousUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="jbDescription != null" >
+        #{jbDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="jbAccountId != null" >
+        #{jbAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.Jubao" >
+    update jubao
+    <set >
+      <if test="jbType != null" >
+        jb_type = #{jbType,jdbcType=TINYINT},
+      </if>
+      <if test="visiousAccount != null" >
+        visious_account = #{visiousAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="visiousUrl != null" >
+        visious_url = #{visiousUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="jbDescription != null" >
+        jb_description = #{jbDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="jbAccountId != null" >
+        jb_account_id = #{jbAccountId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.Jubao" >
+    update jubao
+    set jb_type = #{jbType,jdbcType=TINYINT},
+      visious_account = #{visiousAccount,jdbcType=VARCHAR},
+      visious_url = #{visiousUrl,jdbcType=VARCHAR},
+      jb_description = #{jbDescription,jdbcType=VARCHAR},
+      jb_account_id = #{jbAccountId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="jubao_getReportPage" parameterType="java.util.Map" resultMap="ResultMapWithVisious">
+    SELECT
+      jubao.id,
+      jubao.jb_type,
+      IFNULL(jubao.visious_account, '') AS visiousAccount,
+      IFNULL(jubao.visious_url, '') AS visiousUrl,
+      jubao.jb_description,
+      jubao.jb_account_id,
+      jubao.create_datetime,
+      report_account.username,
+      IFNULL(report_account.merchant_name, '') AS reportAccountMerchantName,
+      IFNULL(report_account.fullname, '') AS reportAccountFullname,
+      report_account.type
+    FROM
+      jubao,
+      account AS report_account
+    WHERE
+      jubao.jb_account_id = report_account.id
+      <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(jubao.jb_description, '')) LIKE Concat('%', #{item}, '%')
+		</foreach>
+	  </if>
+	  <if test="jbType != null">
+	    AND jubao.jb_type = #{jbType, jdbcType=VARCHAR}
+	  </if>
+	  <if test="startDate != null">
+		<![CDATA[ AND jubao.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+ 	  <if test="endDate != null">
+		<![CDATA[ AND jubao.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+	ORDER BY
+	  jubao.id DESC
+	LIMIT
+	  #{page.begin},#{page.pageSize}
+  </select>
+</mapper>

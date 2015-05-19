@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.MenuMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.Menu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="INTEGER" />
+    <result column="flag" property="flag" jdbcType="BIT" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="unused" property="unused" jdbcType="BIT" />
+  </resultMap>
+ 
+  <sql id="Base_Column_List" >
+    id, name, description, parent_id pId, url, type, flag, position , unused
+  </sql>
+  
+  <select id="selectAllTree" resultMap="BaseResultMap" >
+    select 
+		m.id,
+		IFNULL(m.parent_id, '') as pId,
+		m.flag,
+		m.name,
+		m.description,
+		m.type,
+		IFNULL(m.position, '') as position,
+		m.unused,
+		IFNULL(m.url, '') as url
+	from menu m 
+	where m.unused ='0'
+  </select>
+ <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from menu
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insert" parameterType="com.access.model.system.Menu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into menu (name, description, parent_id, 
+      url, type, flag, position, 
+      unused)
+    values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, 
+      #{url,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{flag,jdbcType=BIT}, #{position,jdbcType=VARCHAR}, 
+      #{unused,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.Menu" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into menu
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="flag != null" >
+        flag,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="unused != null" >
+        unused,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=BIT},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="unused != null" >
+        #{unused,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.Menu" >
+    update menu
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        flag = #{flag,jdbcType=BIT},
+      </if>
+      <if test="position != null" >
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="unused != null" >
+        unused = #{unused,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.Menu" >
+    update menu
+    set name = #{name,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      flag = #{flag,jdbcType=BIT},
+      position = #{position,jdbcType=VARCHAR},
+      unused = #{unused,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update> 
+</mapper>

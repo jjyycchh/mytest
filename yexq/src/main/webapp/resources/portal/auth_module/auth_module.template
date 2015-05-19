@@ -1,0 +1,6 @@
+{
+	"moduleStartTag": "<div class='siteModule' id='siteLoginModule'>",
+	"moduleCloseTag": "</div>",
+	"authTypeSelector": "<>",
+	"allAuthComponent": "<div class='LoginBody'><div><input type='text' class='it-text' id='userMobile' placeholder='输入手机号码...'> <button type='button' class='it-button'>获取验证码</button></div><div><input type='text' class='it-text' placeholder='验证码'></div><div><button type='submit' class='it-submit' id='loginSubmit'>登录</button></div></div>"
+}

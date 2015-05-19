@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.ApplicationMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.Application" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="path" property="path" jdbcType="VARCHAR" />
+    <result column="upload_datetime" property="uploadDatetime" jdbcType="TIMESTAMP" />
+    <result column="published_datetime" property="publishedDatetime" jdbcType="TIMESTAMP" />
+    <result column="is_published" property="isPublished" jdbcType="TINYINT" />
+    <result column="download_count" property="downloadCount" jdbcType="BIGINT" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="thumbnail_path" property="thumbnailPath" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, platform, version, path, upload_datetime, published_datetime, is_published, download_count, 
+    description, thumbnail_path
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from application
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from application
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.Application" >
+    insert into application (id, platform, version, 
+      path, upload_datetime, published_datetime, 
+      is_published, download_count, description, 
+      thumbnail_path)
+    values (#{id,jdbcType=BIGINT}, #{platform,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR}, 
+      #{path,jdbcType=VARCHAR}, #{uploadDatetime,jdbcType=TIMESTAMP}, #{publishedDatetime,jdbcType=TIMESTAMP}, 
+      #{isPublished,jdbcType=TINYINT}, #{downloadCount,jdbcType=BIGINT}, #{description,jdbcType=VARCHAR}, 
+      #{thumbnailPath,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.Application" >
+    insert into application
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="path != null" >
+        path,
+      </if>
+      <if test="uploadDatetime != null" >
+        upload_datetime,
+      </if>
+      <if test="publishedDatetime != null" >
+        published_datetime,
+      </if>
+      <if test="isPublished != null" >
+        is_published,
+      </if>
+      <if test="downloadCount != null" >
+        download_count,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDatetime != null" >
+        #{uploadDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishedDatetime != null" >
+        #{publishedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPublished != null" >
+        #{isPublished,jdbcType=TINYINT},
+      </if>
+      <if test="downloadCount != null" >
+        #{downloadCount,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailPath != null" >
+        #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.Application" >
+    update application
+    <set >
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="uploadDatetime != null" >
+        upload_datetime = #{uploadDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="publishedDatetime != null" >
+        published_datetime = #{publishedDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isPublished != null" >
+        is_published = #{isPublished,jdbcType=TINYINT},
+      </if>
+      <if test="downloadCount != null" >
+        download_count = #{downloadCount,jdbcType=BIGINT},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="thumbnailPath != null" >
+        thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.Application" >
+    update application
+    set platform = #{platform,jdbcType=VARCHAR},
+      version = #{version,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      upload_datetime = #{uploadDatetime,jdbcType=TIMESTAMP},
+      published_datetime = #{publishedDatetime,jdbcType=TIMESTAMP},
+      is_published = #{isPublished,jdbcType=TINYINT},
+      download_count = #{downloadCount,jdbcType=BIGINT},
+      description = #{description,jdbcType=VARCHAR},
+      thumbnail_path = #{thumbnailPath,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="application_getApplicationPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  	select 
+  		<include refid="Base_Column_List" />
+  	from 
+  		application
+  	where
+  		1 = 1
+  		<if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+				Concat(IFNULL(application.platform, '')) like Concat('%', #{item}, '%')
+		 	</foreach>
+    	</if>
+    	<if test="startDate != null">
+			<![CDATA[ and application.upload_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+		</if>
+ 		<if test="endDate != null">
+			<![CDATA[ and application.upload_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+		</if>
+	order by
+		is_published desc, upload_datetime desc
+	limit
+		#{page.begin},#{page.pageSize}
+  </select>
+  
+  <update id="updateIsPublishedByPlatform" parameterType="java.lang.Long" >
+  	update application
+  	set
+  		is_published = 0,
+  		published_datetime = null
+  	where
+  		platform = #{platform, jdbcType=VARCHAR}
+  </update>
+  
+  <update id="updateIsPublishedById" parameterType="java.lang.Long" >
+  	update application
+  	set
+  		is_published = 1,
+  		published_datetime = now()
+  	where
+  		id = #{id, jdbcType=BIGINT}
+  </update>
+  
+  <select id="selectVersionByPlatform" resultType="java.lang.String" parameterType="java.lang.String" >
+  	select version
+  	from application
+  	where
+  		platform = #{platform, jdbcType=VARCHAR} and
+  		is_published = 1
+	limit
+		1
+  </select>
+  
+  <select id="selectByPlatformVersion" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  	select 
+  		<include refid="Base_Column_List" />
+  	from 
+  		application
+  	where
+  		platform = #{platform, jdbcType=VARCHAR} and
+  		version = #{version, jdbcType=VARCHAR}
+	limit
+		1
+  </select>
+  
+  <select id="getPathByPlatform" resultType="java.lang.String" parameterType="java.lang.String">
+  	select
+  		path
+  	from
+  		application
+  	where
+  		platform = #{platform, jdbcType=VARCHAR} and
+  		is_published = 1
+  	limit
+  		1
+  </select>
+  
+  <update id="updateDownloadCount" parameterType="java.lang.String">
+  	update
+  		application
+  	set
+  		download_count = download_count + 1
+  	where
+  		platform = #{platform, jdbcType=VARCHAR} and
+  		is_published = 1
+  </update>
+</mapper>

@@ -1,0 +1,32 @@
+@charset "utf-8";
+* {padding:0;margin:0;}
+html,body {width:100%;height:100%;}
+body {background-color:#fff;color:#64686d;font-family:'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';font-size:14px;overflow:auto;}
+div,p {word-break:break-all;word-wrap:break-word;}
+form,ul,li {padding:0;margin:0;}
+ul,li {list-style-type:none;}
+img,iframe,textarea {vertical-align:middle;border:0;}
+a:link,a:visited {text-decoration:underline;}
+a:hover,a:active {text-decoration:none;}
+input,button,textarea {outline:0!important;}
+.clearfix:after {content:" ";display:block;height:0;visibility:hidden;clear:both;}
+.clearfix {zoom:1;}
+
+.main {background:url(bg.jpg) no-repeat top center;background-size:100% auto;width:480px;min-height:100%;margin:0 auto;}
+.main .logo {background-size:60%;height:auto;width:100%;padding:40px 0;text-align:center;}
+.main .logo img {width:60%;border:0;}
+.main .cellphone,.main .authcode {width:auto;min-height:32px;padding:0 30px 0 70px;margin-top:20px;}
+.main .cellphone {background:url(phone.png) no-repeat 30px 0;}
+.main .authcode {background:url(authcode.png) no-repeat 30px 0;}
+.main .ipt {width:60%;height:32px;border:0;float:left;}
+.main .btn {width:38%;height:32px;border:0;float:right;}
+.main input {display:block;text-indent:10px;font-family:'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';font-size:16px;line-height:32px;width:100%;height:32px;border:0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;}
+.main button {display:block;background-color:#E1CBB3;color:#A8745F;width:100%;font-family:'Microsoft Yahei',Arial,Helvetica,sans-serif,Verdana,'Trebuchet MS';font-size:14px;height:32px;border:0;-webkit-border-radius:3px;-moz-border-radius:3px;border-radius:3px;cursor:pointer;}
+.main button:hover {background-color:#D4B798;}
+
+@media screen and (max-width: 480px) {
+.main {width:100%;}
+.main .cellphone,.main .authcode {width:auto;min-height:32px;padding:0 20px 0 60px;}
+.main .cellphone {background:url(phone.png) no-repeat 20px 0;}
+.main .authcode {background:url(authcode.png) no-repeat 20px 0;}
+}

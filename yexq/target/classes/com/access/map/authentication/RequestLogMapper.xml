@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.authentication.RequestLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.authentication.RequestLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="interface_url" property="interfaceUrl" jdbcType="VARCHAR" />
+    <result column="ip_source" property="ipSource" jdbcType="VARCHAR" />
+    <result column="is_success" property="isSuccess" jdbcType="TINYINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.authentication.RequestLogWithBLOBs" extends="BaseResultMap" >
+    <result column="interface_parameter" property="interfaceParameter" jdbcType="LONGVARCHAR" />
+    <result column="message" property="message" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, type, interface_url, ip_source, is_success, create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    interface_parameter, message
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from request_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from request_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.authentication.RequestLogWithBLOBs" >
+    insert into request_log (id, type, interface_url, 
+      ip_source, is_success, create_datetime, 
+      interface_parameter, message)
+    values (#{id,jdbcType=BIGINT}, #{type,jdbcType=VARCHAR}, #{interfaceUrl,jdbcType=VARCHAR}, 
+      #{ipSource,jdbcType=VARCHAR}, #{isSuccess,jdbcType=TINYINT}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{interfaceParameter,jdbcType=LONGVARCHAR}, #{message,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.authentication.RequestLogWithBLOBs" >
+    insert into request_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="interfaceUrl != null" >
+        interface_url,
+      </if>
+      <if test="ipSource != null" >
+        ip_source,
+      </if>
+      <if test="isSuccess != null" >
+        is_success,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="interfaceParameter != null" >
+        interface_parameter,
+      </if>
+      <if test="message != null" >
+        message,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null" >
+        #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ipSource != null" >
+        #{ipSource,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        #{isSuccess,jdbcType=TINYINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceParameter != null" >
+        #{interfaceParameter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="message != null" >
+        #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.authentication.RequestLogWithBLOBs" >
+    update request_log
+    <set >
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="interfaceUrl != null" >
+        interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="ipSource != null" >
+        ip_source = #{ipSource,jdbcType=VARCHAR},
+      </if>
+      <if test="isSuccess != null" >
+        is_success = #{isSuccess,jdbcType=TINYINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="interfaceParameter != null" >
+        interface_parameter = #{interfaceParameter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="message != null" >
+        message = #{message,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.authentication.RequestLogWithBLOBs" >
+    update request_log
+    set type = #{type,jdbcType=VARCHAR},
+      interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      ip_source = #{ipSource,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=TINYINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      interface_parameter = #{interfaceParameter,jdbcType=LONGVARCHAR},
+      message = #{message,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.authentication.RequestLog" >
+    update request_log
+    set type = #{type,jdbcType=VARCHAR},
+      interface_url = #{interfaceUrl,jdbcType=VARCHAR},
+      ip_source = #{ipSource,jdbcType=VARCHAR},
+      is_success = #{isSuccess,jdbcType=TINYINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

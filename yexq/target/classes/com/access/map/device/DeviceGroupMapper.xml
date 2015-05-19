@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.DeviceGroupMapper">
+	<resultMap id="BaseResultMap" type="com.access.model.device.DeviceGroup">
+		<id column="group_id" property="groupId" jdbcType="BIGINT" />
+		<result column="group_name" property="groupName" jdbcType="VARCHAR" />
+		<result column="note" property="note" jdbcType="VARCHAR" />
+		<result column="province" property="province" jdbcType="VARCHAR" />
+		<result column="city" property="city" jdbcType="VARCHAR" />
+		<result column="county_district" property="countyDistrict"
+			jdbcType="VARCHAR" />
+		<result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+		<result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		group_id, group_name, IFNULL(note,'') note, IFNULL(province,'') province, IFNULL(city,'') city,
+		county_district,create_time,update_time
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Long">
+		select
+		<include refid="Base_Column_List" />
+		from device_group
+		where group_id = #{groupId,jdbcType=BIGINT}
+	</select>
+	
+	<select id="selectByGroupname" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from device_group
+		where group_name = #{groupName,jdbcType=VARCHAR}
+	</select>
+	
+	<insert id="insert" parameterType="com.access.model.device.DeviceGroup">
+		<selectKey resultType="java.lang.Long" order="AFTER"
+			keyProperty="group_id">
+			SELECT LAST_INSERT_ID() AS group_id
+		</selectKey>
+		insert into device_group
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="groupId != null">
+				group_id,
+			</if>
+			<if test="groupName != null">
+				group_name,
+			</if>
+			<if test="note != null">
+				note,
+			</if>
+			<if test="province != null">
+				province,
+			</if>
+			<if test="city != null">
+				city,
+			</if>
+			<if test="countyDistrict != null">
+				county_district,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+			<if test="updateTime != null">
+				update_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="groupId != null">
+				#{groupId,jdbcType=BIGINT},
+			</if>
+			<if test="groupName != null">
+				#{groupName,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				#{note,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				#{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				#{city,jdbcType=VARCHAR},
+			</if>
+			<if test="countyDistrict != null">
+				#{countyDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="updateTime != null">
+				#{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+
+	<update id="updateByPrimaryKey" parameterType="com.access.model.device.DeviceGroup">
+		update device_group
+		<set>
+			<if test="groupName != null">
+				group_name = #{groupName,jdbcType=VARCHAR},
+			</if>
+			<if test="note != null">
+				note = #{note,jdbcType=VARCHAR},
+			</if>
+			<if test="province != null">
+				province = #{province,jdbcType=VARCHAR},
+			</if>
+			<if test="city != null">
+				city = #{city,jdbcType=VARCHAR},
+			</if>
+			<if test="countyDistrict != null">
+				county_district = #{countyDistrict,jdbcType=VARCHAR},
+			</if>
+			<if test="updateTime != null">
+				update_time = #{updateTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where group_id = #{groupId,jdbcType=BIGINT}
+	</update>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		delete from
+		device_group where group_id = #{groupId,jdbcType=BIGINT}
+	</delete>
+
+	<select id="getDeviceGroupPage" resultMap="BaseResultMap" parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from
+		device_group dg
+		where 1=1
+			<if test="province != null">
+				and dg.province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				and dg.city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+					Concat(IFNULL(dg.group_name, '')) like Concat('%', #{item}, '%')
+				</foreach>
+			</if>
+		ORDER BY 
+			dg.create_time desc
+		LIMIT 
+			#{page.begin},#{page.pageSize}
+	</select>
+	
+	<select id="getDeviceGroupPageTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		SELECT 
+  			count(*)
+  		FROM 
+  			device_group dg
+		WHERE 1=1 
+			<if test="province != null">
+				and dg.province = #{province,jdbcType=VARCHAR}
+			</if>
+			<if test="city != null">
+				and dg.city = #{city,jdbcType=VARCHAR}
+			</if>
+			<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+					Concat(IFNULL(dg.group_name, '')) like Concat('%', #{item}, '%')
+				</foreach>
+			</if>
+	</select>
+		
+	<select id="getDeviceGroupByProvince" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from device_group
+		where province=#{province,jdbcType=VARCHAR}
+	</select>
+
+	<select id="getDeviceGroupByProvinceAndCity" resultMap="BaseResultMap"
+		parameterType="java.util.Map">
+		select
+		<include refid="Base_Column_List" />
+		from device_group
+		where province=#{province,jdbcType=VARCHAR}
+		and
+		city=#{city,jdbcType=VARCHAR}
+	</select>
+
+</mapper>
