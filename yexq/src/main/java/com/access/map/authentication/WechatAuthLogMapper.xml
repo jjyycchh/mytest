@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.authentication.WechatAuthLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.authentication.WechatAuthLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="wechat_account" property="wechatAccount" jdbcType="VARCHAR" />
+    <result column="user_open_id" property="userOpenId" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="terminal_user_id" property="terminalUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, wechat_account, user_open_id, phone, create_datetime, terminal_user_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from wechat_auth_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from wechat_auth_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.authentication.WechatAuthLog" >
+    insert into wechat_auth_log (id, wechat_account, user_open_id, 
+      phone, create_datetime, terminal_user_id
+      )
+    values (#{id,jdbcType=BIGINT}, #{wechatAccount,jdbcType=VARCHAR}, #{userOpenId,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, #{terminalUserId,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.authentication.WechatAuthLog" >
+    insert into wechat_auth_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="wechatAccount != null" >
+        wechat_account,
+      </if>
+      <if test="userOpenId != null" >
+        user_open_id,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="terminalUserId != null" >
+        terminal_user_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="wechatAccount != null" >
+        #{wechatAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userOpenId != null" >
+        #{userOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalUserId != null" >
+        #{terminalUserId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.authentication.WechatAuthLog" >
+    update wechat_auth_log
+    <set >
+      <if test="wechatAccount != null" >
+        wechat_account = #{wechatAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="userOpenId != null" >
+        user_open_id = #{userOpenId,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalUserId != null" >
+        terminal_user_id = #{terminalUserId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.authentication.WechatAuthLog" >
+    update wechat_auth_log
+    set wechat_account = #{wechatAccount,jdbcType=VARCHAR},
+      user_open_id = #{userOpenId,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      terminal_user_id = #{terminalUserId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getWechatAuthLogByWechatUser" parameterType="java.util.Map" resultType="com.access.model.authentication.WechatAuthLog">
+    SELECT
+      <include refid="Base_Column_List" />
+    FROM
+      wechat_auth_log
+    WHERE
+      wechat_account = #{wechatAccount, jdbcType=VARCHAR} AND
+      user_open_id = #{userOpenId, jdbcType=VARCHAR}
+    LIMIT
+      1
+  </select>
+</mapper>

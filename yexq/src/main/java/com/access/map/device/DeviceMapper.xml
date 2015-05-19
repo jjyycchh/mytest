@@ -1,0 +1,1324 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.DeviceMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.Device" >
+    <id column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="device_model_id" property="deviceModelId" jdbcType="BIGINT" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="frameware_version" property="framewareVersion" jdbcType="VARCHAR" />
+    <result column="component_id" property="componentId" jdbcType="BIGINT" />
+    <result column="location_id" property="locationId" jdbcType="BIGINT" />
+    <result column="wan_protocol" property="wanProtocol" jdbcType="VARCHAR" />
+    <result column="last_online_datetime" property="lastOnlineDatetime" jdbcType="TIMESTAMP" />
+    <result column="registeration_date" property="registerationDate" jdbcType="TIMESTAMP" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="public_ip" property="publicIp" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="manufacturer_id" property="manufacturerId" jdbcType="BIGINT" />
+    <result column="traffic_limit" property="trafficLimit" jdbcType="INTEGER" />
+    <result column="mins_limit" property="minsLimit" jdbcType="INTEGER" />
+    <result column="telcom_account" property="telcomAccount" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="ems_dev_id" property="emsDevId" jdbcType="BIGINT"/>
+    <result column="ems_create_datetime" property="emsCreateDatetime" jdbcType="TIMESTAMP"/>
+    <result column="xpos" property="xPos" jdbcType="VARCHAR" />
+    <result column="ypos" property="yPos" jdbcType="VARCHAR" />
+    <result column="fixaddr" property="fixAddr" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.device.DeviceWithBLOBs" extends="BaseResultMap" >
+    <result column="startup_task" property="startupTask" jdbcType="LONGVARCHAR" />
+    <result column="config_items" property="configItems" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithLocation" type="com.access.model.device.Device" extends="BaseResultMap" >
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county_district" property="countyDistrict" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+  </resultMap>
+
+  <resultMap id="ResultMapWithAccount" type="com.access.model.device.Device" extends="ResultMapWithLocation" >
+    <result column="id" property="accountId" jdbcType="BIGINT" />
+    <result column="username" property="accountUsername" jdbcType="VARCHAR" />
+    <result column="merchant_name" property="accountMerchantname" jdbcType="VARCHAR" />
+    <result column="fullname" property="accountFullname" jdbcType="VARCHAR" />
+    <result column="type" property="accountType" jdbcType="VARCHAR" />
+    <result column="version" property="componentVersion" jdbcType="VARCHAR" />
+  </resultMap>
+    
+ <resultMap id="ResultMapWithDeviceGroup" type="com.access.model.device.Device" extends="ResultMapWithAccount" >
+    <result column="group_id" property="groupId" jdbcType="BIGINT" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+  </resultMap>
+     
+ <resultMap id="findDevicePageMap" type="com.access.model.device.DeviceWithBLOBs" >
+    <id column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="component_id" property="componentId" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="config_items" property="configItems" jdbcType="LONGVARCHAR" />
+    <result column="location_id" property="locationId" jdbcType="BIGINT" />
+    <result column="location_name" property="locationName" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="REAL" />
+    <result column="longitude" property="longitude" jdbcType="REAL" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="up_traffic" property="upTraffic" jdbcType="BIGINT" />
+    <result column="down_traffic" property="downTraffic" jdbcType="BIGINT" />
+  </resultMap>
+	
+  <resultMap id="deviceInfoMap" type="com.access.model.device.Device" extends="findDevicePageMap" >
+    <result column="registeration_date" property="registerationDate" jdbcType="TIMESTAMP" />
+    <result column="location_adress" property="locationAdress" jdbcType="VARCHAR" />
+    <result column="wan_protocol" property="wanProtocol" jdbcType="VARCHAR" />
+    <result column="last_online_datetime" property="lastOnlineDatetime" jdbcType="TIMESTAMP" />
+    <result column="public_ip" property="publicIp" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="device_userDeviceListMap" type="com.access.model.device.DeviceWithBLOBs" extends="findDevicePageMap" >
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="findDeviceLimitMap" type="com.access.model.device.DeviceWithBLOBs" extends="findDevicePageMap" >
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="mins_limit" property="minsLimit" jdbcType="INTEGER" />
+    <result column="traffic_limit" property="trafficLimit" jdbcType="INTEGER" />
+  </resultMap>
+  
+  <resultMap id="findByPageMap" type="com.access.model.device.DeviceWithBLOBs">
+  	<id column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="component_id" property="componentId" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="config_items" property="configItems" jdbcType="LONGVARCHAR" />
+    <result column="location_id" property="locationId" jdbcType="BIGINT" />
+    <result column="location_name" property="locationName" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="REAL" />
+    <result column="longitude" property="longitude" jdbcType="REAL" />
+    <result column="merchant_name" property="merchantName" jdbcType="VARCHAR" />
+    <result column="up_traffic" property="upTraffic" jdbcType="BIGINT" />
+    <result column="down_traffic" property="downTraffic" jdbcType="BIGINT" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="geo_location" property="geoLocation" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <resultMap id="getRefereshDeviceMap" type="com.access.model.device.DeviceWithBLOBs" >
+    <id column="device_id" property="deviceId" jdbcType="VARCHAR" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="mac" property="mac" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="up_traffic" property="upTraffic" jdbcType="BIGINT" />
+    <result column="down_traffic" property="downTraffic" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <sql id="Base_Column_List" >
+    device_id,ems_dev_id,device_model_id, brand, model, name, status, frameware_version, component_id, 
+    location_id, wan_protocol, last_online_datetime, registeration_date, mac, public_ip, 
+    create_datetime, manufacturer_id, traffic_limit, mins_limit, telcom_account, type,
+    xpos, ypos, fixaddr
+  </sql>
+  
+  <sql id="Blob_Column_List" >
+    startup_task startupTask, config_items configItems
+  </sql>
+  
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    	<include refid="Base_Column_List" />
+    from 
+    	device
+    where 
+    	device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByPrimaryKeySelective" resultMap="ResultMapWithBLOBs" parameterType="com.access.model.device.DeviceWithBLOBs" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from device
+    where 1=1
+     <if test="type != null" >
+       AND type = #{type,jdbcType=VARCHAR}
+     </if>
+     <if test="ems_dev_id != null" >
+       AND ems_dev_id = #{ems_dev_id,jdbcType=BIGINT}
+     </if>
+  </select>
+  
+  <!-- 根据网元ID和设备类型获取一条设备记录 -->
+  <select id="selectByEmsDevIdAndType" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+	    <include refid="Base_Column_List" />,
+	    <include refid="Blob_Column_List" />
+    from 
+    	device
+    where
+    	type = #{type,jdbcType=VARCHAR}
+    AND 
+    	ems_dev_id = #{emsDevId,jdbcType=BIGINT}
+  </select>
+  
+  <!-- 根据网元ID和mac获取一条设备记录 -->
+  <select id="selectByEmsDevIdAndMac" resultMap="ResultMapWithBLOBs" parameterType="java.util.Map" >
+    select 
+	    <include refid="Base_Column_List" />,
+	    <include refid="Blob_Column_List" />
+    from 
+    	device
+    where
+    	mac = #{mac,jdbcType=VARCHAR}
+    AND 
+    	ems_dev_id = #{emsDevId,jdbcType=BIGINT}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from device
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.DeviceWithBLOBs" >
+    insert into device (device_id, device_model_id, brand, 
+      model, name, status, 
+      frameware_version, component_id, location_id, 
+      wan_protocol, last_online_datetime, registeration_date, 
+      mac, public_ip, create_datetime, 
+      manufacturer_id, traffic_limit, mins_limit, 
+      telcom_account, type, startup_task, 
+      config_items)
+    values (#{deviceId,jdbcType=VARCHAR}, #{deviceModelId,jdbcType=BIGINT}, #{brand,jdbcType=VARCHAR}, 
+      #{model,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{framewareVersion,jdbcType=VARCHAR}, #{componentId,jdbcType=BIGINT}, #{locationId,jdbcType=BIGINT}, 
+      #{wanProtocol,jdbcType=VARCHAR}, #{lastOnlineDatetime,jdbcType=TIMESTAMP}, #{registerationDate,jdbcType=TIMESTAMP}, 
+      #{mac,jdbcType=VARCHAR}, #{publicIp,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{manufacturerId,jdbcType=BIGINT}, #{trafficLimit,jdbcType=INTEGER}, #{minsLimit,jdbcType=INTEGER}, 
+      #{telcomAccount,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{startupTask,jdbcType=LONGVARCHAR}, 
+      #{configItems,jdbcType=LONGVARCHAR})
+  </insert>
+  
+  <insert id="insertSelective" parameterType="com.access.model.device.DeviceWithBLOBs" >
+    insert into device
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="emsDevId != null" >
+        ems_dev_id,
+      </if>
+      <if test="deviceModelId != null" >
+        device_model_id,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="framewareVersion != null" >
+        frameware_version,
+      </if>
+      <if test="componentId != null" >
+        component_id,
+      </if>
+      <if test="locationId != null" >
+        location_id,
+      </if>
+      <if test="wanProtocol != null" >
+        wan_protocol,
+      </if>
+      <if test="lastOnlineDatetime != null" >
+        last_online_datetime,
+      </if>
+      <if test="registerationDate != null" >
+        registeration_date,
+      </if>
+      <if test="mac != null" >
+        mac,
+      </if>
+      <if test="publicIp != null" >
+        public_ip,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="manufacturerId != null" >
+        manufacturer_id,
+      </if>
+      <if test="trafficLimit != null" >
+        traffic_limit,
+      </if>
+      <if test="minsLimit != null" >
+        mins_limit,
+      </if>
+      <if test="telcomAccount != null" >
+        telcom_account,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="startupTask != null" >
+        startup_task,
+      </if>
+      <if test="configItems != null" >
+        config_items,
+      </if>
+      <if test="emsCreateDatetime != null" >
+        ems_create_datetime,
+      </if>
+      <if test="xPos != null" >
+        xpos,
+      </if>
+      <if test="yPos != null" >
+        ypos,
+      </if>
+      <if test="fixAddr != null" >
+        fixaddr,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="emsDevId != null" >
+        #{emsDevId,jdbcType=BIGINT},
+      </if>
+      <if test="deviceModelId != null" >
+        #{deviceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="framewareVersion != null" >
+        #{framewareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="componentId != null" >
+        #{componentId,jdbcType=BIGINT},
+      </if>
+      <if test="locationId != null" >
+        #{locationId,jdbcType=BIGINT},
+      </if>
+      <if test="wanProtocol != null" >
+        #{wanProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="lastOnlineDatetime != null" >
+        #{lastOnlineDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerationDate != null" >
+        #{registerationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="publicIp != null" >
+        #{publicIp,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manufacturerId != null" >
+        #{manufacturerId,jdbcType=BIGINT},
+      </if>
+      <if test="trafficLimit != null" >
+        #{trafficLimit,jdbcType=INTEGER},
+      </if>
+      <if test="minsLimit != null" >
+        #{minsLimit,jdbcType=INTEGER},
+      </if>
+      <if test="telcomAccount != null" >
+        #{telcomAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="startupTask != null" >
+        #{startupTask,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="configItems != null" >
+        #{configItems,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="emsCreateDatetime != null" >
+        #{emsCreateDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="xPos != null" >
+        #{xPos,jdbcType=VARCHAR},
+      </if>
+      <if test="yPos != null" >
+        #{yPos,jdbcType=VARCHAR},
+      </if>
+      <if test="fixAddr != null" >
+        #{fixAddr,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.DeviceWithBLOBs" >
+    update device
+    <set >
+      <if test="deviceModelId != null" >
+        device_model_id = #{deviceModelId,jdbcType=BIGINT},
+      </if>
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="framewareVersion != null" >
+        frameware_version = #{framewareVersion,jdbcType=VARCHAR},
+      </if>
+      <if test="componentId != null" >
+        component_id = #{componentId,jdbcType=BIGINT},
+      </if>
+      <if test="locationId != null" >
+        location_id = #{locationId,jdbcType=BIGINT},
+      </if>
+      <if test="wanProtocol != null" >
+        wan_protocol = #{wanProtocol,jdbcType=VARCHAR},
+      </if>
+      <if test="lastOnlineDatetime != null" >
+        last_online_datetime = #{lastOnlineDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="registerationDate != null" >
+        registeration_date = #{registerationDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mac != null" >
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+       <if test="startupTask != null" >
+        startup_task = #{startupTask,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="publicIp != null" >
+        public_ip = #{publicIp,jdbcType=VARCHAR},
+      </if>
+      <if test="configItems != null" >
+        config_items = #{configItems,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manufacturerId != null" >
+        manufacturer_id = #{manufacturerId,jdbcType=BIGINT},
+      </if>
+      <if test="trafficLimit != null" >
+        traffic_limit = #{trafficLimit,jdbcType=INTEGER},
+      </if>
+      <if test="minsLimit != null" >
+        mins_limit = #{minsLimit,jdbcType=INTEGER},
+      </if>
+      <if test="telcomAccount != null" >
+        telcom_account = #{telcomAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="emsDevId != null" >
+        ems_dev_id = #{emsDevId,jdbcType=BIGINT},
+      </if>
+      <if test="emsCreateDatetime != null" >
+        ems_create_datetime = #{emsCreateDatetime,jdbcType=TIMESTAMP},
+      </if>
+       <if test="xPos != null" >
+        xpos = #{xPos,jdbcType=TIMESTAMP},
+      </if>
+       <if test="yPos != null" >
+        ypos = #{yPos,jdbcType=TIMESTAMP},
+      </if>
+       <if test="fixAddr != null" >
+        fixaddr = #{fixAddr,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  
+  
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.device.DeviceWithBLOBs" >
+    update device
+    set device_model_id = #{deviceModelId,jdbcType=BIGINT},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      frameware_version = #{framewareVersion,jdbcType=VARCHAR},
+      component_id = #{componentId,jdbcType=BIGINT},
+      location_id = #{locationId,jdbcType=BIGINT},
+      wan_protocol = #{wanProtocol,jdbcType=VARCHAR},
+      last_online_datetime = #{lastOnlineDatetime,jdbcType=TIMESTAMP},
+      registeration_date = #{registerationDate,jdbcType=TIMESTAMP},
+      mac = #{mac,jdbcType=VARCHAR},
+      public_ip = #{publicIp,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      manufacturer_id = #{manufacturerId,jdbcType=BIGINT},
+      traffic_limit = #{trafficLimit,jdbcType=INTEGER},
+      mins_limit = #{minsLimit,jdbcType=INTEGER},
+      telcom_account = #{telcomAccount,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      startup_task = #{startupTask,jdbcType=LONGVARCHAR},
+      config_items = #{configItems,jdbcType=LONGVARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.Device" >
+    update device
+    set device_model_id = #{deviceModelId,jdbcType=BIGINT},
+      brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      frameware_version = #{framewareVersion,jdbcType=VARCHAR},
+      component_id = #{componentId,jdbcType=BIGINT},
+      location_id = #{locationId,jdbcType=BIGINT},
+      wan_protocol = #{wanProtocol,jdbcType=VARCHAR},
+      last_online_datetime = #{lastOnlineDatetime,jdbcType=TIMESTAMP},
+      registeration_date = #{registerationDate,jdbcType=TIMESTAMP},
+      mac = #{mac,jdbcType=VARCHAR},
+      public_ip = #{publicIp,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      manufacturer_id = #{manufacturerId,jdbcType=BIGINT},
+      traffic_limit = #{trafficLimit,jdbcType=INTEGER},
+      mins_limit = #{minsLimit,jdbcType=INTEGER},
+      telcom_account = #{telcomAccount,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR}
+    where device_id = #{deviceId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="device_findDevicePage" parameterType="java.util.Map" resultMap="findDevicePageMap">
+  	 	SELECT d.device_id as device_id, d.component_id as component_id, IFNULL(d.mac, '') as mac,
+  	 		d.brand as brand, d.model as model, IFNULL(d.name,'') as name, 
+  	 		(case upper(d.status) = 'LOCKED' 
+  	 			when true then upper(d.status)
+  	 			else case upper(dsl.type) = 'ONLINE' or upper(dsl.type) = 'OFFLINE'
+		            when true then upper(dsl.type)
+		            else case upper(dsl.type) = 'HEARTBEAT'
+		                when true then UPPER('ONLINE')
+		                else upper(d.status)
+			            end
+			        end
+			    end) as status,
+  	 		d.config_items as config_items, 
+  	 		l.id as location_id, l.name as location_name, 
+  	 		l.latitude as latitude, l.longitude as longitude, 
+  	 		a.merchant_name as merchant_name, 
+			(case dsl.type = 'online' or dsl.type = 'ONLINE' or dsl.type = 'heartbeat' or dsl.type = 'HEARTBEAT'
+			     when true then dsl.up_traffic
+			     else 0 end) as up_traffic,
+			(case dsl.type = 'online' or dsl.type = 'ONLINE' or dsl.type = 'heartbeat' or dsl.type = 'HEARTBEAT'
+			     when true then dsl.down_traffic
+			     else 0 end) as down_traffic
+		from device as d
+		  JOIN	location as l ON d.location_id=l.id 
+		  JOIN	account as a ON l.account_id=a.id
+		  LEFT JOIN	( SELECT DISTINCT device_id, create_datetime, type, up_traffic,down_traffic 
+				from device_status_log order by id desc limit 1) as dsl ON d.device_id=dsl.device_id
+		where 1=1
+	    <if test="status != null" >
+	    	and (case upper(d.status) = 'LOCKED' 
+  	 			when true then upper(d.status)
+  	 			else case upper(dsl.type) = 'ONLINE' or upper(dsl.type) = 'OFFLINE'
+		            when true then upper(dsl.type)
+		            else case upper(dsl.type) = 'HEARTBEAT'
+		                when true then UPPER('ONLINE')
+		                else upper(d.status)
+			            end
+			        end
+			    end) = #{status, jdbcType=VARCHAR}
+	    </if>
+	    <if test="accountid != null" >
+		and (a.id = #{accountid} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{accountid,jdbcType=BIGINT}, '"%')
+		)
+		</if>
+	    <if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+			  Concat(IFNULL(d.name, ''),
+					IFNULL(a.merchant_name,''),
+                    IFNULL(a.username, ''),
+                    IFNULL(d.mac, ''),
+                    IFNULL(d.device_id, '')) like Concat('%', #{item}, '%')
+			 </foreach>
+	    </if>
+	    limit #{page.begin}, #{page.pageSize}
+	</select>
+	<select id="device_findDevicePageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  	 	SELECT count(d.device_id)
+		from device as d
+		  JOIN	location as l ON d.location_id=l.id 
+		  JOIN	account as a ON l.account_id=a.id
+		  LEFT JOIN	( SELECT DISTINCT device_id, create_datetime, type, up_traffic,down_traffic 
+				from device_status_log order by id desc limit 1) as dsl ON d.device_id=dsl.device_id
+		where 1=1
+	    <if test="status != null" >
+	    	and (case upper(d.status) = 'LOCKED' 
+  	 			when true then upper(d.status)
+  	 			else case upper(dsl.type) = 'ONLINE' or upper(dsl.type) = 'OFFLINE'
+		            when true then upper(dsl.type)
+		            else case upper(dsl.type) = 'HEARTBEAT'
+		                when true then UPPER('ONLINE')
+		                else upper(d.status)
+			            end
+			        end
+			    end) = #{status, jdbcType=VARCHAR}
+	    </if>
+	    <if test="accountid != null" >
+		and (a.id = #{accountid} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{accountid,jdbcType=BIGINT}, '"%')
+		)
+		</if>
+	    <if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+			  Concat(IFNULL(d.name, ''),
+					IFNULL(a.merchant_name,'')) like Concat('%', #{item}, '%')
+			 </foreach>
+	    </if>
+	</select>
+	
+	
+  <update id="updateStatus" parameterType="java.util.Map">
+  	update device set status = #{status} where device_id = #{deviceId}
+  </update>
+  
+ <select id="selectDeviceInfoByIds" resultMap="deviceInfoMap" parameterType="java.lang.String" >
+	select d.device_id, d.brand, d.model, d.name, d.registeration_date, d.component_id,
+	l.id as location_id, l.address as location_adress, l.latitude, l.longitude,
+	a.merchant_name, d.wan_protocol, d.last_online_datetime,d.public_ip,
+	d.mac, 		   
+ 	(case upper(d.status) = 'LOCKED' 
+ 		when true then upper(d.status)
+ 		else case upper(dsl.type) = 'ONLINE' or upper(dsl.type) = 'OFFLINE'
+            when true then upper(dsl.type)
+            else case upper(dsl.type) = 'HEARTBEAT'
+                when true then UPPER('ONLINE')
+                else upper(d.status)
+            end
+        end
+    end) as status,
+	(case dsl.type = 'online' or dsl.type = 'ONLINE' or dsl.type = 'heartbeat' or dsl.type = 'HEARTBEAT'
+	     when true then dsl.up_traffic
+	     else 0 end) as up_traffic,
+	(case dsl.type = 'online' or dsl.type = 'ONLINE' or dsl.type = 'heartbeat' or dsl.type = 'HEARTBEAT'
+	     when true then dsl.down_traffic
+	     else 0 end) as down_traffic
+	from device as d
+	LEFT JOIN location as l ON d.location_id=l.id
+	LEFT JOIN account as a ON l.account_id=a.id
+	LEFT JOIN component as c ON d.component_id=c.id
+    LEFT JOIN ( SELECT DISTINCT device_id, create_datetime, type, up_traffic,down_traffic 
+		from device_status_log order by id desc limit 1) as dsl ON d.device_id=dsl.device_id
+	where 1=1 
+	<if test="deviceIds != null">
+		and 
+		<foreach item="item" index="index"  collection="deviceIds" open="(" separator=" or " close=")">  
+		  d.device_id=#{item}
+		</foreach>
+	</if>
+  </select>
+  
+   <select id="getRefereshDeviceByIds" resultMap="getRefereshDeviceMap" parameterType="java.lang.String" >
+		select d.device_id, d.brand, d.model, d.name, d.mac, 		   
+		 	(CASE upper(d.STATUS) = 'LOCKED'
+			WHEN TRUE THEN upper(d.STATUS)
+			ELSE CASE dsl.type is NULL
+					WHEN true THEN 'OFFLINE'
+					ELSE CASE upper(dsl.type) = 'ONLINE' OR upper(dsl.type) = 'OFFLINE'
+						WHEN TRUE THEN upper(dsl.type)
+						ELSE CASE upper(dsl.type) = 'HEARTBEAT'
+							WHEN TRUE THEN UPPER('ONLINE')
+							ELSE upper(d.STATUS)
+							END
+						END
+					END
+			END) as status,
+			(case dsl.type = 'online' or dsl.type = 'ONLINE' or dsl.type = 'heartbeat' or dsl.type = 'HEARTBEAT'
+			     when true then dsl.up_traffic
+			     else 0 end) as up_traffic,
+			(case dsl.type = 'online' or dsl.type = 'ONLINE' or dsl.type = 'heartbeat' or dsl.type = 'HEARTBEAT'
+			     when true then dsl.down_traffic
+			     else 0 end) as down_traffic
+		from device as d
+		LEFT JOIN location as l ON d.location_id=l.id
+		LEFT JOIN account as a ON l.account_id=a.id
+		LEFT JOIN component as c ON d.component_id=c.id
+	    LEFT JOIN ( SELECT MAX(create_datetime), device_id, type, up_traffic, down_traffic 
+				from device_status_log 
+				where 1=1
+				<if test="deviceIds != null">
+					and 
+					<foreach item="item" index="index"  collection="deviceIds" open="(" separator=" or " close=")">  
+					  device_id=#{item}
+					</foreach>
+				</if>
+				group by device_id
+				order by id desc) as dsl ON d.device_id=dsl.device_id
+		where 1=1 
+		<if test="deviceIds != null">
+			and 
+			<foreach item="item" index="index"  collection="deviceIds" open="(" separator=" or " close=")">  
+			  d.device_id=#{item}
+			</foreach>
+		</if>
+  </select>
+  
+  <update id="updateSettings" parameterType="java.util.Map">
+  	update device 
+  	set 
+  	config_items = #{configItems}
+  	<if test="hostname != null">
+  		,name = #{hostname}
+  	</if>
+  	<if test="componentId != null">
+  		,set component_id = #{componentId}
+  	</if>
+  	where device_id = #{deviceId}
+  </update>
+  
+  
+  <update id="updateSettingsBatch" parameterType="java.util.Map">
+  	update device 
+  	set config_items = #{configItems},
+  	component_id = #{componentId}
+  	where device_id in
+  	<foreach item="item" index="index"  collection="deviceIdArray" open="(" separator="," close=")">  
+	  #{item}
+	</foreach>
+  </update>
+  
+  <select id="getDeviceByMac" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+	from device where mac = #{mac}
+  </select>
+  
+  <select id="device_userDeviceList" parameterType="java.util.Map" resultMap="device_userDeviceListMap">
+  	 SELECT d.device_id, d.name, d.status, d.mac
+	from device as d,
+		location as l,
+		account as a
+	where d.location_id=l.id 
+		and l.account_id=a.id
+		and a.type = #{type,jdbcType=VARCHAR}
+		<if test="totalParentId != null" >
+			and (a.id = #{totalParentId} 
+				or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{totalParentId}, '"%')
+			)
+		</if>
+	    <if test="accountId != null" >
+	    	and l.account_id = #{accountId,jdbcType=BIGINT}
+	    </if>
+	    <if test="deviceName != null" >
+	    	and d.name like Concat('%', #{deviceName,jdbcType=VARCHAR}, '%')
+	    </if>
+	    limit #{page.begin},#{page.pageSize}
+	</select>
+	
+  <select id="userDeviceList" parameterType="java.util.Map" resultMap="device_userDeviceListMap">
+  SELECT d.device_id, d.name, d.status, d.mac
+	from device as d,
+		location as l,
+		account as a
+	where d.location_id=l.id 
+		and l.account_id=a.id
+		<if test="devicename != null" >
+		and d.name like concat('%',  #{devicename}, '%')
+		</if>
+		<if test="devicestatus != null" >
+		and d.status = #{devicestatus}
+		</if>
+	    and l.account_id = #{accountId}
+	    limit 200
+  </select>
+	
+  <select id="getDeviceForPolicyByOwnerId" parameterType="java.util.Map" resultMap="device_userDeviceListMap">
+	SELECT 
+	    d.device_id, IFNULL(d.name,'') as name, d.status, a.id, d.mac
+	from
+	    device as d,
+	    location as l,
+	    account as a
+	where
+	    d.location_id = l.id
+	        and l.account_id = a.id
+			<if test="devicename != null" >
+			and d.name like concat('%',  #{devicename}, '%')
+			</if>
+			<if test="devicestatus != null" >
+			and d.status = #{devicestatus}
+			</if>
+	        and l.account_id = #{accountId}
+	        and (select 
+	            count(*)
+	        from
+	            portal_display_policy
+	        where
+	            account_id = #{accountId}
+	            	and status = 'NORMAL'
+	                and device_ids like Concat('%', d.device_id, '%')) = 0
+	limit 200
+  </select>
+
+    <select id="getDevicesByLocationId" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from device where location_id = #{value}
+    </select>
+
+	<update id="updateDeviceLimit" parameterType="java.util.Map">
+		update device as d,location as l set 
+			d.traffic_limit = #{trafficLimit, jdbcType=INTEGER},
+			d.mins_limit = #{minsLimit, jdbcType=INTEGER}
+		where d.location_id=l.id
+		and l.account_id = #{accountId, jdbcType=BIGINT}
+	</update>
+	
+	<select id="findDeviceLimit" parameterType="java.lang.Long" resultMap="findDeviceLimitMap">
+		SELECT l.account_id, d.mins_limit, d.traffic_limit from device as d, location as l
+		where d.location_id=l.id
+		and l.account_id = #{value, jdbcType=BIGINT}
+		limit 1
+	</select>
+	
+	<select id="getDeviceDetails" parameterType="java.util.Map" resultType="java.util.Map">
+  		SELECT (CASE upper(d.STATUS) = 'LOCKED'
+			WHEN TRUE THEN upper(d.STATUS)
+			ELSE CASE dsl.type is NULL
+					WHEN true THEN 'OFFLINE'
+					ELSE CASE upper(dsl.type) = 'ONLINE' OR upper(dsl.type) = 'OFFLINE'
+						WHEN TRUE THEN upper(dsl.type)
+						ELSE CASE upper(dsl.type) = 'HEARTBEAT'
+							WHEN TRUE THEN UPPER('ONLINE')
+							ELSE upper(d.STATUS)
+							END
+						END
+					END
+			END) as status,
+			count(*) as countnum 
+  		from device as d
+			LEFT JOIN location as l ON d.location_id = l.id
+			LEFT JOIN account as a ON l.account_id = a.id
+			LEFT JOIN (
+				SELECT MAX(create_datetime), device_id, type, up_traffic, down_traffic 
+				from device_status_log
+				where create_datetime >= current_date
+				group by device_id
+				) as dsl ON d.device_id=dsl.device_id
+				
+		where 1=1
+			<if test="accountId != null">
+				and a.id = #{accountId}
+			</if>
+			<if test="totalParentId != null">
+				and a.parent_ids like CONCAT('%"', #{totalParentId}, '"%')
+			</if>
+		GROUP BY status
+  	</select>
+  	
+  	<select id="device_findByPage" parameterType="java.util.Map" resultMap="findByPageMap">
+  	 	SELECT d.device_id as device_id, 
+  	 		d.component_id as component_id, 
+  	 		IFNULL(d.mac, '') as mac,
+  	 		d.brand as brand, 
+  	 		d.model as model, 
+  	 		IFNULL(d.name, '') as name, 
+  	 		d.status,
+  	 		d.config_items as config_items, 
+  	 		l.id as location_id, 
+  	 		l.name as location_name, 
+  	 		l.latitude as latitude, 
+  	 		l.longitude as longitude, 
+  	 		IFNULL(a.merchant_name, '') as merchant_name, 
+			0 as up_traffic,
+			0 as down_traffic,
+			IFNULL(a.geo_location, '') as geo_location
+		from device as d
+		  JOIN	location as l ON d.location_id=l.id 
+		  JOIN	account as a ON l.account_id=a.id
+		where 1=1
+	    <if test="status != null" >
+	    	and upper(d.status) = #{status, jdbcType=VARCHAR}
+	    </if>
+	    and a.type != 'MANUFACTURER'
+   		and a.type != 'DEVICE_ADMIN'
+   		<if test="type == 'ADMINISTRATOR'.toString()">
+   			<choose>
+   				<when test="geoLevel == '1'.toString()">
+	   				<![CDATA[ and a.geo_level > #{geoLevel} ]]>
+	   			</when>
+	   			<when test="geoLevel == '4'.toString()">
+	   				and type != 'ADMINISTRATOR'
+		   			and (a.parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or a.geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</when>
+	   			<otherwise>
+	   				<![CDATA[ and a.geo_level > #{geoLevel} ]]>
+		   				and (a.parent_ids like CONCAT('%"',#{totalParentId},'"%')
+			   		<if test="geoLocation != null">
+			   			or a.geo_location like Concat('%', #{geoLocation}, '%')
+			   		</if>
+			   		)
+	   			</otherwise>
+   			</choose>
+   		</if>
+   		<if test="type == 'REPRESENTATIVE'.toString()">
+	   		and a.type = 'MERCHANT'
+	   		and (a.parent_ids like CONCAT('%"',#{totalParentId},'"%')
+	   		<if test="geoLocation != null">
+	   			or a.geo_location like Concat('%', #{geoLocation}, '%')
+	   		</if>
+	   		)
+	   	</if>
+	   	<if test="type == 'MERCHANT'.toString()">
+	   		and a.id = #{accountId}
+	   	</if>
+	   	
+	    <!-- 
+	    <if test="accountId != null" >
+		and (a.id = #{accountId} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{accountId,jdbcType=BIGINT}, '"%')
+		)
+		</if>
+		 -->
+	    <if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+			  Concat(d.device_id,
+			  		IFNULL(d.name, ''),
+					IFNULL(a.merchant_name,''),
+                    IFNULL(a.username, ''),
+                    IFNULL(d.mac, ''),
+                    IFNULL(d.device_id, ''),
+                    IFNULL(d.config_items, '')) like Concat('%', #{item}, '%')
+			 </foreach>
+	    </if>
+	    limit #{page.begin}, #{page.pageSize}
+	</select>
+	<select id="device_findByPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  	 	SELECT count(d.device_id)
+		from device as d
+		  JOIN	location as l ON d.location_id=l.id 
+		  JOIN	account as a ON l.account_id=a.id
+		where 1=1
+	    <if test="status != null" >
+	    	and upper(d.status) = #{status, jdbcType=VARCHAR}
+	    </if>
+	    <if test="accountId != null" >
+		and (a.id = #{accountid} 
+			or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{accountid,jdbcType=BIGINT}, '"%')
+		)
+		</if>
+	    <if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+			  Concat(d.device_id,
+			  		IFNULL(d.name, ''),
+					IFNULL(a.merchant_name,''),
+                    IFNULL(a.username, ''),
+                    IFNULL(d.mac, ''),
+                    IFNULL(d.device_id, '')) like Concat('%', #{item}, '%')
+			 </foreach>
+	    </if>
+	</select>
+  	
+  	<select id="getDeviceCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		SELECT count(d.device_id) from device as d,
+			location as l,
+			account as a
+		where d.location_id=l.id
+			and l.account_id=a.id
+			and (a.id = #{accountId,jdbcType=BIGINT} 
+				or a.parent_ids like Concat('%directParentIds%totalParentIds%"', #{accountId,jdbcType=BIGINT}, '"%')
+			)
+			<if test="status != null">
+				d.status = #{status, jdbcType=VARCHAR}
+			</if>
+  	</select>
+  	
+  	<!--  
+  	<select id="getDeviceCountBySiteId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+  		SELECT count(d.device_id) from portal_display_policy as pdp,
+		device as d,
+		portal_site as ps
+		where pdp.device_ids like CONCAT('%"', d.device_id, '"%')
+		and pdp.display_items like CONCAT('%"siteid":"', ps.id, '"%')
+		and ps.id=#{value}
+  		and pdp.status != 'DELETED'
+  	</select>
+  	-->
+  	
+  	<select id="getDeviceCountBySiteId" parameterType="java.lang.Long" resultType="java.lang.Integer">
+  		select 
+  			count(DISTINCT device_device_id) 
+  		from 
+  			device_display_plan 
+  		where 
+  			portal_site_id=#{portalSiteId}
+  	</select>
+  	
+  	<select id="getDeviceDetailByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithDeviceGroup">
+  		SELECT 
+  			d.device_id,d.type,d.location_id,
+  			IFNULL(d.mac, '') AS mac, 
+  			d.brand, d.model, d.frameware_version,
+  			d.create_datetime, d.location_id,d.xpos,d.ypos,d.manufacturer_id,
+  			l.province, l.city, 
+  			IFNULL(l.county_district, '') AS countyDistrict,
+  			IFNULL(l.address, '') AS address,
+  			c.version,
+  			IFNULL((select dg.group_name from device_group dg, device_has_device_group dhg where dg.group_id = dhg.group_id AND dhg.device_id = d.device_id), '') group_name,
+			IFNULL((select dg.group_id from device_group dg, device_has_device_group dhg where dg.group_id = dhg.group_id AND dhg.device_id = d.device_id), '') group_id
+  		FROM 
+  			device d,
+  			location l,
+  			component c
+		WHERE d.location_id = l.id
+			and d.component_id = c.id
+			and device_id = #{deviceId,jdbcType=VARCHAR}
+	</select>
+	
+  	<select id="device_getBaseDevicePage" parameterType="java.util.Map" resultMap="ResultMapWithDeviceGroup">
+  		SELECT 
+  			d.device_id,d.type,d.location_id,
+  			IFNULL(d.mac, '') AS mac, 
+  			d.brand, d.model, d.frameware_version,
+  			d.create_datetime, d.location_id,d.xpos,d.ypos,IFNULL(d.manufacturer_id, '') AS manufacturerId,
+  			l.province, l.city, 
+  			IFNULL(l.county_district, '') AS countyDistrict,
+  			IFNULL(l.address, '') AS address,
+  			c.version,
+  			IFNULL((select dg.group_name from device_group dg, device_has_device_group dhg where dg.group_id = dhg.group_id AND dhg.device_id = d.device_id), '') group_name,
+			IFNULL((select dg.group_id from device_group dg, device_has_device_group dhg where dg.group_id = dhg.group_id AND dhg.device_id = d.device_id), '') group_id
+  		FROM 
+  			device d,
+  			location l,
+  			component c
+		WHERE d.location_id = l.id
+			and d.component_id = c.id
+			<if test="locationIds != null">
+				and d.location_id in
+				<foreach item="item" index="index"  collection="locationIds" open="(" separator=" , " close=")">  
+				  #{item}
+				</foreach>
+			</if>
+			<if test="type != null">
+				and d.type = #{type,jdbcType=VARCHAR}
+			</if>
+    		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(d.device_id, ''), 
+		  				    IFNULL(d.mac, ''), 
+		  				   IFNULL(d.brand, ''),
+		  				   IFNULL(d.model, ''))
+		  				   like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+    		<if test="startDate != null">
+				<![CDATA[ and d.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and d.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if> 
+		ORDER BY 
+			d.create_datetime desc, l.create_datetime desc
+		LIMIT 
+			#{page.begin},#{page.pageSize}
+	</select>
+	
+	<select id="getDeviceByGroupId" parameterType="java.lang.Long" resultMap="ResultMapWithDeviceGroup">
+  		SELECT 
+			d.device_id,d.type,d.location_id,
+			IFNULL(d.mac, '') AS mac, 
+			d.brand, d.model, d.frameware_version,
+			d.create_datetime, d.location_id,d.xpos,d.ypos,IFNULL(d.manufacturer_id, '') AS manufacturerId,
+			l.province, l.city, 
+			IFNULL(l.county_district, '') AS countyDistrict,
+			IFNULL(l.address, '') AS address,
+			c.version,
+			IFNULL((select dg.group_name from device_group dg, device_has_device_group dhg where dg.group_id = dhg.group_id AND dhg.device_id = d.device_id), '') group_name,
+			IFNULL((select dg.group_id from device_group dg, device_has_device_group dhg where dg.group_id = dhg.group_id AND dhg.device_id = d.device_id), '') group_id
+				
+		FROM device_has_device_group hg,
+				device d,
+				location l,
+		  	component c
+		where d.device_id=hg.device_id
+		AND d.location_id = l.id
+		AND d.component_id = c.id
+		AND hg.group_id =#{groupId}
+	</select>
+	
+	<select id="getUnGroupAp" parameterType="java.util.Map" resultMap="ResultMapWithDeviceGroup">
+  		SELECT d.device_id,d.type
+		FROM 
+		(select d1.* from device d1,
+			location l,
+			component c
+		WHERE d1.location_id = l.id
+		AND d1.component_id = c.id) d
+		LEFT JOIN device_has_device_group B 
+		ON d.device_id =B.device_id
+		WHERE B.device_id is NULL
+		<if test="locationIds != null">
+				and d.location_id in
+				<foreach item="item" index="index"  collection="locationIds" open="(" separator=" , " close=")">  
+				  #{item}
+				</foreach>
+			</if>
+		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(d.device_id, ''))
+		  				   like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+		ORDER BY 
+			d.create_datetime desc
+	</select>
+	
+	<select id="getBaseDevicePageTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		SELECT 
+  			count(d.device_id)
+  		FROM 
+  			device d,
+  			location l,
+  			component c
+		WHERE d.location_id = l.id
+			and d.component_id = c.id
+			<if test="locationIds != null">
+				and d.location_id in
+				<foreach item="item" index="index"  collection="locationIds" open="(" separator=" , " close=")">  
+				  #{item}
+				</foreach>
+			</if>
+			<if test="type != null">
+				and d.type = #{type,jdbcType=VARCHAR}
+			</if>
+    		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(d.device_id, ''), 
+		  				    IFNULL(d.mac, ''), 
+		  				   IFNULL(d.brand, ''),
+		  				   IFNULL(d.model, ''))
+		  				   like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+    		<if test="startDate != null">
+				<![CDATA[ and d.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and d.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if> 
+	</select>
+	
+	<select id="device_getDevicePage" parameterType="java.util.Map" resultMap="ResultMapWithAccount">
+  		SELECT 
+  			device.device_id,
+  			IFNULL(device.mac, '') AS mac, 
+  			device.brand, device.model, device.frameware_version,
+  			device.create_datetime, device.location_id,
+  			location.province, location.city, 
+  			IFNULL(location.county_district, '') AS countyDistrict,
+  			IFNULL(location.address, '') AS address,
+  			component.version,
+  			account.id, account.username,
+  			IFNULL(account.merchant_name, '') AS accountMerchantName, 
+  			IFNULL(account.fullname, '') AS accountFullname
+  		FROM 
+  			device,
+  			location,
+  			component,
+  			account
+		WHERE 
+			device.location_id = location.id and
+			device.component_id = component.id and
+			location.account_id = account.id
+			<if test="manufacturerId != null">
+				and device.manufacturer_id = #{manufacturerId,jdbcType=BIGINT}
+			</if>
+			<if test="type != null">
+				and device.type = #{type,jdbcType=VARCHAR}
+			</if>
+    		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(device.device_id, ''), 
+		  				    IFNULL(device.mac, ''), 
+		  				   IFNULL(device.brand, ''),
+		  				   IFNULL(device.model, ''),
+		  				   IFNULL(device.frameware_version, ''),
+		  				   IFNULL(component.version, ''))
+		  				   like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+    		<if test="startDate != null">
+				<![CDATA[ and device.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and device.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if> 
+		ORDER BY 
+			device.create_datetime desc
+		LIMIT 
+			#{page.begin},#{page.pageSize}
+	</select>
+	
+	<select id="getDevicePageTotal" parameterType="java.util.Map" resultType="java.lang.Integer">
+  		SELECT 
+  			count(device.device_id)
+  		FROM 
+  			device,
+  			location,
+  			component,
+  			account
+		WHERE 
+			device.location_id = location.id and
+			device.component_id = component.id and
+			location.account_id = account.id
+			<if test="manufacturerId != null">
+				and device.manufacturer_id = #{manufacturerId,jdbcType=BIGINT}
+			</if>
+			<if test="type != null">
+				and device.type = #{type,jdbcType=VARCHAR}
+			</if>
+    		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(device.device_id, ''), 
+		  				    IFNULL(device.mac, ''), 
+		  				   IFNULL(device.brand, ''),
+		  				   IFNULL(device.model, ''),
+		  				   IFNULL(device.frameware_version, ''),
+		  				   IFNULL(component.version, ''))
+		  				   like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+    		<if test="startDate != null">
+				<![CDATA[ and device.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and device.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if> 
+	</select>
+  		
+  	<update id="updateBrandModelById" parameterType="java.util.Map" >
+  		update device
+  		set
+  			brand = #{brand,jdbcType=VARCHAR},
+  			model = #{model,jdbcType=VARCHAR}
+  		where
+  			device_model_id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="getSsidList" resultType="java.util.Map">
+  	SELECT ssid from (
+		SELECT 
+			substring(SUBSTRING(config_items, INSTR(config_items, '"ssid":"')+8),
+			1,
+			INSTR(SUBSTRING(config_items, INSTR(config_items, '"ssid":"')+8), '"')-1
+			) as ssid
+			from device
+			where config_items LIKE '%ssid%'
+	)a group by ssid
+  </select>
+  
+  <!-- 查询设备区域列表 -->
+  <select id="findDeviceAddress" parameterType="java.lang.String" resultType="java.util.Map">
+    SELECT 
+        d.device_id as devid,
+        l.province as province,
+        l.city as city,
+        l.county_district as county,
+        a.username as uname
+    FROM
+        account as a,
+        location as l,
+        device as d
+    WHERE
+		d.location_id=l.id 
+		and l.account_id=a.id
+		and a.username=#{account}
+		<!-- or a.parent_ids like 
+			(select Concat('%directParentIds%totalParentIds%"', id, '"%')
+				from account where username=#{account})
+	group by d.device_id,l.province,l.city,l.county_district -->
+  </select>
+  
+  <update id="updateDeviceLocationByAccount" parameterType="java.util.Map">
+  	update
+  	  device
+  	set
+  	  location_id = #{locationId, jdbcType=BIGINT}
+  	where
+      device_id = #{deviceId, jdbcType=VARCHAR}
+  </update>
+  
+  <select id="getDeviceByEmsDevId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+	    <include refid="Base_Column_List" />,
+	    <include refid="Blob_Column_List" />
+    from 
+    	device
+    where 
+    	ems_dev_id = #{emsDevId,jdbcType=BIGINT}
+    limit 1
+  </select>
+  
+  <!-- 根据设备ID取得商户ID-->
+  <select id="getAccountIdByDeviceId" parameterType="java.lang.String" resultType="java.lang.Long">
+  	select 
+  		location.account_id
+  	from 
+  		location,
+  		device 
+  	where 
+  		location.id = device.location_id 
+  	and 
+  		device.device_id = #{deviceId,jdbcType=VARCHAR}
+  </select>
+  
+  <!-- 根据商户ID取得胖AP的MAC地址-->
+  <select id="getFatapMacByAccountId" parameterType="java.lang.Long" resultType="java.lang.String">
+  	select 
+  		device.mac
+  	from 
+  		location,
+  		device 
+  	where 
+  		location.id = device.location_id 
+  	and 
+  		location.account_id = #{accountId,jdbcType=BIGINT}
+  	and 
+  		(device.type = 'FAT_AP' or device.type = 'CUSTOMIZED_AP')
+  	limit 1
+    </select>
+</mapper>

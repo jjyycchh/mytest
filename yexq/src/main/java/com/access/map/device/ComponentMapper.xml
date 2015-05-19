@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.ComponentMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.Component" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="ref_counter" property="refCounter" jdbcType="BIGINT" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="pkg_path" property="pkgPath" jdbcType="VARCHAR" />
+    <result column="script_path" property="scriptPath" jdbcType="VARCHAR" />
+    <result column="is_mandatory" property="isMandatory" jdbcType="BIT" />
+    <result column="is_published" property="isPublished" jdbcType="BIT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.device.ComponentWithBLOBs" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+    <result column="device_supported" property="deviceSupported" jdbcType="LONGVARCHAR" />
+    <result column="requirements" property="requirements" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, ref_counter, version, type, status, pkg_path, script_path, is_mandatory, is_published, 
+    create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    description, device_supported, requirements
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from component
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from component
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.ComponentWithBLOBs" >
+    insert into component (id, ref_counter, version, 
+      type, status, pkg_path, 
+      script_path, is_mandatory, is_published, 
+      create_datetime, description, device_supported, 
+      requirements)
+    values (#{id,jdbcType=BIGINT}, #{refCounter,jdbcType=BIGINT}, #{version,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{pkgPath,jdbcType=VARCHAR}, 
+      #{scriptPath,jdbcType=VARCHAR}, #{isMandatory,jdbcType=BIT}, #{isPublished,jdbcType=BIT}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}, #{deviceSupported,jdbcType=LONGVARCHAR}, 
+      #{requirements,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.ComponentWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into component
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="refCounter != null" >
+        ref_counter,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="pkgPath != null" >
+        pkg_path,
+      </if>
+      <if test="scriptPath != null" >
+        script_path,
+      </if>
+      <if test="isMandatory != null" >
+        is_mandatory,
+      </if>
+      <if test="isPublished != null" >
+        is_published,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="deviceSupported != null" >
+        device_supported,
+      </if>
+      <if test="requirements != null" >
+        requirements,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="refCounter != null" >
+        #{refCounter,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgPath != null" >
+        #{pkgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="scriptPath != null" >
+        #{scriptPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isMandatory != null" >
+        #{isMandatory,jdbcType=BIT},
+      </if>
+      <if test="isPublished != null" >
+        #{isPublished,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="deviceSupported != null" >
+        #{deviceSupported,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirements != null" >
+        #{requirements,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.ComponentWithBLOBs" >
+    update component
+    <set >
+      <if test="refCounter != null" >
+        ref_counter = #{refCounter,jdbcType=BIGINT},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="pkgPath != null" >
+        pkg_path = #{pkgPath,jdbcType=VARCHAR},
+      </if>
+      <if test="scriptPath != null" >
+        script_path = #{scriptPath,jdbcType=VARCHAR},
+      </if>
+      <if test="isMandatory != null" >
+        is_mandatory = #{isMandatory,jdbcType=BIT},
+      </if>
+      <if test="isPublished != null" >
+        is_published = #{isPublished,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="deviceSupported != null" >
+        device_supported = #{deviceSupported,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="requirements != null" >
+        requirements = #{requirements,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.device.ComponentWithBLOBs" >
+    update component
+    set ref_counter = #{refCounter,jdbcType=BIGINT},
+      version = #{version,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      pkg_path = #{pkgPath,jdbcType=VARCHAR},
+      script_path = #{scriptPath,jdbcType=VARCHAR},
+      is_mandatory = #{isMandatory,jdbcType=BIT},
+      is_published = #{isPublished,jdbcType=BIT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR},
+      device_supported = #{deviceSupported,jdbcType=LONGVARCHAR},
+      requirements = #{requirements,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.ComponentWithBLOBs" >
+    update component
+    set ref_counter = #{refCounter,jdbcType=BIGINT},
+      version = #{version,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      pkg_path = #{pkgPath,jdbcType=VARCHAR},
+      script_path = #{scriptPath,jdbcType=VARCHAR},
+      is_mandatory = #{isMandatory,jdbcType=BIT},
+      is_published = #{isPublished,jdbcType=BIT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getComponentsByVersion" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from component
+    where version = #{value}
+  </select>
+
+  <select id="getComponentsByVersionModel" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from component
+    where version = #{version, jdbcType=VARCHAR}
+      and device_supported like Concat('%', #{device_supported, jdbcType=VARCHAR}, '%')
+  </select>
+
+  <select id="component_getComponentPage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from component
+    where status != 'DELETED'
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(version, ''),
+					IFNULL(description,''),
+					IFNULL(device_supported,''),
+					IFNULL(requirements,'')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    <if test="startDate != null">
+		<![CDATA[ and create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+ 		<if test="endDate != null">
+		<![CDATA[ and create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+	order by create_datetime desc 
+	limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="component_getComponentPageCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  	select count(id)
+    from component
+    where 1=1
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(version, ''),
+					IFNULL(description,''),
+					IFNULL(device_supported,''),
+					IFNULL(requirements,'')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    <if test="startDate != null">
+		<![CDATA[ and create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+ 		<if test="endDate != null">
+		<![CDATA[ and create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+	order by create_datetime desc 
+  </select>
+  
+  <select id="getComponentsByType" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+	select 
+	   <include refid="Base_Column_List" />
+	   ,
+	   <include refid="Blob_Column_List" />
+	   from component
+	 where 
+	 	status = 'NORMAL'
+	 	and is_published = 1
+	 	and type = #{value}
+	 	order by id desc
+  </select>
+
+    <select id="getComponentByVersionAndType" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from component
+        where version = #{version}
+            and type = #{type}
+    </select>
+
+	<select id="getComponentNew" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+		select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from component
+        where UPPER(type) = #{type,jdbcType=VARCHAR}
+        <if test="createDatetime != null">
+        	<![CDATA[ and create_datetime > #{createDatetime, jdbcType=TIMESTAMP} ]]>
+        </if>
+        <if test="isPublished != null">
+        	and is_published = #{isPublished,jdbcType=BIT}
+        </if>
+        <if test="status != null">
+        	and status = #{status, jdbcType=VARCHAR}
+        </if>
+        ORDER BY create_datetime desc
+        limit 1
+	</select>
+ </mapper>

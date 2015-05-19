@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.device.DeviceModelMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.device.DeviceModel" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="brand" property="brand" jdbcType="VARCHAR" />
+    <result column="model" property="model" jdbcType="VARCHAR" />
+    <result column="total_mem" property="totalMem" jdbcType="INTEGER" />
+    <result column="cpu_brand" property="cpuBrand" jdbcType="VARCHAR" />
+    <result column="cpu_series" property="cpuSeries" jdbcType="VARCHAR" />
+    <result column="cpu_model" property="cpuModel" jdbcType="VARCHAR" />
+    <result column="max_turbo_frequency" property="maxTurboFrequency" jdbcType="INTEGER" />
+    <result column="cpu_cores" property="cpuCores" jdbcType="INTEGER" />
+    <result column="is_use_api" property="isUseApi" jdbcType="BIT" />
+    <result column="unsupport_api_versions" property="unsupportApiVersions" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="manufacturer_id" property="manufacturerId" jdbcType="BIGINT" />
+  </resultMap>
+  
+  <resultMap id="ResultMapWithCount" type="com.access.model.device.DeviceModel" >
+  	<result column="device_total" property="deviceTotal" jdbcType="BIGINT" />
+    <result column="produced_devices_total" property="producedDevicesTotal" jdbcType="BIGINT" />
+    <result column="fullname" property="fullname" jdbcType="VARCHAR" />
+   </resultMap>
+  <sql id="Base_Column_List" >
+    id, brand, model, total_mem, cpu_brand, cpu_series, cpu_model, max_turbo_frequency, 
+    cpu_cores, is_use_api, unsupport_api_versions, create_datetime, manufacturer_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_model
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from device_model
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.device.DeviceModel" >
+    insert into device_model (id, brand, model, 
+      total_mem, cpu_brand, cpu_series, 
+      cpu_model, max_turbo_frequency, cpu_cores, 
+      is_use_api, unsupport_api_versions, create_datetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{brand,jdbcType=VARCHAR}, #{model,jdbcType=VARCHAR}, 
+      #{totalMem,jdbcType=INTEGER}, #{cpuBrand,jdbcType=VARCHAR}, #{cpuSeries,jdbcType=VARCHAR}, 
+      #{cpuModel,jdbcType=VARCHAR}, #{maxTurboFrequency,jdbcType=INTEGER}, #{cpuCores,jdbcType=INTEGER}, 
+      #{isUseApi,jdbcType=BIT}, #{unsupportApiVersions,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.device.DeviceModel" >
+	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into device_model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="brand != null" >
+        brand,
+      </if>
+      <if test="model != null" >
+        model,
+      </if>
+      <if test="totalMem != null" >
+        total_mem,
+      </if>
+      <if test="cpuBrand != null" >
+        cpu_brand,
+      </if>
+      <if test="cpuSeries != null" >
+        cpu_series,
+      </if>
+      <if test="cpuModel != null" >
+        cpu_model,
+      </if>
+      <if test="maxTurboFrequency != null" >
+        max_turbo_frequency,
+      </if>
+      <if test="cpuCores != null" >
+        cpu_cores,
+      </if>
+      <if test="isUseApi != null" >
+        is_use_api,
+      </if>
+      <if test="unsupportApiVersions != null" >
+        unsupport_api_versions,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="manufacturerId != null" >
+      	manufacturer_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="brand != null" >
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMem != null" >
+        #{totalMem,jdbcType=INTEGER},
+      </if>
+      <if test="cpuBrand != null" >
+        #{cpuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuSeries != null" >
+        #{cpuSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuModel != null" >
+        #{cpuModel,jdbcType=VARCHAR},
+      </if>
+      <if test="maxTurboFrequency != null" >
+        #{maxTurboFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="cpuCores != null" >
+        #{cpuCores,jdbcType=INTEGER},
+      </if>
+      <if test="isUseApi != null" >
+        #{isUseApi,jdbcType=BIT},
+      </if>
+      <if test="unsupportApiVersions != null" >
+        #{unsupportApiVersions,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="manufacturerId != null" >
+      	#{manufacturerId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.device.DeviceModel" >
+    update device_model
+    <set >
+      <if test="brand != null" >
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="model != null" >
+        model = #{model,jdbcType=VARCHAR},
+      </if>
+      <if test="totalMem != null" >
+        total_mem = #{totalMem,jdbcType=INTEGER},
+      </if>
+      <if test="cpuBrand != null" >
+        cpu_brand = #{cpuBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuSeries != null" >
+        cpu_series = #{cpuSeries,jdbcType=VARCHAR},
+      </if>
+      <if test="cpuModel != null" >
+        cpu_model = #{cpuModel,jdbcType=VARCHAR},
+      </if>
+      <if test="maxTurboFrequency != null" >
+        max_turbo_frequency = #{maxTurboFrequency,jdbcType=INTEGER},
+      </if>
+      <if test="cpuCores != null" >
+        cpu_cores = #{cpuCores,jdbcType=INTEGER},
+      </if>
+      <if test="isUseApi != null" >
+        is_use_api = #{isUseApi,jdbcType=BIT},
+      </if>
+      <if test="unsupportApiVersions != null" >
+        unsupport_api_versions = #{unsupportApiVersions,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.device.DeviceModel" >
+    update device_model
+    set brand = #{brand,jdbcType=VARCHAR},
+      model = #{model,jdbcType=VARCHAR},
+      total_mem = #{totalMem,jdbcType=INTEGER},
+      cpu_brand = #{cpuBrand,jdbcType=VARCHAR},
+      cpu_series = #{cpuSeries,jdbcType=VARCHAR},
+      cpu_model = #{cpuModel,jdbcType=VARCHAR},
+      max_turbo_frequency = #{maxTurboFrequency,jdbcType=INTEGER},
+      cpu_cores = #{cpuCores,jdbcType=INTEGER},
+      is_use_api = #{isUseApi,jdbcType=BIT},
+      unsupport_api_versions = #{unsupportApiVersions,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getModelByDeviceId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    Select <include refid="Base_Column_List" />
+    from device_model
+    where
+    id = (select device_model_id from device
+      where device_id = #{value,jdbcType=VARCHAR})
+  </select>
+
+  <select id="getModelObjByBrandModel" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    Select <include refid="Base_Column_List" />
+    from device_model
+    where
+      brand = #{brand,jdbcType=VARCHAR}
+      and model = #{model,jdbcType=VARCHAR}
+    limit 1
+  </select>
+  
+  <select id="deviceModel_getDeviceBrandModelPage" resultMap="ResultMapWithCount" parameterType="java.util.Map">
+  	SELECT
+  		tmp.id as id, tmp.brand as brand, tmp.model as model, account.fullname, 
+  		sum(tmp.device_count) as device_total, sum(tmp.produced_devices_count) as produced_devices_total
+  	FROM (
+  		SELECT
+			device_model.id,
+			device_model.brand,
+			device_model.model,
+			device_model.manufacturer_id,
+			count(device.device_model_id) AS device_count,
+			0 AS produced_devices_count
+		FROM
+			device,
+			device_model
+		WHERE
+			device_model.id = device.device_model_id
+			<if test="deviceManuId != null">
+				and device_model.manufacturer_id = #{deviceManuId, jdbcType=VARCHAR}
+	    	</if>
+			<if test="brand != null">
+				and device_model.brand = #{brand, jdbcType=VARCHAR}
+	    	</if>
+		GROUP BY
+			device_model.id
+		UNION ALL
+		SELECT
+			device_model.id,
+			device_model.brand,
+			device_model.model,
+			device_model.manufacturer_id,
+			0 AS device_count,
+			count(produced_devices.device_model_id) AS produced_devices_count
+		FROM
+			produced_devices,
+			device_model
+		WHERE
+			device_model.id = produced_devices.device_model_id
+			<if test="deviceManuId != null">
+				and device_model.manufacturer_id = #{deviceManuId, jdbcType=VARCHAR}
+	    	</if>
+			<if test="brand != null">
+				and device_model.brand = #{brand, jdbcType=VARCHAR}
+	    	</if>
+		GROUP BY
+			device_model.id
+		UNION ALL
+		SELECT
+			device_model.id,
+			device_model.brand,
+			device_model.model,
+			device_model.manufacturer_id,
+			0 AS device_count,
+			0 AS produced_devices_count
+		FROM
+			device_model
+		WHERE
+			device_model.id = device_model.id
+			<if test="deviceManuId != null">
+				and device_model.manufacturer_id = #{deviceManuId, jdbcType=VARCHAR}
+	    	</if>
+			<if test="brand != null">
+				and device_model.brand = #{brand, jdbcType=VARCHAR}	
+	    	</if>
+		GROUP BY
+			device_model.id
+		) as tmp, account
+	WHERE
+		tmp.manufacturer_id = account.id
+	GROUP BY 
+		brand, model
+	ORDER BY 
+		brand ASC
+	LIMIT
+		#{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="selectByBrandModel" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    <include refid="Base_Column_List" />
+    from device_model
+    where brand = #{brand,jdbcType=VARCHAR} and
+    model = #{model, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="deviceModel_getBrandByManuId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select 
+    	id, brand
+    from 
+    	device_model
+    where
+    	device_model.id = device_model.id
+    <if test="deviceManuId != null">
+		and
+			device_model.manufacturer_id = #{deviceManuId, jdbcType=VARCHAR}
+	</if>
+    group by
+    	brand
+  </select>
+
+</mapper>
