@@ -1,0 +1,238 @@
+.wp-left {float:left;}
+.wp-right {float:right;}
+.wp-show {display:inline-block;}
+.wp-hide {display:none;}
+.modal-dialog {width:720px;}
+
+.clear-line {height:20px;}
+.wp-no-padding {padding:0px !important;}
+
+.wifi-portal-body {position:relative;margin:0 20px;overflow:hidden;min-height:120px;}
+.wifi-portal-body .portal-menu {width:170px;position:absolute;left:0px;top:0px;border-radius:4px;border:1px solid #0753a9;padding:5px;}
+.wifi-portal-body .portal-menu a {font:14px/36px "微软雅黑";color:#333;text-decoration:none;display:block;padding:0 5px 0 10px;border-radius:4px;}
+.wifi-portal-body .portal-menu a:hover {background:#f0f0f0;}
+.wifi-portal-body .portal-menu a span {float:right;width:20px;height:20px;margin:9px 5px 0 0;display:none;}
+.wifi-portal-body .portal-menu a.active {background:#0753a9;color:#fff;}
+.wifi-portal-body .portal-menu a.active span {display:inline-block;}
+
+.wifi-portal-body .portal-main {margin-left:190px;overflow:hidden;}
+.wifi-portal-body .portal-main .wifi-main-header {height:50px;border:1px solid #efefef;background:#fafafa;border-radius:4px;overflow:hidden;padding-top:7px;}
+.wifi-portal-body .portal-main .wifi-main-header .col-xs-3 {padding-right:0px;}
+.wifi-portal-body .portal-main .wifi-main-header .col-md-10 {padding:0px;width:100%;}
+.wifi-portal-body .portal-main .wifi-main-header .col-dx-3 {width:21%;}
+.wifi-portal-body .portal-main .wifi-main-header .col-bx-3 {width:28%;}
+.wifi-portal-body .portal-main .wifi-main-navigator {background:#f0f0f0;border-radius:4px;color:#333;}
+.wifi-portal-body .portal-main .wifi-main-navigator span {margin:0 10px;display:inline-block;}
+
+.wifi-portal-body .portal-main .wifi-main-site {overflow:hidden;margin-right:-25px;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item {width:152px;padding:5px;margin:20px 0 0 20px;height:265px;border:1px solid #efefef;border-radius:4px;overflow:hidden;float:left;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item:hover {border:1px solid #dfdfdf;background:#fafafa;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item img {width:140px;height:152px;border:0px;border-radius:4px;display:block;margin-bottom:10px;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item a.st-text {width:140px;height:20px;font:12px/20px ;text-decoration:none;color:#333;margin:0 auto;space-white:nowrap;display:block;overflow:hidden;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item a.st-text:hover {color:#999;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item span.st-text {display:block;margin:0px;width:136px;height:20px;font:12px/20px "微软雅黑";color:#666;space-white:nowrap;overflow:hidden;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item div {padding-top:5px;text-align:center;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item span.st-icon {width:20px;height:20px;float:right;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item a.st-icon {padding:0 5px;font:12px/14px "";border-radius:4px;background:#025081;text-decoration:none;display:inline-block;color:#fff;margin-left:5px;}
+.wifi-portal-body .portal-main .wifi-main-site .site-item a.st-icon:hover {background:#1d71a6;}
+
+.wifi-portal-body .portal-main .wifi-site-page {padding:10px;overflow:hidden;text-align:center;}
+
+.wifi-portal-body .portal-main .wifi-policy-site {overflow:hidden;}
+.wifi-portal-body .portal-main .wifi-policy-site table td a {color:#333;text-decoration:none;}
+.wifi-portal-body .portal-main .wifi-policy-site table td.wp-operas {}
+.wifi-portal-body .portal-main .wifi-policy-site table td.wp-operas a {float:left;font:12px/18px "微软雅黑";color:#fff;margin-right:5px;background:#0d4e91;text-decoration:none;padding:0 5px;border-radius:4px;}
+.wifi-portal-body .portal-main .wifi-policy-site table td.wp-operas a:hover {background:#3975b3;}
+
+.wifi-portal-body .portal-main .portal-policy-main {border:1px solid #dfdfdf;border-radius:4px;overflow:hidden;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-content {border-bottom:1px solid #ddd;background:#fafafa;padding:10px 15px;border-radius:4px 4px 0 0;overflow:hidden;position:relative;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-content table {width:100%;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-content table td {font:12px/20px "微软雅黑";color:#333;padding:5px 0;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-content .policy-opera {position:absolute;right:10px;top:10px;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-content .policy-opera a {float:right;font:12px/30px "微软雅黑";padding:0 10px;background:#fff;border-radius:4px;margin-left:10px;text-decoration:none;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-site {border-bottom:1px solid #ddd;background:#fafafa;border-radius:4px;position:relative;overflow:hidden;padding:10px;text-align:center;font:16px/30px "微软雅黑";color:#333;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-site .portal-site-list {height:100px;overflow:hidden;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-site .portal-site-list ul {margin:0px;padding:0px;overflow:hidden;height:100px;list-style-type:none;}
+.wifi-portal-body .portal-main .portal-policy-main .portal-site .portal-site-list ul li {height:100px;width:60px;border:1px solid #ddd;background:#fff;float:left;margin-right:10px;cursor:pointer;}
+
+.wifi-portal-body .portal-main .portal-policy-main .policy-content {border-radius:0 0 4px 4px;overflow:hidden;}
+.wifi-portal-body .portal-main .portal-policy-main .policy-content table {width:100%;border-left:1px solid #fff;border-top:1px solid #fff;}
+.wifi-portal-body .portal-main .portal-policy-main .policy-content table td {height:25px;background:#fafafa;border-right:1px solid #fff;}
+.wifi-portal-body .portal-main .portal-policy-main .policy-content table td.wpp-list-number {background:#ffcd48;padding-left:5px;}
+.wifi-portal-body .portal-main .portal-policy-main .policy-content table tr {border-bottom:1px solid #fff;}
+.wifi-portal-body .portal-main .portal-policy-main .policy-content table thead td.wpp-hours {width:25px;text-align:center;padding-left:0px;}
+.wifi-portal-body .portal-main .portal-policy-main .policy-content table thead td {background:#FFB848;height:30px;padding-left:5px;}
+
+.wifi-portal-device {border:1px solid #dfdfdf;border-radius:6px;background:#fafafa;padding:5px;height:85px;overflow:scroll;overflow-x:hidden;}
+.wifi-portal-device a {font:12px/24px "ARIAL";margin-top:5px;display:block;border:1px solid #efefef;border-radius:4px;display:block;text-align:left;text-decoration:none;padding:0 10px;}
+.wifi-portal-device a:hover {background:#fff;}
+.wifi-portal-device a span {float:right;line-height: 2;}
+.wifi-site-editor {border:1px solid #dfdfdf;background:#fefefe;border-radius:6px;height:600px;margin:0 15px;position:relative;}
+.wifi-site-editor .editor-header {float:left;height:60px;border-bottom:1px solid #ddd;border-right:1px solid #ddd;width:600px;overflow:hidden;background:#fafafa;border-radius:6px 0 0 0;margin-right:-3px;position:relative;padding:5px 0 0 0;}
+.wifi-site-editor .editor-header .editor-main {font:12px/25px "微软雅黑";color:#333;padding-left:10px;overflow:hidden;}
+.wifi-site-editor .editor-header .editor-main span {float:left;font:12px/25px "微软雅黑";color:#666;width:60px;}
+.wifi-site-editor .editor-header .view-siteid {position:absolute;right:0px;top:0px;}
+.wifi-site-editor .editor-header .view-siteid a {background:#f0f0f0;text-decoration:none;}
+.wifi-site-editor .editor-header .delSitePageid {position:absolute;right:10px;top:10px;padding:0 15px;font:12px/34px "";color:#fff;background:#f00;border-radius:4px;text-decoration:none;}
+.wifi-site-editor .editor-header .delSitePageid:hover {background:#d66}
+.wifi-site-editor .editor-header .editSitePageid {position:absolute;right:10px;top:10px;padding:0 15px;font:12px/34px "";color:#fff;background:#428BCA;border-radius:4px;text-decoration:none;}
+.wifi-site-editor .editor-header .editSitePageid:hover {background:#559edc;}
+.wifi-site-editor .editor-header .viewSitePageid {position:absolute;right:100px;top:10px;padding:0 15px;font:12px/34px "";color:#fff;background:#428BCA;border-radius:4px;text-decoration:none;}
+.wifi-site-editor .editor-header .viewSitePageid:hover {background:#559edc;}
+
+.wifi-site-editor .editor-frame {width:600px;border-right:1px solid #ddd;height:538px;overflow:scroll;overflow-x:hidden;float:left;border-radius:0 0 0 6px;margin-right:-3px;position:relative;}
+.wifi-site-editor .editor-frame table.editor-table {width:100%;overflow:hidden;}
+.wifi-site-editor .editor-frame table.editor-table td.editor-td {width:100%;padding:30px 0;overflow:hidden;}
+.wifi-site-editor .editor-frame table.editor-table .editor-page-main {overflow:hidden;padding:3px;background:#fff;}
+.wifi-site-editor .editor-frame table.editor-table .page-vertical {width:488px;margin:0 auto;border:1px solid #ddd;}
+.wifi-site-editor .editor-frame table.editor-table .editor-page-main .page-emptyid {padding:15px 0;text-align:center;overflow:hidden;border:1px solid #fff;}
+.wifi-site-editor .editor-frame table.editor-table .editor-page-main .page-emptyid a {font:12px/30px "";color:#fff;background:#f25204;text-decoration:none;width:120px;text-align:center;display:inline-block;border-radius:4px;}
+.wifi-site-editor .editor-frame table.editor-table .editor-page-main .page-emptyid a:hover {background:#ea790a;}
+.wifi-site-editor .editor-frame table.editor-table .editor-page-main .page-emptyid:hover {border:1px dotted #ddd;}
+.wifi-site-editor .editor-frame table.editor-table .editor-page-main .no-pages-in {font:12px/60px "";color:#999;text-align:center;}
+
+.wifi-site-editor .editor-site {width:110px;height:598px;float:right;background:#f5f5f5;border-radius:0 6px 6px 0;}
+.wifi-site-editor .editor-site .editor-site-new {width:110px;overflow:hidden;height:60px;border-bottom:1px solid #ddd;text-align:center;padding-top:10px;}
+.wifi-site-editor .editor-site .editor-site-new a {width:80px;text-align:center;display:inline-block;}
+.wifi-site-editor .editor-site .editor-page-list {height:538px;width:110px;border-radius:0 0 6px 0;overflow:scroll;overflow-x:hidden;}
+.wifi-site-editor .editor-site .editor-page-list a {margin:10px 6px 0 6px;border:3px solid #f5f5f5;height:120px;display:block;overflow:hidden;background:#fff;position:relative;}
+.wifi-site-editor .editor-site .editor-page-list a:hover {}
+.wifi-site-editor .editor-site .editor-page-list a img {width:100%;height:height:100px;border:0px;}
+.wifi-site-editor .editor-site .editor-page-list a div {width:100%;height:120px;background:#000;-moz-opacity:0.6;filter:alpha(opacity=60);opacity:0.6;left:0px;top:0px;background:url(../img/editpage.png) center center;position:absolute;display:none;}
+.wifi-site-editor .editor-site .editor-page-list a.active {border-color:#666;}
+.wifi-site-editor .editor-site .editor-page-list a.active div {display:block;}
+
+
+.wifi-site-editor table {width:100%}
+.wifi-site-editor table td {text-align:center;}
+.wifi-site-editor table td .portal-vertical {overflow:hidden;width:320px;margin:0 auto;padding:30px 0;}
+.wifi-site-editor table td .portal-horizontal {overflow:hidden;width:480px;margin:0 auto;padding:40px 0;}
+
+.wifi-site-editor .view-mode {width:80px;position:absolute;left:10px;top:10px;}
+.wifi-site-editor .view-mode a {font:12px/25px "";color:#fff;background:#f2b866;text-decoration:none;border-radius:4px;padding:0 5px;margin-bottom:5px;display:block;width:70px;}
+.wifi-site-editor .view-mode a:hover {}
+.wifi-site-editor .view-mode a span {display:none;float:right;margin-top:5px;}
+.wifi-site-editor .view-mode a.active {background:#e6931d;}
+.wifi-site-editor .view-mode a.active span {display:inline-block;}
+
+.wifi-site-editor .siteModule {border:1px dotted #ddd;}
+
+
+
+
+.policy-form-dialog {width:500px;height:140px;overflow:hidden;margin:0 auto;}
+.wp-dialog-title {background:#0657c5;position:relative;border-radius:4px 4px 0 0;color:#fff;}
+.wp-dialog-title .wpd-close {width:36px;height:20px;border-radius:0 0 4px 4px;background:#fff;position:absolute;right:5px;top:0px;display:block;text-align:center;padding-top:2px;}
+.wp-dialog-title .wpd-close:hover {background:#b0c7fd;}
+
+
+.page-module-sheet {width:600px;height:320px;overflow:hidden;border:1px solid #b2b2b2;border-right-color:#efefef;border-bottom-color:#efefef;position:relative;}
+.page-module-sheet .module-mode {width:100px;border-right:1px solid #efefef;background:#fefefe;height:320px;float:left;}
+.page-module-sheet .module-mode a {font:12px/25px "";color:#333;padding-left:10px;display:block;border-bottom:1px solid #ddd;text-decoration:none;}
+.page-module-sheet .module-mode a:hover {background:#fbfbfb;}
+.page-module-sheet .module-mode a.active {background:#f5f5f5;font:12px/30px "";}
+
+.page-module-sheet .module-body {width:490px;float:right;overflow:scroll;overflow-x:hidden;height:318px;}
+.page-module-sheet .module-body .module-item {margin:0 10px 0 0;border-bottom:1px solid #dfdfdf;padding:10px 0;height:100px;overflow:hidden;}
+.page-module-sheet .module-body .module-item img {width:80px;height:80px;float:left;}
+.page-module-sheet .module-body .module-item div {float:left;font:12px/20px "";color:#666;margin-left:10px;width:380px}
+.page-module-sheet .module-body .module-item div.md-title {font-weight:bold;color:#333;line-height:24px;}
+
+
+.portal-module-editor {}
+.portal-module-editor .module-editor-header {height:36px;}
+/*.portal-module-editor .module-editor-header a {width:120px;font:12px/32px "";color:#333;background:#fafafa;text-align:center;border-radius:4px;marign-right:10px;float:left;display:inline-block;}
+.portal-module-editor .module-editor-header a:hover {background:#f5f5f5;}
+.portal-module-editor .module-editor-header a.active {background:#004898;color:#fff;}*/
+
+.portal-module-datalist {border:1px solid #b2b2b2;border-bottom-color:#efefef;border-right-color:#efefef;height:298px;overflow:scroll;overflow-x:hidden;}
+.portal-module-datalist .module-data-item {padding:10px 0;border-bottom:1px dotted #ddd;max-height:102px;overflow:hidden;margin:0 10px;position:relative;}
+.portal-module-datalist .module-data-item table {width:80px;height:80px;float:left;}
+.portal-module-datalist .module-data-item table td {width:80px;height:80px;overflow:hidden;background:#fafafa;}
+.portal-module-datalist .module-data-item table td img {width:80px;}
+.portal-module-datalist .module-data-item div {float:left;margin-left:10px;width:527px;font:12px/20px "";color:#333;text-align:left;}
+.portal-module-datalist .module-data-item a.da-remove {background:#AC0000;font:12px/20px "";color:#fff !important;position:absolute;right:0px;top:10px;display:display:block;text-decoration:none;padding:0 10px;}
+.portal-module-datalist .module-data-item a.da-remove:hover {background:#da2626;color:#fff !important;}
+.portal-module-datalist .module-data-item a.da-module {font:12px/20px "";color:#0000ff;text-decoration:none;}
+.portal-module-datalist .module-data-item a.da-module:hover {color:#3366ff;}
+
+.portal-module-form {height:300px;overflow:hidden;}
+.portal-module-form .editor-file {width:150px;height:200px;text-align:center;overflow:hidden;float:left;}
+.portal-module-form .editor-file button {margin-top:10px;}
+.portal-module-form .form-upload {width:150px;height:150px;float:left;overflow:hidden;border:1px solid #efefef;position:relative;}
+.portal-module-form .form-upload table {width:100%;height:100%;cursor:pointer;}
+.portal-module-form .form-upload table td {height:150px;width:150px;overflow:hidden;}
+.portal-module-form .form-upload table td img {width:130px;border:0px;}
+.portal-module-form .form-upload input {height:150px;width:150px;position:absolute;top:0px;left:0px;-moz-opacity:0;filter:alpha(opacity=0);opacity:0;cursor:pointer;}
+.portal-module-form .form-content {width:490px;float:right;overflow:hidden;}
+
+
+ul.wifi-portal-tabnav li{float:left;display:inline;margin-left:-1px;}
+.wifi-portal-tabnav li a{border:1px solid #ccc;color:#666;display:block;padding:0 15px;font:12px/32px "";background:#f5f5f5;border-radius:4px 4px 0 0;text-decoration:none;}
+.wifi-portal-tabnav li a:hover{background-color:#fff;_position:relative;font-weight:bold;color:#333;}
+.wifi-portal-tabnav li a.active {background-color:#fff;_position:relative;color:#333;border-bottom:1px solid #fff;font-weight:bold;}
+.module-editor-header .wifi-portal-tabnav {border-bottom:1px solid #ccc;height:34px; _overflow:}
+
+#tb_policy_timesheet {}
+#tb_policy_timesheet {font:12px/20px "";}
+.enabled-bgcolor {background-color: BLUE !important;}
+.disabled-bgcolor{background-color: RED !important;}
+
+.wifi-portal-body .portal-main .wifi-main-header .col-dx-4 {width:40%;}
+.wifi-portal-body .portal-main .wifi-main-header .col-dx-5 {width:23%;}
+.wifi-portal-body .portal-main .wifi-main-header .col-dx-6 {width:13%;}
+.wifi-portal-body .portal-main .wifi-main-statis {overflow:hidden;margin-right:0px;}
+.demo-placeholder {
+	width: 100%;
+	height: 100%;
+	font-size: 12px;
+	line-height: .8em;
+}
+.movie-result td {vertical-align: top }
+.movie-image { width: 60px; }
+.movie-image img { height: 80px; width: 60px;  }
+.movie-info { padding-left: 10px; vertical-align: top; }
+.movie-title { font-size: .9em; padding-bottom: 5px; }
+.movie-synopsis { font-size: 1em; color: #888; }
+.select2-highlighted .movie-synopsis { font-size: .8em; color: #eee; }
+.bigdrop.select2-container .select2-results {max-height: 300px;}
+.bigdrop .select2-results {max-height: 300px;}
+
+
+.device-search-box {overflow:hidden;border:1px solid #ddd;border-radius:4px;}
+.device-search-box .deviceSeaDiv {border-bottom:1px solid #ddd;background:#fafafa;overflow:hidden;padding:8px 0;}
+.device-search-box .deviceResultList {height:211px;overflow:scroll;overflow-x:hidden;}
+.device-search-box .deviceResultList a {display:block;padding:0 10px;font:12px/30px "";text-align:left;text-decoration:none;color:#333;border-bottom:1px dotted #ddd;}
+.device-search-box .deviceResultList a:hover {background:#fafafa;}
+.device-search-box .deviceResultList a.choose {background:#fffde3;}
+.device-search-box .devicePagDiv {height:36px;background:#fafafa;padding:8px 10px;overflow:hidden;border-top:1px solid #ddd;}
+
+.device-result-box {border:1px solid #b2b2b2;border-right-color:#efefef;border-bottom-color:#efefef;height:300px;overflow:scroll;overflow-x:hidden;}
+.device-result-box a {display:block;padding:0 10px;font:12px/30px "";text-align:left;text-decoration:none;color:#333;border-bottom:1px dotted #ddd;}
+.device-result-box a:hover {background:#fafafa;}
+.device-result-box a.choose {background:#fffde3;}
+.device-pager-box {padding-top:10px;height:20px;overflow:hidden;}
+
+.policy-form-box {overflow:hidden;height:300px;}
+.policy-form-box .LVsiteSheet {width:530px;float:left;border:1px solid #ddd;border-radius:4px;height:300px;}
+.policy-form-box .LVsiteSheet .siteSeaDiv {border-bottom:1px solid #ddd;background:#fafafa;padding:0px 10px;overflow:hidden;font:bold 12px/32px ""; color:#333;}
+.policy-form-box .LVsiteSheet .sitePagDiv {height:36px;background:#fafafa;padding:8px 10px;overflow:hidden;border-top:1px solid #ddd;}
+.policy-form-box .LVsiteSheet .SiteListResults {height:229px;width:530px;overflow:scroll;overflow-x:hidden;}
+.policy-form-box .LVsiteSheet .SiteListResults ul{overflow:hidden;padding:0px;margin:0px;margin-right:-10px;list-style-type:none;}
+.policy-form-box .LVsiteSheet .SiteListResults ul li {width:93px;height:120px;position:relative;float:left;margin:10px 0 0 10px;padding:2px 0;border:1px solid #efefef;overflow:hidden;cursor:pointer;_cursor:hand;}
+.policy-form-box .LVsiteSheet .SiteListResults ul li:hover {border:1px solid #7070ff;}
+.policy-form-box .LVsiteSheet .SiteListResults ul li img {width:76px;border:0px;display:block;}
+.policy-form-box .LVsiteSheet .SiteListResults ul li span.wpcheckbox {position:absolute;top:0px;right:0px;width:16px;height:16px;background:url(../img/checkbox.png);cursor:pointer;_cursor:hand;}
+.policy-form-box .LVsiteSheet .SiteListResults ul li span.wpchecked {top:1px;right:1px;width:16px;height:16px;background:url(../img/checkbox.png) -16px 0 !important;}
+.policy-form-box .LVsiteSheet .SiteListResults ul li span.MerchantSiteName {display:block;text-align:center;font:12px/24px "";color:#333;}
+.policy-form-box .LVsiteSheet .SiteListResults ul li.checked {border-color:#7070ff;box-shadow:0 0 1px #00f;}
+
+
+.policy-form-box .LVpolicyTime {width:120px;float:right;border:1px solid #ddd;border-radius:4px;height:300px;}
+.policy-form-box .LVpolicyTime .LV-P-Title {border-bottom:1px solid #ddd;background:#fafafa;padding:0 10px;font:bold 12px/32px ""; color:#333;overflow:hidden;}
+.policy-edit-bar {height:25px;position:absolute;display:none;overflow:hidden;left:0px;top:0px;z-index:10000;width:120px;}
+.policy-edit-bar a {color:#fff;background:#666;padding:0 10px;float:right;display:inline-block;width:25px;height:25px;font:12px/25px "";text-align:center;padding:5px 8px;text-decoration:none;}
+.policy-edit-bar a:hover {background:#999;}
+.policy-edit-bar a span {display:block;}
+
+.AuthModuleMobile .disabled {background:#ccc !important;color:#fff;border:1px solid #ccc !important;}
