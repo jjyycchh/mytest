@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.account.AccountHasTerminalUserMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.account.AccountHasTerminalUser" >
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="terminal_user_id" property="terminalUserId" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.account.AccountHasTerminalUser" extends="BaseResultMap" >
+    <result column="memo" property="memo" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    account_id, terminal_user_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    memo
+  </sql>
+  <insert id="insert" parameterType="com.access.model.account.AccountHasTerminalUser" >
+    insert into account_has_terminal_user (account_id, terminal_user_id, memo
+      )
+    values (#{accountId,jdbcType=BIGINT}, #{terminalUserId,jdbcType=BIGINT}, #{memo,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.account.AccountHasTerminalUser" >
+    insert into account_has_terminal_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="terminalUserId != null" >
+        terminal_user_id,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="terminalUserId != null" >
+        #{terminalUserId,jdbcType=BIGINT},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  
+  <insert id="insertNotExist" parameterType="com.access.model.account.AccountHasTerminalUser" >
+    insert into account_has_terminal_user (account_id, 
+      <if test="memo != null" >
+        memo,
+      </if>
+    terminal_user_id)
+    select #{accountId,jdbcType=BIGINT}, 
+		<if test="memo != null" >
+        	#{memo,jdbcType=LONGVARCHAR},
+      	</if>
+      	#{terminalUserId,jdbcType=BIGINT}
+    from dual where not exists(
+    	select 1 from account_has_terminal_user where 
+    		account_id=#{accountId,jdbcType=BIGINT} and terminal_user_id=#{terminalUserId,jdbcType=BIGINT}
+    )
+  </insert>
+  
+  <select id="selectAccountUser" parameterType="com.access.model.account.AccountHasTerminalUser" resultType="java.lang.Integer">
+  	select count(*) from account_has_terminal_user 
+  	where account_id=#{accountId} and terminal_user_id=#{terminalUserId}
+  </select>
+  
+  <update id="updateAccountUser" parameterType="com.access.model.account.AccountHasTerminalUser">
+  	update account_has_terminal_user set memo=#{memo,jdbcType=LONGVARCHAR}
+  	where account_id=#{accountId} and terminal_user_id=#{terminalUserId}
+  </update>
+  
+  <select id="getUserMemo" parameterType="java.util.Map" resultType="java.lang.String">
+  	select memo from account_has_terminal_user 
+  	where account_id=#{accountId}
+  	and terminal_user_id=#{terminalUserId}
+  </select>
+  
+  <select id="getRecordsByUserId" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+	    select 
+	    	<include refid="Base_Column_List" />
+	    	,
+	    	<include refid="Blob_Column_List" />
+	    from account_has_terminal_user
+	    where terminal_user_id = #{value }
+    </select>
+    
+    <!-- 根据用户ID和商户ID获取一条记录 -->
+    <select id="selectByAccountIdAndUserId" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+	    select 
+	    	<include refid="Base_Column_List" />,
+	    	<include refid="Blob_Column_List" />
+		from 
+			account_has_terminal_user
+		where 
+			terminal_user_id = #{userId, jdbcType=BIGINT}
+		and
+			account_id = #{accountId, jdbcType=BIGINT}
+    </select>
+  
+</mapper>
