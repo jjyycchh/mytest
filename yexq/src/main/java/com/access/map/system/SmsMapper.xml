@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.SmsMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.Sms" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="cellphone" property="cellphone" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="retry_times" property="retryTimes" jdbcType="INTEGER" />
+    <result column="is_sent" property="isSent" jdbcType="BIT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="terminal_user_authentication_log_id" property="terminalUserAuthenticationLogId" jdbcType="BIGINT" />
+    <result column="associated_id" property="associatedId" jdbcType="BIGINT" />
+    <result column="source_type" property="sourceType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cellphone, content, retry_times, is_sent, create_datetime, terminal_user_authentication_log_id, 
+    associated_id, source_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sms
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sms
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.Sms" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into sms (id, cellphone, content, 
+      retry_times, is_sent, create_datetime, 
+      terminal_user_authentication_log_id, associated_id, 
+      source_type)
+    values (#{id,jdbcType=BIGINT}, #{cellphone,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{retryTimes,jdbcType=INTEGER}, #{isSent,jdbcType=BIT}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{terminalUserAuthenticationLogId,jdbcType=BIGINT}, #{associatedId,jdbcType=BIGINT}, 
+      #{sourceType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.Sms" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into sms
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="cellphone != null" >
+        cellphone,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="retryTimes != null" >
+        retry_times,
+      </if>
+      <if test="isSent != null" >
+        is_sent,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="terminalUserAuthenticationLogId != null" >
+        terminal_user_authentication_log_id,
+      </if>
+      <if test="associatedId != null" >
+        associated_id,
+      </if>
+      <if test="sourceType != null" >
+        source_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cellphone != null" >
+        #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="retryTimes != null" >
+        #{retryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isSent != null" >
+        #{isSent,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalUserAuthenticationLogId != null" >
+        #{terminalUserAuthenticationLogId,jdbcType=BIGINT},
+      </if>
+      <if test="associatedId != null" >
+        #{associatedId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceType != null" >
+        #{sourceType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.Sms" >
+    update sms
+    <set >
+      <if test="cellphone != null" >
+        cellphone = #{cellphone,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="retryTimes != null" >
+        retry_times = #{retryTimes,jdbcType=INTEGER},
+      </if>
+      <if test="isSent != null" >
+        is_sent = #{isSent,jdbcType=BIT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalUserAuthenticationLogId != null" >
+        terminal_user_authentication_log_id = #{terminalUserAuthenticationLogId,jdbcType=BIGINT},
+      </if>
+      <if test="associatedId != null" >
+        associated_id = #{associatedId,jdbcType=BIGINT},
+      </if>
+      <if test="sourceType != null" >
+        source_type = #{sourceType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.Sms" >
+    update sms
+    set cellphone = #{cellphone,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      retry_times = #{retryTimes,jdbcType=INTEGER},
+      is_sent = #{isSent,jdbcType=BIT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      terminal_user_authentication_log_id = #{terminalUserAuthenticationLogId,jdbcType=BIGINT},
+      associated_id = #{associatedId,jdbcType=BIGINT},
+      source_type = #{sourceType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="getUserSmsCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+  	SELECT count(s.cellphone) from 
+		sms as s,
+		terminal_user as tu,
+		terminal_user_has_device as tud,
+		device as d, 
+		location as l, 
+		account as a
+	where s.cellphone = tu.auth_id
+		and tu.id = tud.terminal_user_id
+		and tud.device_id = d.device_id
+		and d.location_id = l.id
+		and l.account_id = a.id
+		and a.id = #{accountId}
+		<![CDATA[ and s.create_datetime >= #{createDatetime, jdbcType=TIMESTAMP} ]]>
+		 
+		<if test="cellphone != null" >
+        	and s.cellphone = #{cellphone}
+      	</if>
+  </select>
+  
+  <select id="sms_getSmsPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	SELECT s.* from sms as s,
+		terminal_user_authentication_log as tual,
+		<!-- terminal_user as tu,
+		terminal_user_has_device as ud, -->
+		device as d,
+		location as l,
+		account as a
+	where s.terminal_user_authentication_log_id = tual.id
+		<!-- and tual.terminal_user_id = tu.id
+		and tu.id = ud.terminal_user_id
+		and ud.device_id = d.device_id -->
+		and tual.device_id=d.device_id
+		and d.location_id = l.id
+		and l.account_id = a.id
+	<if test="accountId != null">
+		and a.id = #{accountId}
+    </if>
+	<if test="type != null">
+		and a.type = #{type}
+    </if>
+    <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(s.cellphone, ''),
+					IFNULL(s.content,'')) like Concat('%', #{item}, '%')
+		 </foreach>
+    </if>
+    <if test="startDate != null">
+		<![CDATA[ and s.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+ 		<if test="endDate != null">
+		<![CDATA[ and s.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	</if>
+	order by s.create_datetime desc
+	limit #{page.begin},#{page.pageSize}
+  </select>
+  
+  <select id="sms_getSmsSentPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	SELECT 
+  		<include refid="Base_Column_List" /> 
+  	FROM 
+  		sms
+	WHERE 
+		sms.id = sms.id
+    	<if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  		Concat(IFNULL(sms.cellphone, ''),
+						IFNULL(sms.content,'')) like Concat('%', #{item}, '%')
+		 	</foreach>
+    	</if>
+    	<if test="startDate != null">
+			<![CDATA[ and sms.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+		</if>
+ 		<if test="endDate != null">
+			<![CDATA[ and sms.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+		</if>
+	ORDER BY 
+		sms.create_datetime DESC
+	LIMIT 
+		#{page.begin},#{page.pageSize}
+  </select>
+</mapper>

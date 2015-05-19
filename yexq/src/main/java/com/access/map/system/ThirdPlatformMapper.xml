@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.ThirdPlatformMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.ThirdPlatform" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="domain" property="domain" jdbcType="VARCHAR" />
+    <result column="ip_addr" property="ipAddr" jdbcType="VARCHAR" />
+    <result column="ip_port" property="ipPort" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county" property="county" jdbcType="VARCHAR" />
+    <result column="user_online_url" property="userOnlineUrl" jdbcType="VARCHAR" />
+    <result column="user_offline_url" property="userOfflineUrl" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="platform_code" property="platformCode" jdbcType="VARCHAR" />
+    <result column="welcome_url" property="welcomeUrl" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="app_auth_type" property="appAuthType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, domain, ip_addr, ip_port, phone, province, city, county, user_online_url, 
+    user_offline_url, description, platform_code, welcome_url, create_datetime, app_auth_type
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from third_platform
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from third_platform
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.ThirdPlatform" >
+    insert into third_platform (id, name, domain, 
+      ip_addr, ip_port, phone, 
+      province, city, county, 
+      user_online_url, user_offline_url, description, 
+      platform_code, welcome_url, create_datetime, 
+      app_auth_type)
+    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{domain,jdbcType=VARCHAR}, 
+      #{ipAddr,jdbcType=VARCHAR}, #{ipPort,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{county,jdbcType=VARCHAR}, 
+      #{userOnlineUrl,jdbcType=VARCHAR}, #{userOfflineUrl,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{platformCode,jdbcType=VARCHAR}, #{welcomeUrl,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}, 
+      #{appAuthType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.ThirdPlatform" >
+    insert into third_platform
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="domain != null" >
+        domain,
+      </if>
+      <if test="ipAddr != null" >
+        ip_addr,
+      </if>
+      <if test="ipPort != null" >
+        ip_port,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="county != null" >
+        county,
+      </if>
+      <if test="userOnlineUrl != null" >
+        user_online_url,
+      </if>
+      <if test="userOfflineUrl != null" >
+        user_offline_url,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="platformCode != null" >
+        platform_code,
+      </if>
+      <if test="welcomeUrl != null" >
+        welcome_url,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="appAuthType != null" >
+        app_auth_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddr != null" >
+        #{ipAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="ipPort != null" >
+        #{ipPort,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="userOnlineUrl != null" >
+        #{userOnlineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userOfflineUrl != null" >
+        #{userOfflineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="platformCode != null" >
+        #{platformCode,jdbcType=VARCHAR},
+      </if>
+      <if test="welcomeUrl != null" >
+        #{welcomeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appAuthType != null" >
+        #{appAuthType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.ThirdPlatform" >
+    update third_platform
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="domain != null" >
+        domain = #{domain,jdbcType=VARCHAR},
+      </if>
+      <if test="ipAddr != null" >
+        ip_addr = #{ipAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="ipPort != null" >
+        ip_port = #{ipPort,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="county != null" >
+        county = #{county,jdbcType=VARCHAR},
+      </if>
+      <if test="userOnlineUrl != null" >
+        user_online_url = #{userOnlineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="userOfflineUrl != null" >
+        user_offline_url = #{userOfflineUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="platformCode != null" >
+        platform_code = #{platformCode,jdbcType=VARCHAR},
+      </if>
+      <if test="welcomeUrl != null" >
+        welcome_url = #{welcomeUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="appAuthType != null" >
+        app_auth_type = #{appAuthType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.ThirdPlatform" >
+    update third_platform
+    set name = #{name,jdbcType=VARCHAR},
+      domain = #{domain,jdbcType=VARCHAR},
+      ip_addr = #{ipAddr,jdbcType=VARCHAR},
+      ip_port = #{ipPort,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county = #{county,jdbcType=VARCHAR},
+      user_online_url = #{userOnlineUrl,jdbcType=VARCHAR},
+      user_offline_url = #{userOfflineUrl,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      platform_code = #{platformCode,jdbcType=VARCHAR},
+      welcome_url = #{welcomeUrl,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      app_auth_type = #{appAuthType,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="thirdPlatform_getThirdPlatformPage" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    SELECT 
+      third_platform.id, 
+      third_platform.name, 
+      third_platform.domain, 
+      third_platform.ip_addr, 
+      third_platform.ip_port, 
+      third_platform.phone,
+      third_platform.province, 
+      third_platform.city,
+      IFNULL(third_platform.county, '') AS county,
+      third_platform.user_online_url, 
+      third_platform.user_offline_url,
+      IFNULL(third_platform.description, '') AS description,
+      third_platform.platform_code, 
+      third_platform.create_datetime,
+      third_platform.app_auth_type,
+      IFNULL(third_platform.welcome_url, '') AS welcomeUrl
+    FROM 
+      third_platform
+    WHERE 
+	  1 = 1
+      <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(third_platform.name, ''),
+	          IFNULL(third_platform.domain,''),
+              IFNULL(third_platform.ip_addr, ''),
+              IFNULL(third_platform.ip_port, ''),
+              IFNULL(third_platform.phone, ''),
+              IFNULL(third_platform.platform_code, '')) like Concat('%', #{item}, '%')
+		</foreach>
+      </if>
+	ORDER BY 
+      third_platform.create_datetime DESC
+	LIMIT 
+	  #{page.begin},#{page.pageSize}
+  </select>
+  
+  <!-- 根据platformCode获取记录 -->
+  <select id="selectURLByCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+        <include refid="Base_Column_List" />
+    FROM
+        third_platform
+    WHERE
+        platform_code = #{platformCode, jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectByDomain" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+        <include refid="Base_Column_List" />
+    FROM
+        third_platform
+    WHERE
+        domain like #{domain, jdbcType=VARCHAR}
+  </select>
+</mapper>

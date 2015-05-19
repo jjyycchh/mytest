@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.ExceptionLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.ExceptionLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="module_name" property="moduleName" jdbcType="VARCHAR" />
+    <result column="service_name" property="serviceName" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.system.ExceptionLogWithBLOBs" extends="BaseResultMap" >
+    <result column="parameter" property="parameter" jdbcType="LONGVARCHAR" />
+    <result column="sys_error_mssage" property="sysErrorMssage" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, module_name, service_name, create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    parameter, sys_error_mssage
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from exception_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from exception_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.ExceptionLogWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into exception_log (module_name, service_name, 
+      create_datetime, parameter, sys_error_mssage
+      )
+    values (#{moduleName,jdbcType=VARCHAR}, #{serviceName,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{parameter,jdbcType=LONGVARCHAR}, #{sysErrorMssage,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.ExceptionLogWithBLOBs" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into exception_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="moduleName != null" >
+        module_name,
+      </if>
+      <if test="serviceName != null" >
+        service_name,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="parameter != null" >
+        parameter,
+      </if>
+      <if test="sysErrorMssage != null" >
+        sys_error_mssage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="moduleName != null" >
+        #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parameter != null" >
+        #{parameter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sysErrorMssage != null" >
+        #{sysErrorMssage,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.ExceptionLogWithBLOBs" >
+    update exception_log
+    <set >
+      <if test="moduleName != null" >
+        module_name = #{moduleName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceName != null" >
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="parameter != null" >
+        parameter = #{parameter,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="sysErrorMssage != null" >
+        sys_error_mssage = #{sysErrorMssage,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.system.ExceptionLogWithBLOBs" >
+    update exception_log
+    set module_name = #{moduleName,jdbcType=VARCHAR},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      parameter = #{parameter,jdbcType=LONGVARCHAR},
+      sys_error_mssage = #{sysErrorMssage,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.ExceptionLog" >
+    update exception_log
+    set module_name = #{moduleName,jdbcType=VARCHAR},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  	<select id="exceptionLog_getExceptionLogPage" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  		SELECT 
+  	  		<include refid="Base_Column_List" />,
+      		<include refid="Blob_Column_List" />
+  		FROM 
+  	  		exception_log
+		WHERE
+	  		exception_log.id = exception_log.id
+      		<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  			Concat(IFNULL(exception_log.module_name, '')) like Concat('%', #{item}, '%')
+				</foreach>
+      		</if>
+      		<if test="startDate != null">
+				<![CDATA[ and exception_log.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and exception_log.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+		ORDER BY 
+			exception_log.id DESC
+		LIMIT 
+			#{page.begin},#{page.pageSize}
+	</select>
+	
+  <select id="getExceptionLogCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+    SELECT
+      count(exception_log.id)
+    FROM
+      exception_log
+    WHERE
+      exception_log.id = exception_log.id
+	  <if test="keywords != null">
+		<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+		  Concat(IFNULL(exception_log.module_name, '')) LIKE Concat('%', #{item}, '%')
+		</foreach>
+      </if>
+      <if test="startDate != null">
+		<![CDATA[ AND exception_log.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+ 	  <if test="endDate != null">
+		<![CDATA[ AND exception_log.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+	  </if>
+  </select>
+	
+	<select id="exportExceptionLog" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+  		SELECT 
+  	  		<include refid="Base_Column_List" />,
+      		<include refid="Blob_Column_List" />
+  		FROM 
+  	  		exception_log
+		WHERE
+	  		exception_log.id = exception_log.id
+			<if test="keywords != null">
+				<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+					Concat(IFNULL(exception_log.module_name, '')) like Concat('%', #{item}, '%')
+		 		</foreach>
+    		</if>
+    		<if test="startDate != null">
+				<![CDATA[ and exception_log.create_datetime >= #{startDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+ 			<if test="endDate != null">
+				<![CDATA[ and exception_log.create_datetime < #{endDate, jdbcType=TIMESTAMP} ]]>
+			</if>
+		ORDER BY 
+			exception_log.create_datetime DESC
+		LIMIT 
+			0, 200
+  	</select>
+</mapper>

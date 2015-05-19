@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.user.TerminalUserRequestLogMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.user.TerminalUserRequestLog" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="MAC" property="mac" jdbcType="VARCHAR" />
+    <result column="dest_ip" property="destIp" jdbcType="VARCHAR" />
+    <result column="dest_port" property="destPort" jdbcType="VARCHAR" />
+    <result column="source_ip" property="sourceIp" jdbcType="VARCHAR" />
+    <result column="source_port" property="sourcePort" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+    <result column="terminal_user_id" property="terminalUserId" jdbcType="BIGINT" />
+    <result column="device_id" property="deviceId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.user.TerminalUserRequestLog" extends="BaseResultMap" >
+    <result column="URL" property="url" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, MAC, dest_ip, dest_port, source_ip, source_port, create_datetime, terminal_user_id, 
+    device_id
+  </sql>
+  <sql id="Blob_Column_List" >
+    URL
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from terminal_user_request_log
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from terminal_user_request_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.user.TerminalUserRequestLog" >
+    insert into terminal_user_request_log (id, MAC, dest_ip, 
+      dest_port, source_ip, source_port, 
+      create_datetime, terminal_user_id, device_id, 
+      URL)
+    values (#{id,jdbcType=BIGINT}, #{mac,jdbcType=VARCHAR}, #{destIp,jdbcType=VARCHAR}, 
+      #{destPort,jdbcType=VARCHAR}, #{sourceIp,jdbcType=VARCHAR}, #{sourcePort,jdbcType=VARCHAR}, 
+      #{createDatetime,jdbcType=TIMESTAMP}, #{terminalUserId,jdbcType=BIGINT}, #{deviceId,jdbcType=VARCHAR}, 
+      #{url,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.user.TerminalUserRequestLog" >
+    insert into terminal_user_request_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="mac != null" >
+        MAC,
+      </if>
+      <if test="destIp != null" >
+        dest_ip,
+      </if>
+      <if test="destPort != null" >
+        dest_port,
+      </if>
+      <if test="sourceIp != null" >
+        source_ip,
+      </if>
+      <if test="sourcePort != null" >
+        source_port,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="terminalUserId != null" >
+        terminal_user_id,
+      </if>
+      <if test="deviceId != null" >
+        device_id,
+      </if>
+      <if test="url != null" >
+        URL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="mac != null" >
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="destIp != null" >
+        #{destIp,jdbcType=VARCHAR},
+      </if>
+      <if test="destPort != null" >
+        #{destPort,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceIp != null" >
+        #{sourceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcePort != null" >
+        #{sourcePort,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalUserId != null" >
+        #{terminalUserId,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null" >
+        #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.user.TerminalUserRequestLog" >
+    update terminal_user_request_log
+    <set >
+      <if test="mac != null" >
+        MAC = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="destIp != null" >
+        dest_ip = #{destIp,jdbcType=VARCHAR},
+      </if>
+      <if test="destPort != null" >
+        dest_port = #{destPort,jdbcType=VARCHAR},
+      </if>
+      <if test="sourceIp != null" >
+        source_ip = #{sourceIp,jdbcType=VARCHAR},
+      </if>
+      <if test="sourcePort != null" >
+        source_port = #{sourcePort,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="terminalUserId != null" >
+        terminal_user_id = #{terminalUserId,jdbcType=BIGINT},
+      </if>
+      <if test="deviceId != null" >
+        device_id = #{deviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        URL = #{url,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.user.TerminalUserRequestLog" >
+    update terminal_user_request_log
+    set MAC = #{mac,jdbcType=VARCHAR},
+      dest_ip = #{destIp,jdbcType=VARCHAR},
+      dest_port = #{destPort,jdbcType=VARCHAR},
+      source_ip = #{sourceIp,jdbcType=VARCHAR},
+      source_port = #{sourcePort,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      terminal_user_id = #{terminalUserId,jdbcType=BIGINT},
+      device_id = #{deviceId,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.user.TerminalUserRequestLog" >
+    update terminal_user_request_log
+    set MAC = #{mac,jdbcType=VARCHAR},
+      dest_ip = #{destIp,jdbcType=VARCHAR},
+      dest_port = #{destPort,jdbcType=VARCHAR},
+      source_ip = #{sourceIp,jdbcType=VARCHAR},
+      source_port = #{sourcePort,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      terminal_user_id = #{terminalUserId,jdbcType=BIGINT},
+      device_id = #{deviceId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+	
+</mapper>

@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.system.LocationMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.system.Location" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="county_district" property="countyDistrict" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="DOUBLE" />
+    <result column="longitude" property="longitude" jdbcType="DOUBLE" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.access.model.system.Location" extends="BaseResultMap" >
+    <result column="description" property="description" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, country, province, city, county_district, address, latitude, longitude, 
+    account_id, create_datetime
+  </sql>
+  <sql id="Blob_Column_List" >
+    description
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from location
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from location
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.system.Location" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into location (name, country, 
+      province, city, county_district, 
+      address, latitude, longitude, 
+      account_id, create_datetime, description
+      )
+    values (#{name,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{countyDistrict,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{latitude,jdbcType=REAL}, #{longitude,jdbcType=REAL}, 
+      #{accountId,jdbcType=BIGINT}, #{createDatetime,jdbcType=TIMESTAMP}, #{description,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.system.Location" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into location
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="countyDistrict != null" >
+        county_district,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="countyDistrict != null" >
+        #{countyDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=REAL},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=REAL},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.system.Location" >
+    update location
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="countyDistrict != null" >
+        county_district = #{countyDistrict,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=REAL},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=REAL},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.access.model.system.Location" >
+    update location
+    set name = #{name,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county_district = #{countyDistrict,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=REAL},
+      longitude = #{longitude,jdbcType=REAL},
+      account_id = #{accountId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.system.Location" >
+    update location
+    set name = #{name,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      county_district = #{countyDistrict,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=REAL},
+      longitude = #{longitude,jdbcType=REAL},
+      account_id = #{accountId,jdbcType=BIGINT},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+  <select id="searchLocation" parameterType="com.access.model.system.Location" resultMap="ResultMapWithBLOBs">
+  	select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from location
+    where 1=1 
+    <if test="accountId != null" >
+		and account_id = #{accountId, jdbcType=VARCHAR}   
+    </if>
+    <if test="country != null" >
+		and country = #{country,jdbcType=VARCHAR}
+    </if>
+    <if test="province != null" >
+		and province = #{province,jdbcType=VARCHAR}
+    </if>
+    <if test="city != null" >
+      	and city = #{city,jdbcType=VARCHAR}
+    </if>
+    <if test="countyDistrict != null" >
+      	and county_district = #{countyDistrict,jdbcType=VARCHAR}
+    </if>
+    <if test="address != null" >
+      	and address = #{address,jdbcType=VARCHAR}
+    </if>
+      order by id desc
+  </select>
+  
+  <select id="getLocationList" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  	select 
+    l.id, l.name, l.country, l.province, l.city, l.county_district, l.address, 
+    l.latitude, l.longitude, 
+    l.account_id, l.create_datetime, l.description
+    from location as l, account as a
+	where l.account_id=a.id and a.id = #{value}
+  </select>
+  
+  <select id="getEmptyLocaitonByAccountId" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+  	select 
+    l.id, l.name, l.country, l.province, l.city, l.county_district, l.address, 
+    l.latitude, l.longitude, 
+    l.account_id, l.create_datetime, l.description
+    from location as l, account as a
+	where l.account_id=a.id 
+		and l.name is null and l.country is null 
+		and l.province is null and l.city is null
+		and l.county_district is null and l.address is null
+		and a.id = #{value}
+  </select>
+  
+  <select id="location_getLocationByAccountID" parameterType="java.util.Map" resultMap="BaseResultMap">
+  select
+  	location.id, location.province, location.city,
+  	location.county_district, location.address,
+  	location.create_datetime
+  from
+  	location
+  where
+  	location.account_id = #{accountId, jdbcType=BIGINT}
+  	<if test="keywords != null">
+			<foreach item="item" index="index"  collection="keywords" open="and (" separator="OR" close=")">  
+				Concat(IFNULL(location.province, ''),
+					IFNULL(location.city, ''),
+					IFNULL(location.county_district, ''),
+					IFNULL(location.address, '')) 
+					like Concat('%', #{item}, '%')
+		 	</foreach>
+    	</if>
+  order by
+  	location.create_datetime
+  limit
+  	#{page.begin},#{page.pageSize}
+  </select>
+
+  <select id="selectByLocation" parameterType="com.access.model.system.Location" resultType="java.lang.String">
+    select
+      province
+    from
+      location
+    where
+      account_id =#{accountId, jdbcType=BIGINT} and
+      province = #{province, jdbcType=VARCHAR} and
+      city = #{city, jdbcType=VARCHAR}
+      <if test="countyDistrict != null">
+        and county_district = #{countyDistrict, jdbcType=VARCHAR}
+      </if>
+      <if test="address != null">
+        and address = #{address, jdbcType=VARCHAR}
+      </if>
+    order by
+      create_datetime desc
+    limit
+      1
+  </select>
+</mapper>

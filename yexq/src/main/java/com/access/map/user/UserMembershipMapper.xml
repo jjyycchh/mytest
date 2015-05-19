@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.access.dao.user.UserMembershipMapper" >
+  <resultMap id="BaseResultMap" type="com.access.model.user.UserMembership" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="full_name" property="fullName" jdbcType="VARCHAR" />
+    <result column="phone_number" property="phoneNumber" jdbcType="VARCHAR" />
+    <result column="memo" property="memo" jdbcType="VARCHAR" />
+    <result column="create_datetime" property="createDatetime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, account_id, full_name, phone_number, memo, create_datetime
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_membership
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user_membership
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.access.model.user.UserMembership" >
+    insert into user_membership (id, account_id, full_name, 
+      phone_number, memo, create_datetime
+      )
+    values (#{id,jdbcType=BIGINT}, #{accountId,jdbcType=BIGINT}, #{fullName,jdbcType=VARCHAR}, 
+      #{phoneNumber,jdbcType=VARCHAR}, #{memo,jdbcType=VARCHAR}, #{createDatetime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.access.model.user.UserMembership" >
+  	<selectKey resultType="java.lang.Long" order="AFTER" keyProperty="id">
+		SELECT LAST_INSERT_ID() AS id
+	</selectKey>
+    insert into user_membership
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="fullName != null" >
+        full_name,
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number,
+      </if>
+      <if test="memo != null" >
+        memo,
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="fullName != null" >
+        #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.access.model.user.UserMembership" >
+    update user_membership
+    <set >
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="fullName != null" >
+        full_name = #{fullName,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNumber != null" >
+        phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memo != null" >
+        memo = #{memo,jdbcType=VARCHAR},
+      </if>
+      <if test="createDatetime != null" >
+        create_datetime = #{createDatetime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.access.model.user.UserMembership" >
+    update user_membership
+    set account_id = #{accountId,jdbcType=BIGINT},
+      full_name = #{fullName,jdbcType=VARCHAR},
+      phone_number = #{phoneNumber,jdbcType=VARCHAR},
+      memo = #{memo,jdbcType=VARCHAR},
+      create_datetime = #{createDatetime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  
+    <!-- 根据accountId检索会员信息 -->
+  <select id="selectByAccountId" parameterType = "java.lang.Long" resultMap = "BaseResultMap">
+    select 
+    	<include refid="Base_Column_List" />
+    from 
+    	user_membership
+    where 
+    	account_id = #{accountId, jdbcType=BIGINT}
+  </select>
+
+  <select id="userMembership_findMemberPage" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    	m.id as id,
+    	m.account_id as accountId,
+    	m.full_name	as fullName,
+    	m.phone_number as phoneNumber,
+    	m.memo as memo,
+    	m.create_datetime as createDatetime
+    from user_membership as m
+    left join account as a on a.id = m.account_id
+    where 1 = 1
+      <if test="keywords != null">
+        <foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">
+            Concat(IFNULL(m.full_name, ''),
+            IFNULL(m.phone_number, ''),
+            IFNULL(m.memo, ''),
+            IFNULL(a.fullname, ''),
+            IFNULL(a.username, ''),
+            IFNULL(a.merchant_name, '')) like '%' #{item} '%'
+        </foreach>
+      </if>
+    order by id desc
+    limit #{page.begin},#{page.pageSize}
+  </select>
+
+  <select id="userMembership_findMemberPageCount" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+      count(m.id)
+    from user_membership as m
+    left join account as a on a.id = m.account_id
+    where 1 = 1
+      <if test="keywords != null">
+        <foreach item="item" index="index" collection="keywords" open="and (" separator="OR" close=")">
+            Concat(IFNULL(m.full_name, ''),
+            IFNULL(m.phone_number, ''),
+            IFNULL(m.memo, ''),
+            IFNULL(a.funll_name, ''),
+            IFNULL(a.username, ''),
+            IFNULL(a.merchant_name, '')) like '%' #{item} '%'
+        </foreach>
+      </if>
+      order by id desc
+  </select>
+  
+  <select id="selectByAccountIdAndPhoneNumber" parameterType="java.util.Map" resultMap="BaseResultMap">
+  	select 
+    	<include refid="Base_Column_List" />
+    from 
+    	user_membership
+    where 
+    	account_id = #{accountId, jdbcType=BIGINT}
+    and
+    	phone_number = #{phoneNumber, jdbcType=VARCHAR}
+    limit 1
+  </select>
+  
+  <select id="selectFirstAndLastLoginTimeByMemberId" parameterType="java.lang.Long" resultType="java.util.Map">
+  	select
+	    max(create_datetime) as last_login_time,
+	    min(create_datetime) as first_login_time
+	from
+	    terminal_user_authentication_log
+	where
+	    terminal_user_id = (select id from terminal_user where membership_id = #{memberId})
+  </select>
+</mapper>
